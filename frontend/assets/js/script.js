@@ -60,7 +60,7 @@ let currentFilterCategory = 'all';
 let currentActiveJobForApply = null;
 
 /* -------------------------------------------------------------------------- */
-/* INICIALIZAÇÃO DA APLICAÇÃO E ANIMAÇÕES AO CARREGAR A PÁGINA               */
+/* INICIALIZAÇÃO DA APLICAÇÃO E ANIMAÇÕES AO CARREGAR A PÁGINA                */
 /* -------------------------------------------------------------------------- */
 window.addEventListener('DOMContentLoaded', () => {
     renderJobCards();
@@ -69,12 +69,10 @@ window.addEventListener('DOMContentLoaded', () => {
     setupMobileMenu();
 });
 
-/* -------------------------------------------------------------------------- */
-/* 1. LÓGICA DO MENU HAMBÚRGUER COM MICROINTERAÇÃO E ANIMAÇÕES MOBILE          */
-/* -------------------------------------------------------------------------- */
-/* -------------------------------------------------------------------------- */
-/* LÓGICA DO MENU HAMBÚRGUER COM FECHAMENTO DIRETO / BOTÃO X / BACKDROP      */
-/* -------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------------- */
+/* 1. MENU HAMBÚRGUER: LÓGICA, MICROINTERAÇÕES, ANIMAÇÕES MOBILE, BOTÃO X E BACKDROP */
+/* --------------------------------------------------------------------------------- */
+
 function setupMobileMenu() {
     const btn = document.getElementById('hamburger-btn');
     const menu = document.getElementById('mobile-menu');
@@ -218,7 +216,7 @@ function renderJobCards() {
 }
 
 /* -------------------------------------------------------------------------- */
-/* PREVIEW DO PAINEL DO RECRUTADOR                                           */
+/* PREVIEW DO PAINEL DO RECRUTADOR                                            */
 /* -------------------------------------------------------------------------- */
 function renderRecruiterCandidates() {
     const list = document.getElementById('recruiter-candidates-list');
@@ -251,7 +249,7 @@ function renderRecruiterCandidates() {
 }
 
 /* -------------------------------------------------------------------------- */
-/* FILTROS E PESQUISA DE VAGAS                                               */
+/* FILTROS E PESQUISA DE VAGAS                                                */
 /* -------------------------------------------------------------------------- */
 function filterByCategory(cat) {
     currentFilterCategory = cat;
@@ -269,7 +267,7 @@ function filterJobs() {
 }
 
 /* -------------------------------------------------------------------------- */
-/* CONTROLE DOS MODAIS                                                       */
+/* CONTROLE DOS MODAIS                                                        */
 /* -------------------------------------------------------------------------- */
 function openModal(id) {
     document.getElementById(id).classList.remove('hidden');
@@ -296,7 +294,7 @@ function updateFileLabel(input, labelId) {
 }
 
 /* -------------------------------------------------------------------------- */
-/* SUBMISSÃO DOS FORMULÁRIOS COM FEEDBACK                                    */
+/* SUBMISSÃO DOS FORMULÁRIOS COM FEEDBACK                                     */
 /* -------------------------------------------------------------------------- */
 function handleApplySubmit(e) {
     e.preventDefault();
@@ -344,7 +342,7 @@ function handlePostJobSubmit(e) {
 }
 
 /* -------------------------------------------------------------------------- */
-/* ALTERNÂNCIA DE MODO SIMULADOR                                             */
+/* ALTERNÂNCIA DE MODO SIMULADOR                                              */
 /* -------------------------------------------------------------------------- */
 function switchView(view) {
     const titleEl = document.getElementById('current-view-title');
