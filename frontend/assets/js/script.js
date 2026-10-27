@@ -76,6 +76,10 @@ window.addEventListener('DOMContentLoaded', () => {
 function setupMobileMenu() {
     const btn = document.getElementById('hamburger-btn');
     const menu = document.getElementById('mobile-menu');
+    
+    // Proteção preventiva caso mude de página
+    if (!btn || !menu) return; 
+
     const links = menu.querySelectorAll('a');
 
     // Alternar ao clicar no botão hambúrguer do topo
@@ -128,15 +132,14 @@ function setupScrollReveal() {
 
     const observerOptions = {
         root: null,
-        rootMargin: '0px 0px -50px 0px', // Ativa um pouco antes de chegar ao fim do viewport
-        threshold: 0.15 // Requer que 15% do elemento esteja visível
+        rootMargin: '0px 0px -50px 0px', 
+        threshold: 0.15 
     };
 
     const revealObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('is-visible');
-                // Uma vez revelado, cancela a observação para otimizar desempenho
                 observer.unobserve(entry.target);
             }
         });
@@ -220,6 +223,7 @@ function renderJobCards() {
 /* -------------------------------------------------------------------------- */
 function renderRecruiterCandidates() {
     const list = document.getElementById('recruiter-candidates-list');
+    if (!list) return;
     list.innerHTML = '';
 
     candidatesData.forEach(c => {
@@ -251,14 +255,18 @@ function renderRecruiterCandidates() {
 /* -------------------------------------------------------------------------- */
 /* FILTROS E PESQUISA DE VAGAS                                                */
 /* -------------------------------------------------------------------------- */
-function filterByCategory(cat) {
+function filterByCategory(cat, e) {
     currentFilterCategory = cat;
     document.querySelectorAll('.category-btn').forEach(btn => {
         btn.classList.remove('bg-pojae-600', 'text-white');
         btn.classList.add('bg-white', 'text-slate-600');
     });
-    event.target.classList.remove('bg-white', 'text-slate-600');
-    event.target.classList.add('bg-pojae-600', 'text-white');
+    
+    const targetElement = e ? e.target : window.event.srcElement;
+    if(targetElement) {
+        targetElement.classList.remove('bg-white', 'text-slate-600');
+        targetElement.classList.add('bg-pojae-600', 'text-white');
+    }
     renderJobCards();
 }
 
@@ -350,14 +358,14 @@ function switchView(view) {
     const btnRecruiter = document.getElementById('toggle-tab-recruiter');
 
     if (view === 'student') {
-        titleEl.innerHTML = 'Visualizando como: <span class="text-pojae-600">Estudante / Candidato</span>';
-        btnStudent.className = 'px-3 py-1 text-xs font-bold rounded-md bg-pojae-600 text-white transition';
-        btnRecruiter.className = 'px-3 py-1 text-xs font-bold rounded-md text-slate-600 hover:text-pojae-600 transition';
+        if(titleEl) titleEl.innerHTML = 'Visualizando como: <span class="text-pojae-600">Estudante / Candidato</span>';
+        if(btnStudent) btnStudent.className = 'px-3 py-1 text-xs font-bold rounded-md bg-pojae-600 text-white transition';
+        if(btnRecruiter) btnRecruiter.className = 'px-3 py-1 text-xs font-bold rounded-md text-slate-600 hover:text-pojae-600 transition';
         showToast("Modo de navegação alterado para Visão do Estudante", "info");
     } else {
-        titleEl.innerHTML = 'Visualizando como: <span class="text-emerald-600">Empresa / Recrutador</span>';
-        btnRecruiter.className = 'px-3 py-1 text-xs font-bold rounded-md bg-emerald-600 text-white transition';
-        btnStudent.className = 'px-3 py-1 text-xs font-bold rounded-md text-slate-600 hover:text-pojae-600 transition';
+        if(titleEl) titleEl.innerHTML = 'Visualizando como: <span class="text-emerald-600">Empresa / Recrutador</span>';
+        if(btnRecruiter) btnRecruiter.className = 'px-3 py-1 text-xs font-bold rounded-md bg-emerald-600 text-white transition';
+        if(btnStudent) btnStudent.className = 'px-3 py-1 text-xs font-bold rounded-md text-slate-600 hover:text-pojae-600 transition';
         showToast("Modo de navegação alterado para Visão da Empresa (Recrutador)", "info");
     }
 }
@@ -367,8 +375,9 @@ function switchView(view) {
 /* -------------------------------------------------------------------------- */
 function showToast(message, type = 'success') {
     const container = document.getElementById('toast-container');
-    const toast = document.createElement('div');
+    if (!container) return;
     
+    const toast = document.createElement('div');
     const bgColor = type === 'success' ? 'bg-emerald-600' : 'bg-pojae-700';
     const icon = type === 'success' ? 'fa-check-circle' : 'fa-info-circle';
 

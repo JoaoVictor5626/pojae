@@ -6,7 +6,7 @@ html {
 }
 
 /* -------------------------------------------------------------------------- */
-/* 2. BOTÃO HAMBÚRGUER COM MICROINTERAÇÃO (3 LINHAS PARA X)                    */
+/* 2. BOTÃO HAMBÚRGUER COM MICROINTERAÇÃO (3 LINHAS PARA X)                   */
 /* -------------------------------------------------------------------------- */
 .hamburger-btn {
     width: 40px;
@@ -130,4 +130,35 @@ html {
 @keyframes slideIn {
     from { transform: translateY(-100%); opacity: 0; }
     to { transform: translateY(0); opacity: 1; }
+}
+
+
+/* --- CONTROLE DE EXIBIÇÃO NOS 900PX --- */
+
+/* Por padrão (telas maiores que 900px) */
+.desktop-nav {
+    display: flex; /* Mostra os links do meio */
+}
+
+.hamburger-btn {
+    display: none; /* Esconde o botão hambúrguer */
+}
+
+.btn-text-publish {
+    display: inline; /* Mostra o texto do botão publicar */
+}
+
+/* Quando a tela for menor ou igual a 900px */
+@media (max-width: 900px) {
+    .desktop-nav {
+        display: none !important; /* Esconde completamente os nomes do meio */
+    }
+
+    .hamburger-btn {
+        display: flex !important; /* Faz o menu hambúrguer aparecer */
+    }
+
+    .btn-text-publish {
+        display: none !important; /* Esconde o texto do botão para não amassar o layout */
+    }
 }

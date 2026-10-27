@@ -46,7 +46,8 @@
             </a>
 
             <!-- NAVIGATION LINKS (DESKTOP) -->
-            <nav class="hidden md:flex items-center space-x-1 lg:space-x-2 text-sm font-semibold text-slate-600">
+            <!-- ALTERADO: Trocado 'hidden md:flex' por 'desktop-nav' -->
+            <nav class="desktop-nav items-center space-x-1 lg:space-x-2 text-sm font-semibold text-slate-600">
                 <a href="#vagas" class="px-3 py-2 rounded-lg hover:text-pojae-600 hover:bg-slate-100 transition">Vagas em Maceió</a>
                 <a href="#estudantes" class="px-3 py-2 rounded-lg hover:text-pojae-600 hover:bg-slate-100 transition">Para Estagiários</a>
                 <a href="#empresas" class="px-3 py-2 rounded-lg hover:text-pojae-600 hover:bg-slate-100 transition">Para Empresas</a>
@@ -66,13 +67,15 @@
                     </button>
                 </div>
 
+                <!-- ALTERADO: Removido 'hidden md:inline' do span para o texto sumir apenas junto com o menu -->
                 <button onclick="openModal('modal-post-job')" class="bg-pojae-600 hover:bg-pojae-700 text-white font-semibold text-xs sm:text-sm px-3.5 py-2 rounded-lg shadow-md shadow-blue-600/30 transition flex items-center gap-1.5">
                     <i class="fas fa-plus-circle"></i>
-                    <span class="hidden md:inline">Publicar Vaga</span>
+                    <span class="btn-text-publish">Publicar Vaga</span>
                 </button>
 
-                <!-- BOTÃO HAMBÚRGUER MOBILE (VISÍVEL APENAS EM MOBILE/TABLETS) -->
-                <button id="hamburger-btn" class="hamburger-btn md:hidden" aria-label="Abrir Menu de Navegação">
+                <!-- BOTÃO HAMBÚRGUER MOBILE -->
+                <!-- ALTERADO: Removido 'md:hidden' -->
+                <button id="hamburger-btn" class="hamburger-btn" aria-label="Abrir Menu de Navegação">
                     <span class="hamburger-line"></span>
                     <span class="hamburger-line"></span>
                     <span class="hamburger-line"></span>
@@ -80,6 +83,7 @@
             </div>
         </div>
     </header>
+
 
     <!-- MENU OVERLAY MOBILE FULLSCREEN (ATUALIZADO COM BOTÃO FECHAR) -->
     <div id="mobile-menu" class="mobile-menu-overlay" onclick="closeMobileMenuOnBackdrop(event)">
