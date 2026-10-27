@@ -1,0 +1,133 @@
+/* -------------------------------------------------------------------------- */
+/* 1. NAVEGAÇÃO E SCROLL SUAVE                                                */
+/* -------------------------------------------------------------------------- */
+html {
+    scroll-behavior: smooth; /* Permite rolagem suave nos links com âncora (#) */
+}
+
+/* -------------------------------------------------------------------------- */
+/* 2. BOTÃO HAMBÚRGUER COM MICROINTERAÇÃO (3 LINHAS PARA X)                    */
+/* -------------------------------------------------------------------------- */
+.hamburger-btn {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    z-index: 50;
+}
+
+.hamburger-line {
+    width: 24px;
+    height: 2.5px;
+    background-color: #1e293b; /* Slate-800 */
+    border-radius: 2px;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.2s ease,
+                background-color 0.3s ease;
+}
+
+/* Estado ATIVO do Menu Hambúrguer (Transformação em X) */
+.hamburger-btn.is-active .hamburger-line:nth-child(1) {
+    transform: translateY(8.5px) rotate(45deg);
+}
+.hamburger-btn.is-active .hamburger-line:nth-child(2) {
+    opacity: 0;
+    transform: translateX(-10px);
+}
+.hamburger-btn.is-active .hamburger-line:nth-child(3) {
+    transform: translateY(-8.5px) rotate(-45deg);
+}
+
+/* -------------------------------------------------------------------------- */
+/* 3. PAINEL DO MENU MOBILE & ANIMAÇÃO DOS LINKS INCLUÍDOS                    */
+/* -------------------------------------------------------------------------- */
+.mobile-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(15, 23, 42, 0.98); /* Fundo escuro com leve transparência */
+    backdrop-filter: blur(12px);
+    z-index: 45;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                visibility 0.4s ease;
+}
+
+.mobile-menu-overlay.is-open {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Estilo e Animação Escalonada dos Itens do Menu Mobile */
+.mobile-nav-link {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #f8fafc;
+    padding: 0.75rem 1.5rem;
+    margin: 0.25rem 0;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.35s ease, transform 0.35s ease, color 0.2s ease;
+}
+
+.mobile-nav-link:hover {
+    color: #3b82f6;
+}
+
+/* Quando o menu abre, os links aparecem sequencialmente (staggering/cascata) */
+.mobile-menu-overlay.is-open .mobile-nav-link {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Delays escalonados para entrada suave */
+.mobile-menu-overlay.is-open .mobile-nav-link:nth-child(1) { transition-delay: 0.10s; }
+.mobile-menu-overlay.is-open .mobile-nav-link:nth-child(2) { transition-delay: 0.15s; }
+.mobile-menu-overlay.is-open .mobile-nav-link:nth-child(3) { transition-delay: 0.20s; }
+.mobile-menu-overlay.is-open .mobile-nav-link:nth-child(4) { transition-delay: 0.25s; }
+.mobile-menu-overlay.is-open .mobile-nav-link:nth-child(5) { transition-delay: 0.30s; }
+
+/* -------------------------------------------------------------------------- */
+/* 4. REVEAL ANIMAÇÃO AO ROLAR A PÁGINA (SCROLL REVEAL COM BLUR SUAVE)        */
+/* -------------------------------------------------------------------------- */
+.reveal-on-scroll {
+    opacity: 0;
+    filter: blur(10px); /* Inicia com desfoque de 10px */
+    transform: translateY(30px); /* Inicia deslocado para baixo */
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                filter 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, filter, transform;
+}
+
+/* Estado visível ativado via JavaScript quando o elemento entra na tela */
+.reveal-on-scroll.is-visible {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+}
+
+/* Estilos adicionais */
+.gradient-hero {
+    background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #2563eb 100%);
+}
+.toast-slide {
+    animation: slideIn 0.3s ease-out forwards;
+}
+@keyframes slideIn {
+    from { transform: translateY(-100%); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}

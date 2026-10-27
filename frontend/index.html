@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POJAE - Plataforma de Oportunidades de Jovens Aprendizes e Estagiários (Maceió - AL)</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FontAwesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <script src="./assets/js/tailwind-config.js"></script>
+
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans flex flex-col min-h-screen antialiased selection:bg-blue-500 selection:text-white">
+
+    <!-- TOP HEADER / AVISO DE ABRANGÊNCIA REGIONAL -->
+    <div class="bg-pojae-900 text-slate-200 text-xs py-2 px-4 text-center font-medium border-b border-blue-900/50 flex items-center justify-center gap-2">
+        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 mr-1.5 animate-pulse"></span> Ativo
+        </span>
+        <span><i class="fas fa-map-marker-alt text-red-400 mr-1"></i> Abrangência exclusiva para a região de <strong>Maceió - AL</strong></span>
+    </div>
+
+    <!-- MAIN NAVBAR -->
+    <header class="bg-white/90 backdrop-blur-md border-b border-slate-200/80 sticky top-0 z-40 transition-all">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-20">
+            
+            <!-- BRAND LOGO POJAE -->
+            <a href="#" class="flex items-center gap-3 group z-50">
+                <div class="bg-gradient-to-tr from-pojae-900 via-pojae-700 to-pojae-500 text-white font-extrabold text-2xl px-3.5 py-1.5 rounded-xl shadow-lg shadow-blue-500/20 group-hover:scale-105 transition-transform">
+                    POJAE
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-xs font-bold text-slate-800 tracking-tight group-hover:text-pojae-600 transition">Plataforma de Oportunidades</span>
+                    <span class="text-[10px] text-slate-500 font-medium">Jovens Aprendizes e Estagiários</span>
+                </div>
+            </a>
+
+            <!-- NAVIGATION LINKS (DESKTOP) -->
+            <nav class="hidden md:flex items-center space-x-1 lg:space-x-2 text-sm font-semibold text-slate-600">
+                <a href="#vagas" class="px-3 py-2 rounded-lg hover:text-pojae-600 hover:bg-slate-100 transition">Vagas em Maceió</a>
+                <a href="#estudantes" class="px-3 py-2 rounded-lg hover:text-pojae-600 hover:bg-slate-100 transition">Para Estagiários</a>
+                <a href="#empresas" class="px-3 py-2 rounded-lg hover:text-pojae-600 hover:bg-slate-100 transition">Para Empresas</a>
+                <a href="#instituicoes" class="px-3 py-2 rounded-lg hover:text-pojae-600 hover:bg-slate-100 transition">Instituições</a>
+            </nav>
+
+            <!-- ACTION BUTTONS DESKTOP & MOBILE TOGGLE -->
+            <div class="flex items-center gap-2 sm:gap-3">
+                <div class="hidden sm:flex items-center gap-2">
+                    <button onclick="switchView('student')" id="btn-view-student" class="px-3 py-1.5 text-xs font-semibold rounded-lg border border-slate-200 hover:border-pojae-500 text-slate-700 transition flex items-center gap-1.5 bg-slate-50">
+                        <i class="fas fa-user-graduate text-pojae-600"></i>
+                        <span>Visão Aluno</span>
+                    </button>
+                    <button onclick="switchView('recruiter')" id="btn-view-recruiter" class="px-3 py-1.5 text-xs font-semibold rounded-lg border border-slate-200 hover:border-pojae-500 text-slate-700 transition flex items-center gap-1.5 bg-slate-50">
+                        <i class="fas fa-building text-pojae-600"></i>
+                        <span>Visão Empresa</span>
+                    </button>
+                </div>
+
+                <button onclick="openModal('modal-post-job')" class="bg-pojae-600 hover:bg-pojae-700 text-white font-semibold text-xs sm:text-sm px-3.5 py-2 rounded-lg shadow-md shadow-blue-600/30 transition flex items-center gap-1.5">
+                    <i class="fas fa-plus-circle"></i>
+                    <span class="hidden md:inline">Publicar Vaga</span>
+                </button>
+
+                <!-- BOTÃO HAMBÚRGUER MOBILE (VISÍVEL APENAS EM MOBILE/TABLETS) -->
+                <button id="hamburger-btn" class="hamburger-btn md:hidden" aria-label="Abrir Menu de Navegação">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MENU OVERLAY MOBILE FULLSCREEN (ATUALIZADO COM BOTÃO FECHAR) -->
+    <div id="mobile-menu" class="mobile-menu-overlay" onclick="closeMobileMenuOnBackdrop(event)">
+        <!-- Botão X dedicado para fechar o menu no canto superior direito -->
+        <button onclick="closeMobileMenu()" class="absolute top-6 right-6 text-slate-300 hover:text-white text-2xl p-2 transition focus:outline-none" aria-label="Fechar Menu">
+            <i class="fas fa-times"></i>
+        </button>
+
+        <div class="flex flex-col items-center text-center space-y-2 pointer-events-auto">
+            <a href="#vagas" class="mobile-nav-link">Vagas em Maceió</a>
+            <a href="#estudantes" class="mobile-nav-link">Para Estagiários</a>
+            <a href="#empresas" class="mobile-nav-link">Para Empresas</a>
+            <a href="#instituicoes" class="mobile-nav-link">Instituições de Ensino</a>
+            
+            <div class="pt-6 flex flex-col gap-3 w-64 mobile-nav-link">
+                <button onclick="switchView('student'); closeMobileMenu();" class="w-full py-2.5 bg-blue-600/30 border border-blue-400/30 rounded-xl text-white font-semibold text-sm flex items-center justify-center gap-2">
+                    <i class="fas fa-user-graduate text-blue-400"></i> Alternar p/ Visão Aluno
+                </button>
+                <button onclick="switchView('recruiter'); closeMobileMenu();" class="w-full py-2.5 bg-emerald-600/30 border border-emerald-400/30 rounded-xl text-white font-semibold text-sm flex items-center justify-center gap-2">
+                    <i class="fas fa-building text-emerald-400"></i> Alternar p/ Visão Empresa
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- NOTIFICATION TOAST CONTAINER -->
+    <div id="toast-container" class="fixed top-24 right-4 z-50 flex flex-col gap-2 max-w-sm w-full pointer-events-none"></div>
+
+    <!-- MAIN CONTENT AREA -->
+    <main class="flex-grow">
+        
+        <!-- HERO SECTION -->
+        <section class="gradient-hero text-white py-16 lg:py-24 px-4 relative overflow-hidden">
+            <!-- Circulos Decorativos -->
+            <div class="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-blue-500/10 blur-3xl pointer-events-none"></div>
+            <div class="absolute -bottom-24 -right-24 w-96 h-96 rounded-full bg-indigo-500/20 blur-3xl pointer-events-none"></div>
+
+            <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
+                
+                <!-- Coluna da Esquerda: Textos e Busca -->
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left reveal-on-scroll">
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-500/20 border border-blue-400/30 text-blue-200 text-xs font-semibold">
+                        <i class="fas fa-shield-alt text-emerald-400"></i> Conformidade com a Lei do Estágio (Nº 11.788)
+                    </div>
+                    
+                    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight">
+                        Sua carreira e estágio em Maceió começam <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-300 via-sky-200 to-emerald-300">aqui.</span>
+                    </h1>
+                    
+                    <p class="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                        Aproximando estudantes, empresas e instituições de ensino. Candidate-se com currículo e histórico escolar de forma rápida e transparente.
+                    </p>
+
+                    <!-- BARRA DE PESQUISA INTERATIVA -->
+                    <div class="bg-white rounded-2xl p-2.5 shadow-2xl shadow-black/30 border border-slate-100 max-w-2xl mx-auto lg:mx-0 flex flex-col sm:flex-row gap-2 text-slate-800">
+                        <div class="flex-1 flex items-center px-3 py-2 bg-slate-50 rounded-xl">
+                            <i class="fas fa-search text-slate-400 mr-2.5"></i>
+                            <input type="text" id="search-keyword" placeholder="Cargo, habilidade (ex: Python, Design)..." class="w-full bg-transparent focus:outline-none text-sm font-medium placeholder-slate-400">
+                        </div>
+                        <div class="sm:w-48 flex items-center px-3 py-2 bg-slate-50 rounded-xl">
+                            <i class="fas fa-layer-group text-slate-400 mr-2"></i>
+                            <select id="search-category" class="w-full bg-transparent focus:outline-none text-sm font-medium text-slate-700">
+                                <option value="">Todas as Áreas</option>
+                                <option value="Tecnologia">Tecnologia (TI)</option>
+                                <option value="Administração">Administração</option>
+                                <option value="Direito">Direito</option>
+                                <option value="Engenharia">Engenharia</option>
+                            </select>
+                        </div>
+                        <button onclick="filterJobs()" class="bg-pojae-600 hover:bg-pojae-700 text-white font-bold px-6 py-3 rounded-xl transition shadow-md shadow-blue-600/40 flex items-center justify-center gap-2 text-sm">
+                            <i class="fas fa-search"></i>
+                            <span>Buscar</span>
+                        </button>
+                    </div>
+
+                    <!-- Destaques Informativos -->
+                    <div class="grid grid-cols-3 gap-2 sm:gap-4 pt-4 max-w-lg mx-auto lg:mx-0 text-center lg:text-left">
+                        <div class="border-l-2 border-blue-400/50 pl-3">
+                            <span class="block text-lg sm:text-xl font-extrabold text-white">100%</span>
+                            <span class="text-[11px] sm:text-xs text-slate-300">Maceió & Região</span>
+                        </div>
+                        <div class="border-l-2 border-blue-400/50 pl-3">
+                            <span class="block text-lg sm:text-xl font-extrabold text-white">0%</span>
+                            <span class="text-[11px] sm:text-xs text-slate-300">Custo p/ Estudante</span>
+                        </div>
+                        <div class="border-l-2 border-blue-400/50 pl-3">
+                            <span class="block text-lg sm:text-xl font-extrabold text-white">Direto</span>
+                            <span class="text-[11px] sm:text-xs text-slate-300">Com Instituições</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Coluna da Direita: Card Interativo e Prototipagem -->
+                <div class="lg:col-span-5 flex justify-center reveal-on-scroll">
+                    <div class="relative w-full max-w-md">
+                        <div class="bg-gradient-to-b from-white/10 to-white/5 backdrop-blur-xl border border-white/20 rounded-3xl p-5 sm:p-6 shadow-2xl relative">
+                            
+                            <!-- Card Recrutador -->
+                            <div class="bg-white rounded-2xl p-4 shadow-lg border border-slate-100 mb-4 transform hover:-translate-y-1 transition text-slate-800">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="bg-blue-100 text-pojae-700 text-xs font-bold px-2.5 py-1 rounded-lg flex items-center gap-1">
+                                        <i class="fas fa-building"></i> Recrutador / Empresa
+                                    </span>
+                                    <span class="text-[10px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-mono">RF02 / RF04</span>
+                                </div>
+                                <h4 class="font-bold text-sm text-slate-800">Publicar Oportunidade</h4>
+                                <p class="text-xs text-slate-500 mt-1">Cadastre vagas e atribua orientadores qualificados para supervisão formativa.</p>
+                                <div class="mt-3 flex justify-end">
+                                    <button onclick="openModal('modal-post-job')" class="text-xs bg-pojae-600 text-white font-semibold px-3 py-1.5 rounded-lg hover:bg-pojae-700 transition">
+                                        + Criar Nova Vaga
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Visual da Plataforma -->
+                            <div class="bg-slate-900 rounded-2xl p-4 shadow-2xl border border-slate-700 space-y-3">
+                                <div class="flex items-center justify-between border-b border-slate-800 pb-2">
+                                    <div class="flex gap-1.5">
+                                        <span class="w-2.5 h-2.5 rounded-full bg-red-500 inline-block"></span>
+                                        <span class="w-2.5 h-2.5 rounded-full bg-yellow-500 inline-block"></span>
+                                        <span class="w-2.5 h-2.5 rounded-full bg-green-500 inline-block"></span>
+                                    </div>
+                                    <span class="text-[10px] text-slate-400 font-mono">pojae.maceio.al.gov.br</span>
+                                </div>
+                                <div class="space-y-2">
+                                    <div class="bg-slate-800 p-2.5 rounded-xl flex items-center justify-between">
+                                        <div class="flex items-center gap-2">
+                                            <div class="w-8 h-8 rounded-lg bg-blue-500/20 text-blue-400 flex items-center justify-center font-bold text-xs">TI</div>
+                                            <div>
+                                                <div class="text-xs font-bold text-white">Dev Front-end Estágio</div>
+                                                <div class="text-[10px] text-slate-400">Pajuçara, Maceió • R$ 1.200</div>
+                                            </div>
+                                        </div>
+                                        <span class="text-[10px] bg-emerald-500/20 text-emerald-400 font-semibold px-2 py-0.5 rounded">Aberto</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Card Candidato -->
+                            <div class="bg-white rounded-2xl p-4 shadow-lg border border-slate-100 mt-4 transform hover:translate-y-1 transition text-slate-800">
+                                <div class="flex items-center justify-between mb-1">
+                                    <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-2.5 py-1 rounded-lg flex items-center gap-1">
+                                        <i class="fas fa-user-graduate"></i> Candidato / Estagiário
+                                    </span>
+                                    <span class="text-[10px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-mono">RF01 / RF07</span>
+                                </div>
+                                <div class="flex items-center gap-3 mt-2">
+                                    <div class="w-10 h-10 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-600 font-bold text-sm">JV</div>
+                                    <div class="flex-1">
+                                        <div class="text-xs font-bold text-slate-800">João Victor A.</div>
+                                        <div class="text-[10px] text-slate-500">Engenharia de Software (CESMAC)</div>
+                                        <div class="flex gap-1 mt-1">
+                                            <span class="text-[9px] bg-blue-50 text-blue-600 px-1.5 py-0.5 rounded">CV Anexado</span>
+                                            <span class="text-[9px] bg-emerald-50 text-emerald-600 px-1.5 py-0.5 rounded">Histórico OK</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- DASHBOARD TOGGLE SIMULATION BANNER -->
+        <section class="bg-slate-100 border-y border-slate-200 py-4 px-4 reveal-on-scroll">
+            <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-3 h-3 rounded-full bg-pojae-600 animate-ping"></div>
+                    <div>
+                        <span class="text-xs uppercase font-bold text-pojae-700 tracking-wider">Modo de Simulação Ativo</span>
+                        <h3 id="current-view-title" class="text-sm font-bold text-slate-800">Visualizando como: <span class="text-pojae-600">Estudante / Candidato</span></h3>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="text-xs text-slate-500 font-medium">Trocar perfil de teste:</span>
+                    <div class="inline-flex rounded-lg border border-slate-300 p-1 bg-white shadow-sm">
+                        <button onclick="switchView('student')" id="toggle-tab-student" class="px-3 py-1 text-xs font-bold rounded-md bg-pojae-600 text-white transition">
+                            Estudante
+                        </button>
+                        <button onclick="switchView('recruiter')" id="toggle-tab-recruiter" class="px-3 py-1 text-xs font-bold rounded-md text-slate-600 hover:text-pojae-600 transition">
+                            Empresa
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO FEED DE VAGAS (RF04, RF05, RF06) -->
+        <section id="vagas" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4 reveal-on-scroll">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-wider text-pojae-600">Oportunidades Ativas</span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">
+                        Vagas de Estágio e Jovem Aprendiz em Maceió
+                    </h2>
+                    <p class="text-slate-500 text-sm mt-1">Exclusivo para estudantes residentes ou matriculados em Maceió - AL.</p>
+                </div>
+
+                <!-- BOTÕES DE FILTRO POR CATEGORIA -->
+                <div class="flex flex-wrap gap-2" id="filter-pills">
+                    <button onclick="filterByCategory('all')" class="category-btn active px-3.5 py-1.5 rounded-full text-xs font-semibold bg-pojae-600 text-white transition shadow-sm">Todas</button>
+                    <button onclick="filterByCategory('Tecnologia')" class="category-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 transition">Tecnologia</button>
+                    <button onclick="filterByCategory('Administração')" class="category-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 transition">Administração</button>
+                    <button onclick="filterByCategory('Direito')" class="category-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 transition">Direito</button>
+                    <button onclick="filterByCategory('Engenharia')" class="category-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 transition">Engenharia</button>
+                </div>
+            </div>
+
+            <!-- CONTAINER DINÂMICO DE CARDS -->
+            <div id="job-cards-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 reveal-on-scroll">
+                <!-- Preenchido via JavaScript -->
+            </div>
+        </section>
+
+        <!-- SEÇÃO RECRUTADOR & INSTITUIÇÃO (RF02, RF03, RF09, RN02) -->
+        <section id="empresas" class="bg-slate-900 text-white py-16 px-4">
+            <div class="max-w-7xl mx-auto">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div class="reveal-on-scroll">
+                        <span class="text-xs font-bold uppercase tracking-wider text-blue-400">Para Concedentes e Escolas</span>
+                        <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-2 leading-tight">
+                            Conexão Segura e Descomplicada entre Empresas e Instituições
+                        </h2>
+                        <p class="text-slate-300 text-sm mt-3 leading-relaxed">
+                            A plataforma POJAE simplifica o recrutamento e o acompanhamento acadêmico. Garanta a conformidade legal com indicação de orientadores qualificados e convênios estruturados.
+                        </p>
+
+                        <div class="space-y-4 mt-6">
+                            <div class="flex items-start gap-3">
+                                <div class="w-8 h-8 rounded-lg bg-blue-500/20 text-blue-400 flex items-center justify-center shrink-0 mt-0.5">
+                                    <i class="fas fa-user-shield"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-bold text-white">RN02 - Supervisão Formativa</h4>
+                                    <p class="text-xs text-slate-400">Cada vaga requer a indicação de um orientador/supervisor com nível de escolaridade superior ao estagiário.</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-3">
+                                <div class="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 mt-0.5">
+                                    <i class="fas fa-file-contract"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-bold text-white">RF09 - Registro de Convênio</h4>
+                                    <p class="text-xs text-slate-400">Formalização e validação direta do convênio entre a empresa e as Instituições de Ensino parceiras de Maceió.</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-3">
+                                <div class="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center shrink-0 mt-0.5">
+                                    <i class="fas fa-bolt"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-bold text-white">RNF03 - Publicação Agilizada</h4>
+                                    <p class="text-xs text-slate-400">Empresas podem criar e publicar oportunidades imediatamente, com responsabilidade pelos dados declarados.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-8 flex flex-wrap gap-3">
+                            <button onclick="openModal('modal-post-job')" class="bg-pojae-600 hover:bg-pojae-500 text-white font-bold text-sm px-5 py-2.5 rounded-xl transition shadow-lg shadow-blue-600/30">
+                                <i class="fas fa-plus-circle mr-1.5"></i> Cadastrar Vaga Gratuitamente
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- RECRUITER MINI-DASHBOARD PREVIEW -->
+                    <div class="bg-slate-800 border border-slate-700 rounded-3xl p-6 shadow-2xl reveal-on-scroll">
+                        <div class="flex items-center justify-between border-b border-slate-700 pb-4 mb-4">
+                            <div>
+                                <span class="text-[10px] text-blue-400 font-mono font-bold">PAINEL DA EMPRESA (RF08)</span>
+                                <h3 class="text-base font-bold text-white">Gestão de Candidatos Inscritos</h3>
+                            </div>
+                            <span class="bg-emerald-500/20 text-emerald-400 text-xs font-semibold px-2.5 py-1 rounded-full border border-emerald-500/30">
+                                Simulador
+                            </span>
+                        </div>
+
+                        <div class="space-y-3" id="recruiter-candidates-list">
+                            <!-- Populated dynamically via JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO FLUXO / PASSO A PASSO -->
+        <section id="estudantes" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-12 reveal-on-scroll">
+                <span class="text-xs font-bold uppercase tracking-wider text-pojae-600">Jornada Simplificada</span>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">Como Funciona a Plataforma</h2>
+                <p class="text-slate-500 text-sm mt-2">Passo a passo rápido para ingressar no mercado de trabalho de Maceió.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 reveal-on-scroll">
+                <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm relative group hover:border-pojae-500 transition">
+                    <div class="w-10 h-10 rounded-xl bg-blue-100 text-pojae-700 flex items-center justify-center font-bold text-lg mb-4">1</div>
+                    <h3 class="font-bold text-base text-slate-800 mb-1">Cadastro do Estudante</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">Preencha seus dados acadêmicos, curso, período e habilidades (RF01).</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm relative group hover:border-pojae-500 transition">
+                    <div class="w-10 h-10 rounded-xl bg-blue-100 text-pojae-700 flex items-center justify-center font-bold text-lg mb-4">2</div>
+                    <h3 class="font-bold text-base text-slate-800 mb-1">Busca & Notificação</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">Explore oportunidades alinhadas com seu perfil em Maceió (RF05).</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm relative group hover:border-pojae-500 transition">
+                    <div class="w-10 h-10 rounded-xl bg-blue-100 text-pojae-700 flex items-center justify-center font-bold text-lg mb-4">3</div>
+                    <h3 class="font-bold text-base text-slate-800 mb-1">Envio de Documentos</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">Candidatura com anexo de Currículo e Histórico Escolar atualizado (RF07).</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm relative group hover:border-pojae-500 transition">
+                    <div class="w-10 h-10 rounded-xl bg-blue-100 text-pojae-700 flex items-center justify-center font-bold text-lg mb-4">4</div>
+                    <h3 class="font-bold text-base text-slate-800 mb-1">Acompanhamento</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">Acompanhe o status do processo seletivo e formalização do convênio (RF08/RF09).</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO INSTITUIÇÕES DE ENSINO PARCEIRAS -->
+        <section id="instituicoes" class="py-16 bg-slate-100/70 border-t border-slate-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center reveal-on-scroll">
+                <span class="text-xs font-bold uppercase tracking-wider text-pojae-600">Rede de Parcerias</span>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">Instituições de Ensino em Maceió</h2>
+                <p class="text-slate-500 text-sm mt-2 max-w-xl mx-auto">Validação de matrículas, envio de históricos acadêmicos e assinatura de termos de convênio.</p>
+                
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8">
+                    <div class="bg-white p-4 rounded-xl border border-slate-200 font-bold text-slate-700 shadow-sm flex items-center justify-center">
+                        <i class="fas fa-university text-pojae-600 mr-2"></i> CESMAC
+                    </div>
+                    <div class="bg-white p-4 rounded-xl border border-slate-200 font-bold text-slate-700 shadow-sm flex items-center justify-center">
+                        <i class="fas fa-university text-pojae-600 mr-2"></i> UFAL
+                    </div>
+                    <div class="bg-white p-4 rounded-xl border border-slate-200 font-bold text-slate-700 shadow-sm flex items-center justify-center">
+                        <i class="fas fa-university text-pojae-600 mr-2"></i> IFAL
+                    </div>
+                    <div class="bg-white p-4 rounded-xl border border-slate-200 font-bold text-slate-700 shadow-sm flex items-center justify-center">
+                        <i class="fas fa-university text-pojae-600 mr-2"></i> UNCISAL
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800 text-xs">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div class="space-y-3 md:col-span-1">
+                    <div class="bg-pojae-600 text-white font-extrabold text-xl px-3 py-1 rounded-lg inline-block">
+                        POJAE
+                    </div>
+                    <p class="text-slate-400 leading-relaxed">
+                        Plataforma de Oportunidades de Jovens Aprendizes e Estagiários na cidade de Maceió - AL.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold mb-3 text-sm">Links Rápidos</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#vagas" class="hover:text-white transition">Vagas Abertas</a></li>
+                        <li><a href="#estudantes" class="hover:text-white transition">Área do Estudante</a></li>
+                        <li><a href="#empresas" class="hover:text-white transition">Área da Empresa</a></li>
+                        <li><a href="#instituicoes" class="hover:text-white transition">Instituições Parceiras</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold mb-3 text-sm">Conformidade Legal</h4>
+                    <ul class="space-y-2">
+                        <li><span>Lei do Estágio (11.788/08)</span></li>
+                        <li><span>Supervisão Obrigatória (RN02)</span></li>
+                        <li><span>Região Exclusiva: Maceió - AL</span></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold mb-3 text-sm">Contato & Suporte</h4>
+                    <p class="text-slate-400 mb-2"><i class="fas fa-envelope mr-1.5 text-pojae-500"></i> suporte@pojae.maceio.br</p>
+                    <p class="text-slate-400"><i class="fas fa-map-pin mr-1.5 text-pojae-500"></i> Maceió, Alagoas - Brasil</p>
+                </div>
+            </div>
+
+            <div class="border-t border-slate-800 pt-6 flex flex-col sm:flex-row items-center justify-between text-slate-500 text-[11px]">
+                <p>&copy; 2026 POJAE - Todos os direitos reservados.</p>
+                <p>Protótipo conceitual para levantamento de requisitos de software (Maceió - AL).</p>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- MODAL 1: CANDIDATURA DA VAGA (RF06, RF07) -->
+    <div id="modal-apply" class="fixed inset-0 bg-slate-900/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl border border-slate-100 relative max-h-[90vh] overflow-y-auto">
+            <button onclick="closeModal('modal-apply')" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600 transition">
+                <i class="fas fa-times text-lg"></i>
+            </button>
+
+            <div class="flex items-center gap-2 text-xs font-bold text-pojae-600 mb-1">
+                <i class="fas fa-paper-plane"></i> ENVIAR CANDIDATURA (RF06 & RF07)
+            </div>
+            <h3 id="modal-job-title" class="text-xl font-bold text-slate-900 mb-1">Desenvolvedor Web Estagiário</h3>
+            <p id="modal-job-company" class="text-xs text-slate-500 mb-4">Tech Maceió Soluções • Pajuçara, Maceió</p>
+
+            <form id="apply-form" onsubmit="handleApplySubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Nome Completo do Estudante *</label>
+                    <input type="text" id="candidate-name" required value="João Victor Araújo Coêlho" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2 text-sm focus:outline-none focus:border-pojae-600">
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">E-mail *</label>
+                        <input type="email" id="candidate-email" required value="joao.victor@cesmac.edu.br" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2 text-sm focus:outline-none focus:border-pojae-600">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Instituição de Ensino *</label>
+                        <select id="candidate-institution" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2 text-sm focus:outline-none focus:border-pojae-600">
+                            <option value="CESMAC">Centro Univ. CESMAC</option>
+                            <option value="UFAL">UFAL</option>
+                            <option value="IFAL">IFAL</option>
+                            <option value="UNCISAL">UNCISAL</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- CAMPO DE ANEXO DE ARQUIVOS (RF07) -->
+                <div class="border border-dashed border-slate-300 rounded-2xl p-3.5 bg-slate-50/50 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-file-pdf text-red-500 text-lg"></i>
+                            <div>
+                                <div class="text-xs font-bold text-slate-800">Currículo Vitae (.pdf) *</div>
+                                <div class="text-[10px] text-slate-400">Anexar versão atualizada</div>
+                            </div>
+                        </div>
+                        <label class="bg-white border border-slate-200 hover:border-pojae-500 text-slate-700 text-xs font-bold px-3 py-1.5 rounded-lg cursor-pointer transition">
+                            <span>Selecionar</span>
+                            <input type="file" class="hidden" onchange="updateFileLabel(this, 'label-cv')">
+                        </label>
+                    </div>
+                    <span id="label-cv" class="text-[10px] text-emerald-600 font-semibold block">curriculo_joaovictor_2026.pdf (Anexado)</span>
+
+                    <hr class="border-slate-200">
+
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-graduation-cap text-blue-500 text-lg"></i>
+                            <div>
+                                <div class="text-xs font-bold text-slate-800">Histórico Escolar / Acadêmico *</div>
+                                <div class="text-[10px] text-slate-400">Comprovação de vínculo em Maceió</div>
+                            </div>
+                        </div>
+                        <label class="bg-white border border-slate-200 hover:border-pojae-500 text-slate-700 text-xs font-bold px-3 py-1.5 rounded-lg cursor-pointer transition">
+                            <span>Selecionar</span>
+                            <input type="file" class="hidden" onchange="updateFileLabel(this, 'label-historico')">
+                        </label>
+                    </div>
+                    <span id="label-historico" class="text-[10px] text-emerald-600 font-semibold block">historico_academico_cesmac.pdf (Anexado)</span>
+                </div>
+
+                <div class="flex gap-2 pt-2">
+                    <button type="button" onclick="closeModal('modal-apply')" class="w-1/2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-2.5 rounded-xl transition text-sm">
+                        Cancelar
+                    </button>
+                    <button type="submit" class="w-1/2 bg-pojae-600 hover:bg-pojae-700 text-white font-bold py-2.5 rounded-xl transition shadow-md shadow-blue-600/30 text-sm">
+                        Confirmar Candidatura
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- MODAL 2: PUBLICAR VAGA EMPRESA (RF02, RF04, RN02) -->
+    <div id="modal-post-job" class="fixed inset-0 bg-slate-900/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-3xl max-w-xl w-full p-6 shadow-2xl border border-slate-100 relative max-h-[90vh] overflow-y-auto">
+            <button onclick="closeModal('modal-post-job')" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600 transition">
+                <i class="fas fa-times text-lg"></i>
+            </button>
+
+            <div class="flex items-center gap-2 text-xs font-bold text-pojae-600 mb-1">
+                <i class="fas fa-plus-circle"></i> CADASTRO DE VAGA DE ESTÁGIO (RF04 & RN02)
+            </div>
+            <h3 class="text-xl font-bold text-slate-900 mb-4">Nova Oportunidade em Maceió</h3>
+
+            <form id="post-job-form" onsubmit="handlePostJobSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Título da Vaga *</label>
+                    <input type="text" id="new-job-title" required placeholder="Ex: Estágio em Desenvolvimento Web" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2 text-sm focus:outline-none focus:border-pojae-600">
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Nome da Empresa *</label>
+                        <input type="text" id="new-job-company" required placeholder="Sua Empresa Ltda" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2 text-sm focus:outline-none focus:border-pojae-600">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Bairro em Maceió *</label>
+                        <input type="text" id="new-job-location" required placeholder="Ex: Farol, Ponta Verde" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2 text-sm focus:outline-none focus:border-pojae-600">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Área do Conhecimento *</label>
+                        <select id="new-job-category" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2 text-sm focus:outline-none focus:border-pojae-600">
+                            <option value="Tecnologia">Tecnologia (TI)</option>
+                            <option value="Administração">Administração</option>
+                            <option value="Direito">Direito</option>
+                            <option value="Engenharia">Engenharia</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Bolsa auxílio mensal (R$) *</label>
+                        <input type="number" id="new-job-stipend" required placeholder="1200" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2 text-sm focus:outline-none focus:border-pojae-600">
+                    </div>
+                </div>
+
+                <!-- CAMPOS OBRIGATÓRIOS DO SUPERVISOR (RN02) -->
+                <div class="bg-amber-50/80 border border-amber-200 rounded-2xl p-4 space-y-3">
+                    <div class="flex items-center gap-2 text-amber-900 font-bold text-xs">
+                        <i class="fas fa-user-check text-amber-600"></i>
+                        <span>RN02 - Indicação do Supervisor / Orientador (Obrigatório)</span>
+                    </div>
+                    <p class="text-[11px] text-amber-800">
+                        A vaga deve obrigatoriamente indicar o responsável por orientar o estagiário, com escolaridade superior à do estudante.
+                    </p>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-[11px] font-bold text-slate-700 mb-1">Nome do Supervisor *</label>
+                            <input type="text" required placeholder="Ex: Dra. Mariana Silva" class="w-full bg-white border border-slate-200 rounded-xl px-3 py-1.5 text-xs focus:outline-none focus:border-pojae-600">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-bold text-slate-700 mb-1">Nível de Formação *</label>
+                            <select required class="w-full bg-white border border-slate-200 rounded-xl px-3 py-1.5 text-xs focus:outline-none focus:border-pojae-600">
+                                <option value="Graduado">Graduado na Área</option>
+                                <option value="Especialista">Pós-Graduado / Especialista</option>
+                                <option value="Mestre">Mestre / Doutor</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex gap-2 pt-2">
+                    <button type="button" onclick="closeModal('modal-post-job')" class="w-1/2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-2.5 rounded-xl transition text-sm">
+                        Cancelar
+                    </button>
+                    <button type="submit" class="w-1/2 bg-pojae-600 hover:bg-pojae-700 text-white font-bold py-2.5 rounded-xl transition shadow-md shadow-blue-600/30 text-sm">
+                        Publicar Vaga
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="./assets/js/script.js"></script>
+    
+</body>
+</html>
