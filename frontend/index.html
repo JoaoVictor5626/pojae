@@ -54,28 +54,21 @@
                 <a href="#instituicoes" class="px-3 py-2 rounded-lg hover:text-pojae-600 hover:bg-slate-100 transition">Instituições</a>
             </nav>
 
-            <!-- ACTION BUTTONS DESKTOP & MOBILE TOGGLE -->
-            <div class="flex items-center gap-2 sm:gap-3">
-                <div class="hidden sm:flex items-center gap-2">
-                    <button onclick="switchView('student')" id="btn-view-student" class="px-3 py-1.5 text-xs font-semibold rounded-lg border border-slate-200 hover:border-pojae-500 text-slate-700 transition flex items-center gap-1.5 bg-slate-50">
-                        <i class="fas fa-user-graduate text-pojae-600"></i>
-                        <span>Visão Aluno</span>
-                    </button>
-                    <button onclick="switchView('recruiter')" id="btn-view-recruiter" class="px-3 py-1.5 text-xs font-semibold rounded-lg border border-slate-200 hover:border-pojae-500 text-slate-700 transition flex items-center gap-1.5 bg-slate-50">
-                        <i class="fas fa-building text-pojae-600"></i>
-                        <span>Visão Empresa</span>
-                    </button>
-                </div>
+            <!-- ACTION BUTTONS / BOTÃO CADASTRE-SE & HAMBÚRGUER -->
+            <div class="flex items-center gap-2">
+                <!-- Botão de Login (Visível apenas em Desktop) -->
+                <a href="#login" onclick="showToast('Módulo de Login em desenvolvimento', 'info')" class="text-xs sm:text-sm font-semibold text-slate-600 hover:text-pojae-600 px-3 py-2 rounded-lg transition hidden md:inline-block">
+                    Já tem conta? Entrar
+                </a>
 
-                <!-- ALTERADO: Removido 'hidden md:inline' do span para o texto sumir apenas junto com o menu -->
-                <button onclick="openModal('modal-post-job')" class="bg-pojae-600 hover:bg-pojae-700 text-white font-semibold text-xs sm:text-sm px-3.5 py-2 rounded-lg shadow-md shadow-blue-600/30 transition flex items-center gap-1.5">
-                    <i class="fas fa-plus-circle"></i>
-                    <span class="btn-text-publish">Publicar Vaga</span>
-                </button>
+                <!-- Botão Principal: Cadastre-se (Oculto no Mobile, Visível a partir do tamanho 'md' - Desktop) -->
+                <a href="pagina-intermediaria.html" class="hidden md:flex bg-pojae-600 hover:bg-pojae-700 text-white font-semibold text-xs sm:text-sm px-4 py-2.5 rounded-lg shadow-md shadow-blue-600/30 transition items-center gap-2">
+                    <i class="fas fa-user-plus"></i>
+                    <span>Cadastre-se</span>
+                </a>
 
-                <!-- BOTÃO HAMBÚRGUER MOBILE -->
-                <!-- ALTERADO: Removido 'md:hidden' -->
-                <button id="hamburger-btn" class="hamburger-btn" aria-label="Abrir Menu de Navegação">
+                <!-- BOTÃO HAMBÚRGUER MOBILE (Aparece no celular) -->
+                <button id="hamburger-btn" class="hamburger-btn md:hidden" aria-label="Abrir Menu de Navegação">
                     <span class="hamburger-line"></span>
                     <span class="hamburger-line"></span>
                     <span class="hamburger-line"></span>
@@ -85,27 +78,34 @@
     </header>
 
 
-    <!-- MENU OVERLAY MOBILE FULLSCREEN (ATUALIZADO COM BOTÃO FECHAR) -->
+    <!-- MENU OVERLAY MOBILE FULLSCREEN (COM BOTÃO CADASTRE-SE INTERNO) -->
     <div id="mobile-menu" class="mobile-menu-overlay" onclick="closeMobileMenuOnBackdrop(event)">
-        <!-- Botão X dedicado para fechar o menu no canto superior direito -->
+        <!-- Botão X dedicado para fechar o menu -->
         <button onclick="closeMobileMenu()" class="absolute top-6 right-6 text-slate-300 hover:text-white text-2xl p-2 transition focus:outline-none" aria-label="Fechar Menu">
             <i class="fas fa-times"></i>
         </button>
 
-        <div class="flex flex-col items-center text-center space-y-2 pointer-events-auto">
-            <a href="#vagas" class="mobile-nav-link">Vagas em Maceió</a>
-            <a href="#estudantes" class="mobile-nav-link">Para Estagiários</a>
-            <a href="#empresas" class="mobile-nav-link">Para Empresas</a>
-            <a href="#instituicoes" class="mobile-nav-link">Instituições de Ensino</a>
+        <div class="flex flex-col items-center text-center space-y-3 w-full max-w-xs px-4 pointer-events-auto">
+            <!-- Links de Navegação -->
+            <a href="#vagas" class="mobile-nav-link w-full text-center">Vagas em Maceió</a>
+            <a href="#estudantes" class="mobile-nav-link w-full text-center">Para Estagiários</a>
+            <a href="#empresas" class="mobile-nav-link w-full text-center">Para Empresas</a>
+            <a href="#instituicoes" class="mobile-nav-link w-full text-center">Instituições de Ensino</a>
             
-            <div class="pt-6 flex flex-col gap-3 w-64 mobile-nav-link">
-                <button onclick="switchView('student'); closeMobileMenu();" class="w-full py-2.5 bg-blue-600/30 border border-blue-400/30 rounded-xl text-white font-semibold text-sm flex items-center justify-center gap-2">
-                    <i class="fas fa-user-graduate text-blue-400"></i> Alternar p/ Visão Aluno
-                </button>
-                <button onclick="switchView('recruiter'); closeMobileMenu();" class="w-full py-2.5 bg-emerald-600/30 border border-emerald-400/30 rounded-xl text-white font-semibold text-sm flex items-center justify-center gap-2">
-                    <i class="fas fa-building text-emerald-400"></i> Alternar p/ Visão Empresa
-                </button>
-            </div>
+            <!-- Divisor sutil -->
+            <div class="w-full border-t border-slate-700/60 my-2"></div>
+
+            <!-- BOTÃO CADASTRE-SE DENTRO DO MENU MOBILE -->
+            <a href="pagina-intermediaria.html" onclick="closeMobileMenu();" class="mobile-nav-link w-full py-3 bg-pojae-600 hover:bg-pojae-700 text-white font-bold text-sm rounded-xl shadow-lg shadow-blue-600/30 flex items-center justify-center gap-2 transition">
+                <i class="fas fa-user-plus"></i>
+                <span>Cadastre-se</span>
+            </a>
+
+            <!-- Botão de Login secundário no Mobile -->
+            <a href="#login" onclick="closeMobileMenu(); showToast('Módulo de Login em desenvolvimento', 'info');" class="mobile-nav-link w-full py-2.5 bg-slate-800 text-slate-300 hover:text-white border border-slate-700 rounded-xl font-semibold text-xs flex items-center justify-center gap-2 transition">
+                <i class="fas fa-sign-in-alt"></i>
+                <span>Já tenho uma conta</span>
+            </a>
         </div>
     </div>
 
@@ -439,8 +439,8 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
                 <div class="space-y-3 md:col-span-1">
-                    <div class="bg-pojae-600 text-white font-extrabold text-xl px-3 py-1 rounded-lg inline-block">
-                        POJAE
+                    <div class="bg-gradient-to-tr from-pojae-900 via-pojae-700 to-pojae-500 text-white font-extrabold text-2xl px-3.5 py-1.5 rounded-xl shadow-lg shadow-blue-500/20 group-hover:scale-105 transition-transform inline-block"> 
+                        POJAE 
                     </div>
                     <p class="text-slate-400 leading-relaxed">
                         Plataforma de Oportunidades de Jovens Aprendizes e Estagiários na cidade de Maceió - AL.
