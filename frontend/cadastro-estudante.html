@@ -397,45 +397,6 @@
         </div>
     </footer>
 
-
-    <!-- MODAL / INTERMEDIÁRIO DE SELEÇÃO DE PERFIL (SOLICITADO) -->
-    <div id="modal-selection" class="fixed inset-0 bg-slate-900/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
-        <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-slate-100 relative">
-            <button onclick="closeSelectionModal()" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600 transition">
-                <i class="fas fa-times text-lg"></i>
-            </button>
-
-            <div class="text-center mb-6">
-                <div class="bg-blue-50 text-pojae-700 font-bold text-xs px-3 py-1 rounded-full inline-block mb-2">
-                    ETAPA INTERMEDIÁRIA DE CADASTRO
-                </div>
-                <h3 class="text-xl font-bold text-slate-900">Como você deseja se cadastrar?</h3>
-                <p class="text-xs text-slate-500 mt-1">Escolha a opção correspondente ao seu perfil no POJAE em Maceió.</p>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <!-- OPÇÃO 1: ESTUDANTE -->
-                <a href="cadastro-estudante.html" class="p-5 border-2 border-pojae-600 bg-blue-50/50 hover:bg-blue-50 rounded-2xl flex flex-col items-center text-center group transition shadow-sm">
-                    <div class="w-12 h-12 rounded-2xl bg-pojae-600 text-white flex items-center justify-center text-xl mb-3 shadow-md shadow-blue-600/30 group-hover:scale-110 transition">
-                        <i class="fas fa-user-graduate"></i>
-                    </div>
-                    <span class="font-bold text-sm text-slate-900">Cadastrar como Estudante</span>
-                    <span class="text-[11px] text-slate-500 mt-1">Busco vagas de estágio ou jovem aprendiz</span>
-                </a>
-
-                <!-- OPÇÃO 2: EMPRESA -->
-                <a href="#cadastro-empresa" onclick="closeSelectionModal(); showToast('Módulo de Cadastro de Empresa selecionado.', 'info')" class="p-5 border border-slate-200 hover:border-pojae-500 bg-white hover:bg-slate-50 rounded-2xl flex flex-col items-center text-center group transition shadow-sm">
-                    <div class="w-12 h-12 rounded-2xl bg-slate-100 text-slate-700 flex items-center justify-center text-xl mb-3 group-hover:bg-pojae-600 group-hover:text-white transition">
-                        <i class="fas fa-building"></i>
-                    </div>
-                    <span class="font-bold text-sm text-slate-900">Cadastrar como Empresa</span>
-                    <span class="text-[11px] text-slate-500 mt-1">Quero divulgar e gerenciar oportunidades</span>
-                </a>
-            </div>
-        </div>
-    </div>
-
-
     <!-- JAVASCRIPT: LÓGICA DE FORMULÁRIO, MÁSCARAS E HABILIDADES -->
     <script>
         // ESTADO INTERNO DAS HABILIDADES
