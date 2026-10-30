@@ -14,10 +14,8 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- Google Fonts -->
     <script src="./assets/js/tailwind-config.js"></script>
 
-    <!-- Google Fonts -->
     <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans flex flex-col min-h-screen antialiased selection:bg-blue-500 selection:text-white">
@@ -32,16 +30,19 @@
 
     <!-- MAIN NAVBAR -->
     <header class="bg-white/90 backdrop-blur-md border-b border-slate-200/80 sticky top-0 z-40 transition-all">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-0 flex justify-between items-center h-20">
             
             <!-- BRAND LOGO POJAE -->
             <a href="#" class="flex items-center gap-3 group z-50">
-                <div class="bg-gradient-to-tr from-pojae-900 via-pojae-700 to-pojae-500 text-white font-extrabold text-2xl px-3.5 py-1.5 rounded-xl shadow-lg shadow-blue-500/20 group-hover:scale-105 transition-transform">
+                <!-- <div class="bg-gradient-to-tr from-pojae-900 via-pojae-700 to-pojae-500 text-white font-extrabold text-2xl px-3.5 py-1.5 rounded-xl shadow-lg shadow-blue-500/20 group-hover:scale-105 transition-transform">
                     POJAE
                 </div>
                 <div class="flex flex-col">
                     <span class="text-xs font-bold text-slate-800 tracking-tight group-hover:text-pojae-600 transition">Plataforma de Oportunidades</span>
                     <span class="text-[10px] text-slate-500 font-medium">Jovens Aprendizes e Estagiários</span>
+                </div> -->
+                <div class="logo-navbar">
+                    <img src="./assets/images/pojae-logo.png" alt="">
                 </div>
             </a>
 
@@ -187,7 +188,7 @@
                                     <span class="bg-blue-100 text-pojae-700 text-xs font-bold px-2.5 py-1 rounded-lg flex items-center gap-1">
                                         <i class="fas fa-building"></i> Recrutador / Empresa
                                     </span>
-                                    <span class="text-[10px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-mono">RF02 / RF04</span>
+                                    <!-- <span class="text-[10px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-mono">RF02 / RF04</span> -->
                                 </div>
                                 <h4 class="font-bold text-sm text-slate-800">Publicar Oportunidade</h4>
                                 <p class="text-xs text-slate-500 mt-1">Cadastre vagas e atribua orientadores qualificados para supervisão formativa.</p>
@@ -228,7 +229,7 @@
                                     <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-2.5 py-1 rounded-lg flex items-center gap-1">
                                         <i class="fas fa-user-graduate"></i> Candidato / Estagiário
                                     </span>
-                                    <span class="text-[10px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-mono">RF01 / RF07</span>
+                                    <!-- <span class="text-[10px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-mono">RF01 / RF07</span> -->
                                 </div>
                                 <div class="flex items-center gap-3 mt-2">
                                     <div class="w-10 h-10 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-600 font-bold text-sm">JV</div>
@@ -274,7 +275,7 @@
             </div>
         </section>
 
-        <!-- SEÇÃO FEED DE VAGAS (RF04, RF05, RF06) -->
+        <!-- SEÇÃO FEED DE VAGAS -->
         <section id="vagas" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4 reveal-on-scroll">
                 <div>
@@ -301,7 +302,7 @@
             </div>
         </section>
 
-        <!-- SEÇÃO RECRUTADOR & INSTITUIÇÃO (RF02, RF03, RF09, RN02) -->
+        <!-- SEÇÃO RECRUTADOR & INSTITUIÇÃO -->
         <section id="empresas" class="bg-slate-900 text-white py-16 px-4">
             <div class="max-w-7xl mx-auto">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -320,7 +321,7 @@
                                     <i class="fas fa-user-shield"></i>
                                 </div>
                                 <div>
-                                    <h4 class="text-sm font-bold text-white">RN02 - Supervisão Formativa</h4>
+                                    <h4 class="text-sm font-bold text-white">Supervisão Formativa</h4>
                                     <p class="text-xs text-slate-400">Cada vaga requer a indicação de um orientador/supervisor com nível de escolaridade superior ao estagiário.</p>
                                 </div>
                             </div>
@@ -330,7 +331,7 @@
                                     <i class="fas fa-file-contract"></i>
                                 </div>
                                 <div>
-                                    <h4 class="text-sm font-bold text-white">RF09 - Registro de Convênio</h4>
+                                    <h4 class="text-sm font-bold text-white">Registro de Convênio</h4>
                                     <p class="text-xs text-slate-400">Formalização e validação direta do convênio entre a empresa e as Instituições de Ensino parceiras de Maceió.</p>
                                 </div>
                             </div>
@@ -340,7 +341,7 @@
                                     <i class="fas fa-bolt"></i>
                                 </div>
                                 <div>
-                                    <h4 class="text-sm font-bold text-white">RNF03 - Publicação Agilizada</h4>
+                                    <h4 class="text-sm font-bold text-white">Publicação Agilizada</h4>
                                     <p class="text-xs text-slate-400">Empresas podem criar e publicar oportunidades imediatamente, com responsabilidade pelos dados declarados.</p>
                                 </div>
                             </div>
@@ -357,7 +358,7 @@
                     <div class="bg-slate-800 border border-slate-700 rounded-3xl p-6 shadow-2xl reveal-on-scroll">
                         <div class="flex items-center justify-between border-b border-slate-700 pb-4 mb-4">
                             <div>
-                                <span class="text-[10px] text-blue-400 font-mono font-bold">PAINEL DA EMPRESA (RF08)</span>
+                                <span class="text-[10px] text-blue-400 font-mono font-bold">PAINEL DA EMPRESA</span>
                                 <h3 class="text-base font-bold text-white">Gestão de Candidatos Inscritos</h3>
                             </div>
                             <span class="bg-emerald-500/20 text-emerald-400 text-xs font-semibold px-2.5 py-1 rounded-full border border-emerald-500/30">
@@ -385,25 +386,25 @@
                 <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm relative group hover:border-pojae-500 transition">
                     <div class="w-10 h-10 rounded-xl bg-blue-100 text-pojae-700 flex items-center justify-center font-bold text-lg mb-4">1</div>
                     <h3 class="font-bold text-base text-slate-800 mb-1">Cadastro do Estudante</h3>
-                    <p class="text-xs text-slate-500 leading-relaxed">Preencha seus dados acadêmicos, curso, período e habilidades (RF01).</p>
+                    <p class="text-xs text-slate-500 leading-relaxed">Preencha seus dados acadêmicos, curso, período e habilidades.</p>
                 </div>
 
                 <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm relative group hover:border-pojae-500 transition">
                     <div class="w-10 h-10 rounded-xl bg-blue-100 text-pojae-700 flex items-center justify-center font-bold text-lg mb-4">2</div>
                     <h3 class="font-bold text-base text-slate-800 mb-1">Busca & Notificação</h3>
-                    <p class="text-xs text-slate-500 leading-relaxed">Explore oportunidades alinhadas com seu perfil em Maceió (RF05).</p>
+                    <p class="text-xs text-slate-500 leading-relaxed">Explore oportunidades alinhadas com seu perfil em Maceió.</p>
                 </div>
 
                 <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm relative group hover:border-pojae-500 transition">
                     <div class="w-10 h-10 rounded-xl bg-blue-100 text-pojae-700 flex items-center justify-center font-bold text-lg mb-4">3</div>
                     <h3 class="font-bold text-base text-slate-800 mb-1">Envio de Documentos</h3>
-                    <p class="text-xs text-slate-500 leading-relaxed">Candidatura com anexo de Currículo e Histórico Escolar atualizado (RF07).</p>
+                    <p class="text-xs text-slate-500 leading-relaxed">Candidatura com anexo de Currículo e Histórico Escolar atualizado.</p>
                 </div>
 
                 <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm relative group hover:border-pojae-500 transition">
                     <div class="w-10 h-10 rounded-xl bg-blue-100 text-pojae-700 flex items-center justify-center font-bold text-lg mb-4">4</div>
                     <h3 class="font-bold text-base text-slate-800 mb-1">Acompanhamento</h3>
-                    <p class="text-xs text-slate-500 leading-relaxed">Acompanhe o status do processo seletivo e formalização do convênio (RF08/RF09).</p>
+                    <p class="text-xs text-slate-500 leading-relaxed">Acompanhe o status do processo seletivo e formalização do convênio.</p>
                 </div>
             </div>
         </section>
@@ -481,7 +482,7 @@
     </footer>
 
 
-    <!-- MODAL 1: CANDIDATURA DA VAGA (RF06, RF07) -->
+    <!-- MODAL 1: CANDIDATURA DA VAGA -->
     <div id="modal-apply" class="fixed inset-0 bg-slate-900/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
         <div class="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl border border-slate-100 relative max-h-[90vh] overflow-y-auto">
             <button onclick="closeModal('modal-apply')" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600 transition">
@@ -489,7 +490,7 @@
             </button>
 
             <div class="flex items-center gap-2 text-xs font-bold text-pojae-600 mb-1">
-                <i class="fas fa-paper-plane"></i> ENVIAR CANDIDATURA (RF06 & RF07)
+                <i class="fas fa-paper-plane"></i> ENVIAR CANDIDATURA
             </div>
             <h3 id="modal-job-title" class="text-xl font-bold text-slate-900 mb-1">Desenvolvedor Web Estagiário</h3>
             <p id="modal-job-company" class="text-xs text-slate-500 mb-4">Tech Maceió Soluções • Pajuçara, Maceió</p>
@@ -516,7 +517,7 @@
                     </div>
                 </div>
 
-                <!-- CAMPO DE ANEXO DE ARQUIVOS (RF07) -->
+                <!-- CAMPO DE ANEXO DE ARQUIVOS -->
                 <div class="border border-dashed border-slate-300 rounded-2xl p-3.5 bg-slate-50/50 space-y-3">
                     <div class="flex items-center justify-between">
                         <div class="flex items-center gap-2">
@@ -564,7 +565,7 @@
     </div>
 
 
-    <!-- MODAL 2: PUBLICAR VAGA EMPRESA (RF02, RF04, RN02) -->
+    <!-- MODAL 2: PUBLICAR VAGA EMPRESA -->
     <div id="modal-post-job" class="fixed inset-0 bg-slate-900/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
         <div class="bg-white rounded-3xl max-w-xl w-full p-6 shadow-2xl border border-slate-100 relative max-h-[90vh] overflow-y-auto">
             <button onclick="closeModal('modal-post-job')" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600 transition">
@@ -572,7 +573,7 @@
             </button>
 
             <div class="flex items-center gap-2 text-xs font-bold text-pojae-600 mb-1">
-                <i class="fas fa-plus-circle"></i> CADASTRO DE VAGA DE ESTÁGIO (RF04 & RN02)
+                <i class="fas fa-plus-circle"></i> CADASTRO DE VAGA DE ESTÁGIO
             </div>
             <h3 class="text-xl font-bold text-slate-900 mb-4">Nova Oportunidade em Maceió</h3>
 

@@ -5,6 +5,10 @@ html {
     scroll-behavior: smooth; /* Permite rolagem suave nos links com âncora (#) */
 }
 
+.logo-navbar{
+    width: 150px;
+}
+
 /* -------------------------------------------------------------------------- */
 /* 2. BOTÃO HAMBÚRGUER COM MICROINTERAÇÃO (3 LINHAS PARA X)                   */
 /* -------------------------------------------------------------------------- */
