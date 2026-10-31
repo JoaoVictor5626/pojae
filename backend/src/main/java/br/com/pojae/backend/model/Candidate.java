@@ -1,11 +1,21 @@
 package br.com.pojae.backend.model;
 
+import br.com.pojae.backend.model.enums.EducationalInstitution;
+import br.com.pojae.backend.model.enums.Status;
+import br.com.pojae.backend.model.enums.StudyShift;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
@@ -44,11 +54,13 @@ public class Candidate {
     @Column(unique = true, length = 14, nullable = false)
     private String phone;
 
-    @Column(unique = true, length = 9, nullable = false)
-    private String cep;
+    @ManyToOne
+    @JoinColumn(name = "address_cep", nullable = false)
+    private String address;
 
     @Column(nullable = false)
-    private String educationalInstitution;
+    @Enumerated(EnumType.STRING)
+    private EducationalInstitution educationalInstitution;
 
     @Column(length = 50, nullable = false)
     private String courseName;
@@ -57,17 +69,25 @@ public class Candidate {
     private String gradeOrAcademicTerm;
 
     @Column(nullable = false)
-    private String studyShift;
+    @Enumerated(EnumType.STRING)
+    private StudyShift studyShift;
 
     @Column(nullable = false)
     @JsonFormat(pattern = "MM/yyyy")
     private LocalDate expectedGraduationDate;
 
-    @Column(length = 50, nullable = false)
-    private String status;
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Status status;
 
     @Column(nullable = false)
-    private List<String> skills = new ArrayList<>();
+    @ManyToMany
+    @JoinTable(
+            name = "tb_candidate_skills",
+            joinColumns = @JoinColumn(name = "candidate_id"),
+            inverseJoinColumns = @JoinColumn(name = "skill_id")
+    )
+    private List<Skill> skills = new ArrayList<>();
 
     @Column(nullable = false)
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
