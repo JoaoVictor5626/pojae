@@ -4,6 +4,7 @@ import br.com.pojae.backend.model.Candidate;
 import br.com.pojae.backend.service.CandidateService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -33,6 +34,11 @@ public class CandidateController {
     @PutMapping("/{id}")
     public Candidate update(UUID id, Candidate candidate) {
         return service.update(id, candidate);
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(UUID id) {
+        service.delete(id);
     }
 
 }
