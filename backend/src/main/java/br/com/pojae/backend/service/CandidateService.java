@@ -50,12 +50,12 @@ public class CandidateService {
 
     private Candidate findById(UUID id) {
         return repository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Candidato não encontrado"));
+                .orElseThrow(() -> new NotFoundException("Candidato"));
     }
 
     private void existsById(UUID id) {
         if (!repository.existsById(id)) {
-            throw new IllegalArgumentException("Candidato não encontrado");
+            throw new NotFoundException("Candidato");
         }
     }
 
