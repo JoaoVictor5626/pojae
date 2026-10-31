@@ -31,7 +31,7 @@ public class CandidateService {
         candidate.setCpf(candidateUpdated.getCpf());
         candidate.setEmail(candidateUpdated.getEmail());
         candidate.setPhone(candidateUpdated.getPhone());
-        candidate.setCep(candidateUpdated.getCep());
+        candidate.setAddress(candidateUpdated.getAddress());
         candidate.setEducationalInstitution(candidateUpdated.getEducationalInstitution());
         candidate.setCourseName(candidateUpdated.getCourseName());
         candidate.setGradeOrAcademicTerm(candidateUpdated.getGradeOrAcademicTerm());

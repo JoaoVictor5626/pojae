@@ -12,6 +12,8 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
@@ -50,8 +52,9 @@ public class Candidate {
     @Column(unique = true, length = 14, nullable = false)
     private String phone;
 
-    @Column(length = 9, nullable = false)
-    private String cep;
+    @ManyToOne
+    @JoinColumn(name = "address_cep", nullable = false)
+    private String address;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
