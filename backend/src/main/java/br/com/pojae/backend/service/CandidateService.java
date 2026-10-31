@@ -1,5 +1,6 @@
 package br.com.pojae.backend.service;
 
+import br.com.pojae.backend.exception.NotFoundException;
 import br.com.pojae.backend.model.Candidate;
 import br.com.pojae.backend.repository.CandidateRepository;
 
@@ -42,9 +43,20 @@ public class CandidateService {
         return repository.save(candidate);
     }
 
+    public void delete(UUID id) {
+        existsById(id);
+        repository.deleteById(id);
+    }
+
     private Candidate findById(UUID id) {
         return repository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Candidato não encontrado"));
+    }
+
+    private void existsById(UUID id) {
+        if (!repository.existsById(id)) {
+            throw new IllegalArgumentException("Candidato não encontrado");
+        }
     }
 
 }
