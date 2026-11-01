@@ -37,9 +37,20 @@ public class SkillService {
         return repository.save(skill);
     }
 
+    public void delete(UUID id) {
+        existsById(id);
+        repository.deleteById(id);
+    }
+
     private Skill findById(UUID id) {
         return repository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Habilidade"));
+    }
+
+    private void existsById(UUID id) {
+        if (!repository.existsById(id)) {
+            throw new NotFoundException("Habilidade");
+        }
     }
 
 }
