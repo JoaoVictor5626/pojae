@@ -5,12 +5,15 @@ import br.com.pojae.backend.model.enums.SkillType;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,9 +21,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.UUID;
 
+@Entity
+@Table(name = "tb_skills")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -44,8 +48,9 @@ public class Skill {
     @Column(length = 1000, nullable = false)
     private String notes;
 
-    @ManyToMany(mappedBy = "skills")
-    private List<Candidate> candidate;
+    @ManyToOne
+    @JoinColumn(name = "candidate_id", nullable = false)
+    private Candidate candidates;
 
     @Column(nullable = false)
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")

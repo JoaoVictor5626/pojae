@@ -17,7 +17,11 @@ public class CandidateService {
     @Autowired
     private CandidateRepository repository;
 
+    @Autowired
+    private SkillService skillService;
+
     public Candidate create(Candidate candidate) {
+        candidate.getSkills().forEach(skill -> skillService.create(skill));
         return repository.save(candidate);
     }
 
