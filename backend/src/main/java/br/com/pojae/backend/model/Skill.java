@@ -37,10 +37,10 @@ public class Skill {
 
     @Column(length = 50, nullable = false)
     @Enumerated(EnumType.STRING)
-    private SkillType skillType;
+    private SkillType type;
 
     @Column(length = 50, nullable = false)
-    private String skillDescription;
+    private String description;
 
     @Column(length = 50, nullable = false)
     private Integer proficiencyLevel;

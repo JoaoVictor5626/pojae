@@ -27,9 +27,8 @@ public class SkillService {
 
     public Skill update(UUID id, Skill skillUpdated) {
         Skill skill = findById(id);
-        skill.setSkillType(skillUpdated.getSkillType());
-        skill.setSkillType(skillUpdated.getSkillType());
-        skill.setSkillDescription(skillUpdated.getSkillDescription());
+        skill.setType(skillUpdated.getType());
+        skill.setDescription(skillUpdated.getDescription());
         skill.setProficiencyLevel(skillUpdated.getProficiencyLevel());
         skill.setNotes(skillUpdated.getNotes());
         skill.setCandidates(skillUpdated.getCandidates());
