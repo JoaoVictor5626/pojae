@@ -4,6 +4,7 @@ import br.com.pojae.backend.model.EducationalInstitution;
 import br.com.pojae.backend.service.EducationalInstitutionService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,6 +36,11 @@ public class EducationalInstitutionController {
     @PutMapping("/{id}")
     public EducationalInstitution update(@PathVariable("id") UUID id, @RequestBody EducationalInstitution educationalInstitution) {
         return service.update(id, educationalInstitution);
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable("id") UUID id) {
+        service.delete(id);
     }
 
 }

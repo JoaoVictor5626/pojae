@@ -43,9 +43,20 @@ public class EducationalInstitutionService {
         return repository.save(educationalInstitution);
     }
 
+    public void delete(UUID id) {
+        existsById(id);
+        repository.deleteById(id);
+    }
+
     private EducationalInstitution findById(UUID id) {
         return repository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Instituição de ensino"));
+    }
+
+    private void existsById(UUID id) {
+        if (!repository.existsById(id)) {
+            throw new NotFoundException("Instituição de ensino");
+        }
     }
 
 }
