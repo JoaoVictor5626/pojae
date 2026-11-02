@@ -45,15 +45,8 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-0 flex justify-between items-center h-20">
             <!-- BRAND LOGO POJAE -->
             <a href="#" class="flex items-center gap-3 group z-50">
-                <!-- <div class="bg-gradient-to-tr from-pojae-900 via-pojae-700 to-pojae-500 text-white font-extrabold text-2xl px-3.5 py-1.5 rounded-xl shadow-lg shadow-blue-500/20 group-hover:scale-105 transition-transform">
-                    POJAE
-                </div>
-                <div class="flex flex-col">
-                    <span class="text-xs font-bold text-slate-800 tracking-tight group-hover:text-pojae-600 transition">Plataforma de Oportunidades</span>
-                    <span class="text-[10px] text-slate-500 font-medium">Jovens Aprendizes e Estagiários</span>
-                </div> -->
                 <div class="logo-navbar">
-                    <img src="./assets/images/pojae-logo.png" alt="">
+                    <img src="./assets/images/pojae-logo.png" alt="POJAE Logo">
                 </div>
             </a>
 
@@ -73,7 +66,8 @@
         <div class="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-blue-500/10 blur-3xl pointer-events-none"></div>
         <div class="absolute -bottom-24 -right-24 w-96 h-96 rounded-full bg-indigo-500/10 blur-3xl pointer-events-none"></div>
 
-        <div class="max-w-3xl w-full space-y-8 relative z-10">
+        <!-- CONTAINER EXPANDIDO PARA ACOMODAR OS 3 CARDS lado a lado -->
+        <div class="max-w-6xl w-full space-y-8 relative z-10">
             
             <!-- TÍTULO E ORIENTAÇÃO -->
             <div class="text-center space-y-3">
@@ -88,8 +82,8 @@
                 </p>
             </div>
 
-            <!-- CARDS DE OPÇÕES DE CADASTRO -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+            <!-- CARDS DE OPÇÕES DE CADASTRO (3 COLUNAS) -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 pt-2">
                 
                 <!-- OPÇÃO 1: CADASTRAR COMO ESTUDANTE -->
                 <a href="cadastro-estudante.html" class="card-option bg-white rounded-3xl p-6 sm:p-8 border-2 border-pojae-600 shadow-xl shadow-blue-500/10 flex flex-col justify-between group relative overflow-hidden">
@@ -136,7 +130,7 @@
                 </a>
 
                 <!-- OPÇÃO 2: CADASTRAR COMO EMPRESA -->
-                <a href="./cadastro-empresa.html"  class="card-option bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 hover:border-pojae-500 shadow-sm hover:shadow-xl flex flex-col justify-between group transition-all">
+                <a href="./cadastro-empresa.html" class="card-option bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 hover:border-pojae-500 shadow-sm hover:shadow-xl flex flex-col justify-between group transition-all">
                     <div>
                         <div class="w-14 h-14 rounded-2xl bg-slate-100 text-slate-700 flex items-center justify-center text-2xl mb-6 group-hover:bg-pojae-600 group-hover:text-white transition-colors shadow-sm">
                             <i class="fas fa-building"></i>
@@ -171,6 +165,46 @@
 
                     <div class="mt-8 flex items-center justify-between text-xs font-bold text-slate-700 group-hover:text-pojae-600 group-hover:translate-x-1 transition-all">
                         <span>Acessar Formulário de Empresa</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </a>
+
+                <!-- OPÇÃO 3: CADASTRAR COMO INSTITUIÇÃO DE ENSINO -->
+                <a href="./cadastro-instituicao.html" class="card-option bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 hover:border-pojae-500 shadow-sm hover:shadow-xl flex flex-col justify-between group transition-all">
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl bg-slate-100 text-slate-700 flex items-center justify-center text-2xl mb-6 group-hover:bg-pojae-600 group-hover:text-white transition-colors shadow-sm">
+                            <i class="fas fa-university"></i>
+                        </div>
+                        
+                        <div class="space-y-2">
+                            <span class="text-xs font-bold uppercase text-slate-400 tracking-wider">Opção 03</span>
+                            <h2 class="text-xl font-bold text-slate-900 group-hover:text-pojae-600 transition">
+                                Cadastrar Instituição
+                            </h2>
+                            <p class="text-xs text-slate-500 leading-relaxed">
+                                Para escolas, institutos técnicos e faculdades de Maceió acompanharem estudantes e formalizarem convênios.
+                            </p>
+                        </div>
+
+                        <!-- Lista de Funcionalidades do Perfil -->
+                        <ul class="mt-6 space-y-2 text-xs text-slate-600 border-t border-slate-100 pt-4">
+                            <li class="flex items-center gap-2">
+                                <i class="fas fa-check text-emerald-500 text-xs"></i>
+                                <span>Validação de vínculo dos estudantes</span>
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <i class="fas fa-check text-emerald-500 text-xs"></i>
+                                <span>Cadastro de Professor Orientador</span>
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <i class="fas fa-check text-emerald-500 text-xs"></i>
+                                <span>Assinatura e gestão de convênios</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="mt-8 flex items-center justify-between text-xs font-bold text-slate-700 group-hover:text-pojae-600 group-hover:translate-x-1 transition-all">
+                        <span>Acessar Formulário de Instituição</span>
                         <i class="fas fa-arrow-right"></i>
                     </div>
                 </a>
