@@ -1,6 +1,5 @@
 package br.com.pojae.backend.model;
 
-import br.com.pojae.backend.model.enums.EducationalInstitution;
 import br.com.pojae.backend.model.enums.Status;
 import br.com.pojae.backend.model.enums.StudyShift;
 
@@ -58,8 +57,8 @@ public class Candidate {
     @JoinColumn(name = "address_cep", nullable = false)
     private Address address;
 
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
+    @ManyToOne
+    @JoinColumn(name = "educational_institution_id", nullable = false)
     private EducationalInstitution educationalInstitution;
 
     @Column(length = 50, nullable = false)
@@ -96,5 +95,11 @@ public class Candidate {
     @Column(nullable = false)
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
     private LocalDateTime updatedAt;
+
+//    @Column(nullable = false)
+//    private Boolean cv;
+//
+//    @Column(nullable = false)
+//    private Boolean historico;
 
 }
