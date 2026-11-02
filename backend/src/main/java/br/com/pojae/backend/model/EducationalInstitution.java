@@ -1,5 +1,6 @@
 package br.com.pojae.backend.model;
 
+import br.com.pojae.backend.model.enums.EducationalInstitutionType;
 import br.com.pojae.backend.model.enums.Status;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -46,6 +47,10 @@ public class EducationalInstitution {
 
     @Column(length = 14, nullable = false)
     private String phone;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private EducationalInstitutionType type;
 
     @ManyToOne
     @JoinColumn(name = "address_cep", nullable = false)

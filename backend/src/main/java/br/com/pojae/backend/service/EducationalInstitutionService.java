@@ -31,6 +31,7 @@ public class EducationalInstitutionService {
         educationalInstitution.setCnpj(educationalInstitutionUpdated.getCnpj());
         educationalInstitution.setEmail(educationalInstitutionUpdated.getEmail());
         educationalInstitution.setPhone(educationalInstitutionUpdated.getPhone());
+        educationalInstitution.setType(educationalInstitutionUpdated.getType());
         educationalInstitution.setAddress(educationalInstitutionUpdated.getAddress());
         educationalInstitution.setAcademicAdvisorName(educationalInstitutionUpdated.getAcademicAdvisorName());
         educationalInstitution.setAcademicAdvisorCpf(educationalInstitutionUpdated.getAcademicAdvisorCpf());
