@@ -119,8 +119,11 @@ html {
     transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
                 filter 0.8s cubic-bezier(0.16, 1, 0.3, 1),
                 transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-    will-change: opacity, filter, transform;
+    
+    /* REMOVA OU SUBSTITUA POR APENAS OPACITY SE QUISER PREVENIR FLICKER */
+    will-change: opacity; 
 }
+
 
 /* Estado visível ativado via JavaScript quando o elemento entra na tela */
 .reveal-on-scroll.is-visible {
