@@ -6,6 +6,8 @@ import br.com.pojae.backend.repository.CompanyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CompanyService {
 
@@ -14,6 +16,10 @@ public class CompanyService {
 
     public Company create(Company company) {
         return repository.save(company);
+    }
+
+    public List<Company> read() {
+        return repository.findAll();
     }
 
 }
