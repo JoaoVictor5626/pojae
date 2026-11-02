@@ -17,7 +17,11 @@ public class CandidateService {
     @Autowired
     private CandidateRepository repository;
 
+    @Autowired
+    private SkillService skillService;
+
     public Candidate create(Candidate candidate) {
+        candidate.getSkills().forEach(skill -> skillService.create(skill));
         return repository.save(candidate);
     }
 
@@ -31,7 +35,7 @@ public class CandidateService {
         candidate.setCpf(candidateUpdated.getCpf());
         candidate.setEmail(candidateUpdated.getEmail());
         candidate.setPhone(candidateUpdated.getPhone());
-        candidate.setCep(candidateUpdated.getCep());
+        candidate.setAddress(candidateUpdated.getAddress());
         candidate.setEducationalInstitution(candidateUpdated.getEducationalInstitution());
         candidate.setCourseName(candidateUpdated.getCourseName());
         candidate.setGradeOrAcademicTerm(candidateUpdated.getGradeOrAcademicTerm());
@@ -50,12 +54,12 @@ public class CandidateService {
 
     private Candidate findById(UUID id) {
         return repository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Candidato não encontrado"));
+                .orElseThrow(() -> new NotFoundException("Candidato"));
     }
 
     private void existsById(UUID id) {
         if (!repository.existsById(id)) {
-            throw new IllegalArgumentException("Candidato não encontrado");
+            throw new NotFoundException("Candidato");
         }
     }
 
