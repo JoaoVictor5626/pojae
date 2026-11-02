@@ -6,6 +6,8 @@ import br.com.pojae.backend.repository.EducationalInstitutionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class EducationalInstitutionService {
 
@@ -14,6 +16,10 @@ public class EducationalInstitutionService {
 
     public EducationalInstitution create(EducationalInstitution educationalInstitution) {
         return repository.save(educationalInstitution);
+    }
+
+    public List<EducationalInstitution> read() {
+        return repository.findAll();
     }
 
 }
