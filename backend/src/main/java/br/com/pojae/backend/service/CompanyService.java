@@ -44,9 +44,20 @@ public class CompanyService {
         return repository.save(company);
     }
 
+    public void delete(UUID id) {
+        existsById(id);
+        repository.deleteById(id);
+    }
+
     private Company findById(UUID id) {
         return repository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Empresa"));
+    }
+
+    private void existsById(UUID id) {
+        if (!repository.existsById(id)) {
+            throw new NotFoundException("Empresa");
+        }
     }
 
 }
