@@ -45,7 +45,7 @@ public class Candidate {
     @Column(length = 50, nullable = false)
     private String name;
 
-    @Column(unique = true, length = 50, nullable = false)
+    @Column(unique = true, length = 14, nullable = false)
     private String cpf;
 
     @Column(unique = true, length = 50, nullable = false)
@@ -56,7 +56,7 @@ public class Candidate {
 
     @ManyToOne
     @JoinColumn(name = "address_cep", nullable = false)
-    private String address;
+    private Address address;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
@@ -84,8 +84,8 @@ public class Candidate {
     @ManyToMany
     @JoinTable(
             name = "tb_candidate_skills",
-            joinColumns = @JoinColumn(name = "candidate_id"),
-            inverseJoinColumns = @JoinColumn(name = "skill_id")
+            joinColumns = @JoinColumn(name = "candidate_id", nullable = false),
+            inverseJoinColumns = @JoinColumn(name = "skill_id", nullable = false)
     )
     private List<Skill> skills = new ArrayList<>();
 

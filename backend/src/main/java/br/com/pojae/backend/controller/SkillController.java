@@ -6,8 +6,10 @@ import br.com.pojae.backend.service.SkillService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,7 +24,7 @@ public class SkillController {
     private SkillService service;
 
     @PostMapping
-    public Skill create(Skill skill) {
+    public Skill create(@RequestBody Skill skill) {
         return service.create(skill);
     }
 
@@ -32,12 +34,12 @@ public class SkillController {
     }
 
     @PutMapping("/{id}")
-    public Skill update(UUID id, Skill skill) {
+    public Skill update(@PathVariable("id") UUID id, @RequestBody Skill skill) {
         return service.update(id, skill);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(UUID id) {
+    public void delete(@PathVariable("id") UUID id) {
         service.delete(id);
     }
 
