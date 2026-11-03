@@ -2,13 +2,15 @@
 /* 1. NAVEGAÇÃO E SCROLL SUAVE                                                */
 /* -------------------------------------------------------------------------- */
 html {
-    scroll-behavior: smooth; /* Permite rolagem suave nos links com âncora (#) */
+    scroll-behavior: smooth;
+    /* Permite rolagem suave nos links com âncora (#) */
 }
 
-.logo-navbar{
+.logo-navbar {
     width: 150px;
 }
-.logo-footer{
+
+.logo-footer {
     width: 100px;
     background-color: #ffffff;
     border-radius: 50%;
@@ -34,21 +36,24 @@ html {
 .hamburger-line {
     width: 24px;
     height: 2.5px;
-    background-color: #1e293b; /* Slate-800 */
+    background-color: #1e293b;
+    /* Slate-800 */
     border-radius: 2px;
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-                opacity 0.2s ease,
-                background-color 0.3s ease;
+        opacity 0.2s ease,
+        background-color 0.3s ease;
 }
 
 /* Estado ATIVO do Menu Hambúrguer (Transformação em X) */
 .hamburger-btn.is-active .hamburger-line:nth-child(1) {
     transform: translateY(8.5px) rotate(45deg);
 }
+
 .hamburger-btn.is-active .hamburger-line:nth-child(2) {
     opacity: 0;
     transform: translateX(-10px);
 }
+
 .hamburger-btn.is-active .hamburger-line:nth-child(3) {
     transform: translateY(-8.5px) rotate(-45deg);
 }
@@ -62,7 +67,8 @@ html {
     left: 0;
     width: 100%;
     height: 100vh;
-    background-color: rgba(15, 23, 42, 0.98); /* Fundo escuro com leve transparência */
+    background-color: rgba(15, 23, 42, 0.98);
+    /* Fundo escuro com leve transparência */
     backdrop-filter: blur(12px);
     z-index: 45;
     display: flex;
@@ -71,8 +77,8 @@ html {
     align-items: center;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
-                visibility 0.4s ease;
+    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+        visibility 0.4s ease;
 }
 
 .mobile-menu-overlay.is-open {
@@ -103,25 +109,41 @@ html {
 }
 
 /* Delays escalonados para entrada suave */
-.mobile-menu-overlay.is-open .mobile-nav-link:nth-child(1) { transition-delay: 0.10s; }
-.mobile-menu-overlay.is-open .mobile-nav-link:nth-child(2) { transition-delay: 0.15s; }
-.mobile-menu-overlay.is-open .mobile-nav-link:nth-child(3) { transition-delay: 0.20s; }
-.mobile-menu-overlay.is-open .mobile-nav-link:nth-child(4) { transition-delay: 0.25s; }
-.mobile-menu-overlay.is-open .mobile-nav-link:nth-child(5) { transition-delay: 0.30s; }
+.mobile-menu-overlay.is-open .mobile-nav-link:nth-child(1) {
+    transition-delay: 0.10s;
+}
+
+.mobile-menu-overlay.is-open .mobile-nav-link:nth-child(2) {
+    transition-delay: 0.15s;
+}
+
+.mobile-menu-overlay.is-open .mobile-nav-link:nth-child(3) {
+    transition-delay: 0.20s;
+}
+
+.mobile-menu-overlay.is-open .mobile-nav-link:nth-child(4) {
+    transition-delay: 0.25s;
+}
+
+.mobile-menu-overlay.is-open .mobile-nav-link:nth-child(5) {
+    transition-delay: 0.30s;
+}
 
 /* -------------------------------------------------------------------------- */
 /* 4. REVEAL ANIMAÇÃO AO ROLAR A PÁGINA (SCROLL REVEAL COM BLUR SUAVE)        */
 /* -------------------------------------------------------------------------- */
 .reveal-on-scroll {
     opacity: 0;
-    filter: blur(10px); /* Inicia com desfoque de 10px */
-    transform: translateY(30px); /* Inicia deslocado para baixo */
+    filter: blur(10px);
+    /* Inicia com desfoque de 10px */
+    transform: translateY(30px);
+    /* Inicia deslocado para baixo */
     transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-                filter 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-    
+        filter 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+
     /* REMOVA OU SUBSTITUA POR APENAS OPACITY SE QUISER PREVENIR FLICKER */
-    will-change: opacity; 
+    will-change: opacity;
 }
 
 
@@ -136,12 +158,21 @@ html {
 .gradient-hero {
     background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #2563eb 100%);
 }
+
 .toast-slide {
     animation: slideIn 0.3s ease-out forwards;
 }
+
 @keyframes slideIn {
-    from { transform: translateY(-100%); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
 
@@ -149,28 +180,34 @@ html {
 
 /* Por padrão (telas maiores que 900px) */
 .desktop-nav {
-    display: flex; /* Mostra os links do meio */
+    display: flex;
+    /* Mostra os links do meio */
 }
 
 .hamburger-btn {
-    display: none; /* Esconde o botão hambúrguer */
+    display: none;
+    /* Esconde o botão hambúrguer */
 }
 
 .btn-text-publish {
-    display: inline; /* Mostra o texto do botão publicar */
+    display: inline;
+    /* Mostra o texto do botão publicar */
 }
 
 /* Quando a tela for menor ou igual a 900px */
 @media (max-width: 900px) {
     .desktop-nav {
-        display: none !important; /* Esconde completamente os nomes do meio */
+        display: none !important;
+        /* Esconde completamente os nomes do meio */
     }
 
     .hamburger-btn {
-        display: flex !important; /* Faz o menu hambúrguer aparecer */
+        display: flex !important;
+        /* Faz o menu hambúrguer aparecer */
     }
 
     .btn-text-publish {
-        display: none !important; /* Esconde o texto do botão para não amassar o layout */
+        display: none !important;
+        /* Esconde o texto do botão para não amassar o layout */
     }
 }

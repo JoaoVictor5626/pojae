@@ -4,16 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>POJAE - Cadastro de Instituição de Ensino</title>
-    
+
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
     <!-- FontAwesome Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    
+
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
     <script src="./assets/js/tailwind-config.js"></script>
 
     <link rel="stylesheet" href="./assets/css/style.css">
@@ -22,20 +23,31 @@
         .toast-slide {
             animation: slideIn 0.3s ease-out forwards;
         }
+
         @keyframes slideIn {
-            from { transform: translateY(-100%); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans flex flex-col min-h-screen antialiased selection:bg-blue-500 selection:text-white">
 
     <!-- TOP HEADER / AVISO REGIONAL -->
-    <div class="bg-pojae-900 text-slate-200 text-xs py-2 px-4 text-center font-medium border-b border-blue-900/50 flex items-center justify-center gap-2">
-        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+    <div
+        class="bg-pojae-900 text-slate-200 text-xs py-2 px-4 text-center font-medium border-b border-blue-900/50 flex items-center justify-center gap-2">
+        <span
+            class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
             <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 mr-1.5 animate-pulse"></span> Ativo
         </span>
-        <span><i class="fas fa-map-marker-alt text-red-400 mr-1"></i> Cadastro válido exclusivamente para a região de <strong>Maceió - AL</strong></span>
+        <span><i class="fas fa-map-marker-alt text-red-400 mr-1"></i> Cadastro válido exclusivamente para a região de
+            <strong>Maceió - AL</strong></span>
     </div>
 
     <!-- NAVBAR PRINCIPAL -->
@@ -50,7 +62,8 @@
 
             <!-- LINK PARA HOME E BOTÃO VOLTAR -->
             <div class="flex items-center gap-3">
-                <a href="pagina-intermediaria.html" class="text-xs sm:text-sm font-semibold text-slate-600 hover:text-pojae-600 px-3 py-2 rounded-lg transition">
+                <a href="pagina-intermediaria.html"
+                    class="text-xs sm:text-sm font-semibold text-slate-600 hover:text-pojae-600 px-3 py-2 rounded-lg transition">
                     <i class="fas fa-arrow-left mr-1.5"></i> Voltar
                 </a>
             </div>
@@ -58,52 +71,63 @@
     </header>
 
     <!-- NOTIFICATION TOAST CONTAINER -->
-    <div id="toast-container" class="fixed top-24 right-4 z-50 flex flex-col gap-2 max-w-sm w-full pointer-events-none"></div>
+    <div id="toast-container" class="fixed top-24 right-4 z-50 flex flex-col gap-2 max-w-sm w-full pointer-events-none">
+    </div>
 
     <!-- CONTEÚDO PRINCIPAL: FORMULÁRIO DE CADASTRO DA INSTITUIÇÃO -->
     <main class="flex-grow py-10 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto w-full">
-        
+
         <!-- CABEÇALHO DA PÁGINA -->
         <div class="mb-8 text-center sm:text-left">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-100 text-pojae-700 text-xs font-bold mb-2">
+            <div
+                class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-100 text-pojae-700 text-xs font-bold mb-2">
                 <i class="fas fa-university"></i> CADASTRO DE INSTITUIÇÕES DE ENSINO (RF03)
             </div>
             <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900">Crie o Perfil da Instituição de Ensino</h1>
-            <p class="text-slate-500 text-sm mt-1">Cadastre as informações da escola, instituto ou faculdade para validação de vínculo e convênios de estágio em Maceió - AL.</p>
+            <p class="text-slate-500 text-sm mt-1">Cadastre as informações da escola, instituto ou faculdade para
+                validação de vínculo e convênios de estágio em Maceió - AL.</p>
         </div>
 
         <!-- FORMULÁRIO COMPLETO -->
         <form id="institution-register-form" onsubmit="handleInstitutionRegister(event)" class="space-y-8">
-            
+
             <!-- BLOCO 1: DADOS INSTITUCIONAIS & CONTATO -->
             <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-sm space-y-6">
                 <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
-                    <div class="w-10 h-10 rounded-xl bg-blue-100 text-pojae-700 flex items-center justify-center font-bold text-lg">
+                    <div
+                        class="w-10 h-10 rounded-xl bg-blue-100 text-pojae-700 flex items-center justify-center font-bold text-lg">
                         <i class="fas fa-school"></i>
                     </div>
                     <div>
                         <h2 class="text-base font-bold text-slate-900">Dados Institucionais & Contato</h2>
-                        <p class="text-xs text-slate-500">Informações de identificação, CNPJ e classificação da instituição.</p>
+                        <p class="text-xs text-slate-500">Informações de identificação, CNPJ e classificação da
+                            instituição.</p>
                     </div>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
                     <!-- Nome da Instituição -->
                     <div class="md:col-span-7">
-                        <label class="block text-xs font-bold text-slate-700 mb-1">Nome da Instituição de Ensino *</label>
-                        <input type="text" id="field-nome-inst" required placeholder="Ex: Centro Universitário CESMAC" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:border-pojae-600">
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Nome da Instituição de Ensino
+                            *</label>
+                        <input type="text" id="field-nome-inst" required placeholder="Ex: Centro Universitário CESMAC"
+                            class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:border-pojae-600">
                     </div>
 
                     <!-- CNPJ -->
                     <div class="md:col-span-5">
                         <label class="block text-xs font-bold text-slate-700 mb-1">CNPJ *</label>
-                        <input type="text" id="field-cnpj-inst" required placeholder="00.000.000/0000-00" maxlength="18" oninput="maskCNPJ(this)" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:border-pojae-600 font-mono">
+                        <input type="text" id="field-cnpj-inst" required placeholder="00.000.000/0000-00" maxlength="18"
+                            oninput="maskCNPJ(this)"
+                            class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:border-pojae-600 font-mono">
                     </div>
 
                     <!-- Tipo de Instituição (Integer / Enum) -->
                     <div class="md:col-span-4">
-                        <label class="block text-xs font-bold text-slate-700 mb-1">Tipo de Instituição (ID/Tipo) *</label>
-                        <select id="field-tipo-inst" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:border-pojae-600">
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Tipo de Instituição (ID/Tipo)
+                            *</label>
+                        <select id="field-tipo-inst" required
+                            class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:border-pojae-600">
                             <option value="">Selecione o tipo...</option>
                             <option value="1">1 - Escola (Ensino Médio / Fundamental)</option>
                             <option value="2">2 - Escola Técnica / Profissionalizante</option>
@@ -114,13 +138,17 @@
                     <!-- E-mail -->
                     <div class="md:col-span-4">
                         <label class="block text-xs font-bold text-slate-700 mb-1">E-mail Institucional *</label>
-                        <input type="email" id="field-email-inst" required placeholder="estagios@cesmac.edu.br" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:border-pojae-600">
+                        <input type="email" id="field-email-inst" required placeholder="estagios@cesmac.edu.br"
+                            class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:border-pojae-600">
                     </div>
 
                     <!-- Telefone -->
                     <div class="md:col-span-4">
-                        <label class="block text-xs font-bold text-slate-700 mb-1">Telefone de Contato / Setor de Estágios *</label>
-                        <input type="text" id="field-telefone-inst" required placeholder="(82) 3215-5000" maxlength="15" oninput="maskPhone(this)" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:border-pojae-600 font-mono">
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Telefone de Contato / Setor de
+                            Estágios *</label>
+                        <input type="text" id="field-telefone-inst" required placeholder="(82) 3215-5000" maxlength="15"
+                            oninput="maskPhone(this)"
+                            class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:border-pojae-600 font-mono">
                     </div>
                 </div>
             </div>
@@ -128,7 +156,8 @@
             <!-- BLOCO 2: ENDEREÇO DA INSTITUIÇÃO EM MACEIÓ -->
             <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-sm space-y-6">
                 <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
-                    <div class="w-10 h-10 rounded-xl bg-blue-100 text-pojae-700 flex items-center justify-center font-bold text-lg">
+                    <div
+                        class="w-10 h-10 rounded-xl bg-blue-100 text-pojae-700 flex items-center justify-center font-bold text-lg">
                         <i class="fas fa-map-marked-alt"></i>
                     </div>
                     <div>
@@ -141,37 +170,45 @@
                     <!-- CEP -->
                     <div class="md:col-span-4">
                         <label class="block text-xs font-bold text-slate-700 mb-1">CEP *</label>
-                        <input type="text" id="field-cep-inst" required placeholder="57000-000" maxlength="9" oninput="maskCEP(this)" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:border-pojae-600 font-mono">
+                        <input type="text" id="field-cep-inst" required placeholder="57000-000" maxlength="9"
+                            oninput="maskCEP(this)"
+                            class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:border-pojae-600 font-mono">
                     </div>
 
                     <!-- Endereço / Logradouro -->
                     <div class="md:col-span-8">
                         <label class="block text-xs font-bold text-slate-700 mb-1">Endereço (Logradouro) *</label>
-                        <input type="text" id="field-endereco-inst" required placeholder="Ex: Rua Cônego Machado" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:border-pojae-600">
+                        <input type="text" id="field-endereco-inst" required placeholder="Ex: Rua Cônego Machado"
+                            class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:border-pojae-600">
                     </div>
 
                     <!-- Número -->
                     <div class="md:col-span-3">
                         <label class="block text-xs font-bold text-slate-700 mb-1">Número *</label>
-                        <input type="text" id="field-numero-inst" required placeholder="918" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:border-pojae-600">
+                        <input type="text" id="field-numero-inst" required placeholder="918"
+                            class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:border-pojae-600">
                     </div>
 
                     <!-- Bairro -->
                     <div class="md:col-span-4">
                         <label class="block text-xs font-bold text-slate-700 mb-1">Bairro *</label>
-                        <input type="text" id="field-bairro-inst" required placeholder="Farol, Poço, Cidade Universitária, etc." class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:border-pojae-600">
+                        <input type="text" id="field-bairro-inst" required
+                            placeholder="Farol, Poço, Cidade Universitária, etc."
+                            class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:border-pojae-600">
                     </div>
 
                     <!-- Cidade -->
                     <div class="md:col-span-3">
                         <label class="block text-xs font-bold text-slate-700 mb-1">Cidade *</label>
-                        <input type="text" id="field-cidade-inst" value="Maceió" readonly class="w-full bg-slate-100 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm text-slate-600 font-semibold cursor-not-allowed">
+                        <input type="text" id="field-cidade-inst" value="Maceió" readonly
+                            class="w-full bg-slate-100 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm text-slate-600 font-semibold cursor-not-allowed">
                     </div>
 
                     <!-- Estado -->
                     <div class="md:col-span-2">
                         <label class="block text-xs font-bold text-slate-700 mb-1">Estado *</label>
-                        <input type="text" id="field-estado-inst" value="AL" readonly class="w-full bg-slate-100 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm text-slate-600 font-semibold cursor-not-allowed">
+                        <input type="text" id="field-estado-inst" value="AL" readonly
+                            class="w-full bg-slate-100 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm text-slate-600 font-semibold cursor-not-allowed">
                     </div>
                 </div>
             </div>
@@ -179,32 +216,42 @@
             <!-- BLOCO 3: CADASTRO DO PROFESSOR ORIENTADOR -->
             <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-sm space-y-6">
                 <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
-                    <div class="w-10 h-10 rounded-xl bg-blue-100 text-pojae-700 flex items-center justify-center font-bold text-lg">
+                    <div
+                        class="w-10 h-10 rounded-xl bg-blue-100 text-pojae-700 flex items-center justify-center font-bold text-lg">
                         <i class="fas fa-chalkboard-teacher"></i>
                     </div>
                     <div>
                         <h2 class="text-base font-bold text-slate-900">Cadastro do Professor Orientador</h2>
-                        <p class="text-xs text-slate-500">Docente responsável pelo acompanhamento acadêmico do estágio.</p>
+                        <p class="text-xs text-slate-500">Docente responsável pelo acompanhamento acadêmico do estágio.
+                        </p>
                     </div>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
                     <!-- Nome do Professor Orientador -->
                     <div class="md:col-span-8">
-                        <label class="block text-xs font-bold text-slate-700 mb-1">Nome do Professor Orientador *</label>
-                        <input type="text" id="field-nome-prof" required placeholder="Ex: Prof. Dr. Mozart de Melo Alves Junior" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:border-pojae-600">
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Nome do Professor Orientador
+                            *</label>
+                        <input type="text" id="field-nome-prof" required
+                            placeholder="Ex: Prof. Dr. Mozart de Melo Alves Junior"
+                            class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:border-pojae-600">
                     </div>
 
                     <!-- CPF do Professor Orientador -->
                     <div class="md:col-span-4">
                         <label class="block text-xs font-bold text-slate-700 mb-1">CPF do Professor Orientador *</label>
-                        <input type="text" id="field-cpf-prof" required placeholder="000.000.000-00" maxlength="14" oninput="maskCPF(this)" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:border-pojae-600 font-mono">
+                        <input type="text" id="field-cpf-prof" required placeholder="000.000.000-00" maxlength="14"
+                            oninput="maskCPF(this)"
+                            class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:border-pojae-600 font-mono">
                     </div>
 
                     <!-- Cargo do Professor Orientador -->
                     <div class="md:col-span-12">
-                        <label class="block text-xs font-bold text-slate-700 mb-1">Cargo / Titulação do Professor Orientador *</label>
-                        <input type="text" id="field-cargo-prof" required placeholder="Ex: Coordenador de Estágios / Professor Titular de TI" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:border-pojae-600">
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Cargo / Titulação do Professor
+                            Orientador *</label>
+                        <input type="text" id="field-cargo-prof" required
+                            placeholder="Ex: Coordenador de Estágios / Professor Titular de TI"
+                            class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:border-pojae-600">
                     </div>
                 </div>
             </div>
@@ -212,12 +259,14 @@
             <!-- BLOCO 4: CADASTRO DO REPRESENTANTE LEGAL DA INSTITUIÇÃO -->
             <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-sm space-y-6">
                 <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
-                    <div class="w-10 h-10 rounded-xl bg-blue-100 text-pojae-700 flex items-center justify-center font-bold text-lg">
+                    <div
+                        class="w-10 h-10 rounded-xl bg-blue-100 text-pojae-700 flex items-center justify-center font-bold text-lg">
                         <i class="fas fa-user-tie"></i>
                     </div>
                     <div>
                         <h2 class="text-base font-bold text-slate-900">Representante Legal da Instituição</h2>
-                        <p class="text-xs text-slate-500">Responsável pela assinatura dos termos de convênio entre empresa e instituição (RF09).</p>
+                        <p class="text-xs text-slate-500">Responsável pela assinatura dos termos de convênio entre
+                            empresa e instituição (RF09).</p>
                     </div>
                 </div>
 
@@ -225,23 +274,27 @@
                     <!-- Nome do Representante -->
                     <div class="md:col-span-7">
                         <label class="block text-xs font-bold text-slate-700 mb-1">Nome do Representante *</label>
-                        <input type="text" id="field-nome-rep-inst" required placeholder="Ex: Vinícius Araújo Coêlho" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:border-pojae-600">
+                        <input type="text" id="field-nome-rep-inst" required placeholder="Ex: Vinícius Araújo Coêlho"
+                            class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:border-pojae-600">
                     </div>
 
                     <!-- Cargo do Representante -->
                     <div class="md:col-span-5">
                         <label class="block text-xs font-bold text-slate-700 mb-1">Cargo do Representante *</label>
-                        <input type="text" id="field-cargo-rep-inst" required placeholder="Ex: Reitor / Diretor Geral" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:border-pojae-600">
+                        <input type="text" id="field-cargo-rep-inst" required placeholder="Ex: Reitor / Diretor Geral"
+                            class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:border-pojae-600">
                     </div>
                 </div>
             </div>
 
             <!-- BOTÃO DE FINALIZAÇÃO -->
             <div class="flex flex-col sm:flex-row justify-end gap-3 pt-4">
-                <a href="index.html" class="px-6 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-sm rounded-xl transition text-center">
+                <a href="index.html"
+                    class="px-6 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-sm rounded-xl transition text-center">
                     Cancelar
                 </a>
-                <button type="submit" class="px-8 py-3 bg-pojae-600 hover:bg-pojae-700 text-white font-bold text-sm rounded-xl shadow-lg shadow-blue-600/30 transition flex items-center justify-center gap-2">
+                <button type="submit"
+                    class="px-8 py-3 bg-pojae-600 hover:bg-pojae-700 text-white font-bold text-sm rounded-xl shadow-lg shadow-blue-600/30 transition flex items-center justify-center gap-2">
                     <i class="fas fa-check-circle"></i>
                     <span>Concluir Cadastro de Instituição</span>
                 </button>
@@ -323,7 +376,7 @@
         function showToast(message, type = 'success') {
             const container = document.getElementById('toast-container');
             const toast = document.createElement('div');
-            
+
             const bgColor = type === 'success' ? 'bg-emerald-600' : 'bg-pojae-700';
             const icon = type === 'success' ? 'fa-check-circle' : 'fa-info-circle';
 
