@@ -546,44 +546,51 @@
             <p id="modal-job-company" class="text-xs text-slate-500 mb-4">Tech Maceió Soluções • Pajuçara, Maceió</p>
 
             <form id="apply-form" onsubmit="handleApplySubmit(event)" class="space-y-4">
-                <div>
-                    <label class="block text-xs font-bold text-slate-700 mb-1">Nome Completo do Estudante *</label>
-                    <input type="text" id="candidate-name" required value="João Victor Araújo Coêlho"
-                        class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2 text-sm focus:outline-none focus:border-pojae-600">
+                <!-- IDENTIFICADORES NUMÉRICOS (Integer) OCULTOS -->
+                <input type="hidden" id="apply-candidate-id" value="101">
+                <input type="hidden" id="apply-job-id" value="">
+
+                <!-- DADOS PREENCHIDOS AUTOMATICAMENTE PELO SISTEMA (SOMENTE LEITURA) -->
+                <div class="bg-slate-50/80 p-3.5 rounded-2xl border border-slate-200/80 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="text-[10px] font-bold uppercase text-slate-400 tracking-wider">Dados da sua Conta</span>
+                        <span class="text-[10px] text-slate-400"><i class="fas fa-lock mr-1"></i> Preenchimento automático</span>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Nome Completo do Estudante</label>
+                        <input type="text" id="candidate-name" readonly value="João Victor Araújo Coêlho"
+                            class="w-full bg-slate-100 border border-slate-200 rounded-xl px-3.5 py-2 text-sm text-slate-600 font-medium cursor-not-allowed">
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">E-mail</label>
+                            <input type="email" id="candidate-email" readonly value="joao.victor@cesmac.edu.br"
+                                class="w-full bg-slate-100 border border-slate-200 rounded-xl px-3.5 py-2 text-sm text-slate-600 font-medium cursor-not-allowed">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">Instituição de Ensino</label>
+                            <input type="text" id="candidate-institution" readonly value="Centro Univ. CESMAC"
+                                class="w-full bg-slate-100 border border-slate-200 rounded-xl px-3.5 py-2 text-sm text-slate-600 font-medium cursor-not-allowed">
+                        </div>
+                    </div>
                 </div>
 
-                <div class="grid grid-cols-2 gap-3">
-                    <div>
-                        <label class="block text-xs font-bold text-slate-700 mb-1">E-mail *</label>
-                        <input type="email" id="candidate-email" required value="joao.victor@cesmac.edu.br"
-                            class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2 text-sm focus:outline-none focus:border-pojae-600">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold text-slate-700 mb-1">Instituição de Ensino *</label>
-                        <select id="candidate-institution" required
-                            class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2 text-sm focus:outline-none focus:border-pojae-600">
-                            <option value="CESMAC">Centro Univ. CESMAC</option>
-                            <option value="UFAL">UFAL</option>
-                            <option value="IFAL">IFAL</option>
-                            <option value="UNCISAL">UNCISAL</option>
-                        </select>
-                    </div>
-                </div>
-
-                <!-- CAMPO DE ANEXO DE ARQUIVOS -->
+                <!-- CAMPO DE ANEXO DE ARQUIVOS (Currículo e Histórico - Integer / Referência) -->
                 <div class="border border-dashed border-slate-300 rounded-2xl p-3.5 bg-slate-50/50 space-y-3">
                     <div class="flex items-center justify-between">
                         <div class="flex items-center gap-2">
                             <i class="fas fa-file-pdf text-red-500 text-lg"></i>
                             <div>
                                 <div class="text-xs font-bold text-slate-800">Currículo Vitae (.pdf) *</div>
-                                <div class="text-[10px] text-slate-400">Anexar versão atualizada</div>
+                                <div class="text-[10px] text-slate-400">ID/Ref: #501 • Versão atualizada</div>
                             </div>
                         </div>
                         <label
                             class="bg-white border border-slate-200 hover:border-pojae-500 text-slate-700 text-xs font-bold px-3 py-1.5 rounded-lg cursor-pointer transition">
                             <span>Selecionar</span>
-                            <input type="file" class="hidden" onchange="updateFileLabel(this, 'label-cv')">
+                            <input type="file" id="file-cv" data-doc-id="501" class="hidden" onchange="updateFileLabel(this, 'label-cv')">
                         </label>
                     </div>
                     <span id="label-cv"
@@ -597,18 +604,29 @@
                             <i class="fas fa-graduation-cap text-blue-500 text-lg"></i>
                             <div>
                                 <div class="text-xs font-bold text-slate-800">Histórico Escolar / Acadêmico *</div>
-                                <div class="text-[10px] text-slate-400">Comprovação de vínculo em Maceió</div>
+                                <div class="text-[10px] text-slate-400">ID/Ref: #802 • Vínculo em Maceió</div>
                             </div>
                         </div>
                         <label
                             class="bg-white border border-slate-200 hover:border-pojae-500 text-slate-700 text-xs font-bold px-3 py-1.5 rounded-lg cursor-pointer transition">
                             <span>Selecionar</span>
-                            <input type="file" class="hidden" onchange="updateFileLabel(this, 'label-historico')">
+                            <input type="file" id="file-historico" data-doc-id="802" class="hidden" onchange="updateFileLabel(this, 'label-historico')">
                         </label>
                     </div>
                     <span id="label-historico"
                         class="text-[10px] text-emerald-600 font-semibold block">historico_academico_cesmac.pdf
                         (Anexado)</span>
+                </div>
+
+                <!-- NOVO CAMPO: MENSAGEM DE APRESENTAÇÃO (String) -->
+                <div>
+                    <div class="flex items-center justify-between mb-1">
+                        <label for="apply-message" class="block text-xs font-bold text-slate-700">Mensagem de Apresentação *</label>
+                        <span class="text-[10px] text-slate-400">Apresente-se ao recrutador</span>
+                    </div>
+                    <textarea id="apply-message" rows="3" required
+                        placeholder="Olá! Gostaria de me candidatar a esta vaga pois tenho grande interesse na área e conhecimentos alinhados com os requisitos..."
+                        class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:border-pojae-600 resize-none"></textarea>
                 </div>
 
                 <div class="flex gap-2 pt-2">

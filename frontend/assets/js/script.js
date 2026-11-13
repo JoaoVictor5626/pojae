@@ -153,8 +153,13 @@ function setupScrollReveal() {
 /* -------------------------------------------------------------------------- */
 function renderJobCards() {
     const container = document.getElementById('job-cards-container');
-    const searchKeyword = document.getElementById('search-keyword').value.toLowerCase();
-    const searchCategory = document.getElementById('search-category').value;
+    if (!container) return;
+
+    const searchKeywordInput = document.getElementById('search-keyword');
+    const searchCategoryInput = document.getElementById('search-category');
+    
+    const searchKeyword = searchKeywordInput ? searchKeywordInput.value.toLowerCase() : '';
+    const searchCategory = searchCategoryInput ? searchCategoryInput.value : '';
 
     container.innerHTML = '';
 
@@ -278,17 +283,25 @@ function filterJobs() {
 /* CONTROLE DOS MODAIS                                                        */
 /* -------------------------------------------------------------------------- */
 function openModal(id) {
-    document.getElementById(id).classList.remove('hidden');
+    const modal = document.getElementById(id);
+    if (modal) modal.classList.remove('hidden');
 }
 
 function closeModal(id) {
-    document.getElementById(id).classList.add('hidden');
+    const modal = document.getElementById(id);
+    if (modal) modal.classList.add('hidden');
 }
 
 function openApplyModal(jobId) {
     const job = jobsData.find(j => j.id === jobId);
     if (!job) return;
     currentActiveJobForApply = job;
+
+    // Preenche o ID oculto da vaga (Integer) e limpa a mensagem anterior
+    const jobIdInput = document.getElementById('apply-job-id');
+    const messageInput = document.getElementById('apply-message');
+    if (jobIdInput) jobIdInput.value = job.id;
+    if (messageInput) messageInput.value = '';
 
     document.getElementById('modal-job-title').textContent = job.title;
     document.getElementById('modal-job-company').textContent = `${job.company} • ${job.location}`;
@@ -306,6 +319,24 @@ function updateFileLabel(input, labelId) {
 /* -------------------------------------------------------------------------- */
 function handleApplySubmit(e) {
     e.preventDefault();
+
+    const candidatoIdEl = document.getElementById('apply-candidate-id');
+    const vagaIdEl = document.getElementById('apply-job-id');
+    const fileCvEl = document.getElementById('file-cv');
+    const fileHistEl = document.getElementById('file-historico');
+    const messageEl = document.getElementById('apply-message');
+
+    // Payload estruturado conforme os requisitos de Candidatura
+    const candidaturaPayload = {
+        candidatoId: candidatoIdEl ? parseInt(candidatoIdEl.value) : 101,
+        vagaId: vagaIdEl ? parseInt(vagaIdEl.value) : (currentActiveJobForApply ? currentActiveJobForApply.id : null),
+        curriculoId: fileCvEl && fileCvEl.dataset.docId ? parseInt(fileCvEl.dataset.docId) : 501,
+        historicoEscolarId: fileHistEl && fileHistEl.dataset.docId ? parseInt(fileHistEl.dataset.docId) : 802,
+        mensagemApresentacao: messageEl ? messageEl.value.trim() : ""
+    };
+
+    console.log("Candidatura enviada (Payload):", candidaturaPayload);
+
     const name = document.getElementById('candidate-name').value;
     const inst = document.getElementById('candidate-institution').value;
 
@@ -315,7 +346,8 @@ function handleApplySubmit(e) {
         course: `Estudante (${inst})`,
         status: "Inscrito Hoje",
         cv: true,
-        historico: true
+        historico: true,
+        mensagem: candidaturaPayload.mensagemApresentacao
     });
 
     renderRecruiterCandidates();
