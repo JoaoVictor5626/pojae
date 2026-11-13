@@ -186,7 +186,8 @@ function renderJobCards() {
 
     filteredJobs.forEach(job => {
         const card = document.createElement('div');
-        card.className = "bg-white rounded-2xl p-6 border border-slate-200/80 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group";
+        // card.className = "bg-white rounded-2xl p-6 border border-slate-200/80 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group";
+        card.className = "bg-white rounded-2xl p-6 border border-slate-200/80 shadow-sm hover:-translate-y-0.5 hover:shadow-xl transition-[transform,box-shadow] duration-300 will-change-transform flex flex-col justify-between group";
 
         card.innerHTML = `
             <div>
