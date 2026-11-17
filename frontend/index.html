@@ -39,13 +39,6 @@
             <!-- BRAND LOGO POJAE -->
             <a href="index.html" class="flex items-center gap-3 group z-50"
                 aria-label="POJAE - Ir para a página inicial">
-                <!-- <div class="bg-gradient-to-tr from-pojae-900 via-pojae-700 to-pojae-500 text-white font-extrabold text-2xl px-3.5 py-1.5 rounded-xl shadow-lg shadow-blue-500/20 group-hover:scale-105 transition-transform">
-                    POJAE
-                </div>
-                <div class="flex flex-col">
-                    <span class="text-xs font-bold text-slate-800 tracking-tight group-hover:text-pojae-600 transition">Plataforma de Oportunidades</span>
-                    <span class="text-[10px] text-slate-500 font-medium">Jovens Aprendizes e Estagiários</span>
-                </div> -->
                 <div class="logo-navbar">
                     <img src="./assets/images/pojae-logo.png" alt="Logotipo POJAE">
                 </div>
@@ -53,7 +46,6 @@
 
 
             <!-- NAVIGATION LINKS (DESKTOP) -->
-            <!-- ALTERADO: Trocado 'hidden md:flex' por 'desktop-nav' -->
             <nav class="desktop-nav items-center space-x-1 lg:space-x-2 text-sm font-semibold text-slate-600">
                 <a href="#vagas" class="px-3 py-2 rounded-lg hover:text-pojae-600 hover:bg-slate-100 transition">Vagas
                     em Maceió</a>
@@ -68,7 +60,7 @@
             <!-- ACTION BUTTONS / BOTÃO CADASTRE-SE & HAMBÚRGUER -->
             <div class="flex items-center gap-2">
                 <!-- Botão de Login (Visível apenas em Desktop) -->
-                <a href="#login" onclick="showToast('Módulo de Login em desenvolvimento', 'info')"
+                <a href="login.html"
                     class="text-xs sm:text-sm font-semibold text-slate-600 hover:text-pojae-600 px-3 py-2 rounded-lg transition hidden md:inline-block">
                     Já tem conta? Entrar
                 </a>
@@ -118,7 +110,7 @@
             </a>
 
             <!-- Botão de Login secundário no Mobile -->
-            <a href="#login" onclick="closeMobileMenu(); showToast('Módulo de Login em desenvolvimento', 'info');"
+            <a href="login.html" onclick="closeMobileMenu();"
                 class="mobile-nav-link w-full py-2.5 bg-slate-800 text-slate-300 hover:text-white border border-slate-700 rounded-xl font-semibold text-xs flex items-center justify-center gap-2 transition">
                 <i class="fas fa-sign-in-alt"></i>
                 <span>Já tenho uma conta</span>
