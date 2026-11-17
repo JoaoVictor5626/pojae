@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POJAE - Login</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FontAwesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Configuração Customizada Tailwind (Mesmo padrão das outras páginas) -->
+    <script src="./assets/js/tailwind-config.js"></script>
+    <script>
+        // Fallback caso o arquivo externo não esteja carregado no ambiente de teste
+        if (typeof tailwind !== 'undefined' && !tailwind.config?.theme?.extend?.colors?.pojae) {
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        fontFamily: {
+                            sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        },
+                        colors: {
+                            pojae: {
+                                50: '#eff6ff',
+                                100: '#dbeafe',
+                                500: '#3b82f6',
+                                600: '#2563eb',
+                                700: '#1d4ed8',
+                                800: '#1e40af',
+                                900: '#1e3a8a',
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <link rel="stylesheet" href="./assets/css/style.css">
+
+    <style>
+        .toast-slide {
+            animation: slideIn 0.3s ease-out forwards;
+        }
+        @keyframes slideIn {
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans flex flex-col min-h-screen antialiased selection:bg-blue-500 selection:text-white">
+
+    <!-- TOP HEADER / AVISO REGIONAL -->
+    <div class="bg-pojae-900 text-slate-200 text-xs py-2 px-4 text-center font-medium border-b border-blue-900/50 flex items-center justify-center gap-2">
+        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 mr-1.5 animate-pulse"></span> Ativo
+        </span>
+        <span><i class="fas fa-map-marker-alt text-red-400 mr-1"></i> Atuação exclusiva para a região de <strong>Maceió - AL</strong></span>
+    </div>
+
+    <!-- NAVBAR PRINCIPAL (PADRÃO DO SISTEMA) -->
+    <header class="bg-white/90 backdrop-blur-md border-b border-slate-200/80 sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-0 flex justify-between items-center h-20">
+            <!-- BRAND LOGO POJAE -->
+            <a href="index.html" class="flex items-center gap-3 group z-50">
+                <div class="logo-navbar">
+                    <img src="./assets/images/pojae-logo.png" alt="POJAE Logo">
+                </div>
+            </a>
+
+            <!-- LINK PARA VOLTAR -->
+            <div class="flex items-center gap-3">
+                <a href="index.html" class="text-xs sm:text-sm font-semibold text-slate-600 hover:text-pojae-600 px-3 py-2 rounded-lg transition">
+                    <i class="fas fa-arrow-left mr-1.5"></i> Voltar à Página Inicial
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- NOTIFICATION TOAST CONTAINER -->
+    <div id="toast-container" class="fixed top-24 right-4 z-50 flex flex-col gap-2 max-w-sm w-full pointer-events-none"></div>
+
+    <!-- CONTEÚDO PRINCIPAL: TELA DE LOGIN CENTRALIZADA -->
+    <main class="flex-grow flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden bg-slate-50">
+        
+        <!-- Padrão de Grid Pontilhado Sutil + Brilho Radial Institucional -->
+        <div class="absolute inset-0 bg-[radial-gradient(#cbd5e1_1px,transparent_1px)] [background-size:24px_24px] opacity-60 pointer-events-none"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[540px] h-[540px] bg-pojae-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <!-- Elementos Contextuais Discretos nas Laterais (Apenas Desktop) -->
+        <div class="hidden xl:flex items-center gap-3 bg-white/80 backdrop-blur-md border border-slate-200/80 shadow-lg shadow-slate-200/40 rounded-2xl p-3.5 absolute left-16 top-1/3 -rotate-2 pointer-events-none">
+            <div class="w-10 h-10 rounded-xl bg-blue-50 text-pojae-600 flex items-center justify-center text-base">
+                <i class="fas fa-user-graduate"></i>
+            </div>
+            <div>
+                <p class="text-xs font-bold text-slate-800">Estudantes & Aprendizes</p>
+                <p class="text-[11px] text-slate-500">Vagas exclusivas em Maceió - AL</p>
+            </div>
+        </div>
+
+        <div class="hidden xl:flex items-center gap-3 bg-white/80 backdrop-blur-md border border-slate-200/80 shadow-lg shadow-slate-200/40 rounded-2xl p-3.5 absolute right-16 bottom-1/3 rotate-2 pointer-events-none">
+            <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-base">
+                <i class="fas fa-handshake"></i>
+            </div>
+            <div>
+                <p class="text-xs font-bold text-slate-800">Empresas & Instituições</p>
+                <p class="text-[11px] text-slate-500">Conexão direta e convênio ágil</p>
+            </div>
+        </div>
+
+        <!-- CARD DE LOGIN -->
+        <div class="bg-white rounded-3xl max-w-md w-full p-8 sm:p-10 shadow-xl shadow-slate-200/80 border border-slate-200/90 relative z-10">
+            
+            <!-- Cabeçalho do Card -->
+            <div class="text-center mb-8">
+                <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 border border-blue-100 text-pojae-700 text-[11px] font-bold mb-3">
+                    <i class="fas fa-shield-alt text-pojae-600"></i> PORTAL DE ACESSO
+                </div>
+                <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+                    Login
+                </h1>
+                <p class="text-xs sm:text-sm text-slate-500 mt-2">
+                    Entre com seu CPF ou CNPJ para continuar
+                </p>
+            </div>
+
+            <!-- Formulário de Login -->
+            <form id="login-form" onsubmit="handleLogin(event)" class="space-y-5">
+                
+                <!-- Campo CPF ou CNPJ -->
+                <div>
+                    <label for="login-documento" class="block text-xs font-bold text-slate-700 mb-1.5">
+                        CPF ou CNPJ
+                    </label>
+                    <input 
+                        type="text" 
+                        id="login-documento" 
+                        required 
+                        placeholder="000.000.000-00" 
+                        maxlength="18"
+                        oninput="maskCpfCnpj(this)"
+                        class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:bg-white focus:border-pojae-600 focus:ring-2 focus:ring-pojae-500/20 transition font-mono"
+                    >
+                </div>
+
+                <!-- Campo Senha com Botão de Visualizar -->
+                <div>
+                    <label for="login-senha" class="block text-xs font-bold text-slate-700 mb-1.5">
+                        Senha
+                    </label>
+                    <div class="relative">
+                        <input 
+                            type="password" 
+                            id="login-senha" 
+                            required 
+                            placeholder="••••••••" 
+                            class="w-full bg-slate-50 border border-slate-200 rounded-xl pl-4 pr-11 py-3 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:bg-white focus:border-pojae-600 focus:ring-2 focus:ring-pojae-500/20 transition"
+                        >
+                        <button 
+                            type="button" 
+                            onclick="togglePasswordVisibility()" 
+                            class="absolute inset-y-0 right-0 px-3.5 flex items-center text-slate-400 hover:text-pojae-600 transition focus:outline-none"
+                            aria-label="Mostrar ou ocultar senha"
+                        >
+                            <i id="toggle-password-icon" class="fas fa-eye text-base"></i>
+                        </button>
+                    </div>
+
+                    <!-- Link Esqueci Minha Senha -->
+                    <div class="flex justify-end mt-2">
+                        <a href="#recuperar-senha" onclick="openModal('modal-forgot-password'); return false;" class="text-xs font-semibold text-pojae-600 hover:text-pojae-800 hover:underline transition">
+                            Esqueci minha senha
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Botão Principal ENTRAR -->
+                <div class="pt-1">
+                    <button 
+                        type="submit" 
+                        class="w-full bg-pojae-600 hover:bg-pojae-700 active:scale-[0.99] text-white font-bold text-sm uppercase tracking-wider py-3.5 rounded-xl shadow-lg shadow-blue-600/30 transition flex items-center justify-center gap-2"
+                    >
+                        <span>ENTRAR</span>
+                    </button>
+                </div>
+            </form>
+
+            <!-- Links Inferiores do Card -->
+            <div class="mt-7 text-center space-y-2.5 text-xs sm:text-sm">
+                <p class="text-slate-600">
+                    Ainda não tem conta? 
+                    <a href="pagina-intermediaria.html" class="font-bold text-pojae-600 hover:text-pojae-800 hover:underline transition">
+                        Cadastre-se
+                    </a>
+                </p>
+                <p>
+                    <a href="#ajuda" onclick="openModal('modal-help'); return false;" class="font-semibold text-pojae-600 hover:text-pojae-800 hover:underline transition text-xs">
+                        Precisa de ajuda?
+                    </a>
+                </p>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Container do Footer -->
+    <div id="footer-container"></div>
+
+    <!-- Script de Inclusão dos Componentes Modulares -->
+    <script src="./assets/js/partials.js"></script>
+    
+
+    <!-- MODAL: RECUPERAÇÃO DE SENHA -->
+    <div id="modal-forgot-password" class="fixed inset-0 bg-slate-900/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl border border-slate-100 relative">
+            <button onclick="closeModal('modal-forgot-password')" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600 transition">
+                <i class="fas fa-times text-lg"></i>
+            </button>
+
+            <div class="w-12 h-12 rounded-2xl bg-blue-50 text-pojae-600 flex items-center justify-center text-xl mb-4">
+                <i class="fas fa-key"></i>
+            </div>
+            <h3 class="text-xl font-bold text-slate-900">Recuperar Senha</h3>
+            <p class="text-xs text-slate-500 mt-1 mb-5">
+                Informe seu CPF/CNPJ ou e-mail cadastrado no POJAE. Enviaremos um link de redefinição.
+            </p>
+
+            <form onsubmit="handleForgotPassword(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">CPF, CNPJ ou E-mail *</label>
+                    <input type="text" required placeholder="Digite seu documento ou e-mail" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:border-pojae-600">
+                </div>
+                <div class="flex gap-2 pt-2">
+                    <button type="button" onclick="closeModal('modal-forgot-password')" class="w-1/2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-2.5 rounded-xl transition text-xs">
+                        Cancelar
+                    </button>
+                    <button type="submit" class="w-1/2 bg-pojae-600 hover:bg-pojae-700 text-white font-bold py-2.5 rounded-xl transition shadow-md shadow-blue-600/30 text-xs">
+                        Enviar Link
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL: PRECISA DE AJUDA -->
+    <div id="modal-help" class="fixed inset-0 bg-slate-900/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl border border-slate-100 relative">
+            <button onclick="closeModal('modal-help')" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600 transition">
+                <i class="fas fa-times text-lg"></i>
+            </button>
+
+            <div class="w-12 h-12 rounded-2xl bg-blue-50 text-pojae-600 flex items-center justify-center text-xl mb-4">
+                <i class="fas fa-headset"></i>
+            </div>
+            <h3 class="text-xl font-bold text-slate-900">Central de Ajuda POJAE</h3>
+            <p class="text-xs text-slate-500 mt-1 mb-4 leading-relaxed">
+                Dúvidas sobre o acesso para estudantes, empresas concedentes ou instituições de ensino em Maceió?
+            </p>
+
+            <div class="bg-slate-50 border border-slate-200/80 rounded-2xl p-4 space-y-2.5 text-xs text-slate-600 mb-5">
+                <p><strong><i class="fas fa-user-graduate text-pojae-600 mr-1.5"></i> Estudantes:</strong> Utilize o CPF cadastrado no momento da criação do seu perfil.</p>
+                <p><strong><i class="fas fa-building text-pojae-600 mr-1.5"></i> Empresas / Instituições:</strong> Utilize o CNPJ institucional vinculado ao cadastro.</p>
+                <p><strong><i class="fas fa-envelope text-pojae-600 mr-1.5"></i> Suporte Técnico:</strong> suporte@pojae.maceio.br</p>
+            </div>
+
+            <button type="button" onclick="closeModal('modal-help')" class="w-full bg-pojae-600 hover:bg-pojae-700 text-white font-bold py-2.5 rounded-xl transition text-xs">
+                Entendi
+            </button>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT: MÁSCARA DINÂMICA CPF/CNPJ, VISUALIZAR SENHA E SIMULAÇÃO DE LOGIN -->
+    <script>
+        // Máscara dinâmica que alterna automaticamente entre CPF (11 dígitos) e CNPJ (14 dígitos)
+        function maskCpfCnpj(input) {
+            let v = input.value.replace(/\D/g, "");
+
+            if (v.length <= 11) {
+                // Formato CPF: 000.000.000-00
+                v = v.replace(/(\d{3})(\d)/, "$1.$2");
+                v = v.replace(/(\d{3})(\d)/, "$1.$2");
+                v = v.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+            } else {
+                // Formato CNPJ: 00.000.000/0000-00
+                v = v.substring(0, 14);
+                v = v.replace(/^(\d{2})(\d)/, "$1.$2");
+                v = v.replace(/^(\d{2})\.(\d{3})(\d)/, "$1.$2.$3");
+                v = v.replace(/\.(\d{3})(\d)/, ".$1/$2");
+                v = v.replace(/(\d{4})(\d)/, "$1-$2");
+            }
+
+            input.value = v;
+        }
+
+        // Alternar visibilidade da senha ("olhinho")
+        function togglePasswordVisibility() {
+            const passwordInput = document.getElementById('login-senha');
+            const icon = document.getElementById('toggle-password-icon');
+
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+
+        // Simulação de autenticação e redirecionamento conforme perfil (CPF x CNPJ)
+        function handleLogin(e) {
+            e.preventDefault();
+            const docRaw = document.getElementById('login-documento').value.replace(/\D/g, "");
+
+            if (docRaw.length !== 11 && docRaw.length !== 14) {
+                showToast("Por favor, digite um CPF (11 dígitos) ou CNPJ (14 dígitos) válido.", "info");
+                return;
+            }
+
+            if (docRaw.length === 14) {
+                showToast("Login realizado como Empresa! Redirecionando para o painel...", "success");
+                setTimeout(() => {
+                    window.location.href = "dashboard-empresa.html";
+                }, 1500);
+            } else {
+                showToast("Login realizado como Estudante! Redirecionando para as vagas...", "success");
+                setTimeout(() => {
+                    window.location.href = "index.html";
+                }, 1500);
+            }
+        }
+
+        // Simulação de envio de recuperação de senha
+        function handleForgotPassword(e) {
+            e.preventDefault();
+            closeModal('modal-forgot-password');
+            showToast("Instruções de recuperação enviadas para o e-mail cadastrado!", "success");
+        }
+
+        // Controle dos Modais
+        function openModal(id) {
+            document.getElementById(id).classList.remove('hidden');
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.add('hidden');
+        }
+
+        // Notificações Toast (Padrão POJAE)
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            
+            const bgColor = type === 'success' ? 'bg-emerald-600' : 'bg-pojae-700';
+            const icon = type === 'success' ? 'fa-check-circle' : 'fa-info-circle';
+
+            toast.className = `${bgColor} text-white px-4 py-3 rounded-2xl shadow-xl flex items-center justify-between text-xs font-semibold toast-slide pointer-events-auto`;
+            toast.innerHTML = `
+                <div class="flex items-center gap-2">
+                    <i class="fas ${icon} text-sm"></i>
+                    <span>${message}</span>
+                </div>
+                <button onclick="this.parentElement.remove()" class="text-white/80 hover:text-white ml-3">
+                    <i class="fas fa-times"></i>
+                </button>
+            `;
+
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                if (toast.parentElement) toast.remove();
+            }, 4000);
+        }
+    </script>
+</body>
+</html>
