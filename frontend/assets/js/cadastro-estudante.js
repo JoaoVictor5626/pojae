@@ -2,14 +2,33 @@
 
 // ESTADO INTERNO DAS HABILIDADES
 let currentRating = 3;
-let skillsList = [
-    { tipoId: 1, tipoNome: "Técnica / Hard Skill", nome: "Lógica de Programação", nivel: 4, obs: "Projetos em C# e Java" },
-    { tipoId: 2, tipoNome: "Comportamental / Soft Skill", nome: "Trabalho em Equipe", nivel: 5, obs: "Experiência em projetos acadêmicos" }
-];
+let skillsList = [];
+const API_BASE_URL = window.POJAE_API_URL || 'http://localhost:8080';
 
 window.addEventListener('DOMContentLoaded', () => {
     renderSkillsTable();
+    loadEducationalInstitutions();
 });
+
+async function loadEducationalInstitutions() {
+    const select = document.getElementById('field-instituicao');
+
+    try {
+        const response = await fetch(`${API_BASE_URL}/instituicoesDeEnsino`);
+        if (!response.ok) throw new Error('Falha ao carregar instituições');
+
+        const institutions = await response.json();
+        institutions.forEach(institution => {
+            const option = document.createElement('option');
+            option.value = institution.id;
+            option.textContent = institution.name;
+            select.appendChild(option);
+        });
+    } catch (error) {
+        select.disabled = true;
+        showToast('Não foi possível carregar as instituições. Tente novamente mais tarde.', 'info');
+    }
+}
 
 // MODAL DE SELEÇÃO DE PERFIL
 function openSelectionModal() {
@@ -67,7 +86,7 @@ function setRating(val) {
 // ADIÇÃO DE HABILIDADE À LISTA
 function addSkill() {
     const tipoSelect = document.getElementById('hab-tipo');
-    const tipoId = parseInt(tipoSelect.value);
+    const tipo = tipoSelect.value;
     const tipoNome = tipoSelect.options[tipoSelect.selectedIndex].text;
     const nome = document.getElementById('hab-nome').value.trim();
     const obs = document.getElementById('hab-obs').value.trim();
@@ -78,7 +97,7 @@ function addSkill() {
     }
 
     skillsList.push({
-        tipoId,
+        tipo,
         tipoNome,
         nome,
         nivel: currentRating,
@@ -137,32 +156,53 @@ function renderSkillsTable() {
 // SUBMISSÃO FINAL DO CADASTRO
 function handleStudentRegister(e) {
     e.preventDefault();
+    submitStudentRegistration(e.currentTarget);
+}
 
-    const studentData = {
-        nome: document.getElementById('field-nome').value,
-        cpf: document.getElementById('field-cpf').value,
-        endereco: document.getElementById('field-endereco').value,
-        numero: document.getElementById('field-numero').value,
-        bairro: document.getElementById('field-bairro').value,
-        cidade: document.getElementById('field-cidade').value,
-        estado: document.getElementById('field-estado').value,
-        cep: document.getElementById('field-cep').value,
-        telefone: document.getElementById('field-telefone').value,
-        email: document.getElementById('field-email').value,
-        instituicaoId: parseInt(document.getElementById('field-instituicao').value),
-        nomeCurso: document.getElementById('field-curso').value,
-        seriePeriodo: document.getElementById('field-periodo').value,
-        turno: document.getElementById('field-turno').value,
-        conclusaoPrevista: document.getElementById('field-conclusao').value,
-        habilidades: skillsList
+async function submitStudentRegistration(form) {
+    const submitButton = form.querySelector('[type="submit"]');
+    const payload = {
+        name: document.getElementById('field-nome').value.trim(),
+        cpf: document.getElementById('field-cpf').value.replace(/\D/g, ''),
+        email: document.getElementById('field-email').value.trim(),
+        phone: document.getElementById('field-telefone').value.replace(/\D/g, ''),
+        address: {
+            cep: document.getElementById('field-cep').value,
+            street: document.getElementById('field-endereco').value.trim(),
+            number: Number(document.getElementById('field-numero').value),
+            neighborhood: document.getElementById('field-bairro').value.trim(),
+            city: document.getElementById('field-cidade').value,
+            state: document.getElementById('field-estado').value
+        },
+        educationalInstitution: { id: document.getElementById('field-instituicao').value },
+        courseName: document.getElementById('field-curso').value.trim(),
+        gradeOrAcademicTerm: document.getElementById('field-periodo').value.trim(),
+        studyShift: document.getElementById('field-turno').value,
+        expectedGraduationDate: document.getElementById('field-conclusao').value.trim(),
+        status: 'ACTIVE',
+        skills: skillsList.map(skill => ({
+            type: skill.tipo,
+            description: skill.nome,
+            proficiencyLevel: skill.nivel,
+            notes: skill.obs === '-' ? '' : skill.obs
+        }))
     };
 
-    console.log("Dados do Estudante Cadastrado (RF01):", studentData);
-    showToast("Cadastro de Estagiário realizado com sucesso no POJAE!", "success");
+    submitButton.disabled = true;
+    try {
+        const response = await fetch(`${API_BASE_URL}/candidatos`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        });
 
-    setTimeout(() => {
-        window.location.href = "index.html";
-    }, 2000);
+        if (!response.ok) throw new Error('Cadastro não concluído');
+        showToast('Cadastro de estagiário realizado com sucesso no POJAE!', 'success');
+        setTimeout(() => { window.location.href = 'index.html'; }, 2000);
+    } catch (error) {
+        showToast('Não foi possível concluir o cadastro. Confira os dados e tente novamente.', 'info');
+        submitButton.disabled = false;
+    }
 }
 
 // NOTIFICAÇÕES TOAST

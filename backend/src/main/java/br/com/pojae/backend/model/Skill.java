@@ -3,6 +3,7 @@ package br.com.pojae.backend.model;
 import br.com.pojae.backend.model.enums.SkillType;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -50,6 +51,7 @@ public class Skill {
 
     @ManyToOne
     @JoinColumn(name = "candidate_id", nullable = false)
+    @JsonIgnore
     private Candidate candidates;
 
     @Column(nullable = false)
