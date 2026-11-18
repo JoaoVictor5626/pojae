@@ -24,7 +24,7 @@ public class CompanyService {
     @Transactional
     public Company create(Company company) {
         company.setAddress(addressService.create(company.getAddress()));
-        company.setUpdatedAt(LocalDateTime.now());
+        company.setCreatedAt(LocalDateTime.now());
         return repository.save(company);
     }
 
