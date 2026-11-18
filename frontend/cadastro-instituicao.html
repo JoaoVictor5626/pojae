@@ -17,25 +17,9 @@
 
     <script src="./assets/js/tailwind-config.js"></script>
 
+    <script src="./assets/js/cadastro-instituicao.js"></script>
+
     <link rel="stylesheet" href="./assets/css/style.css">
-
-    <style>
-        .toast-slide {
-            animation: slideIn 0.3s ease-out forwards;
-        }
-
-        @keyframes slideIn {
-            from {
-                transform: translateY(-100%);
-                opacity: 0;
-            }
-
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-    </style>
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans flex flex-col min-h-screen antialiased selection:bg-blue-500 selection:text-white">
 
@@ -308,111 +292,5 @@
     <!-- Script de Inclusão dos Componentes Modulares -->
     <script src="./assets/js/partials.js"></script>
 
-    <!-- JAVASCRIPT EM SCRIPT DEDICADO OU INLINE -->
-    <script>
-        // MÁSCARAS DE ENTRADA
-        function maskCNPJ(input) {
-            let v = input.value.replace(/\D/g, "");
-            v = v.replace(/^(\d{2})(\d)/, "$1.$2");
-            v = v.replace(/^(\d{2})\.(\d{3})(\d)/, "$1.$2.$3");
-            v = v.replace(/\.(\d{3})(\d)/, ".$1/$2");
-            v = v.replace(/(\d{4})(\d)/, "$1-$2");
-            input.value = v;
-        }
-
-        function maskCPF(input) {
-            let v = input.value.replace(/\D/g, "");
-            v = v.replace(/(\d{3})(\d)/, "$1.$2");
-            v = v.replace(/(\d{3})(\d)/, "$1.$2");
-            v = v.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
-            input.value = v;
-        }
-
-        function maskCEP(input) {
-            let v = input.value.replace(/\D/g, "");
-            v = v.replace(/^(\d{5})(\d)/, "$1-$2");
-            input.value = v;
-        }
-
-        function maskPhone(input) {
-            let v = input.value.replace(/\D/g, "");
-            v = v.replace(/^(\d{2})(\d)/g, "($1) $2");
-            v = v.replace(/(\d{5})(\d)/, "$1-$2");
-            input.value = v;
-        }
-
-        const API_BASE_URL = window.POJAE_API_URL || 'http://localhost:8080';
-
-        // SUBMISSÃO DO FORMULÁRIO DE INSTITUIÇÃO
-        async function handleInstitutionRegister(e) {
-            e.preventDefault();
-            const form = e.currentTarget;
-            const submitButton = form.querySelector('[type="submit"]');
-
-            const institutionData = {
-                name: document.getElementById('field-nome-inst').value.trim(),
-                cnpj: document.getElementById('field-cnpj-inst').value.trim(),
-                email: document.getElementById('field-email-inst').value.trim(),
-                phone: document.getElementById('field-telefone-inst').value.replace(/\D/g, ''),
-                type: document.getElementById('field-tipo-inst').value,
-                address: {
-                    cep: document.getElementById('field-cep-inst').value.trim(),
-                    street: document.getElementById('field-endereco-inst').value.trim(),
-                    number: Number(document.getElementById('field-numero-inst').value),
-                    neighborhood: document.getElementById('field-bairro-inst').value.trim(),
-                    city: document.getElementById('field-cidade-inst').value,
-                    state: document.getElementById('field-estado-inst').value
-                },
-                academicAdvisorName: document.getElementById('field-nome-prof').value.trim(),
-                academicAdvisorCpf: document.getElementById('field-cpf-prof').value.trim(),
-                academicAdvisorPosition: document.getElementById('field-cargo-prof').value.trim(),
-                representativeName: document.getElementById('field-nome-rep-inst').value.trim(),
-                representativePosition: document.getElementById('field-cargo-rep-inst').value.trim(),
-                status: 'ACTIVE'
-            };
-
-            submitButton.disabled = true;
-            try {
-                const response = await fetch(`${API_BASE_URL}/instituicoesDeEnsino`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(institutionData)
-                });
-
-                if (!response.ok) throw new Error('Cadastro não concluído');
-                showToast('Cadastro de instituição realizado com sucesso no POJAE!', 'success');
-                setTimeout(() => { window.location.href = 'index.html'; }, 2000);
-            } catch (error) {
-                showToast('Não foi possível concluir o cadastro. Confira os dados e tente novamente.', 'info');
-                submitButton.disabled = false;
-            }
-        }
-
-        // SISTEMA DE NOTIFICAÇÕES TOAST
-        function showToast(message, type = 'success') {
-            const container = document.getElementById('toast-container');
-            const toast = document.createElement('div');
-
-            const bgColor = type === 'success' ? 'bg-emerald-600' : 'bg-pojae-700';
-            const icon = type === 'success' ? 'fa-check-circle' : 'fa-info-circle';
-
-            toast.className = `${bgColor} text-white px-4 py-3 rounded-2xl shadow-xl flex items-center justify-between text-xs font-semibold toast-slide pointer-events-auto`;
-            toast.innerHTML = `
-                <div class="flex items-center gap-2">
-                    <i class="fas ${icon} text-sm"></i>
-                    <span>${message}</span>
-                </div>
-                <button onclick="this.parentElement.remove()" class="text-white/80 hover:text-white ml-3">
-                    <i class="fas fa-times"></i>
-                </button>
-            `;
-
-            container.appendChild(toast);
-
-            setTimeout(() => {
-                if (toast.parentElement) toast.remove();
-            }, 4000);
-        }
-    </script>
 </body>
 </html>
