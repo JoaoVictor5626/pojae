@@ -95,7 +95,7 @@
                     <!-- Título da Vaga -->
                     <div class="md:col-span-8">
                         <label for="field-titulo" class="block text-xs font-bold text-slate-700 mb-1.5">Título da Vaga *</label>
-                        <input type="text" id="field-titulo" required placeholder="Ex: Estágio em Desenvolvimento Web & Software" 
+                        <input type="text" id="field-titulo" maxlength="50" required placeholder="Ex: Estágio em Desenvolvimento Web & Software"
                             class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:bg-white focus:border-pojae-600 focus:ring-2 focus:ring-pojae-600/15 transition-all">
                     </div>
 
@@ -105,16 +105,18 @@
                         <select id="field-tipo-vaga" required 
                                 class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:bg-white focus:border-pojae-600 focus:ring-2 focus:ring-pojae-600/15 transition-all">
                         <option value="">Selecione o tipo...</option>
-                        <option value="1">1 - Estágio (Lei 11.788/08)</option>
-                        <option value="2">2 - Jovem Aprendiz</option>
+                        <option value="ESTAGIARIO">Estágio (Lei 11.788/08)</option>
+                        <option value="JOVEM_APRENDIZ">Jovem Aprendiz</option>
                         </select>
                     </div>
 
                     <!-- Empresa Responsável -->
                     <div class="md:col-span-6">
                         <label for="field-empresa-resp" class="block text-xs font-bold text-slate-700 mb-1.5">Empresa / Entidade Concedente *</label>
-                        <input type="text" id="field-empresa-resp" required placeholder="Ex: Tecnologia Alagoana S.A." 
+                        <select id="field-empresa-resp" required
                             class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:bg-white focus:border-pojae-600 focus:ring-2 focus:ring-pojae-600/15 transition-all">
+                            <option value="">Carregando empresas...</option>
+                        </select>
                     </div>
 
                     <!-- Quantidade de Vagas -->
@@ -129,16 +131,16 @@
                         <label for="field-modalidade" class="block text-xs font-bold text-slate-700 mb-1.5">Modalidade *</label>
                         <select id="field-modalidade" required 
                                 class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:bg-white focus:border-pojae-600 focus:ring-2 focus:ring-pojae-600/15 transition-all">
-                        <option value="1">1 - Presencial</option>
-                        <option value="2">2 - Híbrido</option>
-                        <option value="3">3 - Remoto</option>
+                        <option value="PRESENCIAL">Presencial</option>
+                        <option value="HIBRIDO">Híbrido</option>
+                        <option value="REMOTO">Remoto</option>
                         </select>
                     </div>
 
                     <!-- Localidade da Vaga (Ajustado para 12 colunas enquanto o Status está comentado) -->
                     <div class="md:col-span-12">
                         <label for="field-localidade" class="block text-xs font-bold text-slate-700 mb-1.5">Localidade da Vaga (Bairro/Região em Maceió) *</label>
-                        <input type="text" id="field-localidade" required placeholder="Ex: Farol, Maceió - AL" 
+                        <input type="text" id="field-localidade" maxlength="50" required placeholder="Ex: Farol, Maceió - AL"
                             class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:bg-white focus:border-pojae-600 focus:ring-2 focus:ring-pojae-600/15 transition-all">
                     </div>
 
@@ -157,7 +159,7 @@
                     <!-- Descrição da Vaga -->
                     <div class="md:col-span-12">
                         <label for="field-descricao" class="block text-xs font-bold text-slate-700 mb-1.5">Descrição Geral da Vaga *</label>
-                        <textarea id="field-descricao" rows="4" required placeholder="Descreva os objetivos principais da vaga e o ambiente de trabalho..." 
+                        <textarea id="field-descricao" rows="4" maxlength="1000" required placeholder="Descreva os objetivos principais da vaga e o ambiente de trabalho..."
                                 class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:bg-white focus:border-pojae-600 focus:ring-2 focus:ring-pojae-600/15 transition-all"></textarea>
                     </div>
                 </div>
@@ -185,7 +187,7 @@
                     <!-- Carga Horária Diária -->
                     <div class="md:col-span-4">
                         <label class="block text-xs font-bold text-slate-700 mb-1">Carga Horária Diária (Horas) *</label>
-                        <input type="number" id="field-ch-diaria" max="6" required placeholder="6" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:border-pojae-600">
+                        <input type="number" id="field-ch-diaria" min="1" max="6" required placeholder="6" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:border-pojae-600">
                     </div>
 
                     <!-- Carga Horária Semanal -->
@@ -197,13 +199,13 @@
                     <!-- Dias da Semana / Horários -->
                     <div class="md:col-span-6">
                         <label class="block text-xs font-bold text-slate-700 mb-1">Dia(s) da Semana & Horário *</label>
-                        <input type="text" id="field-dias-semana" required placeholder="Ex: Seg a Sex (08:00 às 12:00 / 13:00 às 15:00)" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:border-pojae-600">
+                        <input type="text" id="field-dias-semana" maxlength="250" required placeholder="Ex: Seg a Sex (08:00 às 12:00 / 13:00 às 15:00)" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:border-pojae-600">
                     </div>
 
                     <!-- Período de Recesso -->
                     <div class="md:col-span-6">
                         <label class="block text-xs font-bold text-slate-700 mb-1">Período de Recesso Remunerado</label>
-                        <input type="text" id="field-recesso" placeholder="Ex: 30 dias a cada 12 meses de estágio" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:border-pojae-600">
+                        <input type="text" id="field-recesso" maxlength="50" placeholder="Ex: 30 dias a cada 12 meses de estágio" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:border-pojae-600">
                     </div>
 
                     <!-- Início Previsto -->
@@ -221,7 +223,7 @@
                     <!-- Benefícios Oferecidos -->
                     <div class="md:col-span-4">
                         <label class="block text-xs font-bold text-slate-700 mb-1">Benefícios Oferecidos</label>
-                        <input type="text" id="field-beneficios" placeholder="Ex: Auxílio Transporte, Seguro de Vida" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:border-pojae-600">
+                        <input type="text" id="field-beneficios" maxlength="50" placeholder="Ex: Auxílio Transporte, Seguro de Vida" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:border-pojae-600">
                     </div>
                 </div>
             </div>
@@ -242,13 +244,13 @@
                     <!-- Objetivo da Oportunidade -->
                     <div class="md:col-span-12">
                         <label class="block text-xs font-bold text-slate-700 mb-1">Objetivo da Oportunidade *</label>
-                        <textarea id="field-objetivo" rows="2" required placeholder="Ex: Desenvolver habilidades práticas em programação web front-end..." class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:border-pojae-600"></textarea>
+                        <textarea id="field-objetivo" rows="2" maxlength="1000" required placeholder="Ex: Desenvolver habilidades práticas em programação web front-end..." class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:border-pojae-600"></textarea>
                     </div>
 
                     <!-- Atividades Previstas -->
                     <div class="md:col-span-12">
                         <label class="block text-xs font-bold text-slate-700 mb-1">Atividades Previstas *</label>
-                        <textarea id="field-atividades" rows="3" required placeholder="Ex: Auxiliar na construção de telas, codificação HTML/CSS/JS, versionamento com Git..." class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:border-pojae-600"></textarea>
+                        <textarea id="field-atividades" rows="3" maxlength="1000" required placeholder="Ex: Auxiliar na construção de telas, codificação HTML/CSS/JS, versionamento com Git..." class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:border-pojae-600"></textarea>
                     </div>
                 </div>
             </div>
@@ -270,11 +272,11 @@
                     <div class="md:col-span-4">
                         <label class="block text-xs font-bold text-slate-700 mb-1">Setor de Atuação *</label>
                         <select id="field-setor" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:border-pojae-600">
-                            <option value="1">1 - Tecnologia da Informação (TI)</option>
-                            <option value="2">2 - Administração / Gestão</option>
-                            <option value="3">3 - Jurídico / Direito</option>
-                            <option value="4">4 - Engenharia / Arquitetura</option>
-                            <option value="5">5 - Comunicação / Marketing</option>
+                            <option value="TECNOLOGIA">Tecnologia da Informação (TI)</option>
+                            <option value="ADMINISTRACAO">Administração / Gestão</option>
+                            <option value="DIREITO">Jurídico / Direito</option>
+                            <option value="ENGENHARIA">Engenharia / Arquitetura</option>
+                            <option value="COMUNICACAO_MARKETING">Comunicação / Marketing</option>
                         </select>
                     </div>
 
@@ -282,33 +284,33 @@
                     <div class="md:col-span-4">
                         <label class="block text-xs font-bold text-slate-700 mb-1">Escolaridade Mínima *</label>
                         <select id="field-escolaridade" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:border-pojae-600">
-                            <option value="1">1 - Ensino Médio / Técnico</option>
-                            <option value="2">2 - Ensino Superior em Andamento</option>
+                            <option value="ENSINO_MEDIO_TECNICO">Ensino Médio / Técnico</option>
+                            <option value="ENSINO_SUPERIOR_EM_ANDAMENTO">Ensino Superior em Andamento</option>
                         </select>
                     </div>
 
                     <!-- Série / Período -->
                     <div class="md:col-span-4">
                         <label class="block text-xs font-bold text-slate-700 mb-1">Série / Período Exigido *</label>
-                        <input type="text" id="field-serie-periodo" required placeholder="Ex: A partir do 3º Período" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:border-pojae-600">
+                        <input type="text" id="field-serie-periodo" maxlength="100" required placeholder="Ex: A partir do 3º Período" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:border-pojae-600">
                     </div>
 
                     <!-- Cursos Relacionados -->
                     <div class="md:col-span-6">
                         <label class="block text-xs font-bold text-slate-700 mb-1">Curso(s) Relacionado(s) *</label>
-                        <input type="text" id="field-cursos" required placeholder="Ex: Engenharia de Software, Ciência da Computação, Análise de Sistemas" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:border-pojae-600">
+                        <input type="text" id="field-cursos" maxlength="500" required placeholder="Ex: Engenharia de Software, Ciência da Computação, Análise de Sistemas" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:border-pojae-600">
                     </div>
 
                     <!-- Habilidades Desejadas -->
                     <div class="md:col-span-6">
                         <label class="block text-xs font-bold text-slate-700 mb-1">Habilidades Desejadas *</label>
-                        <input type="text" id="field-habilidades" required placeholder="Ex: JavaScript, HTML/CSS, Lógica de Programação, Git" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:border-pojae-600">
+                        <input type="text" id="field-habilidades" maxlength="500" required placeholder="Ex: JavaScript, HTML/CSS, Lógica de Programação, Git" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:border-pojae-600">
                     </div>
 
                     <!-- Observações -->
                     <div class="md:col-span-12">
                         <label class="block text-xs font-bold text-slate-700 mb-1">Observações Adicionais</label>
-                        <input type="text" id="field-obs-criterios" placeholder="Ex: Preferência por candidatos que residam próximo ao bairro do Farol" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:border-pojae-600">
+                        <input type="text" id="field-obs-criterios" maxlength="1000" placeholder="Ex: Preferência por candidatos que residam próximo ao bairro do Farol" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:border-pojae-600">
                     </div>
                 </div>
             </div>
@@ -332,16 +334,16 @@
                     <!-- Nome do Supervisor -->
                     <div class="md:col-span-8">
                         <label class="block text-xs font-bold text-slate-700 mb-1">Nome Completo do Supervisor *</label>
-                        <input type="text" id="field-nome-supervisor-vaga" required placeholder="Ex: Eng. Vinícius Araújo Coêlho" class="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:border-pojae-600">
+                        <input type="text" id="field-nome-supervisor-vaga" maxlength="50" required placeholder="Ex: Eng. Vinícius Araújo Coêlho" class="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:border-pojae-600">
                     </div>
 
                     <!-- Formação do Supervisor -->
                     <div class="md:col-span-4">
                         <label class="block text-xs font-bold text-slate-700 mb-1">Nível de Formação *</label>
                         <select id="field-formacao-supervisor" required class="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:border-pojae-600">
-                            <option value="Graduado">Graduado na Área</option>
-                            <option value="Especialista">Pós-Graduado / Especialista</option>
-                            <option value="Mestre">Mestre / Doutor</option>
+                            <option value="Graduado na área">Graduado na Área</option>
+                            <option value="Pós-graduado / Especialista">Pós-Graduado / Especialista</option>
+                            <option value="Mestre / Doutor">Mestre / Doutor</option>
                         </select>
                     </div>
                 </div>
@@ -377,49 +379,112 @@
             input.value = value;
         }
 
+        const API_BASE_URL = window.POJAE_API_URL || 'http://localhost:8080';
+
+        window.addEventListener('DOMContentLoaded', loadCompanies);
+
+        async function loadCompanies() {
+            const select = document.getElementById('field-empresa-resp');
+            try {
+                const response = await fetch(`${API_BASE_URL}/empresas`);
+                if (!response.ok) throw new Error('Falha ao carregar empresas');
+
+                const companies = await response.json();
+                select.replaceChildren(new Option('Selecione a empresa...', ''));
+                companies.forEach(company => select.add(new Option(company.name, company.id)));
+                if (companies.length === 0) {
+                    select.disabled = true;
+                    showToast('Cadastre uma empresa antes de publicar uma vaga.', 'info');
+                }
+            } catch (error) {
+                select.disabled = true;
+                showToast('Não foi possível carregar as empresas cadastradas.', 'info');
+            }
+        }
+
+        function countWorkDays(schedule) {
+            const normalized = schedule.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+            const matches = [...normalized.matchAll(/\b(segunda|seg|terca|ter|quarta|qua|quinta|qui|sexta|sex|sabado|sab|domingo|dom)\b/g)];
+            const dayIndexes = matches.map(match => {
+                const day = match[1];
+                if (day.startsWith('seg')) return 0;
+                if (day.startsWith('ter')) return 1;
+                if (day.startsWith('qua')) return 2;
+                if (day.startsWith('qui')) return 3;
+                if (day.startsWith('sex')) return 4;
+                if (day.startsWith('sab')) return 5;
+                return 6;
+            });
+
+            if (dayIndexes.length >= 2 && /\ba\b|\bate\b/.test(normalized)) {
+                const distance = (dayIndexes[dayIndexes.length - 1] - dayIndexes[0] + 7) % 7;
+                return distance + 1;
+            }
+            return new Set(dayIndexes).size;
+        }
+
+        function formatApiDate(value) {
+            const [year, month, day] = value.split('-');
+            return `${day}/${month}/${year}`;
+        }
+
         // SUBMISSÃO DO FORMULÁRIO DE CADASTRO DE VAGA
-        function handleJobRegister(e) {
+        async function handleJobRegister(e) {
             e.preventDefault();
+            const form = e.currentTarget;
+            const submitButton = form.querySelector('[type="submit"]');
+
+            const schedule = document.getElementById('field-dias-semana').value.trim();
+            const daysOfTheWeek = countWorkDays(schedule);
+            if (daysOfTheWeek < 1) {
+                showToast('Informe os dias da semana por nome, por exemplo: Seg a Sex.', 'info');
+                return;
+            }
 
             const jobData = {
-                titulo: document.getElementById('field-titulo').value,
-                descricao: document.getElementById('field-descricao').value,
-                tipoVaga: parseInt(document.getElementById('field-tipo-vaga').value),
-                quantidadeVagas: parseInt(document.getElementById('field-qtd-vagas').value),
-                diasSemana: document.getElementById('field-dias-semana').value,
-                cargaHorariaDiaria: parseInt(document.getElementById('field-ch-diaria').value),
-                cargaHorariaSemanal: parseInt(document.getElementById('field-ch-semanal').value),
-                valorBolsa: parseFloat(document.getElementById('field-bolsa').value.replace('.', '').replace(',', '.')),
-                objetivoOportunidade: document.getElementById('field-objetivo').value,
-                atividadesPrevistas: document.getElementById('field-atividades').value,
-                periodoRecesso: document.getElementById('field-recesso').value,
-                inicioPrevisto: document.getElementById('field-inicio').value,
-                terminoPrevisto: document.getElementById('field-termino').value,
-                beneficiosOferecidos: document.getElementById('field-beneficios').value,
-                empresaResponsavel: document.getElementById('field-empresa-resp').value,
-                localidadeVaga: document.getElementById('field-localidade').value,
-                modalidadeTrabalho: parseInt(document.getElementById('field-modalidade').value),
-                status: parseInt(document.getElementById('field-status').value),
-                criterios: {
-                    setorAtuacao: parseInt(document.getElementById('field-setor').value),
-                    escolaridade: parseInt(document.getElementById('field-escolaridade').value),
-                    seriePeriodo: document.getElementById('field-serie-periodo').value,
-                    cursosRelacionados: document.getElementById('field-cursos').value,
-                    habilidadesDesejadas: document.getElementById('field-habilidades').value,
-                    observacoes: document.getElementById('field-obs-criterios').value
-                },
-                supervisor: {
-                    nome: document.getElementById('field-nome-supervisor-vaga').value,
-                    formacao: document.getElementById('field-formacao-supervisor').value
-                }
+                title: document.getElementById('field-titulo').value.trim(),
+                description: document.getElementById('field-descricao').value.trim(),
+                type: document.getElementById('field-tipo-vaga').value,
+                numberOfPositions: Number(document.getElementById('field-qtd-vagas').value),
+                dailyWorkingHours: Number(document.getElementById('field-ch-diaria').value),
+                workSchedule: schedule,
+                daysOfTheWeek,
+                weeklyWorkingHours: Number(document.getElementById('field-ch-semanal').value),
+                scholarshipAmount: Number(document.getElementById('field-bolsa').value.replace(/\./g, '').replace(',', '.')),
+                opportunityObjective: document.getElementById('field-objetivo').value.trim(),
+                expectedActivities: document.getElementById('field-atividades').value.trim(),
+                recessPeriod: document.getElementById('field-recesso').value.trim(),
+                expectedStartDate: formatApiDate(document.getElementById('field-inicio').value),
+                expectedEndDate: formatApiDate(document.getElementById('field-termino').value),
+                benefitsOffered: document.getElementById('field-beneficios').value.trim(),
+                company: { id: document.getElementById('field-empresa-resp').value },
+                location: document.getElementById('field-localidade').value.trim(),
+                workModality: document.getElementById('field-modalidade').value,
+                sector: document.getElementById('field-setor').value,
+                minimumEducation: document.getElementById('field-escolaridade').value,
+                gradeOrAcademicTerm: document.getElementById('field-serie-periodo').value.trim(),
+                relatedCourses: document.getElementById('field-cursos').value.trim(),
+                desiredSkills: document.getElementById('field-habilidades').value.trim(),
+                criteriaObservations: document.getElementById('field-obs-criterios').value.trim(),
+                supervisorName: document.getElementById('field-nome-supervisor-vaga').value.trim(),
+                supervisorEducation: document.getElementById('field-formacao-supervisor').value
             };
 
-            console.log("Dados da Vaga Cadastrada:", jobData);
-            showToast("Vaga de Estágio publicada com sucesso no POJAE!", "success");
+            submitButton.disabled = true;
+            try {
+                const response = await fetch(`${API_BASE_URL}/vagas`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(jobData)
+                });
+                if (!response.ok) throw new Error('Cadastro não concluído');
 
-            setTimeout(() => {
-                window.location.href = "index.html";
-            }, 2000);
+                showToast('Vaga cadastrada com sucesso no POJAE!', 'success');
+                setTimeout(() => { window.location.href = 'index.html'; }, 2000);
+            } catch (error) {
+                showToast('Não foi possível cadastrar a vaga. Confira os dados e tente novamente.', 'info');
+                submitButton.disabled = false;
+            }
         }
 
         // SISTEMA DE NOTIFICAÇÕES TOAST
