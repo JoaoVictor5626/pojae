@@ -129,9 +129,9 @@
                         <select id="field-tipo-inst" required
                             class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:border-pojae-600">
                             <option value="">Selecione o tipo...</option>
-                            <option value="1">1 - Escola (Ensino Médio / Fundamental)</option>
-                            <option value="2">2 - Escola Técnica / Profissionalizante</option>
-                            <option value="3">3 - Faculdade / Centro Universitário / Universidade</option>
+                            <option value="ESCOLA">Escola (Ensino Médio / Fundamental)</option>
+                            <option value="ESCOLA_TECNICA">Escola Técnica / Profissionalizante</option>
+                            <option value="FACULDADE">Faculdade / Centro Universitário / Universidade</option>
                         </select>
                     </div>
 
@@ -185,7 +185,7 @@
                     <!-- Número -->
                     <div class="md:col-span-3">
                         <label class="block text-xs font-bold text-slate-700 mb-1">Número *</label>
-                        <input type="text" id="field-numero-inst" required placeholder="918"
+                        <input type="number" id="field-numero-inst" required min="1" step="1" placeholder="918"
                             class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:border-pojae-600">
                     </div>
 
@@ -341,35 +341,51 @@
             input.value = v;
         }
 
+        const API_BASE_URL = window.POJAE_API_URL || 'http://localhost:8080';
+
         // SUBMISSÃO DO FORMULÁRIO DE INSTITUIÇÃO
-        function handleInstitutionRegister(e) {
+        async function handleInstitutionRegister(e) {
             e.preventDefault();
+            const form = e.currentTarget;
+            const submitButton = form.querySelector('[type="submit"]');
 
             const institutionData = {
-                nomeInstituicao: document.getElementById('field-nome-inst').value,
-                cnpj: document.getElementById('field-cnpj-inst').value,
-                tipoInstituicaoId: parseInt(document.getElementById('field-tipo-inst').value),
-                email: document.getElementById('field-email-inst').value,
-                telefone: document.getElementById('field-telefone-inst').value,
-                cep: document.getElementById('field-cep-inst').value,
-                endereco: document.getElementById('field-endereco-inst').value,
-                numero: document.getElementById('field-numero-inst').value,
-                bairro: document.getElementById('field-bairro-inst').value,
-                cidade: document.getElementById('field-cidade-inst').value,
-                estado: document.getElementById('field-estado-inst').value,
-                nomeProfessor: document.getElementById('field-nome-prof').value,
-                cpfProfessor: document.getElementById('field-cpf-prof').value,
-                cargoProfessor: document.getElementById('field-cargo-prof').value,
-                nomeRepresentante: document.getElementById('field-nome-rep-inst').value,
-                cargoRepresentante: document.getElementById('field-cargo-rep-inst').value
+                name: document.getElementById('field-nome-inst').value.trim(),
+                cnpj: document.getElementById('field-cnpj-inst').value.trim(),
+                email: document.getElementById('field-email-inst').value.trim(),
+                phone: document.getElementById('field-telefone-inst').value.replace(/\D/g, ''),
+                type: document.getElementById('field-tipo-inst').value,
+                address: {
+                    cep: document.getElementById('field-cep-inst').value.trim(),
+                    street: document.getElementById('field-endereco-inst').value.trim(),
+                    number: Number(document.getElementById('field-numero-inst').value),
+                    neighborhood: document.getElementById('field-bairro-inst').value.trim(),
+                    city: document.getElementById('field-cidade-inst').value,
+                    state: document.getElementById('field-estado-inst').value
+                },
+                academicAdvisorName: document.getElementById('field-nome-prof').value.trim(),
+                academicAdvisorCpf: document.getElementById('field-cpf-prof').value.trim(),
+                academicAdvisorPosition: document.getElementById('field-cargo-prof').value.trim(),
+                representativeName: document.getElementById('field-nome-rep-inst').value.trim(),
+                representativePosition: document.getElementById('field-cargo-rep-inst').value.trim(),
+                status: 'ACTIVE'
             };
 
-            console.log("Dados da Instituição Cadastrada (RF03):", institutionData);
-            showToast("Cadastro de Instituição realizado com sucesso no POJAE!", "success");
+            submitButton.disabled = true;
+            try {
+                const response = await fetch(`${API_BASE_URL}/instituicoesDeEnsino`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(institutionData)
+                });
 
-            setTimeout(() => {
-                window.location.href = "index.html";
-            }, 2000);
+                if (!response.ok) throw new Error('Cadastro não concluído');
+                showToast('Cadastro de instituição realizado com sucesso no POJAE!', 'success');
+                setTimeout(() => { window.location.href = 'index.html'; }, 2000);
+            } catch (error) {
+                showToast('Não foi possível concluir o cadastro. Confira os dados e tente novamente.', 'info');
+                submitButton.disabled = false;
+            }
         }
 
         // SISTEMA DE NOTIFICAÇÕES TOAST

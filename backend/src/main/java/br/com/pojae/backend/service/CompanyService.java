@@ -6,6 +6,7 @@ import br.com.pojae.backend.repository.CompanyRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -17,7 +18,13 @@ public class CompanyService {
     @Autowired
     private CompanyRepository repository;
 
+    @Autowired
+    private AddressService addressService;
+
+    @Transactional
     public Company create(Company company) {
+        company.setAddress(addressService.create(company.getAddress()));
+        company.setCreatedAt(LocalDateTime.now());
         return repository.save(company);
     }
 

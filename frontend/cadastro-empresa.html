@@ -139,7 +139,7 @@
                     <!-- Site -->
                     <div class="md:col-span-4">
                         <label class="block text-xs font-bold text-slate-700 mb-1">Site Institucional</label>
-                        <input type="text" id="field-site" placeholder="https://www.empresa.com.br"
+                        <input type="text" id="field-site" maxlength="50" placeholder="https://www.empresa.com.br"
                             class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:border-pojae-600">
                     </div>
                 </div>
@@ -177,7 +177,7 @@
                     <!-- Número -->
                     <div class="md:col-span-3">
                         <label class="block text-xs font-bold text-slate-700 mb-1">Número *</label>
-                        <input type="text" id="field-numero-empresa" required placeholder="500"
+                        <input type="number" id="field-numero-empresa" required min="1" step="1" placeholder="500"
                             class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:border-pojae-600">
                     </div>
 
@@ -336,35 +336,51 @@
             input.value = v;
         }
 
+        const API_BASE_URL = window.POJAE_API_URL || 'http://localhost:8080';
+
         // SUBMISSÃO DO FORMULÁRIO DE EMPRESA
-        function handleCompanyRegister(e) {
+        async function handleCompanyRegister(e) {
             e.preventDefault();
+            const form = e.currentTarget;
+            const submitButton = form.querySelector('[type="submit"]');
 
             const companyData = {
-                nomeEmpresa: document.getElementById('field-nome-empresa').value,
-                cnpj: document.getElementById('field-cnpj').value,
-                email: document.getElementById('field-email-empresa').value,
-                telefone: document.getElementById('field-telefone-empresa').value,
-                site: document.getElementById('field-site').value,
-                cep: document.getElementById('field-cep-empresa').value,
-                endereco: document.getElementById('field-endereco-empresa').value,
-                numero: document.getElementById('field-numero-empresa').value,
-                bairro: document.getElementById('field-bairro-empresa').value,
-                cidade: document.getElementById('field-cidade-empresa').value,
-                estado: document.getElementById('field-estado-empresa').value,
-                nomeRepresentante: document.getElementById('field-nome-representante').value,
-                cargoRepresentante: document.getElementById('field-cargo-representante').value,
-                nomeSupervisor: document.getElementById('field-nome-supervisor').value,
-                cpfSupervisor: document.getElementById('field-cpf-supervisor').value,
-                cargoSupervisor: document.getElementById('field-cargo-supervisor').value
+                name: document.getElementById('field-nome-empresa').value.trim(),
+                cnpj: document.getElementById('field-cnpj').value.trim(),
+                email: document.getElementById('field-email-empresa').value.trim(),
+                phone: document.getElementById('field-telefone-empresa').value.replace(/\D/g, ''),
+                website: document.getElementById('field-site').value.trim(),
+                address: {
+                    cep: document.getElementById('field-cep-empresa').value.trim(),
+                    street: document.getElementById('field-endereco-empresa').value.trim(),
+                    number: Number(document.getElementById('field-numero-empresa').value),
+                    neighborhood: document.getElementById('field-bairro-empresa').value.trim(),
+                    city: document.getElementById('field-cidade-empresa').value,
+                    state: document.getElementById('field-estado-empresa').value
+                },
+                representativeName: document.getElementById('field-nome-representante').value.trim(),
+                representativePosition: document.getElementById('field-cargo-representante').value.trim(),
+                internshipSupervisorName: document.getElementById('field-nome-supervisor').value.trim(),
+                internshipSupervisorCpf: document.getElementById('field-cpf-supervisor').value.trim(),
+                internshipSupervisorPosition: document.getElementById('field-cargo-supervisor').value.trim(),
+                status: 'ACTIVE'
             };
 
-            console.log("Dados da Empresa Cadastrada (RF02):", companyData);
-            showToast("Cadastro de Empresa realizado com sucesso no POJAE!", "success");
+            submitButton.disabled = true;
+            try {
+                const response = await fetch(`${API_BASE_URL}/empresas`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(companyData)
+                });
 
-            setTimeout(() => {
-                window.location.href = "index.html";
-            }, 2000);
+                if (!response.ok) throw new Error('Cadastro não concluído');
+                showToast('Cadastro de empresa realizado com sucesso no POJAE!', 'success');
+                setTimeout(() => { window.location.href = 'index.html'; }, 2000);
+            } catch (error) {
+                showToast('Não foi possível concluir o cadastro. Confira os dados e tente novamente.', 'info');
+                submitButton.disabled = false;
+            }
         }
 
         // SISTEMA DE NOTIFICAÇÕES TOAST

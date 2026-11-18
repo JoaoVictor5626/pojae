@@ -1,11 +1,13 @@
 package br.com.pojae.backend.service;
 
+import br.com.pojae.backend.dto.request.EducationalInstitutionRequestDto;
 import br.com.pojae.backend.exception.NotFoundException;
 import br.com.pojae.backend.model.EducationalInstitution;
 import br.com.pojae.backend.repository.EducationalInstitutionRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -17,7 +19,28 @@ public class EducationalInstitutionService {
     @Autowired
     private EducationalInstitutionRepository repository;
 
-    public EducationalInstitution create(EducationalInstitution educationalInstitution) {
+    @Autowired
+    private AddressService addressService;
+
+    @Transactional
+    public EducationalInstitution create(EducationalInstitutionRequestDto educationalInstitutionRequestDto) {
+        LocalDateTime now = LocalDateTime.now();
+        EducationalInstitution educationalInstitution = EducationalInstitution.builder()
+                .name(educationalInstitutionRequestDto.name())
+                .cnpj(educationalInstitutionRequestDto.cnpj())
+                .phone(educationalInstitutionRequestDto.phone())
+                .email(educationalInstitutionRequestDto.email())
+                .type(educationalInstitutionRequestDto.type())
+                .address(addressService.create(educationalInstitutionRequestDto.address()))
+                .academicAdvisorName(educationalInstitutionRequestDto.academicAdvisorName())
+                .academicAdvisorCpf(educationalInstitutionRequestDto.academicAdvisorCpf())
+                .academicAdvisorPosition(educationalInstitutionRequestDto.academicAdvisorPosition())
+                .representativeName(educationalInstitutionRequestDto.representativeName())
+                .representativePosition(educationalInstitutionRequestDto.representativePosition())
+                .status(educationalInstitutionRequestDto.status())
+                .updatedAt(now)
+                .createdAt(now)
+                .build();
         return repository.save(educationalInstitution);
     }
 

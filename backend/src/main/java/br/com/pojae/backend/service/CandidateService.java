@@ -2,12 +2,15 @@ package br.com.pojae.backend.service;
 
 import br.com.pojae.backend.exception.NotFoundException;
 import br.com.pojae.backend.model.Candidate;
+import br.com.pojae.backend.model.Skill;
 import br.com.pojae.backend.repository.CandidateRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -20,9 +23,26 @@ public class CandidateService {
     @Autowired
     private SkillService skillService;
 
+    @Autowired
+    private AddressService addressService;
+
+    @Transactional
     public Candidate create(Candidate candidate) {
-        candidate.getSkills().forEach(skill -> skillService.create(skill));
-        return repository.save(candidate);
+        candidate.setUpdatedAt(LocalDateTime.now());
+        candidate.setAddress(addressService.create(candidate.getAddress()));
+        List<Skill> skills = candidate.getSkills();
+        candidate.setSkills(List.of());
+        candidate.setCreatedAt(LocalDateTime.now());
+        Candidate savedCandidate = repository.save(candidate);
+
+        List<Skill> savedSkills = new ArrayList<>();
+        for (Skill skill : skills) {
+            skill.setCandidates(savedCandidate);
+            skill.setUpdatedAt(LocalDateTime.now());
+            savedSkills.add(skillService.create(skill));
+        }
+        savedCandidate.setSkills(savedSkills);
+        return repository.save(savedCandidate);
     }
 
     public List<Candidate> read() {
@@ -36,7 +56,7 @@ public class CandidateService {
         candidate.setEmail(candidateUpdated.getEmail());
         candidate.setPhone(candidateUpdated.getPhone());
         candidate.setAddress(candidateUpdated.getAddress());
-        candidate.setEducationalInstitution(candidateUpdated.getEducationalInstitution());
+//        candidate.setEducationalInstitution(candidateUpdated.getEducationalInstitution());
         candidate.setCourseName(candidateUpdated.getCourseName());
         candidate.setGradeOrAcademicTerm(candidateUpdated.getGradeOrAcademicTerm());
         candidate.setStudyShift(candidateUpdated.getStudyShift());
