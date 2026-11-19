@@ -5,11 +5,14 @@ import br.com.pojae.backend.model.Company;
 import br.com.pojae.backend.repository.CompanyRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -21,8 +24,12 @@ public class CompanyService {
     @Autowired
     private AddressService addressService;
 
+    @Autowired
+    private PasswordEncoder encoder;
+
     @Transactional
     public Company create(Company company) {
+        company.setPassword(encrypt(company.getPassword()));
         company.setAddress(addressService.create(company.getAddress()));
         company.setCreatedAt(LocalDateTime.now());
         return repository.save(company);
@@ -61,10 +68,18 @@ public class CompanyService {
                 .orElseThrow(() -> new NotFoundException("Empresa"));
     }
 
+    public Optional<Company> findByCnpj(String cnpj) {
+        return repository.findByCnpj(cnpj);
+    }
+
     private void existsById(UUID id) {
         if (!repository.existsById(id)) {
             throw new NotFoundException("Empresa");
         }
+    }
+
+    private String encrypt(String password) {
+        return encoder.encode(password);
     }
 
 }
