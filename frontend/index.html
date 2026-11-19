@@ -338,21 +338,18 @@
         
         <!-- SEÇÃO FEED DE VAGAS -->
         <section id="vagas" class="py-16 sm:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
             <!-- Cabeçalho da Seção + Filtros -->
             <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-10 reveal-on-scroll">
-                
-                <!-- Bloco de Título e Subtítulo (Agrupados dentro de uma div) -->
                 <div>
-                    <span class="text-xs font-bold uppercase tracking-wider text-pojae-600">
-                        Oportunidades Ativas
-                    </span>
-                    <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 mt-3.5 tracking-tight">
-                        Vagas de Estágio e Jovem Aprendiz em Maceió
-                    </h2>
-                    <p class="text-slate-500 text-sm sm:text-base mt-2.5 leading-relaxed">
-                        Exclusivo para estudantes residentes ou matriculados em Maceió - AL.
-                    </p>
+                <span class="text-xs font-bold uppercase tracking-wider text-pojae-600">
+                    Oportunidades Ativas
+                </span>
+                <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 mt-3.5 tracking-tight">
+                    Vagas de Estágio e Jovem Aprendiz em Maceió
+                </h2>
+                <p class="text-slate-500 text-sm sm:text-base mt-2.5 leading-relaxed">
+                    Exclusivo para estudantes residentes ou matriculados em Maceió - AL.
+                </p>
                 </div>
 
                 <!-- BOTÕES DE FILTRO POR CATEGORIA -->
@@ -360,19 +357,15 @@
                 <button onclick="filterByCategory('all', event)" class="category-btn active px-4 py-2 rounded-full text-xs sm:text-sm font-semibold border transition-all cursor-pointer bg-white text-slate-600 border-slate-200 [&:not(.active)]:hover:bg-blue-50/80 [&:not(.active)]:hover:text-pojae-600 [&:not(.active)]:hover:border-pojae-300 [&.active]:bg-pojae-600 [&.active]:text-white [&.active]:border-pojae-600 [&.active]:shadow-sm [&.active]:hover:bg-pojae-700">
                     Todas
                 </button>
-
                 <button onclick="filterByCategory('Tecnologia', event)" class="category-btn px-4 py-2 rounded-full text-xs sm:text-sm font-semibold border transition-all cursor-pointer bg-white text-slate-600 border-slate-200 [&:not(.active)]:hover:bg-blue-50/80 [&:not(.active)]:hover:text-pojae-600 [&:not(.active)]:hover:border-pojae-300 [&.active]:bg-pojae-600 [&.active]:text-white [&.active]:border-pojae-600 [&.active]:shadow-sm [&.active]:hover:bg-pojae-700">
                     Tecnologia
                 </button>
-
                 <button onclick="filterByCategory('Administração', event)" class="category-btn px-4 py-2 rounded-full text-xs sm:text-sm font-semibold border transition-all cursor-pointer bg-white text-slate-600 border-slate-200 [&:not(.active)]:hover:bg-blue-50/80 [&:not(.active)]:hover:text-pojae-600 [&:not(.active)]:hover:border-pojae-300 [&.active]:bg-pojae-600 [&.active]:text-white [&.active]:border-pojae-600 [&.active]:shadow-sm [&.active]:hover:bg-pojae-700">
                     Administração
                 </button>
-
                 <button onclick="filterByCategory('Direito', event)" class="category-btn px-4 py-2 rounded-full text-xs sm:text-sm font-semibold border transition-all cursor-pointer bg-white text-slate-600 border-slate-200 [&:not(.active)]:hover:bg-blue-50/80 [&:not(.active)]:hover:text-pojae-600 [&:not(.active)]:hover:border-pojae-300 [&.active]:bg-pojae-600 [&.active]:text-white [&.active]:border-pojae-600 [&.active]:shadow-sm [&.active]:hover:bg-pojae-700">
                     Direito
                 </button>
-
                 <button onclick="filterByCategory('Engenharia', event)" class="category-btn px-4 py-2 rounded-full text-xs sm:text-sm font-semibold border transition-all cursor-pointer bg-white text-slate-600 border-slate-200 [&:not(.active)]:hover:bg-blue-50/80 [&:not(.active)]:hover:text-pojae-600 [&:not(.active)]:hover:border-pojae-300 [&.active]:bg-pojae-600 [&.active]:text-white [&.active]:border-pojae-600 [&.active]:shadow-sm [&.active]:hover:bg-pojae-700">
                     Engenharia
                 </button>
@@ -383,6 +376,11 @@
             <div id="job-cards-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 reveal-on-scroll">
                 <!-- Preenchido via JavaScript -->
             </div>
+
+            <!-- CONTAINER DE PAGINAÇÃO DINÂMICA -->
+            <nav id="pagination-container" aria-label="Paginação de vagas" class="mt-10 flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 hidden">
+                <!-- Preenchido via JavaScript -->
+            </nav>
         </section>
 
         <!-- SEÇÃO RECRUTADOR & INSTITUIÇÃO -->
