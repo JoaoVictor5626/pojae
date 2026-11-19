@@ -2,16 +2,20 @@ package br.com.pojae.backend.service;
 
 import br.com.pojae.backend.exception.NotFoundException;
 import br.com.pojae.backend.model.Candidate;
+import br.com.pojae.backend.model.Company;
 import br.com.pojae.backend.model.Skill;
 import br.com.pojae.backend.repository.CandidateRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -26,8 +30,12 @@ public class CandidateService {
     @Autowired
     private AddressService addressService;
 
+    @Autowired
+    private PasswordEncoder encoder;
+
     @Transactional
     public Candidate create(Candidate candidate) {
+        candidate.setPassword(encrypt(candidate.getPassword()));
         candidate.setUpdatedAt(LocalDateTime.now());
         candidate.setAddress(addressService.create(candidate.getAddress()));
         List<Skill> skills = candidate.getSkills();
@@ -77,10 +85,18 @@ public class CandidateService {
                 .orElseThrow(() -> new NotFoundException("Candidato"));
     }
 
+    public Optional<Candidate> findByCpf(String cpf) {
+        return repository.findByCpf(cpf);
+    }
+
     private void existsById(UUID id) {
         if (!repository.existsById(id)) {
             throw new NotFoundException("Candidato");
         }
+    }
+
+    private String encrypt(String password) {
+        return encoder.encode(password);
     }
 
 }

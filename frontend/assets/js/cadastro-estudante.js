@@ -161,9 +161,16 @@ function handleStudentRegister(e) {
 
 async function submitStudentRegistration(form) {
     const submitButton = form.querySelector('[type="submit"]');
+    const password = document.getElementById('field-senha').value;
+    if (password !== document.getElementById('field-confirmar-senha').value) {
+        showToast('As senhas informadas não coincidem.', 'info');
+        return;
+    }
+
     const payload = {
         name: document.getElementById('field-nome').value.trim(),
         cpf: document.getElementById('field-cpf').value.replace(/\D/g, ''),
+        password,
         email: document.getElementById('field-email').value.trim(),
         phone: document.getElementById('field-telefone').value.replace(/\D/g, ''),
         address: {

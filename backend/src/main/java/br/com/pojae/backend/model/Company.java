@@ -45,11 +45,14 @@ public class Company {
     @Column(length = 18, nullable = false)
     private String cnpj;
 
-    @Column(length = 50, nullable = false)
-    private String email;
-
     @Column(length = 14, nullable = false)
     private String phone;
+
+    @Column(length = 100, nullable = false)
+    private String password;
+
+    @Column(length = 50, nullable = false)
+    private String email;
 
     @ManyToOne
     @JoinColumn(name = "address_cep", nullable = false)

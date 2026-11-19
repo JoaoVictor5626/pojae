@@ -23,7 +23,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.YearMonth;
 import java.util.ArrayList;
@@ -48,11 +47,14 @@ public class Candidate {
     @Column(unique = true, length = 14, nullable = false)
     private String cpf;
 
+    @Column(unique = true, length = 14, nullable = false)
+    private String phone;
+
     @Column(unique = true, length = 50, nullable = false)
     private String email;
 
-    @Column(unique = true, length = 14, nullable = false)
-    private String phone;
+    @Column(length = 100, nullable = false)
+    private String password;
 
     @ManyToOne
     @JoinColumn(name = "address_cep", nullable = false)
