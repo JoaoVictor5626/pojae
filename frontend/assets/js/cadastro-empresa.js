@@ -38,10 +38,16 @@ async function handleCompanyRegister(e) {
     e.preventDefault();
     const form = e.currentTarget;
     const submitButton = form.querySelector('[type="submit"]');
+    const password = document.getElementById('field-senha-empresa').value;
+    if (password !== document.getElementById('field-confirmar-senha-empresa').value) {
+        showToast('As senhas informadas não coincidem.', 'info');
+        return;
+    }
 
     const companyData = {
         name: document.getElementById('field-nome-empresa').value.trim(),
         cnpj: document.getElementById('field-cnpj').value.trim(),
+        password,
         email: document.getElementById('field-email-empresa').value.trim(),
         phone: document.getElementById('field-telefone-empresa').value.replace(/\D/g, ''),
         website: document.getElementById('field-site').value.trim(),
