@@ -1,51 +1,227 @@
 /* -------------------------------------------------------------------------- */
-/* DADOS INICIAIS DE SIMULAÇÃO                                                */
+/* DADOS INICIAIS DE SIMULAÇÃO */
 /* -------------------------------------------------------------------------- */
 const initialJobs = [
-    {
-        id: 1,
-        title: "Estágio em Desenvolvimento Web & Software",
-        company: "Tecnologia Alagoana S.A.",
-        location: "Farol, Maceió - AL",
-        category: "Tecnologia",
-        stipend: 1200,
-        skills: ["JavaScript", "HTML/CSS", "Git"],
-        supervisor: "Eng. Roberto Melo (Pós-graduado)",
-        active: true
-    },
-    {
-        id: 2,
-        title: "Estágio em Gestão Administrativa",
-        company: "Grupo Comercial Pajuçara",
-        location: "Centro, Maceió - AL",
-        category: "Administração",
-        stipend: 950,
-        skills: ["Excel Intermediário", "Organização", "Atendimento"],
-        supervisor: "Adm. Luciana Santos (Graduada)",
-        active: true
-    },
-    {
-        id: 3,
-        title: "Estágio Jurídico - Contratos e Processos",
-        company: "Alves & Coêlho Advogados Assoc.",
-        location: "Jatiúca, Maceió - AL",
-        category: "Direito",
-        stipend: 1100,
-        skills: ["Pesquisa Jurídica", "Peças Processuais"],
-        supervisor: "Dr. Mozart Melo (Mestre em Direito)",
-        active: true
-    },
-    {
-        id: 4,
-        title: "Estágio em Engenharia Civil e Obras",
-        company: "Maceió Engenharias Unidas",
-        location: "Mangabeiras, Maceió - AL",
-        category: "Engenharia",
-        stipend: 1300,
-        skills: ["AutoCAD", "Orçamento", "AutoCAD 3D"],
-        supervisor: "Eng. Vinícius Coêlho (Especialista)",
-        active: true
-    }
+  {
+    id: 1,
+    title: "Estágio em Desenvolvimento Web & Software",
+    company: "Tecnologia Alagoana S.A.",
+    location: "Farol, Maceió - AL",
+    category: "Tecnologia",
+    stipend: 1200,
+    skills: ["JavaScript", "HTML/CSS", "Git"],
+    supervisor: "Eng. Roberto Melo (Pós-graduado)",
+    active: true
+  },
+  {
+    id: 2,
+    title: "Estágio em Gestão Administrativa",
+    company: "Grupo Comercial Pajuçara",
+    location: "Centro, Maceió - AL",
+    category: "Administração",
+    stipend: 950,
+    skills: ["Excel Intermediário", "Organização", "Atendimento"],
+    supervisor: "Adm. Luciana Santos (Graduada)",
+    active: true
+  },
+  {
+    id: 3,
+    title: "Estágio Jurídico - Contratos e Processos",
+    company: "Alves & Coêlho Advogados Assoc.",
+    location: "Jatiúca, Maceió - AL",
+    category: "Direito",
+    stipend: 1100,
+    skills: ["Pesquisa Jurídica", "Peças Processuais"],
+    supervisor: "Dr. Mozart Melo (Mestre em Direito)",
+    active: true
+  },
+  {
+    id: 4,
+    title: "Estágio em Engenharia Civil e Obras",
+    company: "Maceió Engenharias Unidas",
+    location: "Mangabeiras, Maceió - AL",
+    category: "Engenharia",
+    stipend: 1300,
+    skills: ["AutoCAD", "Orçamento", "AutoCAD 3D"],
+    supervisor: "Eng. Vinícius Coêlho (Especialista)",
+    active: true
+  },
+  {
+    id: 5,
+    title: "Estágio em Suporte de TI e Redes",
+    company: "Conecta Alagoas Telecom",
+    location: "Ponta Verde, Maceió - AL",
+    category: "Tecnologia",
+    stipend: 1050,
+    skills: ["Redes", "Linux", "Help Desk"],
+    supervisor: "Tec. Tiago Rocha (Especialista)",
+    active: true
+  },
+  {
+    id: 6,
+    title: "Estágio em Análise de Dados",
+    company: "Nordeste Inteligência Digital",
+    location: "Farol, Maceió - AL",
+    category: "Tecnologia",
+    stipend: 1350,
+    skills: ["Python", "SQL", "Power BI"],
+    supervisor: "Esp. Camila Barros (Pós-graduada)",
+    active: true
+  },
+  {
+    id: 7,
+    title: "Estágio em Marketing Digital e Conteúdo",
+    company: "Agência Litoral Criativo",
+    location: "Jatiúca, Maceió - AL",
+    category: "Administração",
+    stipend: 900,
+    skills: ["Copywriting", "Redes Sociais", "Canva"],
+    supervisor: "Pub. Rafael Nunes (Graduado)",
+    active: true
+  },
+  {
+    id: 8,
+    title: "Estágio em Finanças e Controladoria",
+    company: "Atacadão Lagoa do Sul",
+    location: "Tabuleiro do Martins, Maceió - AL",
+    category: "Administração",
+    stipend: 1100,
+    skills: ["Excel Avançado", "Fluxo de Caixa", "Análise Financeira"],
+    supervisor: "Adm. Fernanda Lima (Especialista)",
+    active: true
+  },
+  {
+    id: 9,
+    title: "Estágio em Recursos Humanos",
+    company: "Hospital Vida e Saúde AL",
+    location: "Pajuçara, Maceió - AL",
+    category: "Administração",
+    stipend: 950,
+    skills: ["Recrutamento", "Comunicação", "Excel Básico"],
+    supervisor: "Psi. Patrícia Costa (Especialista)",
+    active: true
+  },
+  {
+    id: 10,
+    title: "Estágio em Direito Trabalhista",
+    company: "Melo & Vasconcelos Advocacia",
+    location: "Centro, Maceió - AL",
+    category: "Direito",
+    stipend: 1150,
+    skills: ["CLT", "Audiências", "Redação Jurídica"],
+    supervisor: "Dra. Beatriz Vasconcelos (Especialista)",
+    active: true
+  },
+  {
+    id: 11,
+    title: "Estágio em Direito Público e Licitações",
+    company: "Consultoria Jurídica Alagoas",
+    location: "Farol, Maceió - AL",
+    category: "Direito",
+    stipend: 1200,
+    skills: ["Licitações", "Análise de Editais", "Legislação"],
+    supervisor: "Dr. Henrique Alves (Mestre em Direito)",
+    active: true
+  },
+  {
+    id: 12,
+    title: "Estágio em Direito Civil e Família",
+    company: "Escritório Costa & Soares",
+    location: "Ponta Verde, Maceió - AL",
+    category: "Direito",
+    stipend: 1050,
+    skills: ["Peticionamento", "Pesquisa Jurisprudencial", "Organização"],
+    supervisor: "Dra. Mariana Soares (Graduada)",
+    active: false
+  },
+  {
+    id: 13,
+    title: "Estágio em Engenharia Elétrica",
+    company: "Energia do Sol Nordeste",
+    location: "Benedito Bentes, Maceió - AL",
+    category: "Engenharia",
+    stipend: 1300,
+    skills: ["AutoCAD", "Energia Solar", "Normas Técnicas"],
+    supervisor: "Eng. Lucas Ferreira (Pós-graduado)",
+    active: true
+  },
+  {
+    id: 14,
+    title: "Estágio em Engenharia de Produção",
+    company: "Indústria Açucareira Caeté",
+    location: "Cruz das Almas, Maceió - AL",
+    category: "Engenharia",
+    stipend: 1250,
+    skills: ["Lean Manufacturing", "Excel Intermediário", "Indicadores"],
+    supervisor: "Eng. Gustavo Menezes (Especialista)",
+    active: true
+  },
+  {
+    id: 15,
+    title: "Estágio em Engenharia Ambiental",
+    company: "Saneamento Verde Alagoas",
+    location: "Jacarecica, Maceió - AL",
+    category: "Engenharia",
+    stipend: 1150,
+    skills: ["Licenciamento Ambiental", "QGIS", "Relatórios Técnicos"],
+    supervisor: "Eng. Daniela Cavalcante (Mestre)",
+    active: true
+  },
+  {
+    id: 16,
+    title: "Estágio em QA e Testes de Software",
+    company: "Sistemas Maceió Tech",
+    location: "Jatiúca, Maceió - AL",
+    category: "Tecnologia",
+    stipend: 1100,
+    skills: ["Testes Manuais", "Postman", "Git"],
+    supervisor: "Esp. Bruno Araújo (Graduado)",
+    active: true
+  },
+  {
+    id: 17,
+    title: "Estágio em UX/UI Design",
+    company: "Estúdio Digital Pajuçara",
+    location: "Pajuçara, Maceió - AL",
+    category: "Tecnologia",
+    stipend: 1150,
+    skills: ["Figma", "Prototipagem", "Design System"],
+    supervisor: "Des. Larissa Vieira (Especialista)",
+    active: true
+  },
+  {
+    id: 18,
+    title: "Estágio em Logística e Suprimentos",
+    company: "Porto & Carga Maceió",
+    location: "Jaraguá, Maceió - AL",
+    category: "Administração",
+    stipend: 1050,
+    skills: ["Controle de Estoque", "Logística", "Excel Intermediário"],
+    supervisor: "Adm. André Barbosa (Graduado)",
+    active: true
+  },
+  {
+    id: 19,
+    title: "Estágio em Direito Digital e LGPD",
+    company: "Proteção de Dados AL",
+    location: "Mangabeiras, Maceió - AL",
+    category: "Direito",
+    stipend: 1250,
+    skills: ["LGPD", "Políticas de Privacidade", "Contratos"],
+    supervisor: "Dra. Sofia Mendonça (Pós-graduada)",
+    active: true
+  },
+  {
+    id: 20,
+    title: "Estágio em Planejamento de Obras",
+    company: "Construtora Horizonte AL",
+    location: "Gruta de Lourdes, Maceió - AL",
+    category: "Engenharia",
+    stipend: 1350,
+    skills: ["MS Project", "Cronograma Físico-Financeiro", "Orçamento"],
+    supervisor: "Eng. Ricardo Dantas (Especialista)",
+    active: true
+  }
 ];
 
 const initialCandidates = [
@@ -58,6 +234,10 @@ let jobsData = [...initialJobs];
 let candidatesData = [...initialCandidates];
 let currentFilterCategory = 'all';
 let currentActiveJobForApply = null;
+
+// [NOVO - PAGINAÇÃO] Configuração de itens por página e página atual
+const ITEMS_PER_PAGE = 6;
+let currentPage = 1;
 
 /* -------------------------------------------------------------------------- */
 /* INICIALIZAÇÃO DA APLICAÇÃO E ANIMAÇÕES AO CARREGAR A PÁGINA                */
@@ -72,7 +252,6 @@ window.addEventListener('DOMContentLoaded', () => {
 /* --------------------------------------------------------------------------------- */
 /* 1. MENU HAMBÚRGUER: LÓGICA, MICROINTERAÇÕES, ANIMAÇÕES MOBILE, BOTÃO X E BACKDROP */
 /* --------------------------------------------------------------------------------- */
-
 function setupMobileMenu() {
     const btn = document.getElementById('hamburger-btn');
     const menu = document.getElementById('mobile-menu');
@@ -149,15 +328,16 @@ function setupScrollReveal() {
 }
 
 /* -------------------------------------------------------------------------- */
-/* RENDERIZAÇÃO DO FEED DE VAGAS                                              */
+/* [ATUALIZADO - PAGINAÇÃO] RENDERIZAÇÃO DO FEED DE VAGAS                      */
 /* -------------------------------------------------------------------------- */
 function renderJobCards() {
     const container = document.getElementById('job-cards-container');
+    const paginationContainer = document.getElementById('pagination-container');
     if (!container) return;
 
     const searchKeywordInput = document.getElementById('search-keyword');
     const searchCategoryInput = document.getElementById('search-category');
-    
+
     const searchKeyword = searchKeywordInput ? searchKeywordInput.value.toLowerCase() : '';
     const searchCategory = searchCategoryInput ? searchCategoryInput.value : '';
 
@@ -181,12 +361,19 @@ function renderJobCards() {
                 <p class="text-xs text-slate-400 mt-1">Tente buscar por termos mais genéricos ou limpe os filtros em Maceió.</p>
             </div>
         `;
+        if (paginationContainer) paginationContainer.classList.add('hidden');
         return;
     }
 
-    filteredJobs.forEach(job => {
+    // Fatiamento de no máximo 6 vagas por página
+    const totalPages = Math.ceil(filteredJobs.length / ITEMS_PER_PAGE);
+    if (currentPage > totalPages) currentPage = 1;
+
+    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+    const paginatedJobs = filteredJobs.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+
+    paginatedJobs.forEach(job => {
         const card = document.createElement('div');
-        // card.className = "bg-white rounded-2xl p-6 border border-slate-200/80 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group";
         card.className = "bg-white rounded-2xl p-6 border border-slate-200/80 shadow-sm hover:-translate-y-0.5 hover:shadow-xl transition-[transform,box-shadow] duration-300 will-change-transform flex flex-col justify-between group";
 
         card.innerHTML = `
@@ -215,13 +402,123 @@ function renderJobCards() {
 
             <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
                 <span class="text-[10px] text-slate-400 font-medium"><i class="fas fa-clock mr-1"></i> Vaga Ativa</span>
-                <button onclick="openApplyModal(${job.id})" class="bg-pojae-600 hover:bg-pojae-700 text-white font-bold text-xs px-4 py-2 rounded-xl transition shadow-md shadow-blue-600/20 flex items-center gap-1.5">
+                <button onclick="openApplyModal(${job.id})" class="bg-pojae-600 hover:bg-pojae-700 text-white font-bold text-xs px-4 py-2 rounded-xl transition shadow-md shadow-blue-600/20 flex items-center gap-1.5 cursor-pointer">
                     <i class="fas fa-paper-plane"></i> Candidatar-se
                 </button>
             </div>
         `;
         container.appendChild(card);
     });
+
+    // Renderiza os botões de paginação abaixo dos cards
+    renderPagination(filteredJobs.length, totalPages);
+}
+
+/* -------------------------------------------------------------------------- */
+/* [NOVO - PAGINAÇÃO] LÓGICA DE EXIBIÇÃO DOS BOTÕES DE PAGINAÇÃO              */
+/* -------------------------------------------------------------------------- */
+function getPaginationItems(current, total) {
+    if (total <= 10) {
+        return Array.from({ length: total }, (_, i) => i + 1);
+    }
+
+    if (current <= 4) {
+        return [
+            1, 2, 3, 4, 5,
+            '...',
+            total - 4, total - 3, total - 2, total - 1, total
+        ];
+    }
+
+    if (current >= total - 7) {
+        const tail = [];
+        for (let i = total - 7; i <= total; i++) {
+            tail.push(i);
+        }
+        return [1, 2, '...', ...tail];
+    }
+
+    const middle = [];
+    for (let i = current - 1; i <= current + 4; i++) {
+        middle.push(i);
+    }
+    return [1, 2, '...', ...middle, '...', total - 1, total];
+}
+
+function renderPagination(totalItems, totalPages) {
+    const paginationContainer = document.getElementById('pagination-container');
+    if (!paginationContainer) return;
+
+    if (totalItems <= ITEMS_PER_PAGE || totalPages <= 1) {
+        paginationContainer.classList.add('hidden');
+        paginationContainer.innerHTML = '';
+        return;
+    }
+
+    paginationContainer.classList.remove('hidden');
+    paginationContainer.innerHTML = '';
+
+    const baseBtnClass = "min-w-[38px] h-9 px-3 rounded-xl text-xs sm:text-sm font-semibold border transition-all flex items-center justify-center select-none";
+    const inactiveBtnClass = "bg-white text-slate-600 border-slate-200 hover:bg-blue-50/80 hover:border-pojae-300 hover:text-pojae-600 cursor-pointer";
+    const activeBtnClass = "bg-pojae-600 text-white border-pojae-600 shadow-sm cursor-default";
+    const disabledBtnClass = "bg-slate-100 text-slate-300 border-slate-200 cursor-not-allowed opacity-60";
+
+    // Botão Anterior (<)
+    const prevBtn = document.createElement('button');
+    prevBtn.type = "button";
+    prevBtn.setAttribute("aria-label", "Página anterior");
+    prevBtn.disabled = currentPage === 1;
+    prevBtn.className = `${baseBtnClass} ${currentPage === 1 ? disabledBtnClass : inactiveBtnClass}`;
+    prevBtn.innerHTML = `<i class="fas fa-chevron-left text-xs"></i>`;
+    if (currentPage > 1) {
+        prevBtn.onclick = () => goToPage(currentPage - 1);
+    }
+    paginationContainer.appendChild(prevBtn);
+
+    // Números e Reticências
+    const items = getPaginationItems(currentPage, totalPages);
+    items.forEach(item => {
+        if (item === '...') {
+            const dots = document.createElement('span');
+            dots.className = "px-1.5 text-slate-400 font-bold text-sm select-none";
+            dots.textContent = "...";
+            paginationContainer.appendChild(dots);
+        } else {
+            const pageBtn = document.createElement('button');
+            pageBtn.type = "button";
+            const isActive = item === currentPage;
+            pageBtn.className = `${baseBtnClass} ${isActive ? activeBtnClass : inactiveBtnClass}`;
+            pageBtn.textContent = item;
+            if (isActive) {
+                pageBtn.setAttribute("aria-current", "page");
+            } else {
+                pageBtn.onclick = () => goToPage(item);
+            }
+            paginationContainer.appendChild(pageBtn);
+        }
+    });
+
+    // Botão Próximo (>)
+    const nextBtn = document.createElement('button');
+    nextBtn.type = "button";
+    nextBtn.setAttribute("aria-label", "Próxima página");
+    nextBtn.disabled = currentPage === totalPages;
+    nextBtn.className = `${baseBtnClass} ${currentPage === totalPages ? disabledBtnClass : inactiveBtnClass}`;
+    nextBtn.innerHTML = `<i class="fas fa-chevron-right text-xs"></i>`;
+    if (currentPage < totalPages) {
+        nextBtn.onclick = () => goToPage(currentPage + 1);
+    }
+    paginationContainer.appendChild(nextBtn);
+}
+
+function goToPage(page) {
+    currentPage = page;
+    renderJobCards();
+
+    const vagasSection = document.getElementById('vagas');
+    if (vagasSection) {
+        vagasSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
 }
 
 /* -------------------------------------------------------------------------- */
@@ -259,18 +556,17 @@ function renderRecruiterCandidates() {
 }
 
 /* -------------------------------------------------------------------------- */
-/* FILTROS E PESQUISA DE VAGAS                                                */
+/* [ATUALIZADO - PAGINAÇÃO] FILTROS E PESQUISA DE VAGAS                       */
 /* -------------------------------------------------------------------------- */
 function filterByCategory(cat, e) {
     currentFilterCategory = cat;
+    currentPage = 1; // Volta para a página 1 ao filtrar por categoria
 
-    // Remove a classe 'active' de todos os botões
     document.querySelectorAll('.category-btn').forEach(btn => {
         btn.classList.remove('active');
     });
 
-    // Adiciona a classe 'active' apenas no botão clicado
-    const targetElement = e ? e.currentTarget : window.event.currentTarget;
+    const targetElement = e ? e.currentTarget : window.event?.currentTarget;
     if (targetElement) {
         targetElement.classList.add('active');
     }
@@ -279,9 +575,9 @@ function filterByCategory(cat, e) {
 }
 
 function filterJobs() {
+    currentPage = 1; // Volta para a página 1 ao pesquisar
     renderJobCards();
 }
-
 
 /* -------------------------------------------------------------------------- */
 /* CONTROLE DOS MODAIS                                                        */
@@ -301,7 +597,6 @@ function openApplyModal(jobId) {
     if (!job) return;
     currentActiveJobForApply = job;
 
-    // Preenche o ID oculto da vaga (Integer) e limpa a mensagem anterior
     const jobIdInput = document.getElementById('apply-job-id');
     const messageInput = document.getElementById('apply-message');
     if (jobIdInput) jobIdInput.value = job.id;
@@ -330,7 +625,6 @@ function handleApplySubmit(e) {
     const fileHistEl = document.getElementById('file-historico');
     const messageEl = document.getElementById('apply-message');
 
-    // Payload estruturado conforme os requisitos de Candidatura
     const candidaturaPayload = {
         candidatoId: candidatoIdEl ? parseInt(candidatoIdEl.value) : 101,
         vagaId: vagaIdEl ? parseInt(vagaIdEl.value) : (currentActiveJobForApply ? currentActiveJobForApply.id : null),
@@ -380,6 +674,7 @@ function handlePostJobSubmit(e) {
     };
 
     jobsData.unshift(newJob);
+    currentPage = 1; // [ATUALIZADO - PAGINAÇÃO] Mostra a nova vaga na página 1
     renderJobCards();
     closeModal('modal-post-job');
     showToast(`Nova vaga para "${title}" publicada com sucesso em Maceió!`, 'success');
