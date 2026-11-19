@@ -22,10 +22,6 @@ if (typeof tailwind !== 'undefined' && !tailwind.config?.theme?.extend?.colors?.
     }
 }
 
-
-
-
-
 // MÁSCARA DINÂMICA CPF/CNPJ, VISUALIZAR SENHA E SIMULAÇÃO DE LOGIN 
 
 // Máscara dinâmica que alterna automaticamente entre CPF (11 dígitos) e CNPJ (14 dígitos)
@@ -65,26 +61,47 @@ function togglePasswordVisibility() {
     }
 }
 
-// Simulação de autenticação e redirecionamento conforme perfil (CPF x CNPJ)
-function handleLogin(e) {
+// AUTENTICAÇÃO E REDIRECIONAMENTO CONFORME PERFIL
+const API_BASE_URL = window.POJAE_API_URL || 'http://localhost:8080';
+
+async function handleLogin(e) {
     e.preventDefault();
+    const form = e.currentTarget;
+    const submitButton = form.querySelector('[type="submit"]');
     const docRaw = document.getElementById('login-documento').value.replace(/\D/g, "");
+    const password = document.getElementById('login-senha').value;
 
     if (docRaw.length !== 11 && docRaw.length !== 14) {
         showToast("Por favor, digite um CPF (11 dígitos) ou CNPJ (14 dígitos) válido.", "info");
-        return;
+        return;2
     }
 
-    if (docRaw.length === 14) {
-        showToast("Login realizado como Empresa! Redirecionando para o painel...", "success");
-        setTimeout(() => {
-            window.location.href = "dashboard-empresa.html";
-        }, 1500);
-    } else {
-        showToast("Login realizado como Estudante! Redirecionando para as vagas...", "success");
-        setTimeout(() => {
-            window.location.href = "index.html";
-        }, 1500);
+    submitButton.disabled = true;
+    try {
+        const response = await fetch(`${API_BASE_URL}/login`, {
+            method: 'POST',
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ document: docRaw, password })
+        });
+
+        if (response.status === 401) {
+            showToast('CPF/CNPJ ou senha inválidos.', 'info');
+            submitButton.disabled = false;
+            return;
+        }
+        if (!response.ok) throw new Error('Falha ao autenticar');
+
+        const account = await response.json();
+        showToast('Login realizado com sucesso! Redirecionando...', 'success');
+        if (docRaw.length === 11) {
+            setTimeout(() => { window.location.href = 'index.html'; }, 1000);
+        } else {
+            setTimeout(() => { window.location.href = 'dashboard-empresa.html'; }, 1000);
+        }
+    } catch (error) {
+        showToast('Não foi possível acessar o sistema. Tente novamente.', 'info');
+        submitButton.disabled = false;
     }
 }
 
@@ -129,9 +146,3 @@ function showToast(message, type = 'success') {
         if (toast.parentElement) toast.remove();
     }, 4000);
 }
-
-
-
-
-
-
