@@ -49,6 +49,66 @@
         <div class="absolute -top-20 -left-20 w-72 h-72 rounded-full bg-pojae-500/[0.07] blur-3xl pointer-events-none"></div>
         <div class="absolute -bottom-20 -right-20 w-72 h-72 rounded-full bg-blue-600/[0.07] blur-3xl pointer-events-none"></div>
 
+        <!-- ELEMENTOS NOS CANTOS: ONDAS ORGÂNICAS SVG (TAMANHO REDUZIDO E EQUILIBRADO) -->
+        <div class="pointer-events-none select-none overflow-hidden" aria-hidden="true">
+            
+            <!-- Canto Superior Esquerdo: Azul da Seta (#0D56D9) -->
+            <div class="absolute top-0 left-0">
+                <div class="absolute -top-10 -left-10 w-44 h-44 bg-[#0D56D9]/15 rounded-full blur-3xl"></div>
+                
+                <svg class="relative w-52 sm:w-64 md:w-72 h-auto" viewBox="0 0 360 360" fill="none">
+                    <defs>
+                        <linearGradient id="wave-top-1" x1="0" y1="0" x2="320" y2="320" gradientUnits="userSpaceOnUse">
+                            <stop offset="0%" stop-color="#0D56D9" stop-opacity="0.21" />
+                            <stop offset="100%" stop-color="#0D56D9" stop-opacity="0.02" />
+                        </linearGradient>
+                        <linearGradient id="wave-top-2" x1="0" y1="0" x2="240" y2="245" gradientUnits="userSpaceOnUse">
+                            <stop offset="0%" stop-color="#0D56D9" stop-opacity="0.29" />
+                            <stop offset="100%" stop-color="#3B82F6" stop-opacity="0.06" />
+                        </linearGradient>
+                    </defs>
+
+                    <!-- Onda Externa -->
+                    <path d="M0 0H320C290 110 210 150 140 190C70 230 40 280 0 320V0Z" fill="url(#wave-top-1)" />
+                    <!-- Onda Interna -->
+                    <path d="M0 0H240C215 80 155 115 100 145C45 175 25 215 0 245V0Z" fill="url(#wave-top-2)" />
+                    <!-- Linha de contorno tracejada -->
+                    <path d="M342 0C310 122 224 166 150 208C76 250 44 304 0 346" stroke="#0D56D9" stroke-opacity="0.22" stroke-width="1.5" stroke-dasharray="6 6" />
+                    <!-- Ponto de destaque na curva -->
+                    <circle cx="195" cy="180" r="3.5" fill="#0D56D9" fill-opacity="0.42" />
+                    <circle cx="195" cy="180" r="8" stroke="#0D56D9" stroke-opacity="0.18" stroke-width="1.5" />
+                </svg>
+            </div>
+
+            <!-- Canto Inferior Direito: Azul Escuro da Tipografia (#0B2868) -->
+            <div class="absolute bottom-0 right-0">
+                <div class="absolute -bottom-10 -right-10 w-44 h-44 bg-[#0B2868]/15 rounded-full blur-3xl"></div>
+
+                <svg class="relative w-52 sm:w-64 md:w-72 h-auto" viewBox="0 0 360 360" fill="none">
+                    <defs>
+                        <linearGradient id="wave-bottom-1" x1="360" y1="360" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+                            <stop offset="0%" stop-color="#0B2868" stop-opacity="0.24" />
+                            <stop offset="100%" stop-color="#0B2868" stop-opacity="0.03" />
+                        </linearGradient>
+                        <linearGradient id="wave-bottom-2" x1="360" y1="360" x2="120" y2="115" gradientUnits="userSpaceOnUse">
+                            <stop offset="0%" stop-color="#0B2868" stop-opacity="0.33" />
+                            <stop offset="100%" stop-color="#1E40AF" stop-opacity="0.08" />
+                        </linearGradient>
+                    </defs>
+
+                    <!-- Onda Externa -->
+                    <path d="M360 360H40C70 250 150 210 220 170C290 130 320 80 360 40V360Z" fill="url(#wave-bottom-1)" />
+                    <!-- Onda Interna -->
+                    <path d="M360 360H120C145 280 205 245 260 215C315 185 335 145 360 115V360Z" fill="url(#wave-bottom-2)" />
+                    <!-- Linha de contorno tracejada -->
+                    <path d="M18 360C50 238 136 194 210 152C284 110 316 56 360 14" stroke="#0B2868" stroke-opacity="0.23" stroke-width="1.5" stroke-dasharray="6 6" />
+                    <!-- Ponto de destaque na curva -->
+                    <circle cx="165" cy="180" r="3.5" fill="#0B2868" fill-opacity="0.45" />
+                    <circle cx="165" cy="180" r="8" stroke="#0B2868" stroke-opacity="0.18" stroke-width="1.5" />
+                </svg>
+            </div>
+        </div>
+
         <!-- CONTAINER EXPANDIDO PARA ACOMODAR OS 3 CARDS LADO A LADO -->
         <div class="max-w-6xl w-full space-y-8 relative z-10">
 
@@ -206,7 +266,7 @@
             </div>
 
             <!-- RODAPÉ DE AJUDA -->
-            <div class="bg-blue-50/70 backdrop-blur-sm border border-blue-100 rounded-2xl p-4 text-center text-xs text-slate-600 flex items-center justify-center gap-2">
+            <div class="w-full max-w-sm mx-auto bg-blue-50/70 backdrop-blur-sm border border-blue-100 rounded-2xl p-4 text-center text-xs text-slate-600 flex items-center justify-center gap-2">
                 <i class="fas fa-info-circle text-pojae-600 text-sm"></i>
                 <span>Já possui conta? <a href="login.html" class="font-bold text-pojae-700 hover:underline">Clique aqui para entrar</a>.</span>
             </div>
