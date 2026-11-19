@@ -1,227 +1,227 @@
 /* -------------------------------------------------------------------------- */
-/* DADOS INICIAIS DE SIMULAÇÃO */
+/* DADOS INICIAIS DE SIMULAÇÃO                                                */
 /* -------------------------------------------------------------------------- */
 const initialJobs = [
-  {
-    id: 1,
-    title: "Estágio em Desenvolvimento Web & Software",
-    company: "Tecnologia Alagoana S.A.",
-    location: "Farol, Maceió - AL",
-    category: "Tecnologia",
-    stipend: 1200,
-    skills: ["JavaScript", "HTML/CSS", "Git"],
-    supervisor: "Eng. Roberto Melo (Pós-graduado)",
-    active: true
-  },
-  {
-    id: 2,
-    title: "Estágio em Gestão Administrativa",
-    company: "Grupo Comercial Pajuçara",
-    location: "Centro, Maceió - AL",
-    category: "Administração",
-    stipend: 950,
-    skills: ["Excel Intermediário", "Organização", "Atendimento"],
-    supervisor: "Adm. Luciana Santos (Graduada)",
-    active: true
-  },
-  {
-    id: 3,
-    title: "Estágio Jurídico - Contratos e Processos",
-    company: "Alves & Coêlho Advogados Assoc.",
-    location: "Jatiúca, Maceió - AL",
-    category: "Direito",
-    stipend: 1100,
-    skills: ["Pesquisa Jurídica", "Peças Processuais"],
-    supervisor: "Dr. Mozart Melo (Mestre em Direito)",
-    active: true
-  },
-  {
-    id: 4,
-    title: "Estágio em Engenharia Civil e Obras",
-    company: "Maceió Engenharias Unidas",
-    location: "Mangabeiras, Maceió - AL",
-    category: "Engenharia",
-    stipend: 1300,
-    skills: ["AutoCAD", "Orçamento", "AutoCAD 3D"],
-    supervisor: "Eng. Vinícius Coêlho (Especialista)",
-    active: true
-  },
-  {
-    id: 5,
-    title: "Estágio em Suporte de TI e Redes",
-    company: "Conecta Alagoas Telecom",
-    location: "Ponta Verde, Maceió - AL",
-    category: "Tecnologia",
-    stipend: 1050,
-    skills: ["Redes", "Linux", "Help Desk"],
-    supervisor: "Tec. Tiago Rocha (Especialista)",
-    active: true
-  },
-  {
-    id: 6,
-    title: "Estágio em Análise de Dados",
-    company: "Nordeste Inteligência Digital",
-    location: "Farol, Maceió - AL",
-    category: "Tecnologia",
-    stipend: 1350,
-    skills: ["Python", "SQL", "Power BI"],
-    supervisor: "Esp. Camila Barros (Pós-graduada)",
-    active: true
-  },
-  {
-    id: 7,
-    title: "Estágio em Marketing Digital e Conteúdo",
-    company: "Agência Litoral Criativo",
-    location: "Jatiúca, Maceió - AL",
-    category: "Administração",
-    stipend: 900,
-    skills: ["Copywriting", "Redes Sociais", "Canva"],
-    supervisor: "Pub. Rafael Nunes (Graduado)",
-    active: true
-  },
-  {
-    id: 8,
-    title: "Estágio em Finanças e Controladoria",
-    company: "Atacadão Lagoa do Sul",
-    location: "Tabuleiro do Martins, Maceió - AL",
-    category: "Administração",
-    stipend: 1100,
-    skills: ["Excel Avançado", "Fluxo de Caixa", "Análise Financeira"],
-    supervisor: "Adm. Fernanda Lima (Especialista)",
-    active: true
-  },
-  {
-    id: 9,
-    title: "Estágio em Recursos Humanos",
-    company: "Hospital Vida e Saúde AL",
-    location: "Pajuçara, Maceió - AL",
-    category: "Administração",
-    stipend: 950,
-    skills: ["Recrutamento", "Comunicação", "Excel Básico"],
-    supervisor: "Psi. Patrícia Costa (Especialista)",
-    active: true
-  },
-  {
-    id: 10,
-    title: "Estágio em Direito Trabalhista",
-    company: "Melo & Vasconcelos Advocacia",
-    location: "Centro, Maceió - AL",
-    category: "Direito",
-    stipend: 1150,
-    skills: ["CLT", "Audiências", "Redação Jurídica"],
-    supervisor: "Dra. Beatriz Vasconcelos (Especialista)",
-    active: true
-  },
-  {
-    id: 11,
-    title: "Estágio em Direito Público e Licitações",
-    company: "Consultoria Jurídica Alagoas",
-    location: "Farol, Maceió - AL",
-    category: "Direito",
-    stipend: 1200,
-    skills: ["Licitações", "Análise de Editais", "Legislação"],
-    supervisor: "Dr. Henrique Alves (Mestre em Direito)",
-    active: true
-  },
-  {
-    id: 12,
-    title: "Estágio em Direito Civil e Família",
-    company: "Escritório Costa & Soares",
-    location: "Ponta Verde, Maceió - AL",
-    category: "Direito",
-    stipend: 1050,
-    skills: ["Peticionamento", "Pesquisa Jurisprudencial", "Organização"],
-    supervisor: "Dra. Mariana Soares (Graduada)",
-    active: false
-  },
-  {
-    id: 13,
-    title: "Estágio em Engenharia Elétrica",
-    company: "Energia do Sol Nordeste",
-    location: "Benedito Bentes, Maceió - AL",
-    category: "Engenharia",
-    stipend: 1300,
-    skills: ["AutoCAD", "Energia Solar", "Normas Técnicas"],
-    supervisor: "Eng. Lucas Ferreira (Pós-graduado)",
-    active: true
-  },
-  {
-    id: 14,
-    title: "Estágio em Engenharia de Produção",
-    company: "Indústria Açucareira Caeté",
-    location: "Cruz das Almas, Maceió - AL",
-    category: "Engenharia",
-    stipend: 1250,
-    skills: ["Lean Manufacturing", "Excel Intermediário", "Indicadores"],
-    supervisor: "Eng. Gustavo Menezes (Especialista)",
-    active: true
-  },
-  {
-    id: 15,
-    title: "Estágio em Engenharia Ambiental",
-    company: "Saneamento Verde Alagoas",
-    location: "Jacarecica, Maceió - AL",
-    category: "Engenharia",
-    stipend: 1150,
-    skills: ["Licenciamento Ambiental", "QGIS", "Relatórios Técnicos"],
-    supervisor: "Eng. Daniela Cavalcante (Mestre)",
-    active: true
-  },
-  {
-    id: 16,
-    title: "Estágio em QA e Testes de Software",
-    company: "Sistemas Maceió Tech",
-    location: "Jatiúca, Maceió - AL",
-    category: "Tecnologia",
-    stipend: 1100,
-    skills: ["Testes Manuais", "Postman", "Git"],
-    supervisor: "Esp. Bruno Araújo (Graduado)",
-    active: true
-  },
-  {
-    id: 17,
-    title: "Estágio em UX/UI Design",
-    company: "Estúdio Digital Pajuçara",
-    location: "Pajuçara, Maceió - AL",
-    category: "Tecnologia",
-    stipend: 1150,
-    skills: ["Figma", "Prototipagem", "Design System"],
-    supervisor: "Des. Larissa Vieira (Especialista)",
-    active: true
-  },
-  {
-    id: 18,
-    title: "Estágio em Logística e Suprimentos",
-    company: "Porto & Carga Maceió",
-    location: "Jaraguá, Maceió - AL",
-    category: "Administração",
-    stipend: 1050,
-    skills: ["Controle de Estoque", "Logística", "Excel Intermediário"],
-    supervisor: "Adm. André Barbosa (Graduado)",
-    active: true
-  },
-  {
-    id: 19,
-    title: "Estágio em Direito Digital e LGPD",
-    company: "Proteção de Dados AL",
-    location: "Mangabeiras, Maceió - AL",
-    category: "Direito",
-    stipend: 1250,
-    skills: ["LGPD", "Políticas de Privacidade", "Contratos"],
-    supervisor: "Dra. Sofia Mendonça (Pós-graduada)",
-    active: true
-  },
-  {
-    id: 20,
-    title: "Estágio em Planejamento de Obras",
-    company: "Construtora Horizonte AL",
-    location: "Gruta de Lourdes, Maceió - AL",
-    category: "Engenharia",
-    stipend: 1350,
-    skills: ["MS Project", "Cronograma Físico-Financeiro", "Orçamento"],
-    supervisor: "Eng. Ricardo Dantas (Especialista)",
-    active: true
-  }
+    {
+        id: 1,
+        title: "Estágio em Desenvolvimento Web & Software",
+        company: "Tecnologia Alagoana S.A.",
+        location: "Farol, Maceió - AL",
+        category: "Tecnologia",
+        stipend: 1200,
+        skills: ["JavaScript", "HTML/CSS", "Git"],
+        supervisor: "Eng. Roberto Melo (Pós-graduado)",
+        active: true
+    },
+    {
+        id: 2,
+        title: "Estágio em Gestão Administrativa",
+        company: "Grupo Comercial Pajuçara",
+        location: "Centro, Maceió - AL",
+        category: "Administração",
+        stipend: 950,
+        skills: ["Excel Intermediário", "Organização", "Atendimento"],
+        supervisor: "Adm. Luciana Santos (Graduada)",
+        active: true
+    },
+    {
+        id: 3,
+        title: "Estágio Jurídico - Contratos e Processos",
+        company: "Alves & Coêlho Advogados Assoc.",
+        location: "Jatiúca, Maceió - AL",
+        category: "Direito",
+        stipend: 1100,
+        skills: ["Pesquisa Jurídica", "Peças Processuais"],
+        supervisor: "Dr. Mozart Melo (Mestre em Direito)",
+        active: true
+    },
+    {
+        id: 4,
+        title: "Estágio em Engenharia Civil e Obras",
+        company: "Maceió Engenharias Unidas",
+        location: "Mangabeiras, Maceió - AL",
+        category: "Engenharia",
+        stipend: 1300,
+        skills: ["AutoCAD", "Orçamento", "AutoCAD 3D"],
+        supervisor: "Eng. Vinícius Coêlho (Especialista)",
+        active: true
+    },
+    {
+        id: 5,
+        title: "Estágio em Suporte de TI e Redes",
+        company: "Conecta Alagoas Telecom",
+        location: "Ponta Verde, Maceió - AL",
+        category: "Tecnologia",
+        stipend: 1050,
+        skills: ["Redes", "Linux", "Help Desk"],
+        supervisor: "Tec. Tiago Rocha (Especialista)",
+        active: true
+    },
+    {
+        id: 6,
+        title: "Estágio em Análise de Dados",
+        company: "Nordeste Inteligência Digital",
+        location: "Farol, Maceió - AL",
+        category: "Tecnologia",
+        stipend: 1350,
+        skills: ["Python", "SQL", "Power BI"],
+        supervisor: "Esp. Camila Barros (Pós-graduada)",
+        active: true
+    },
+    {
+        id: 7,
+        title: "Estágio em Marketing Digital e Conteúdo",
+        company: "Agência Litoral Criativo",
+        location: "Jatiúca, Maceió - AL",
+        category: "Administração",
+        stipend: 900,
+        skills: ["Copywriting", "Redes Sociais", "Canva"],
+        supervisor: "Pub. Rafael Nunes (Graduado)",
+        active: true
+    },
+    {
+        id: 8,
+        title: "Estágio em Finanças e Controladoria",
+        company: "Atacadão Lagoa do Sul",
+        location: "Tabuleiro do Martins, Maceió - AL",
+        category: "Administração",
+        stipend: 1100,
+        skills: ["Excel Avançado", "Fluxo de Caixa", "Análise Financeira"],
+        supervisor: "Adm. Fernanda Lima (Especialista)",
+        active: true
+    },
+    {
+        id: 9,
+        title: "Estágio em Recursos Humanos",
+        company: "Hospital Vida e Saúde AL",
+        location: "Pajuçara, Maceió - AL",
+        category: "Administração",
+        stipend: 950,
+        skills: ["Recrutamento", "Comunicação", "Excel Básico"],
+        supervisor: "Psi. Patrícia Costa (Especialista)",
+        active: true
+    },
+    {
+        id: 10,
+        title: "Estágio em Direito Trabalhista",
+        company: "Melo & Vasconcelos Advocacia",
+        location: "Centro, Maceió - AL",
+        category: "Direito",
+        stipend: 1150,
+        skills: ["CLT", "Audiências", "Redação Jurídica"],
+        supervisor: "Dra. Beatriz Vasconcelos (Especialista)",
+        active: true
+    },
+    {
+        id: 11,
+        title: "Estágio em Direito Público e Licitações",
+        company: "Consultoria Jurídica Alagoas",
+        location: "Farol, Maceió - AL",
+        category: "Direito",
+        stipend: 1200,
+        skills: ["Licitações", "Análise de Editais", "Legislação"],
+        supervisor: "Dr. Henrique Alves (Mestre em Direito)",
+        active: true
+    },
+    {
+        id: 12,
+        title: "Estágio em Direito Civil e Família",
+        company: "Escritório Costa & Soares",
+        location: "Ponta Verde, Maceió - AL",
+        category: "Direito",
+        stipend: 1050,
+        skills: ["Peticionamento", "Pesquisa Jurisprudencial", "Organização"],
+        supervisor: "Dra. Mariana Soares (Graduada)",
+        active: false
+    },
+    {
+        id: 13,
+        title: "Estágio em Engenharia Elétrica",
+        company: "Energia do Sol Nordeste",
+        location: "Benedito Bentes, Maceió - AL",
+        category: "Engenharia",
+        stipend: 1300,
+        skills: ["AutoCAD", "Energia Solar", "Normas Técnicas"],
+        supervisor: "Eng. Lucas Ferreira (Pós-graduado)",
+        active: true
+    },
+    {
+        id: 14,
+        title: "Estágio em Engenharia de Produção",
+        company: "Indústria Açucareira Caeté",
+        location: "Cruz das Almas, Maceió - AL",
+        category: "Engenharia",
+        stipend: 1250,
+        skills: ["Lean Manufacturing", "Excel Intermediário", "Indicadores"],
+        supervisor: "Eng. Gustavo Menezes (Especialista)",
+        active: true
+    },
+    {
+        id: 15,
+        title: "Estágio em Engenharia Ambiental",
+        company: "Saneamento Verde Alagoas",
+        location: "Jacarecica, Maceió - AL",
+        category: "Engenharia",
+        stipend: 1150,
+        skills: ["Licenciamento Ambiental", "QGIS", "Relatórios Técnicos"],
+        supervisor: "Eng. Daniela Cavalcante (Mestre)",
+        active: true
+    },
+    {
+        id: 16,
+        title: "Estágio em QA e Testes de Software",
+        company: "Sistemas Maceió Tech",
+        location: "Jatiúca, Maceió - AL",
+        category: "Tecnologia",
+        stipend: 1100,
+        skills: ["Testes Manuais", "Postman", "Git"],
+        supervisor: "Esp. Bruno Araújo (Graduado)",
+        active: true
+    },
+    {
+        id: 17,
+        title: "Estágio em UX/UI Design",
+        company: "Estúdio Digital Pajuçara",
+        location: "Pajuçara, Maceió - AL",
+        category: "Tecnologia",
+        stipend: 1150,
+        skills: ["Figma", "Prototipagem", "Design System"],
+        supervisor: "Des. Larissa Vieira (Especialista)",
+        active: true
+    },
+    {
+        id: 18,
+        title: "Estágio em Logística e Suprimentos",
+        company: "Porto & Carga Maceió",
+        location: "Jaraguá, Maceió - AL",
+        category: "Administração",
+        stipend: 1050,
+        skills: ["Controle de Estoque", "Logística", "Excel Intermediário"],
+        supervisor: "Adm. André Barbosa (Graduado)",
+        active: true
+    },
+    {
+        id: 19,
+        title: "Estágio em Direito Digital e LGPD",
+        company: "Proteção de Dados AL",
+        location: "Mangabeiras, Maceió - AL",
+        category: "Direito",
+        stipend: 1250,
+        skills: ["LGPD", "Políticas de Privacidade", "Contratos"],
+        supervisor: "Dra. Sofia Mendonça (Pós-graduada)",
+        active: true
+    },
+    {
+        id: 20,
+        title: "Estágio em Planejamento de Obras",
+        company: "Construtora Horizonte AL",
+        location: "Gruta de Lourdes, Maceió - AL",
+        category: "Engenharia",
+        stipend: 1350,
+        skills: ["MS Project", "Cronograma Físico-Financeiro", "Orçamento"],
+        supervisor: "Eng. Ricardo Dantas (Especialista)",
+        active: true
+    }
 ];
 
 const initialCandidates = [
@@ -235,9 +235,12 @@ let candidatesData = [...initialCandidates];
 let currentFilterCategory = 'all';
 let currentActiveJobForApply = null;
 
-// [NOVO - PAGINAÇÃO] Configuração de itens por página e página atual
+// Configuração de paginação
 const ITEMS_PER_PAGE = 6;
 let currentPage = 1;
+
+// Controle do contador progressivo de vagas
+let hasAnimatedJobsCounter = false;
 
 /* -------------------------------------------------------------------------- */
 /* INICIALIZAÇÃO DA APLICAÇÃO E ANIMAÇÕES AO CARREGAR A PÁGINA                */
@@ -247,6 +250,7 @@ window.addEventListener('DOMContentLoaded', () => {
     renderRecruiterCandidates();
     setupScrollReveal();
     setupMobileMenu();
+    setupJobsCounterObserver();
 });
 
 /* --------------------------------------------------------------------------------- */
@@ -328,7 +332,65 @@ function setupScrollReveal() {
 }
 
 /* -------------------------------------------------------------------------- */
-/* [ATUALIZADO - PAGINAÇÃO] RENDERIZAÇÃO DO FEED DE VAGAS                      */
+/* 3. CONTADOR PROGRESSIVO DE VAGAS ATIVAS (0 -> TOTAL REAL)                  */
+/* -------------------------------------------------------------------------- */
+function getActiveJobsCount() {
+    if (!Array.isArray(jobsData)) return 0;
+    return jobsData.filter(job => job.active !== false).length;
+}
+
+function animateJobsCounter(targetTotal, duration = 1200) {
+    const counterEl = document.getElementById('jobs-counter');
+    if (!counterEl) return;
+
+    if (targetTotal <= 0) {
+        counterEl.textContent = '0';
+        return;
+    }
+
+    const startTime = performance.now();
+
+    function step(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        // Curva easeOutQuart para desaceleração suave no final
+        const easedProgress = 1 - Math.pow(1 - progress, 4);
+        const currentValue = Math.round(easedProgress * targetTotal);
+
+        counterEl.textContent = currentValue;
+
+        if (progress < 1) {
+            requestAnimationFrame(step);
+        } else {
+            counterEl.textContent = targetTotal;
+        }
+    }
+
+    requestAnimationFrame(step);
+}
+
+function setupJobsCounterObserver() {
+    const sectionEl = document.getElementById('indicadores-locais');
+    const counterEl = document.getElementById('jobs-counter');
+    if (!sectionEl || !counterEl) return;
+
+    counterEl.textContent = '0';
+
+    const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !hasAnimatedJobsCounter) {
+                hasAnimatedJobsCounter = true;
+                animateJobsCounter(getActiveJobsCount());
+                obs.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.25 });
+
+    observer.observe(sectionEl);
+}
+
+/* -------------------------------------------------------------------------- */
+/* RENDERIZAÇÃO DO FEED DE VAGAS COM PAGINAÇÃO                                */
 /* -------------------------------------------------------------------------- */
 function renderJobCards() {
     const container = document.getElementById('job-cards-container');
@@ -401,7 +463,7 @@ function renderJobCards() {
             </div>
 
             <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-                <span class="text-[10px] text-slate-400 font-medium"><i class="fas fa-clock mr-1"></i> Vaga Ativa</span>
+                <span class="text-[10px] text-slate-400 font-medium"><i class="fas fa-clock mr-1"></i> ${job.active ? 'Vaga Ativa' : 'Vaga Encerrada'}</span>
                 <button onclick="openApplyModal(${job.id})" class="bg-pojae-600 hover:bg-pojae-700 text-white font-bold text-xs px-4 py-2 rounded-xl transition shadow-md shadow-blue-600/20 flex items-center gap-1.5 cursor-pointer">
                     <i class="fas fa-paper-plane"></i> Candidatar-se
                 </button>
@@ -415,7 +477,7 @@ function renderJobCards() {
 }
 
 /* -------------------------------------------------------------------------- */
-/* [NOVO - PAGINAÇÃO] LÓGICA DE EXIBIÇÃO DOS BOTÕES DE PAGINAÇÃO              */
+/* LÓGICA DE EXIBIÇÃO DOS BOTÕES DE PAGINAÇÃO                                 */
 /* -------------------------------------------------------------------------- */
 function getPaginationItems(current, total) {
     if (total <= 10) {
@@ -556,7 +618,7 @@ function renderRecruiterCandidates() {
 }
 
 /* -------------------------------------------------------------------------- */
-/* [ATUALIZADO - PAGINAÇÃO] FILTROS E PESQUISA DE VAGAS                       */
+/* FILTROS E PESQUISA DE VAGAS                                                */
 /* -------------------------------------------------------------------------- */
 function filterByCategory(cat, e) {
     currentFilterCategory = cat;
@@ -674,8 +736,14 @@ function handlePostJobSubmit(e) {
     };
 
     jobsData.unshift(newJob);
-    currentPage = 1; // [ATUALIZADO - PAGINAÇÃO] Mostra a nova vaga na página 1
+    currentPage = 1;
     renderJobCards();
+
+    // Atualiza o contador de vagas ativas na faixa de indicadores
+    if (hasAnimatedJobsCounter) {
+        animateJobsCounter(getActiveJobsCount(), 600);
+    }
+
     closeModal('modal-post-job');
     showToast(`Nova vaga para "${title}" publicada com sucesso em Maceió!`, 'success');
 }
