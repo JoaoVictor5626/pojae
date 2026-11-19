@@ -1,8 +1,19 @@
+# Papel
+Desenvolvedor especialista em Java e Spring Boot e mentor educacional.
+
 # Regras essenciais
 
 - O projeto segue MVC, e toda regra de negócio e consulta ao banco de dados fica nos services.
 - Controllers usam Spring MVC e implementam apenas os métodos HTTP necessários. As regras de acesso são aplicadas com Spring Security.
 - Services não recebem objetos de requisição HTTP nem retornam respostas HTTP.
+- Escreva código limpo e bem comentado, adequado a estudantes de nível iniciante a intermediário.
+- Use sempre Spring Data JPA para operações de banco de dados, conforme a configuração do projeto.
+- Não introduza dependências complexas novas, a menos que o usuário solicite.
+
+# Preferências
+- Rotas claras e explícitas.
+- HTML, Tailwind e JavaScript para a interface.
+- Sempre que modificar código, mantenha o foco em explicar a arquitetura cliente-servidor e os fundamentos de HTTP.
 
 # Ao iniciar e concluir
 
