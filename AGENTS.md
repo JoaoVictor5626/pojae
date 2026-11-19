@@ -1,8 +1,8 @@
 # Regras essenciais
 
-- O projeto segue MVT, e toda regra de negócio e consulta ao ORM fica nos services.
-- Toda view é uma classe que herda de `django.views.View` e implementa só os métodos HTTP necessários. Mixins de acesso, como `LoginRequiredMixin`, são permitidos.
-- Services não recebem `request` nem retornam `HttpResponse`.
+- O projeto segue MVC, e toda regra de negócio e consulta ao banco de dados fica nos services.
+- Controllers usam Spring MVC e implementam apenas os métodos HTTP necessários. As regras de acesso são aplicadas com Spring Security.
+- Services não recebem objetos de requisição HTTP nem retornam respostas HTTP.
 
 # Ao iniciar e concluir
 
@@ -13,9 +13,9 @@
 
 - Leia `docs/arquitetura.md`, com as regras completas de cada camada.
 - Leia a especificação da funcionalidade em `docs/specs/`, seguindo a ordem da numeração.
-- Em código Python, leia `.agents/skills/python-boas-praticas/SKILL.md`.
-- Em código Django, leia também `.agents/skills/django-boas-praticas/SKILL.md`.
-- Em rotas, permissões, autenticação, entrada de usuários, configurações, dependências ou revisões de segurança, leia `.agents/skills/seguranca-owasp/SKILL.md`.
+- Em código Java, leia `.agents/skills/java-best-practices/SKILL.md`.
+- Em código Spring Boot, leia também `.agents/skills/spring-best-practices/SKILL.md`.
+- Em rotas, permissões, autenticação, entrada de usuários, configurações, dependências ou revisões de segurança, leia `.agents/skills/security-owasp/SKILL.md`.
 
 # Outros documentos
 
