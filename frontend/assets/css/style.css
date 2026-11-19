@@ -178,6 +178,22 @@ html {
 
 
 
+/*------ CARROSSEL INFINITO DE LOGOS ------*/
+@keyframes infiniteScroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-33.3333%);
+    }
+}
+
+.animate-infinite-scroll {
+    animation: infiniteScroll 22s linear infinite;
+}
+
+
+
 
 
 /* ------ PRESENTE NAS PÁGINAS DE: LOGIN, CADASTRO DE ESTUDANTE  ------*/
