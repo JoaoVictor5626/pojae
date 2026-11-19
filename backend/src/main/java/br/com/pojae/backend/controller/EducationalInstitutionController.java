@@ -1,9 +1,11 @@
 package br.com.pojae.backend.controller;
 
+import br.com.pojae.backend.dto.request.EducationalInstitutionRequestDto;
 import br.com.pojae.backend.model.EducationalInstitution;
 import br.com.pojae.backend.service.EducationalInstitutionService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,14 +20,15 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/instituicoesDeEnsino")
+@CrossOrigin(origins = {"http://localhost:5500", "http://127.0.0.1:5500", "http://localhost:5501", "http://127.0.0.1:5501"})
 public class EducationalInstitutionController {
 
     @Autowired
     private EducationalInstitutionService service;
 
     @PostMapping
-    public EducationalInstitution create(@RequestBody EducationalInstitution educationalInstitution) {
-        return service.create(educationalInstitution);
+    public EducationalInstitution create(@RequestBody EducationalInstitutionRequestDto educationalInstitutionRequestDto) {
+        return service.create(educationalInstitutionRequestDto);
     }
 
     @GetMapping

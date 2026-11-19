@@ -11,6 +11,8 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -43,11 +45,14 @@ public class Company {
     @Column(length = 18, nullable = false)
     private String cnpj;
 
-    @Column(length = 50, nullable = false)
-    private String email;
-
     @Column(length = 14, nullable = false)
     private String phone;
+
+    @Column(length = 100, nullable = false)
+    private String password;
+
+    @Column(length = 50, nullable = false)
+    private String email;
 
     @ManyToOne
     @JoinColumn(name = "address_cep", nullable = false)
@@ -75,13 +80,18 @@ public class Company {
     @Enumerated(EnumType.STRING)
     private Status status;
 
-    private List<String> jobs = new ArrayList<>();
+    @ManyToMany
+    @JoinTable(
+            name = "tb_company_jobs",
+            joinColumns = @JoinColumn(name = "company_id", nullable = false),
+            inverseJoinColumns = @JoinColumn(name = "job_id", nullable = false)
+    )
+    private List<Job> jobs = new ArrayList<>();
 
     @Column(nullable = false)
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
     private LocalDateTime createdAt = LocalDateTime.now();
 
-    @Column(nullable = false)
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
     private LocalDateTime updatedAt;
 

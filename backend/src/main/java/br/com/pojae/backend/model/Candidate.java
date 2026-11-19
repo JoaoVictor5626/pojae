@@ -23,8 +23,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -47,11 +47,14 @@ public class Candidate {
     @Column(unique = true, length = 14, nullable = false)
     private String cpf;
 
+    @Column(unique = true, length = 14, nullable = false)
+    private String phone;
+
     @Column(unique = true, length = 50, nullable = false)
     private String email;
 
-    @Column(unique = true, length = 14, nullable = false)
-    private String phone;
+    @Column(length = 100, nullable = false)
+    private String password;
 
     @ManyToOne
     @JoinColumn(name = "address_cep", nullable = false)
@@ -73,7 +76,7 @@ public class Candidate {
 
     @Column(nullable = false)
     @JsonFormat(pattern = "MM/yyyy")
-    private LocalDate expectedGraduationDate;
+    private YearMonth expectedGraduationDate;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
