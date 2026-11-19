@@ -263,22 +263,25 @@ function renderRecruiterCandidates() {
 /* -------------------------------------------------------------------------- */
 function filterByCategory(cat, e) {
     currentFilterCategory = cat;
+
+    // Remove a classe 'active' de todos os botões
     document.querySelectorAll('.category-btn').forEach(btn => {
-        btn.classList.remove('bg-pojae-600', 'text-white');
-        btn.classList.add('bg-white', 'text-slate-600');
+        btn.classList.remove('active');
     });
 
-    const targetElement = e ? e.target : window.event.srcElement;
+    // Adiciona a classe 'active' apenas no botão clicado
+    const targetElement = e ? e.currentTarget : window.event.currentTarget;
     if (targetElement) {
-        targetElement.classList.remove('bg-white', 'text-slate-600');
-        targetElement.classList.add('bg-pojae-600', 'text-white');
+        targetElement.classList.add('active');
     }
+
     renderJobCards();
 }
 
 function filterJobs() {
     renderJobCards();
 }
+
 
 /* -------------------------------------------------------------------------- */
 /* CONTROLE DOS MODAIS                                                        */
