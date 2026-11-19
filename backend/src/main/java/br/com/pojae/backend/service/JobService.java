@@ -1,6 +1,7 @@
 package br.com.pojae.backend.service;
 
 import br.com.pojae.backend.exception.NotFoundException;
+import br.com.pojae.backend.dto.response.JobApplicationJobDto;
 import br.com.pojae.backend.model.Company;
 import br.com.pojae.backend.model.Job;
 import br.com.pojae.backend.repository.CompanyRepository;
@@ -34,6 +35,21 @@ public class JobService {
 
     public List<Job> read() {
         return repository.findAll();
+    }
+
+    @Transactional(readOnly = true)
+    public List<JobApplicationJobDto> listApplicationOptions() {
+        return repository.findAll().stream()
+                .map(job -> new JobApplicationJobDto(
+                        job.getId(),
+                        job.getTitle(),
+                        job.getCompany().getName(),
+                        job.getLocation(),
+                        job.getSector(),
+                        job.getScholarshipAmount(),
+                        job.getDesiredSkills(),
+                        job.getSupervisorName()))
+                .toList();
     }
 
     public Job update(UUID id, Job jobUpdated) {
