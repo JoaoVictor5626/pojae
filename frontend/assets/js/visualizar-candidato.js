@@ -1,11 +1,11 @@
 // JAVASCRIPT: LEITURA DOS PARÂMETROS DA CANDIDATURA E RENDERIZAÇÃO 
 
 const STATUS_CANDIDATURA_MAP = {
-    1: "1 - Inscrito",
+    1: "1 - Enviada",
     2: "2 - Em Análise",
-    3: "3 - Entrevista Agendada",
-    4: "4 - Aprovado",
-    5: "5 - Reprovado"
+    3: "3 - Aprovada",
+    4: "4 - Rejeitada",
+    5: "5 - Cancelada"
 };
 
 const INSTITUICAO_MAP = {
@@ -56,15 +56,15 @@ let allVacancies = [];
 
 window.addEventListener('DOMContentLoaded', () => {
     const params = new URLSearchParams(window.location.search);
-    const vagaId = parseInt(params.get('vagaId'));
-    const candidaturaId = parseInt(params.get('candidaturaId'));
+    const vagaId = params.get('vagaId');
+    const candidaturaId = params.get('candidaturaId');
 
     const stored = sessionStorage.getItem('pojae_company_vacancies');
     if (stored) {
         allVacancies = JSON.parse(stored);
-        activeVaga = allVacancies.find(v => v.id === vagaId);
+        activeVaga = allVacancies.find(v => String(v.id) === String(vagaId));
         if (activeVaga) {
-            activeCandidatura = activeVaga.candidaturas.find(c => c.idCandidatura === candidaturaId);
+            activeCandidatura = activeVaga.candidaturas.find(c => String(c.idCandidatura) === String(candidaturaId));
         }
     }
 
@@ -80,6 +80,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 function formatDateBR(isoDate) {
     if (!isoDate) return '-';
+    if (/^\d{2}\/\d{4}$/.test(isoDate)) return isoDate;
     const [year, month, day] = isoDate.split('-');
     return `${day}/${month}/${year}`;
 }
@@ -106,13 +107,21 @@ function renderStars(level) {
     return html;
 }
 
-function updateCandidateApplicationStatus(newStatusInt) {
-    activeCandidatura.statusCandidatura = parseInt(newStatusInt);
+async function updateCandidateApplicationStatus(newStatusInt) {
+    const status = Number(newStatusInt);
+    const host = window.location.hostname || 'localhost';
+    try {
+        const response = await fetch(`${window.POJAE_API_URL || `http://${host}:8080`}/candidaturas/${activeCandidatura.idCandidatura}/status`, {
+            method: 'PATCH', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ status })
+        });
+        if (!response.ok) throw new Error('Não foi possível atualizar o status.');
+    } catch (error) { showToast(error.message, 'error'); renderCandidateProfile(); return; }
+    activeCandidatura.statusCandidatura = status;
 
     if (allVacancies.length > 0) {
-        const vIndex = allVacancies.findIndex(v => v.id === activeVaga.id);
+        const vIndex = allVacancies.findIndex(v => String(v.id) === String(activeVaga.id));
         if (vIndex !== -1) {
-            const cIndex = allVacancies[vIndex].candidaturas.findIndex(c => c.idCandidatura === activeCandidatura.idCandidatura);
+            const cIndex = allVacancies[vIndex].candidaturas.findIndex(c => String(c.idCandidatura) === String(activeCandidatura.idCandidatura));
             if (cIndex !== -1) {
                 allVacancies[vIndex].candidaturas[cIndex].statusCandidatura = activeCandidatura.statusCandidatura;
                 sessionStorage.setItem('pojae_company_vacancies', JSON.stringify(allVacancies));
@@ -173,11 +182,11 @@ function renderCandidateProfile() {
                         Status da Candidatura (RF08):
                     </label>
                     <select id="profile-status-select" onchange="updateCandidateApplicationStatus(this.value)" class="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2 text-xs font-bold text-pojae-800 focus:outline-none focus:border-pojae-600 cursor-pointer">
-                        <option value="1" ${c.statusCandidatura === 1 ? 'selected' : ''}>1 - Inscrito</option>
+                        <option value="1" ${c.statusCandidatura === 1 ? 'selected' : ''}>1 - Enviada</option>
                         <option value="2" ${c.statusCandidatura === 2 ? 'selected' : ''}>2 - Em Análise</option>
-                        <option value="3" ${c.statusCandidatura === 3 ? 'selected' : ''}>3 - Entrevista Agendada</option>
-                        <option value="4" ${c.statusCandidatura === 4 ? 'selected' : ''}>4 - Aprovado</option>
-                        <option value="5" ${c.statusCandidatura === 5 ? 'selected' : ''}>5 - Reprovado</option>
+                        <option value="3" ${c.statusCandidatura === 3 ? 'selected' : ''}>3 - Aprovada</option>
+                        <option value="4" ${c.statusCandidatura === 4 ? 'selected' : ''}>4 - Rejeitada</option>
+                        <option value="5" ${c.statusCandidatura === 5 ? 'selected' : ''}>5 - Cancelada</option>
                     </select>
                 </div>
             </div>
