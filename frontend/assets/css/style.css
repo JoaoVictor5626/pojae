@@ -3,8 +3,16 @@
 /* -------------------------------------------------------------------------- */
 html {
     scroll-behavior: smooth;
-    /* Permite rolagem suave nos links com âncora (#) */
+    scrollbar-gutter: stable; /* Evita que a tela dê um "pulo" lateral quando a barra sumir */
 }
+
+/* Trava o scroll apenas se um overlay fixo de modal estiver visível (de todas as páginas) */
+body:has(div.fixed[id^="modal-"]:not(.hidden)),
+body:has(.mobile-menu-overlay.is-open) {
+    overflow: hidden;
+}
+
+
 
 .logo-navbar {
     width: 150px;
