@@ -49,7 +49,7 @@
             <!-- ACTION BUTTONS / BOTÃO CADASTRE-SE & HAMBÚRGUER -->
             <div class="flex items-center gap-2">
                 <!-- Botão de Login (Visível apenas em Desktop) -->
-                <a href="login.html"
+                <a id="desktop-login-link" href="login.html"
                     class="text-xs sm:text-sm font-semibold text-slate-600 hover:text-pojae-600 px-3 py-2 rounded-lg transition hidden md:inline-block">
                     Já tem conta? Entrar
                 </a>
@@ -99,7 +99,7 @@
             </a>
 
             <!-- Botão de Login secundário no Mobile -->
-            <a href="login.html" onclick="closeMobileMenu();"
+            <a id="mobile-login-link" href="login.html" onclick="closeMobileMenu();"
                 class="mobile-nav-link w-full py-2.5 bg-slate-800 text-slate-300 hover:text-white border border-slate-700 rounded-xl font-semibold text-xs flex items-center justify-center gap-2 transition">
                 <i class="fas fa-sign-in-alt"></i>
                 <span>Já tenho uma conta</span>
@@ -746,8 +746,7 @@
             <p id="modal-job-company" class="text-xs text-slate-500 mb-4">Tech Maceió Soluções • Pajuçara, Maceió</p>
 
             <form id="apply-form" onsubmit="handleApplySubmit(event)" class="space-y-4">
-                <!-- IDENTIFICADORES NUMÉRICOS (Integer) OCULTOS -->
-                <input type="hidden" id="apply-candidate-id" value="101">
+                <!-- A identidade do candidato é obtida da sessão autenticada no backend. -->
                 <input type="hidden" id="apply-job-id" value="">
 
                 <!-- DADOS PREENCHIDOS AUTOMATICAMENTE PELO SISTEMA (SOMENTE LEITURA) -->
@@ -759,19 +758,19 @@
 
                     <div>
                         <label class="block text-xs font-bold text-slate-700 mb-1">Nome Completo do Estudante</label>
-                        <input type="text" id="candidate-name" readonly value="João Victor Araújo Coêlho"
+                    <input type="text" id="candidate-name" readonly value=""
                             class="w-full bg-slate-100 border border-slate-200 rounded-xl px-3.5 py-2 text-sm text-slate-600 font-medium cursor-not-allowed">
                     </div>
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <div>
                             <label class="block text-xs font-bold text-slate-700 mb-1">E-mail</label>
-                            <input type="email" id="candidate-email" readonly value="joao.victor@cesmac.edu.br"
+                            <input type="email" id="candidate-email" readonly value=""
                                 class="w-full bg-slate-100 border border-slate-200 rounded-xl px-3.5 py-2 text-sm text-slate-600 font-medium cursor-not-allowed">
                         </div>
                         <div>
                             <label class="block text-xs font-bold text-slate-700 mb-1">Instituição de Ensino</label>
-                            <input type="text" id="candidate-institution" readonly value="Centro Univ. CESMAC"
+                            <input type="text" id="candidate-institution" readonly value=""
                                 class="w-full bg-slate-100 border border-slate-200 rounded-xl px-3.5 py-2 text-sm text-slate-600 font-medium cursor-not-allowed">
                         </div>
                     </div>
@@ -790,12 +789,11 @@
                         <label
                             class="bg-white border border-slate-200 hover:border-pojae-500 text-slate-700 text-xs font-bold px-3 py-1.5 rounded-lg cursor-pointer transition">
                             <span>Selecionar</span>
-                            <input type="file" id="file-cv" data-doc-id="501" class="hidden" onchange="updateFileLabel(this, 'label-cv')">
+                            <input type="file" id="file-cv" accept="application/pdf,.pdf" class="hidden" onchange="updateFileLabel(this, 'label-cv')">
                         </label>
                     </div>
                     <span id="label-cv"
-                        class="text-[10px] text-emerald-600 font-semibold block">curriculo_joaovictor_2026.pdf
-                        (Anexado)</span>
+                        class="text-[10px] text-slate-500 font-semibold block">Nenhum arquivo selecionado</span>
 
                     <hr class="border-slate-200">
 
@@ -810,12 +808,11 @@
                         <label
                             class="bg-white border border-slate-200 hover:border-pojae-500 text-slate-700 text-xs font-bold px-3 py-1.5 rounded-lg cursor-pointer transition">
                             <span>Selecionar</span>
-                            <input type="file" id="file-historico" data-doc-id="802" class="hidden" onchange="updateFileLabel(this, 'label-historico')">
+                            <input type="file" id="file-historico" accept="application/pdf,.pdf" class="hidden" onchange="updateFileLabel(this, 'label-historico')">
                         </label>
                     </div>
                     <span id="label-historico"
-                        class="text-[10px] text-emerald-600 font-semibold block">historico_academico_cesmac.pdf
-                        (Anexado)</span>
+                        class="text-[10px] text-slate-500 font-semibold block">Nenhum arquivo selecionado</span>
                 </div>
 
                 <!-- NOVO CAMPO: MENSAGEM DE APRESENTAÇÃO (String) -->

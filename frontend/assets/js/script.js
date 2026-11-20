@@ -234,6 +234,9 @@ let jobsData = [...initialJobs];
 let candidatesData = [...initialCandidates];
 let currentFilterCategory = 'all';
 let currentActiveJobForApply = null;
+let jobsLoadedFromBackend = false;
+const API_HOST = window.location.hostname || 'localhost';
+const API_BASE_URL = window.POJAE_API_URL || `http://${API_HOST}:8080`;
 
 // Configuração de paginação
 const ITEMS_PER_PAGE = 6;
@@ -247,11 +250,63 @@ let hasAnimatedJobsCounter = false;
 /* -------------------------------------------------------------------------- */
 window.addEventListener('DOMContentLoaded', () => {
     renderJobCards();
+    loadJobsForApplications();
+    hideLoginLinksForAuthenticatedUser();
     renderRecruiterCandidates();
     setupScrollReveal();
     setupMobileMenu();
     setupJobsCounterObserver();
 });
+
+async function hideLoginLinksForAuthenticatedUser() {
+    try {
+        const response = await fetch(`${API_BASE_URL}/session`, { credentials: 'include' });
+        if (!response.ok) return;
+
+        ['desktop-login-link', 'mobile-login-link'].forEach(id => {
+            const loginLink = document.getElementById(id);
+            if (loginLink) loginLink.style.display = 'none';
+        });
+    } catch (error) {
+        // Sem conexão com o backend, os links continuam visíveis para permitir o login.
+    }
+}
+
+async function loadJobsForApplications() {
+    try {
+        const response = await fetch(`${API_BASE_URL}/vagas/opcoes-candidatura`);
+        if (!response.ok) throw new Error('Não foi possível carregar as vagas.');
+
+        const jobs = await response.json();
+        jobsData = jobs.map(job => ({
+            id: String(job.id),
+            title: job.title,
+            company: job.company,
+            location: job.location,
+            category: job.category,
+            stipend: Number(job.stipend),
+            skills: (job.skills || '').split(/[,;]/).map(skill => skill.trim()).filter(Boolean),
+            supervisor: job.supervisor,
+            active: true,
+            backendId: true
+        }));
+        jobsLoadedFromBackend = true;
+        currentPage = 1;
+        renderJobCards();
+    } catch (error) {
+        console.warn('As vagas de demonstração continuam visíveis; candidaturas exigem vagas cadastradas no sistema.');
+    }
+}
+
+function escapeHtml(value) {
+    return String(value ?? '').replace(/[&<>"']/g, character => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;'
+    })[character]);
+}
 
 /* --------------------------------------------------------------------------------- */
 /* 1. MENU HAMBÚRGUER: LÓGICA, MICROINTERAÇÕES, ANIMAÇÕES MOBILE, BOTÃO X E BACKDROP */
@@ -442,29 +497,29 @@ function renderJobCards() {
             <div>
                 <div class="flex items-start justify-between gap-2 mb-3">
                     <span class="text-[10px] font-bold tracking-wider uppercase px-2.5 py-1 rounded-md bg-blue-50 text-pojae-700 border border-blue-100">
-                        ${job.category}
+                        ${escapeHtml(job.category)}
                     </span>
                     <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">
-                        R$ ${job.stipend}/mês
+                        R$ ${escapeHtml(job.stipend)}/mês
                     </span>
                 </div>
 
-                <h3 class="font-bold text-base text-slate-900 group-hover:text-pojae-600 transition mb-1">${job.title}</h3>
-                <p class="text-xs font-medium text-slate-600 mb-3"><i class="fas fa-building text-slate-400 mr-1"></i> ${job.company}</p>
+                <h3 class="font-bold text-base text-slate-900 group-hover:text-pojae-600 transition mb-1">${escapeHtml(job.title)}</h3>
+                <p class="text-xs font-medium text-slate-600 mb-3"><i class="fas fa-building text-slate-400 mr-1"></i> ${escapeHtml(job.company)}</p>
                 
                 <div class="text-xs text-slate-500 space-y-1 mb-4">
-                    <div><i class="fas fa-map-marker-alt text-red-400 mr-1.5"></i> ${job.location}</div>
-                    <div><i class="fas fa-user-tie text-blue-500 mr-1.5"></i> Supervisor: ${job.supervisor}</div>
+                    <div><i class="fas fa-map-marker-alt text-red-400 mr-1.5"></i> ${escapeHtml(job.location)}</div>
+                    <div><i class="fas fa-user-tie text-blue-500 mr-1.5"></i> Supervisor: ${escapeHtml(job.supervisor)}</div>
                 </div>
 
                 <div class="flex flex-wrap gap-1.5 mb-4">
-                    ${job.skills.map(s => `<span class="text-[10px] bg-slate-100 text-slate-600 font-medium px-2 py-0.5 rounded-md">#${s}</span>`).join('')}
+                    ${job.skills.map(s => `<span class="text-[10px] bg-slate-100 text-slate-600 font-medium px-2 py-0.5 rounded-md">#${escapeHtml(s)}</span>`).join('')}
                 </div>
             </div>
 
             <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
                 <span class="text-[10px] text-slate-400 font-medium"><i class="fas fa-clock mr-1"></i> ${job.active ? 'Vaga Ativa' : 'Vaga Encerrada'}</span>
-                <button onclick="openApplyModal(${job.id})" class="bg-pojae-600 hover:bg-pojae-700 text-white font-bold text-xs px-4 py-2 rounded-xl transition shadow-md shadow-blue-600/20 flex items-center gap-1.5 cursor-pointer">
+                <button onclick="openApplyModal('${escapeHtml(job.id)}')" class="bg-pojae-600 hover:bg-pojae-700 text-white font-bold text-xs px-4 py-2 rounded-xl transition shadow-md shadow-blue-600/20 flex items-center gap-1.5 cursor-pointer">
                     <i class="fas fa-paper-plane"></i> Candidatar-se
                 </button>
             </div>
@@ -654,9 +709,13 @@ function closeModal(id) {
     if (modal) modal.classList.add('hidden');
 }
 
-function openApplyModal(jobId) {
-    const job = jobsData.find(j => j.id === jobId);
+async function openApplyModal(jobId) {
+    const job = jobsData.find(j => String(j.id) === String(jobId));
     if (!job) return;
+    if (!jobsLoadedFromBackend || !job.backendId) {
+        showToast('As vagas de demonstração não recebem candidaturas. Conecte-se ao servidor e tente novamente.', 'info');
+        return;
+    }
     currentActiveJobForApply = job;
 
     const jobIdInput = document.getElementById('apply-job-id');
@@ -666,7 +725,26 @@ function openApplyModal(jobId) {
 
     document.getElementById('modal-job-title').textContent = job.title;
     document.getElementById('modal-job-company').textContent = `${job.company} • ${job.location}`;
-    openModal('modal-apply');
+    try {
+        const response = await fetch(`${API_BASE_URL}/candidaturas/perfil`, { credentials: 'include' });
+        if (response.status === 401) {
+            showToast('Sua sessão não foi encontrada. Entre novamente para se candidatar.', 'info');
+            return;
+        }
+        if (response.status === 403) {
+            showToast('Entre com uma conta de candidato para se candidatar.', 'info');
+            return;
+        }
+        if (!response.ok) throw new Error('Não foi possível carregar o perfil.');
+        const profile = await response.json();
+        if (currentActiveJobForApply !== job) return;
+        document.getElementById('candidate-name').value = profile.name;
+        document.getElementById('candidate-email').value = profile.email;
+        document.getElementById('candidate-institution').value = profile.institution;
+        openModal('modal-apply');
+    } catch (error) {
+        showToast('Não foi possível carregar seus dados. Tente novamente.', 'info');
+    }
 }
 
 function updateFileLabel(input, labelId) {
@@ -678,41 +756,63 @@ function updateFileLabel(input, labelId) {
 /* -------------------------------------------------------------------------- */
 /* SUBMISSÃO DOS FORMULÁRIOS COM FEEDBACK                                     */
 /* -------------------------------------------------------------------------- */
-function handleApplySubmit(e) {
+async function handleApplySubmit(e) {
     e.preventDefault();
 
-    const candidatoIdEl = document.getElementById('apply-candidate-id');
     const vagaIdEl = document.getElementById('apply-job-id');
     const fileCvEl = document.getElementById('file-cv');
     const fileHistEl = document.getElementById('file-historico');
     const messageEl = document.getElementById('apply-message');
+    const form = e.currentTarget;
+    const submitButton = form.querySelector('[type="submit"]');
+    if (!currentActiveJobForApply?.backendId || !vagaIdEl.value) {
+        showToast('Selecione uma vaga cadastrada no sistema.', 'info');
+        return;
+    }
+    if (!fileCvEl.files[0] || !fileHistEl.files[0]) {
+        showToast('Selecione o currículo e o histórico escolar em PDF.', 'info');
+        return;
+    }
 
-    const candidaturaPayload = {
-        candidatoId: candidatoIdEl ? parseInt(candidatoIdEl.value) : 101,
-        vagaId: vagaIdEl ? parseInt(vagaIdEl.value) : (currentActiveJobForApply ? currentActiveJobForApply.id : null),
-        curriculoId: fileCvEl && fileCvEl.dataset.docId ? parseInt(fileCvEl.dataset.docId) : 501,
-        historicoEscolarId: fileHistEl && fileHistEl.dataset.docId ? parseInt(fileHistEl.dataset.docId) : 802,
-        mensagemApresentacao: messageEl ? messageEl.value.trim() : ""
-    };
+    const formData = new FormData();
+    formData.append('jobId', vagaIdEl.value);
+    formData.append('resume', fileCvEl.files[0]);
+    formData.append('academicHistory', fileHistEl.files[0]);
+    formData.append('presentationMessage', messageEl.value.trim());
 
-    console.log("Candidatura enviada (Payload):", candidaturaPayload);
+    submitButton.disabled = true;
+    try {
+        const response = await fetch(`${API_BASE_URL}/candidaturas`, {
+            method: 'POST',
+            credentials: 'include',
+            body: formData
+        });
+        if (!response.ok) {
+            const error = await response.json().catch(() => ({}));
+            showToast(error.message || 'Não foi possível enviar a candidatura.', 'info');
+            submitButton.disabled = false;
+            return;
+        }
 
-    const name = document.getElementById('candidate-name').value;
-    const inst = document.getElementById('candidate-institution').value;
+        const name = document.getElementById('candidate-name').value;
+        const inst = document.getElementById('candidate-institution').value;
+        candidatesData.unshift({
+            id: Date.now(),
+            name,
+            course: `Estudante (${inst})`,
+            status: 'Inscrito Hoje',
+            cv: true,
+            historico: true,
+            mensagem: messageEl.value.trim()
+        });
 
-    candidatesData.unshift({
-        id: Date.now(),
-        name: name,
-        course: `Estudante (${inst})`,
-        status: "Inscrito Hoje",
-        cv: true,
-        historico: true,
-        mensagem: candidaturaPayload.mensagemApresentacao
-    });
-
-    renderRecruiterCandidates();
-    closeModal('modal-apply');
-    showToast(`Candidatura enviada para ${currentActiveJobForApply ? currentActiveJobForApply.company : 'empresa'} com sucesso!`, 'success');
+        renderRecruiterCandidates();
+        closeModal('modal-apply');
+        showToast(`Candidatura enviada para ${currentActiveJobForApply.company} com sucesso!`, 'success');
+    } catch (error) {
+        showToast('Não foi possível acessar o sistema. Tente novamente.', 'info');
+        submitButton.disabled = false;
+    }
 }
 
 function handlePostJobSubmit(e) {
