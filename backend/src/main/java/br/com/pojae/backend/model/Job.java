@@ -2,6 +2,7 @@ package br.com.pojae.backend.model;
 
 import br.com.pojae.backend.model.enums.JobType;
 import br.com.pojae.backend.model.enums.WorkModality;
+import br.com.pojae.backend.model.enums.JobStatus;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -120,6 +121,10 @@ public class Job {
 
     @Column(length = 50, nullable = false)
     private WorkModality workModality;
+
+    @Enumerated(EnumType.STRING)
+    @Column(length = 20)
+    private JobStatus status;
 
     @Column(nullable = false)
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")

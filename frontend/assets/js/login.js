@@ -62,7 +62,8 @@ function togglePasswordVisibility() {
 }
 
 // AUTENTICAÇÃO E REDIRECIONAMENTO CONFORME PERFIL
-const API_BASE_URL = window.POJAE_API_URL || 'http://localhost:8080';
+const API_HOST = window.location.hostname || 'localhost';
+const API_BASE_URL = window.POJAE_API_URL || `http://${API_HOST}:8080`;
 
 async function handleLogin(e) {
     e.preventDefault();

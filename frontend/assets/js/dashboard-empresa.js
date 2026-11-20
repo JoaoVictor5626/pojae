@@ -21,11 +21,11 @@ const FORMACAO_SUPERVISOR_MAP = {
 
 // Status da Candidatura (Integer -> Label)
 const STATUS_CANDIDATURA_MAP = {
-    1: "1 - Inscrito",
+    1: "1 - Enviada",
     2: "2 - Em Análise",
-    3: "3 - Entrevista Agendada",
-    4: "4 - Aprovado",
-    5: "5 - Reprovado"
+    3: "3 - Aprovada",
+    4: "4 - Rejeitada",
+    5: "5 - Cancelada"
 };
 
 // Instituição de Ensino (Integer -> Label)
@@ -40,182 +40,43 @@ const INSTITUICAO_MAP = {
 /* -------------------------------------------------------------------------- */
 /* DADOS MOCKADOS COMPLETOS (VAGAS + CANDIDATURAS DETALHADAS)                 */
 /* -------------------------------------------------------------------------- */
-let companyVacancies = [
-    {
-        id: 1042,
-        status: "Publicada",
-        titulo: "Estágio em Desenvolvimento Web Full Stack",
-        descricao: "Oportunidade para atuar junto à equipe de engenharia de software no desenvolvimento e manutenção de aplicações web modernas voltadas ao setor de serviços em Alagoas.",
-        tipoVaga: 1,
-        quantidadeVagas: 2,
-        quantidadeCandidaturas: 2,
-        diasSemana: "Seg a Sex (08:00 às 12:00 / 13:00 às 15:00)",
-        cargaHorariaDiaria: 6,
-        cargaHorariaSemanal: 30,
-        valorBolsa: 1350.00,
-        objetivoOportunidade: "Proporcionar vivência prática no ciclo completo de desenvolvimento de software ágil, versionamento e integração de APIs REST.",
-        atividadesPrevistas: "Auxiliar na codificação de interfaces responsivas em HTML/Tailwind/JS; implementar endpoints sob supervisão; participar de reuniões diárias (Daily) e escrever testes unitários.",
-        periodoRecesso: "30 dias remunerados a cada 12 meses de estágio (conforme Lei 11.788/08)",
-        inicioPrevisto: "2026-12-01",
-        terminoPrevisto: "2027-11-30",
-        beneficiosOferecidos: "Auxílio-transporte (Cartão Bem Legal Maceió), Vale-alimentação (R$ 350,00), Seguro contra acidentes pessoais.",
-        empresaResponsavel: "Tecnologia Alagoana S.A.",
-        localidadeVaga: "Farol, Maceió - AL",
-        modalidadeTrabalho: 2,
-        setorAtuacao: 1,
-        habilidadesDesejadas: "JavaScript ES6+, HTML5, CSS3, Git, Lógica de Programação e Noções de SQL.",
-        cursosRelacionados: "Engenharia de Software, Ciência da Computação, Sistemas de Informação, Análise e Desenvolvimento de Sistemas.",
-        escolaridade: 2,
-        seriePeriodoDesejado: "A partir do 4º período",
-        observacoesCriterios: "Preferência por candidatos que residam próximo ao bairro do Farol ou com fácil acesso à Av. Fernandes Lima.",
-        supervisorNome: "Eng. Vinícius Araújo Coêlho",
-        supervisorFormacao: "Especialista",
-        candidaturas: [
-            {
-                idCandidatura: 9001, // Integer
-                dataHoraCandidatura: "2026-11-15T14:32:00", // DateTime
-                statusCandidatura: 2, // Integer (2 - Em Análise)
-                candidatoId: 101,
-                nomeCandidato: "João Victor Araújo Coêlho", // String
-                email: "joao.victor@cesmac.edu.br", // String
-                telefone: "(82) 99812-3456", // String
-                curriculoId: 501, // Integer
-                historicoEscolarId: 801, // Integer
-                mensagemApresentacao: "Prezados, sou estudante do 5º período de Engenharia de Software no CESMAC e tenho grande interesse em aplicar meus conhecimentos em JavaScript, Tailwind CSS e Git nos projetos da Tecnologia Alagoana.", // String
-                instituicaoEnsino: 1, // Integer (CESMAC)
-                nomeCurso: "Engenharia de Software", // String
-                seriePeriodo: "5º Período", // String
-                turno: "Noturno", // String
-                conclusaoPrevista: "2027-12-15", // Date
-                habilidades: [
-                    { tipoHabilidade: 1, habilidade: "JavaScript ES6+ & DOM", nivelProficiencia: 4, observacoes: "Desenvolvimento de aplicações web interativas e consumo de APIs REST." },
-                    { tipoHabilidade: 1, habilidade: "HTML5 & Tailwind CSS", nivelProficiencia: 5, observacoes: "Construção de interfaces responsivas e protótipos de alta fidelidade." },
-                    { tipoHabilidade: 2, habilidade: "Git & GitHub", nivelProficiencia: 4, observacoes: "Controle de versão, branches e pull requests em equipe." }
-                ]
-            },
-            {
-                idCandidatura: 9002,
-                dataHoraCandidatura: "2026-11-16T09:15:00",
-                statusCandidatura: 3, // Integer (3 - Entrevista Agendada)
-                candidatoId: 105,
-                nomeCandidato: "Beatriz Tenório Cavalcante",
-                email: "beatriz.tenorio@ic.ufal.br",
-                telefone: "(82) 99645-7890",
-                curriculoId: 508,
-                historicoEscolarId: 814,
-                mensagemApresentacao: "Olá! Tenho experiência prévia em projetos de extensão universitária na UFAL com foco em desenvolvimento web full stack e bancos de dados relacionais.",
-                instituicaoEnsino: 2, // Integer (UFAL)
-                nomeCurso: "Ciência da Computação",
-                seriePeriodo: "6º Período",
-                turno: "Integral / Vespertino",
-                conclusaoPrevista: "2027-07-30",
-                habilidades: [
-                    { tipoHabilidade: 1, habilidade: "Node.js & Express", nivelProficiencia: 4, observacoes: "Criação de APIs RESTful e integração com PostgreSQL." },
-                    { tipoHabilidade: 1, habilidade: "SQL & Modelagem de Dados", nivelProficiencia: 4, observacoes: "Consultas complexas, índices e normalização." },
-                    { tipoHabilidade: 3, habilidade: "Comunicação e Trabalho em Equipe", nivelProficiencia: 5, observacoes: "Monitoria acadêmica por 2 semestres na disciplina de Programação." }
-                ]
-            }
-        ]
-    },
-    {
-        id: 1043,
-        status: "Publicada",
-        titulo: "Jovem Aprendiz - Suporte Administrativo e Atendimento",
-        descricao: "Programa de aprendizagem profissional voltado à formação administrativa, organização documental e atendimento ao cliente interno e externo.",
-        tipoVaga: 2,
-        quantidadeVagas: 3,
-        quantidadeCandidaturas: 1,
-        diasSemana: "Seg a Sex (13:00 às 15:00 / 15:15 às 17:15)",
-        cargaHorariaDiaria: 4,
-        cargaHorariaSemanal: 20,
-        valorBolsa: 820.50,
-        objetivoOportunidade: "Capacitar jovens estudantes nas rotinas administrativas, protocolos de atendimento e ferramentas de escritório.",
-        atividadesPrevistas: "Organização de arquivos digitais e físicos, emissão de relatórios básicos em planilhas, apoio à recepção e encaminhamento de demandas internas.",
-        periodoRecesso: "Coincidente com as férias escolares (30 dias anuais)",
-        inicioPrevisto: "2027-01-11",
-        terminoPrevisto: "2028-01-10",
-        beneficiosOferecidos: "Vale-transporte integral (Maceió), Seguro de vida e Curso de capacitação teórica certificado.",
-        empresaResponsavel: "Tecnologia Alagoana S.A.",
-        localidadeVaga: "Pajuçara, Maceió - AL",
-        modalidadeTrabalho: 1,
-        setorAtuacao: 2,
-        habilidadesDesejadas: "Comunicação clara, Pacote Office básico, Organização e Proatividade.",
-        cursosRelacionados: "Ensino Médio Regular ou Técnico em Administração / Secretariado.",
-        escolaridade: 1,
-        seriePeriodoDesejado: "A partir do 1º ano do Ensino Médio",
-        observacoesCriterios: "Não é necessária experiência anterior; disponibilidade no turno vespertino.",
-        supervisorNome: "Adm. Luciana Santos Melo",
-        supervisorFormacao: "Graduado",
-        candidaturas: [
-            {
-                idCandidatura: 9010,
-                dataHoraCandidatura: "2026-11-14T16:40:00",
-                statusCandidatura: 1, // Integer (1 - Inscrito)
-                candidatoId: 201,
-                nomeCandidato: "Mariana Costa Silva",
-                email: "mariana.silva2026@gmail.com",
-                telefone: "(82) 98834-1122",
-                curriculoId: 522,
-                historicoEscolarId: 830,
-                mensagemApresentacao: "Busco minha primeira oportunidade como Jovem Aprendiz para desenvolver minhas habilidades administrativas e contribuir com a organização da equipe.",
-                instituicaoEnsino: 5, // Integer (Escola Estadual Moreira e Silva)
-                nomeCurso: "Ensino Médio Regular",
-                seriePeriodo: "2º Ano",
-                turno: "Matutino",
-                conclusaoPrevista: "2027-12-20",
-                habilidades: [
-                    { tipoHabilidade: 2, habilidade: "Pacote Office (Word e Excel)", nivelProficiencia: 3, observacoes: "Criação de planilhas de controle e digitação de documentos." },
-                    { tipoHabilidade: 3, habilidade: "Atendimento e Organização", nivelProficiencia: 4, observacoes: "Participação no grêmio estudantil e organização de eventos escolares." }
-                ]
-            }
-        ]
-    },
-    {
-        id: 1044,
-        status: "Rascunho",
-        titulo: "Estágio em Análise de Dados & Business Intelligence",
-        descricao: "Atuação na estruturação de dashboards gerenciais, limpeza de bases de dados e suporte à tomada de decisão comercial.",
-        tipoVaga: 1,
-        quantidadeVagas: 1,
-        quantidadeCandidaturas: 0,
-        diasSemana: "Seg a Sex (09:00 às 12:00 / 13:00 às 16:00)",
-        cargaHorariaDiaria: 6,
-        cargaHorariaSemanal: 30,
-        valorBolsa: 1500.00,
-        objetivoOportunidade: "Desenvolver competências analíticas em modelagem de dados, SQL e visualização de indicadores (KPIs).",
-        atividadesPrevistas: "Extração e tratamento de dados via SQL/Python; criação de relatórios no Power BI; apoio na validação de métricas operacionais.",
-        periodoRecesso: "30 dias proporcionais após 12 meses de contrato",
-        inicioPrevisto: "2027-02-01",
-        terminoPrevisto: "2028-01-31",
-        beneficiosOferecidos: "Auxílio-transporte, Vale-refeição (R$ 400,00) e Acesso a plataforma de cursos técnicos.",
-        empresaResponsavel: "Tecnologia Alagoana S.A.",
-        localidadeVaga: "Jatiúca, Maceió - AL",
-        modalidadeTrabalho: 3,
-        setorAtuacao: 1,
-        habilidadesDesejadas: "Excel Avançado, Power BI, SQL básico e Raciocínio Lógico.",
-        cursosRelacionados: "Ciência de Dados, Estatística, Engenharia de Software, Administração ou Economia.",
-        escolaridade: 2,
-        seriePeriodoDesejado: "Do 3º ao 7º período",
-        observacoesCriterios: "Desejável portfólio com dashboards criados em Power BI ou Looker Studio.",
-        supervisorNome: "Dr. Roberto Melo Cavalcanti",
-        supervisorFormacao: "Mestre",
-        candidaturas: []
-    }
-];
+let companyVacancies = [];
+const API_HOST = window.location.hostname || 'localhost';
+const API_BASE_URL = window.POJAE_API_URL || `http://${API_HOST}:8080`;
+
+async function apiRequest(path, options = {}) {
+    const response = await fetch(`${API_BASE_URL}${path}`, {
+        credentials: 'include',
+        ...options,
+        headers: { ...(options.body instanceof FormData ? {} : { 'Content-Type': 'application/json' }), ...(options.headers || {}) }
+    });
+    if (!response.ok) throw new Error(response.status === 401 ? 'Entre com uma conta de empresa para acessar o painel.' : 'Não foi possível concluir a operação.');
+    return response.status === 204 ? null : response.json();
+}
+
+function mapVacancy(v) {
+    return { ...v, id: String(v.id), candidaturas: (v.candidaturas || []).map(c => ({ ...c,
+        idCandidatura: String(c.idCandidatura), statusCandidatura: Number(c.statusCandidatura),
+        habilidades: c.habilidades || [] })) };
+}
 
 let currentStatusFilter = 'ALL';
 
-window.addEventListener('DOMContentLoaded', () => {
-    // Sincroniza dados no sessionStorage para a página perfil-candidato.html ler dinamicamente
-    syncStorage();
-    updateMetrics();
-    renderVacancies();
-
-    // Caso retorne da página de perfil com parâmetro para reabrir o modal de candidatos
-    const urlParams = new URLSearchParams(window.location.search);
-    const openVagaId = urlParams.get('openCandidatesVagaId');
-    if (openVagaId) {
-        openCandidatesModal(parseInt(openVagaId));
+window.addEventListener('DOMContentLoaded', async () => {
+    try {
+        const dashboard = await apiRequest('/vagas/minhas');
+        companyVacancies = dashboard.vacancies.map(mapVacancy);
+        const companyName = document.getElementById('company-name');
+        const companyCnpj = document.getElementById('company-cnpj');
+        const companyInitials = document.getElementById('company-initials');
+        if (companyName) companyName.textContent = dashboard.companyName;
+        if (companyCnpj) companyCnpj.textContent = dashboard.cnpj;
+        if (companyInitials) companyInitials.textContent = dashboard.companyName.split(/\s+/).slice(0, 2).map(n => n[0]).join('').toUpperCase();
+        syncStorage(); updateMetrics(); renderVacancies();
+        const openVagaId = new URLSearchParams(window.location.search).get('openCandidatesVagaId');
+        if (openVagaId) openCandidatesModal(openVagaId);
+    } catch (error) {
+        companyVacancies = []; updateMetrics(); renderVacancies(); showToast(error.message, 'error');
     }
 });
 
@@ -336,18 +197,18 @@ function renderVacancies() {
                 <div class="flex flex-wrap items-center gap-2">
                     <div class="flex items-center gap-1.5 mr-1">
                         <label for="status-select-${vaga.id}" class="text-[11px] font-bold text-slate-500">Status:</label>
-                        <select id="status-select-${vaga.id}" onchange="changeVacancyStatus(${vaga.id}, this.value)" class="bg-slate-50 border border-slate-200 rounded-xl px-2.5 py-1.5 text-xs font-bold text-slate-800 focus:outline-none focus:border-pojae-600 cursor-pointer">
+                        <select id="status-select-${vaga.id}" onchange="changeVacancyStatus('${vaga.id}', this.value)" class="bg-slate-50 border border-slate-200 rounded-xl px-2.5 py-1.5 text-xs font-bold text-slate-800 focus:outline-none focus:border-pojae-600 cursor-pointer">
                             <option value="Rascunho" ${vaga.status === 'Rascunho' ? 'selected' : ''}>Rascunho</option>
                             <option value="Publicada" ${vaga.status === 'Publicada' ? 'selected' : ''}>Publicada</option>
                             <option value="Encerrada" ${vaga.status === 'Encerrada' ? 'selected' : ''}>Encerrada</option>
                         </select>
                     </div>
 
-                    <button onclick="openEditModal(${vaga.id})" class="px-3 py-1.5 rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-700 border border-amber-200 text-xs font-bold transition flex items-center gap-1.5">
+                    <button onclick="openEditModal('${vaga.id}')" class="px-3 py-1.5 rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-700 border border-amber-200 text-xs font-bold transition flex items-center gap-1.5">
                         <i class="fas fa-pen"></i><span>Editar</span>
                     </button>
 
-                    <button onclick="openDeleteModal(${vaga.id})" class="px-3 py-1.5 rounded-xl bg-red-50 hover:bg-red-100 text-red-600 border border-red-200 text-xs font-bold transition flex items-center gap-1.5">
+                    <button onclick="openDeleteModal('${vaga.id}')" class="px-3 py-1.5 rounded-xl bg-red-50 hover:bg-red-100 text-red-600 border border-red-200 text-xs font-bold transition flex items-center gap-1.5">
                         <i class="fas fa-trash-alt"></i><span>Excluir</span>
                     </button>
                 </div>
@@ -369,7 +230,7 @@ function renderVacancies() {
                 </div>
 
                 <div class="lg:col-span-4 flex flex-col sm:flex-row lg:flex-col items-stretch justify-between gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200/80">
-                    <button onclick="openCandidatesModal(${vaga.id})" class="w-full text-left bg-white hover:bg-blue-50/70 border border-slate-200 hover:border-pojae-500 p-3.5 rounded-xl transition flex items-center justify-between group shadow-sm">
+                    <button onclick="openCandidatesModal('${vaga.id}')" class="w-full text-left bg-white hover:bg-blue-50/70 border border-slate-200 hover:border-pojae-500 p-3.5 rounded-xl transition flex items-center justify-between group shadow-sm">
                         <div class="flex items-center gap-3">
                             <div class="w-11 h-11 rounded-xl bg-pojae-600 text-white font-extrabold text-lg flex items-center justify-center shadow-md shadow-blue-600/20 group-hover:scale-105 transition-transform">
                                 ${vaga.candidaturas.length}
@@ -381,7 +242,7 @@ function renderVacancies() {
                         </div>
                     </button>
 
-                    <button onclick="openDetailsModal(${vaga.id})" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-2.5 px-4 rounded-xl transition flex items-center justify-center gap-2">
+                    <button onclick="openDetailsModal('${vaga.id}')" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-2.5 px-4 rounded-xl transition flex items-center justify-center gap-2">
                         <i class="fas fa-eye"></i><span>Visualizar Ficha Completa da Vaga</span>
                     </button>
                 </div>
@@ -390,10 +251,12 @@ function renderVacancies() {
     `).join('');
 }
 
-function changeVacancyStatus(vagaId, newStatus) {
-    const vaga = companyVacancies.find(v => v.id === vagaId);
+async function changeVacancyStatus(vagaId, newStatus) {
+    const vaga = companyVacancies.find(v => String(v.id) === String(vagaId));
     if (!vaga) return;
     const oldStatus = vaga.status;
+    try { await apiRequest(`/vagas/minhas/${vagaId}/status?status=${encodeURIComponent(newStatus)}`, { method: 'PATCH' }); }
+    catch (error) { showToast(error.message, 'error'); renderVacancies(); return; }
     vaga.status = newStatus;
     syncStorage();
     updateMetrics();
@@ -401,13 +264,16 @@ function changeVacancyStatus(vagaId, newStatus) {
     showToast(`Vaga #${vaga.id} alterada de "${oldStatus}" para "${newStatus}".`, 'success');
 }
 
-function changeApplicationStatus(vagaId, idCandidatura, newStatusInt) {
-    const vaga = companyVacancies.find(v => v.id === vagaId);
+async function changeApplicationStatus(vagaId, idCandidatura, newStatusInt) {
+    const vaga = companyVacancies.find(v => String(v.id) === String(vagaId));
     if (!vaga) return;
     const cand = vaga.candidaturas.find(c => c.idCandidatura === idCandidatura);
     if (!cand) return;
 
-    cand.statusCandidatura = parseInt(newStatusInt);
+    const status = Number(newStatusInt);
+    try { await apiRequest(`/candidaturas/${idCandidatura}/status`, { method: 'PATCH', body: JSON.stringify({ status }) }); }
+    catch (error) { showToast(error.message, 'error'); renderVacancies(); return; }
+    cand.statusCandidatura = status;
     syncStorage();
     showToast(`Candidatura #${idCandidatura} atualizada para "${STATUS_CANDIDATURA_MAP[cand.statusCandidatura]}".`, 'success');
 }
@@ -416,7 +282,7 @@ function changeApplicationStatus(vagaId, idCandidatura, newStatusInt) {
 /* MODAL 1: FICHA DETALHADA DA VAGA                                           */
 /* -------------------------------------------------------------------------- */
 function openDetailsModal(vagaId) {
-    const vaga = companyVacancies.find(v => v.id === vagaId);
+    const vaga = companyVacancies.find(v => String(v.id) === String(vagaId));
     if (!vaga) return;
 
     const content = document.getElementById('modal-details-content');
@@ -492,11 +358,11 @@ function openDetailsModal(vagaId) {
 
         <div class="flex flex-col sm:flex-row justify-between gap-3 pt-6 mt-6 border-t border-slate-100">
             <div class="flex gap-2">
-                <button onclick="closeModal('modal-vacancy-details'); openEditModal(${vaga.id});" class="px-4 py-2.5 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200 font-bold text-xs rounded-xl transition flex items-center gap-1.5"><i class="fas fa-pen"></i> Editar Vaga</button>
-                <button onclick="closeModal('modal-vacancy-details'); openDeleteModal(${vaga.id});" class="px-4 py-2.5 bg-red-50 hover:bg-red-100 text-red-700 border border-red-200 font-bold text-xs rounded-xl transition flex items-center gap-1.5"><i class="fas fa-trash-alt"></i> Excluir</button>
+                <button onclick="closeModal('modal-vacancy-details'); openEditModal('${vaga.id}');" class="px-4 py-2.5 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200 font-bold text-xs rounded-xl transition flex items-center gap-1.5"><i class="fas fa-pen"></i> Editar Vaga</button>
+                <button onclick="closeModal('modal-vacancy-details'); openDeleteModal('${vaga.id}');" class="px-4 py-2.5 bg-red-50 hover:bg-red-100 text-red-700 border border-red-200 font-bold text-xs rounded-xl transition flex items-center gap-1.5"><i class="fas fa-trash-alt"></i> Excluir</button>
             </div>
             <div class="flex gap-2">
-                <button onclick="closeModal('modal-vacancy-details'); openCandidatesModal(${vaga.id});" class="px-5 py-2.5 bg-pojae-600 hover:bg-pojae-700 text-white font-bold text-xs rounded-xl shadow-md shadow-blue-600/20 transition flex items-center justify-center gap-2"><i class="fas fa-users"></i> Ver Candidatos (${vaga.candidaturas.length})</button>
+                <button onclick="closeModal('modal-vacancy-details'); openCandidatesModal('${vaga.id}');" class="px-5 py-2.5 bg-pojae-600 hover:bg-pojae-700 text-white font-bold text-xs rounded-xl shadow-md shadow-blue-600/20 transition flex items-center justify-center gap-2"><i class="fas fa-users"></i> Ver Candidatos (${vaga.candidaturas.length})</button>
                 <button onclick="closeModal('modal-vacancy-details')" class="px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs rounded-xl transition">Fechar</button>
             </div>
         </div>
@@ -508,7 +374,7 @@ function openDetailsModal(vagaId) {
 /* MODAL 2 & 3: EDIÇÃO E EXCLUSÃO                                             */
 /* -------------------------------------------------------------------------- */
 function openEditModal(vagaId) {
-    const vaga = companyVacancies.find(v => v.id === vagaId);
+    const vaga = companyVacancies.find(v => String(v.id) === String(vagaId));
     if (!vaga) return;
     document.getElementById('edit-id').value = vaga.id;
     document.getElementById('edit-modal-id-label').textContent = `#${vaga.id}`;
@@ -541,10 +407,10 @@ function openEditModal(vagaId) {
     openModal('modal-edit-vacancy');
 }
 
-function handleEditSubmit(e) {
+async function handleEditSubmit(e) {
     e.preventDefault();
-    const id = parseInt(document.getElementById('edit-id').value);
-    const vaga = companyVacancies.find(v => v.id === id);
+    const id = document.getElementById('edit-id').value;
+    const vaga = companyVacancies.find(v => String(v.id) === String(id));
     if (!vaga) return;
 
     const rawBolsa = document.getElementById('edit-bolsa').value.replace(/\./g, '').replace(',', '.');
@@ -575,6 +441,24 @@ function handleEditSubmit(e) {
     vaga.supervisorNome = document.getElementById('edit-supervisor-nome').value;
     vaga.supervisorFormacao = document.getElementById('edit-supervisor-formacao').value;
 
+    const toApiDate = value => value ? value.split('-').reverse().join('/') : null;
+    const payload = {
+        title: vaga.titulo, description: vaga.descricao, dailyWorkingHours: vaga.cargaHorariaDiaria,
+        workSchedule: vaga.diasSemana, type: vaga.tipoVaga === 1 ? 'ESTAGIARIO' : 'JOVEM_APRENDIZ',
+        numberOfPositions: vaga.quantidadeVagas, daysOfTheWeek: vaga.diasSemanaCount || 5,
+        weeklyWorkingHours: vaga.cargaHorariaSemanal, scholarshipAmount: vaga.valorBolsa,
+        opportunityObjective: vaga.objetivoOportunidade, expectedActivities: vaga.atividadesPrevistas,
+        sector: String(vaga.setorAtuacao), minimumEducation: String(vaga.escolaridade),
+        gradeOrAcademicTerm: vaga.seriePeriodoDesejado, relatedCourses: vaga.cursosRelacionados,
+        desiredSkills: vaga.habilidadesDesejadas, criteriaObservations: vaga.observacoesCriterios,
+        supervisorName: vaga.supervisorNome, supervisorEducation: vaga.supervisorFormacao,
+        recessPeriod: vaga.periodoRecesso, expectedStartDate: toApiDate(vaga.inicioPrevisto),
+        expectedEndDate: toApiDate(vaga.terminoPrevisto), benefitsOffered: vaga.beneficiosOferecidos,
+        location: vaga.localidadeVaga, workModality: ['PRESENCIAL','HIBRIDO','REMOTO'][vaga.modalidadeTrabalho - 1],
+        status: vaga.status === 'Rascunho' ? 'RASCUNHO' : vaga.status === 'Encerrada' ? 'ENCERRADA' : 'PUBLICADA'
+    };
+    try { await apiRequest(`/vagas/minhas/${id}`, { method: 'PUT', body: JSON.stringify(payload) }); }
+    catch (error) { showToast(error.message, 'error'); return; }
     syncStorage();
     updateMetrics();
     renderVacancies();
@@ -583,7 +467,7 @@ function handleEditSubmit(e) {
 }
 
 function openDeleteModal(vagaId) {
-    const vaga = companyVacancies.find(v => v.id === vagaId);
+    const vaga = companyVacancies.find(v => String(v.id) === String(vagaId));
     if (!vaga) return;
     document.getElementById('delete-vacancy-id').value = vaga.id;
     document.getElementById('delete-modal-title').textContent = vaga.titulo;
@@ -591,9 +475,11 @@ function openDeleteModal(vagaId) {
     openModal('modal-delete-vacancy');
 }
 
-function confirmDeleteVacancy() {
-    const id = parseInt(document.getElementById('delete-vacancy-id').value);
-    companyVacancies = companyVacancies.filter(v => v.id !== id);
+async function confirmDeleteVacancy() {
+    const id = document.getElementById('delete-vacancy-id').value;
+    try { await apiRequest(`/vagas/minhas/${id}`, { method: 'DELETE' }); }
+    catch (error) { showToast(error.message, 'error'); return; }
+    companyVacancies = companyVacancies.filter(v => String(v.id) !== String(id));
     syncStorage();
     updateMetrics();
     renderVacancies();
@@ -605,7 +491,7 @@ function confirmDeleteVacancy() {
 /* MODAL 4: GESTÃO DE CANDIDATOS INSCRITOS (ATUALIZADO CONFORME REQUISITOS)   */
 /* -------------------------------------------------------------------------- */
 function openCandidatesModal(vagaId) {
-    const vaga = companyVacancies.find(v => v.id === vagaId);
+    const vaga = companyVacancies.find(v => String(v.id) === String(vagaId));
     if (!vaga) return;
 
     const content = document.getElementById('modal-candidates-content');
@@ -626,12 +512,12 @@ function openCandidatesModal(vagaId) {
 
                     <div class="flex items-center gap-1.5">
                         <label class="text-[11px] font-bold text-slate-500">Status:</label>
-                        <select onchange="changeApplicationStatus(${vaga.id}, ${cand.idCandidatura}, this.value)" class="bg-white border border-slate-200 rounded-xl px-2.5 py-1 text-xs font-bold text-pojae-800 focus:outline-none focus:border-pojae-600 cursor-pointer">
-                            <option value="1" ${cand.statusCandidatura === 1 ? 'selected' : ''}>1 - Inscrito</option>
+                        <select onchange="changeApplicationStatus('${vaga.id}', '${cand.idCandidatura}', this.value)" class="bg-white border border-slate-200 rounded-xl px-2.5 py-1 text-xs font-bold text-pojae-800 focus:outline-none focus:border-pojae-600 cursor-pointer">
+                            <option value="1" ${cand.statusCandidatura === 1 ? 'selected' : ''}>1 - Enviada</option>
                             <option value="2" ${cand.statusCandidatura === 2 ? 'selected' : ''}>2 - Em Análise</option>
-                            <option value="3" ${cand.statusCandidatura === 3 ? 'selected' : ''}>3 - Entrevista Agendada</option>
-                            <option value="4" ${cand.statusCandidatura === 4 ? 'selected' : ''}>4 - Aprovado</option>
-                            <option value="5" ${cand.statusCandidatura === 5 ? 'selected' : ''}>5 - Reprovado</option>
+                            <option value="3" ${cand.statusCandidatura === 3 ? 'selected' : ''}>3 - Aprovada</option>
+                            <option value="4" ${cand.statusCandidatura === 4 ? 'selected' : ''}>4 - Rejeitada</option>
+                            <option value="5" ${cand.statusCandidatura === 5 ? 'selected' : ''}>5 - Cancelada</option>
                         </select>
                     </div>
                 </div>
@@ -645,7 +531,7 @@ function openCandidatesModal(vagaId) {
                         <div class="space-y-1">
                             <h4 class="text-base font-extrabold text-slate-900">${cand.nomeCandidato}</h4>
                             <p class="text-xs text-slate-600 font-medium">
-                                <i class="fas fa-university text-pojae-600 mr-1"></i> ${INSTITUICAO_MAP[cand.instituicaoEnsino]} • <strong>${cand.nomeCurso}</strong> (${cand.seriePeriodo} - ${cand.turno})
+                                <i class="fas fa-university text-pojae-600 mr-1"></i> ${cand.instituicaoEnsino} • <strong>${cand.nomeCurso}</strong> (${cand.seriePeriodo} - ${cand.turno})
                             </p>
                             <div class="flex flex-wrap items-center gap-3 text-xs text-slate-500 pt-0.5">
                                 <span><i class="fas fa-envelope text-slate-400 mr-1"></i> ${cand.email}</span>
@@ -666,10 +552,10 @@ function openCandidatesModal(vagaId) {
                 <!-- RODAPÉ DO CARD: ANEXOS (RF07) E BOTÃO VER MAIS SOBRE O CANDIDATO -->
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-1">
                     <div class="flex flex-wrap gap-2">
-                        <button onclick="showToast('Abrindo Currículo (ID #${cand.curriculoId}) de ${cand.nomeCandidato}...', 'info')" class="text-xs font-bold text-slate-700 bg-white hover:bg-slate-100 border border-slate-200 px-3 py-2 rounded-xl transition flex items-center gap-1.5">
+                        <button onclick="downloadApplicationDocument('${cand.idCandidatura}', 'curriculo')" class="text-xs font-bold text-slate-700 bg-white hover:bg-slate-100 border border-slate-200 px-3 py-2 rounded-xl transition flex items-center gap-1.5">
                             <i class="fas fa-file-pdf text-red-500"></i> Currículo (#${cand.curriculoId})
                         </button>
-                        <button onclick="showToast('Abrindo Histórico Escolar (ID #${cand.historicoEscolarId}) de ${cand.nomeCandidato}...', 'info')" class="text-xs font-bold text-slate-700 bg-white hover:bg-slate-100 border border-slate-200 px-3 py-2 rounded-xl transition flex items-center gap-1.5">
+                        <button onclick="downloadApplicationDocument('${cand.idCandidatura}', 'historico')" class="text-xs font-bold text-slate-700 bg-white hover:bg-slate-100 border border-slate-200 px-3 py-2 rounded-xl transition flex items-center gap-1.5">
                             <i class="fas fa-graduation-cap text-blue-600"></i> Histórico (#${cand.historicoEscolarId})
                         </button>
                     </div>
@@ -716,6 +602,15 @@ function openCandidatesModal(vagaId) {
     `;
 
     openModal('modal-vacancy-candidates');
+}
+
+async function downloadApplicationDocument(applicationId, type) {
+    try {
+        const response = await fetch(`${API_BASE_URL}/candidaturas/${applicationId}/documentos/${type}`, { credentials: 'include' });
+        if (!response.ok) throw new Error('Não foi possível abrir o documento.');
+        const blob = await response.blob(); const url = URL.createObjectURL(blob);
+        const link = document.createElement('a'); link.href = url; link.download = `${type}.pdf`; link.click(); URL.revokeObjectURL(url);
+    } catch (error) { showToast(error.message, 'error'); }
 }
 
 /* -------------------------------------------------------------------------- */
