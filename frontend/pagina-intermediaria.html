@@ -16,6 +16,8 @@
 
     <script src="./assets/js/tailwind-config.js"></script>
 
+    <script src="./assets/js/pagina-intermediaria.js"></script>
+
     <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans flex flex-col min-h-screen antialiased selection:bg-blue-500 selection:text-white">
@@ -263,7 +265,9 @@
 
             <!-- RODAPÉ DE AJUDA -->
             <div class="w-full max-w-sm mx-auto bg-blue-50/70 backdrop-blur-sm border border-blue-100 rounded-2xl p-4 text-center text-xs text-slate-600 flex items-center justify-center gap-2">
-                <i class="fas fa-info-circle text-pojae-600 text-sm"></i>
+                <button type="button" onclick="openModal('modal-profile-info')" title="Saiba mais sobre os perfis" class="text-pojae-600 hover:text-pojae-800 hover:scale-110 transition-transform focus:outline-none">
+                    <i class="fas fa-info-circle text-sm"></i>
+                </button>
                 <span>Já possui conta? <a href="login.html" class="font-bold text-pojae-700 hover:underline">Clique aqui para entrar</a>.</span>
             </div>
 
@@ -275,6 +279,34 @@
 
     <!-- Script de Inclusão dos Componentes Modulares -->
     <script src="./assets/js/partials.js"></script>
+
+
+    <!-- MODAL: INFORMAÇÕES SOBRE OS PERFIS -->
+    <div id="modal-profile-info" class="fixed inset-0 bg-slate-900/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl border border-slate-100 relative">
+            <button type="button" onclick="closeModal('modal-profile-info')" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600 transition">
+                <i class="fas fa-times text-lg"></i>
+            </button>
+
+            <div class="w-12 h-12 rounded-2xl bg-blue-50 text-pojae-600 flex items-center justify-center text-xl mb-4">
+                <i class="fas fa-info-circle"></i>
+            </div>
+            <h3 class="text-xl font-bold text-slate-900">Qual perfil escolher?</h3>
+            <p class="text-xs text-slate-500 mt-1 mb-4 leading-relaxed">
+                O POJAE conecta estudantes, empresas e instituições de ensino em Maceió. Veja qual opção se aplica a você:
+            </p>
+
+            <div class="bg-slate-50 border border-slate-200/80 rounded-2xl p-4 space-y-2.5 text-xs text-slate-600 mb-5">
+                <p><strong><i class="fas fa-user-graduate text-pojae-600 mr-1.5"></i> Estudante:</strong> Para jovens em busca de vagas de estágio ou aprendizagem (use seu CPF).</p>
+                <p><strong><i class="fas fa-building text-pojae-600 mr-1.5"></i> Empresa:</strong> Para organizações que desejam ofertar vagas (use o CNPJ).</p>
+                <p><strong><i class="fas fa-university text-pojae-600 mr-1.5"></i> Instituição:</strong> Para escolas técnicas e faculdades validarem alunos e convênios.</p>
+            </div>
+
+            <button type="button" onclick="closeModal('modal-profile-info')" class="w-full bg-pojae-600 hover:bg-pojae-700 text-white font-bold py-2.5 rounded-xl transition shadow-md shadow-blue-600/30 text-xs">
+                Entendi
+            </button>
+        </div>
+    </div>
 
 </body>
 </html>
