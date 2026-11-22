@@ -33,35 +33,42 @@
                 </div>
             </a>
 
-
             <!-- NAVIGATION LINKS (DESKTOP) -->
-            <nav class="desktop-nav items-center space-x-1 lg:space-x-2 text-sm font-semibold text-slate-600">
-                <a href="#vagas" class="px-3 py-2 rounded-lg hover:text-pojae-600 hover:bg-slate-100 transition">Vagas
-                    em Maceió</a>
+            <nav class="desktop-nav items-center space-x-2 lg:space-x-4 text-sm font-semibold text-slate-600">
+                <a href="#vagas" 
+                class="relative px-3 py-2 transition-colors duration-300 md:hover:text-pojae-600 after:content-[''] after:absolute after:bottom-0 after:left-3 after:right-3 after:h-[2px] after:bg-pojae-600 after:scale-x-0 after:origin-right after:transition-transform after:duration-300 md:hover:after:scale-x-100 md:hover:after:origin-left">
+                    Vagas em Maceió
+                </a>
                 <a href="#estudantes"
-                    class="px-3 py-2 rounded-lg hover:text-pojae-600 hover:bg-slate-100 transition">Para Estagiários</a>
-                <a href="#empresas" class="px-3 py-2 rounded-lg hover:text-pojae-600 hover:bg-slate-100 transition">Para
-                    Empresas</a>
+                class="relative px-3 py-2 transition-colors duration-300 md:hover:text-pojae-600 after:content-[''] after:absolute after:bottom-0 after:left-3 after:right-3 after:h-[2px] after:bg-pojae-600 after:scale-x-0 after:origin-right after:transition-transform after:duration-300 md:hover:after:scale-x-100 md:hover:after:origin-left">
+                    Para Estagiários
+                </a>
+                <a href="#empresas" 
+                class="relative px-3 py-2 transition-colors duration-300 md:hover:text-pojae-600 after:content-[''] after:absolute after:bottom-0 after:left-3 after:right-3 after:h-[2px] after:bg-pojae-600 after:scale-x-0 after:origin-right after:transition-transform after:duration-300 md:hover:after:scale-x-100 md:hover:after:origin-left">
+                    Para Empresas
+                </a>
                 <a href="#instituicoes"
-                    class="px-3 py-2 rounded-lg hover:text-pojae-600 hover:bg-slate-100 transition">Instituições</a>
+                class="relative px-3 py-2 transition-colors duration-300 md:hover:text-pojae-600 after:content-[''] after:absolute after:bottom-0 after:left-3 after:right-3 after:h-[2px] after:bg-pojae-600 after:scale-x-0 after:origin-right after:transition-transform after:duration-300 md:hover:after:scale-x-100 md:hover:after:origin-left">
+                    Instituições
+                </a>
             </nav>
 
             <!-- ACTION BUTTONS / BOTÃO CADASTRE-SE & HAMBÚRGUER -->
             <div class="flex items-center gap-2">
                 <!-- Botão de Login (Visível apenas em Desktop) -->
                 <a id="desktop-login-link" href="login.html"
-                    class="text-xs sm:text-sm font-semibold text-slate-600 hover:text-pojae-600 px-3 py-2 rounded-lg transition hidden md:inline-block">
+                    class="text-xs sm:text-sm font-semibold text-slate-600 px-3 py-2 transition-colors duration-300 hidden md:inline-block md:hover:text-pojae-600">
                     Já tem conta? Entrar
                 </a>
 
-                <!-- Botão Principal: Cadastre-se (Oculto no Mobile, Visível a partir do tamanho 'md' - Desktop) -->
+                <!-- Botão Principal: Cadastre-se (Apenas Desktop) -->
                 <a href="pagina-intermediaria.html"
                     class="hidden md:flex bg-pojae-600 hover:bg-pojae-700 text-white font-semibold text-xs sm:text-sm px-4 py-2.5 rounded-lg shadow-md shadow-blue-600/30 transition items-center gap-2">
                     <i class="fas fa-user-plus"></i>
                     <span>Cadastre-se</span>
                 </a>
 
-                <!-- BOTÃO HAMBÚRGUER MOBILE (Aparece no celular) -->
+                <!-- BOTÃO HAMBÚRGUER MOBILE -->
                 <button id="hamburger-btn" class="hamburger-btn md:hidden" aria-label="Abrir Menu de Navegação">
                     <span class="hamburger-line"></span>
                     <span class="hamburger-line"></span>
@@ -477,16 +484,21 @@
 
                         <!-- Botões Únicos e Quadrados (rounded-xl) com Ícones à Direita -->
                         <div class="flex flex-col sm:flex-row gap-3">
-                            <a href="pagina-intermediaria.html"
+                            <a href="cadastro-empresa.html"
                                 class="flex-1 bg-pojae-600 hover:bg-pojae-500 text-white font-bold text-sm px-5 py-3.5 rounded-xl transition flex items-center justify-center gap-2.5 shadow-md shadow-blue-950/40">
                                 <span>Cadastrar Empresa</span>
                                 <i class="fas fa-arrow-right text-xs"></i>
                             </a>
-                            <button onclick="openModal('modal-post-job')"
+                            <!-- <button onclick="openModal('modal-post-job')"
                                 class="flex-1 bg-slate-900 hover:bg-slate-950 text-white border border-slate-600 hover:border-slate-500 font-semibold text-sm px-5 py-3.5 rounded-xl transition flex items-center justify-center gap-2.5 cursor-pointer">
                                 <span>Publicar Vaga</span>
                                 <i class="fas fa-plus text-xs text-blue-400"></i>
-                            </button>
+                            </button> -->
+                            <a href="cadastro-vaga.html"
+                                class="flex-1 bg-slate-900 hover:bg-slate-950 text-white border border-slate-600 hover:border-slate-500 font-semibold text-sm px-5 py-3.5 rounded-xl transition flex items-center justify-center gap-2.5 cursor-pointer">
+                                <span>Publicar Vaga</span>
+                                <i class="fas fa-plus text-xs text-blue-400"></i>
+                            </a>
                         </div>
 
                         <!-- Nota Discreta de Requisito Básico -->
