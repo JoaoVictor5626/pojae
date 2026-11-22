@@ -12,8 +12,6 @@ body:has(.mobile-menu-overlay.is-open) {
     overflow: hidden;
 }
 
-
-
 .logo-navbar {
     width: 150px;
 }
@@ -110,6 +108,12 @@ body:has(.mobile-menu-overlay.is-open) {
     color: #3b82f6;
 }
 
+/* Garante que o botão Cadastre-se mantenha o texto branco no hover (acessibilidade) */
+.mobile-menu-overlay a[href="pagina-intermediaria.html"].mobile-nav-link:hover,
+.mobile-menu-overlay .bg-pojae-600.mobile-nav-link:hover {
+    color: #ffffff !important;
+}
+
 /* Quando o menu abre, os links aparecem sequencialmente (staggering/cascata) */
 .mobile-menu-overlay.is-open .mobile-nav-link {
     opacity: 1;
@@ -154,7 +158,6 @@ body:has(.mobile-menu-overlay.is-open) {
     will-change: opacity;
 }
 
-
 /* Estado visível ativado via JavaScript quando o elemento entra na tela */
 .reveal-on-scroll.is-visible {
     opacity: 1;
@@ -184,8 +187,6 @@ body:has(.mobile-menu-overlay.is-open) {
     animation: pojaeFloat 4.4s ease-in-out 1.4s infinite !important;
 }
 
-
-
 /*------ CARROSSEL INFINITO DE LOGOS ------*/
 @keyframes infiniteScroll {
     0% {
@@ -199,10 +200,6 @@ body:has(.mobile-menu-overlay.is-open) {
 .animate-infinite-scroll {
     animation: infiniteScroll 22s linear infinite;
 }
-
-
-
-
 
 /* ------ PRESENTE NAS PÁGINAS DE: LOGIN, CADASTRO DE ESTUDANTE  ------*/
 .toast-slide {
@@ -220,10 +217,6 @@ body:has(.mobile-menu-overlay.is-open) {
         opacity: 1;
     }
 }
-
-
-
-
 
 /* --- CONTROLE DE EXIBIÇÃO NOS 900PX --- */
 
@@ -261,10 +254,6 @@ body:has(.mobile-menu-overlay.is-open) {
     }
 }
 
-
-
-
-
 /* ------ CSS ESPECÍFICO DA PÁGINA INTERMEDIÁRIA ------ */
 .gradient-hero {
     background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #2563eb 100%);
@@ -280,7 +269,6 @@ body:has(.mobile-menu-overlay.is-open) {
 .card-option:hover {
     transform: translateY(-6px);
 }
-
 
 /* ------ CSS ESPECÍFICO DA PÁGINA DE CADASTRO DE ESTUDANTE ------ */
 .star-rating i {
