@@ -153,39 +153,39 @@
                     </p>
 
                     <!-- BARRA DE PESQUISA INTERATIVA -->
-<div class="mt-7 sm:mt-8 bg-white/95 backdrop-blur-md rounded-2xl p-2.5 shadow-[0_20px_50px_rgba(8,15,40,0.35)] border border-white/60 max-w-2xl mx-auto lg:mx-0 flex flex-col sm:flex-row gap-2.5 text-slate-800">
-    
-    <!-- Campo de Palavra-chave (Digitar) -->
-    <label for="search-keyword" class="flex-1 flex items-center px-3.5 py-2.5 bg-white border border-slate-300 hover:border-slate-400 focus-within:border-pojae-600 focus-within:ring-2 focus-within:ring-pojae-500/25 rounded-xl transition cursor-text">
-        <i class="fas fa-search text-slate-400 mr-2.5 text-xs shrink-0"></i>
-        <input type="text" id="search-keyword"
-            placeholder="Cargo ou habilidade (ex: Python)..."
-            class="w-full bg-transparent focus:outline-none text-sm font-medium text-slate-800 placeholder-slate-400">
-    </label>
+                    <div class="mt-7 sm:mt-8 bg-white/95 backdrop-blur-md rounded-2xl p-2.5 shadow-[0_20px_50px_rgba(8,15,40,0.35)] border border-white/60 max-w-2xl mx-auto lg:mx-0 flex flex-col sm:flex-row gap-2.5 text-slate-800">
+                        
+                        <!-- Campo de Palavra-chave (Digitar) -->
+                        <label for="search-keyword" class="flex-1 flex items-center px-3.5 py-2.5 bg-white border border-slate-300 hover:border-slate-400 focus-within:border-pojae-600 focus-within:ring-2 focus-within:ring-pojae-500/25 rounded-xl transition cursor-text">
+                            <i class="fas fa-search text-slate-400 mr-2.5 text-xs shrink-0"></i>
+                            <input type="text" id="search-keyword"
+                                placeholder="Cargo ou habilidade (ex: Python)..."
+                                class="w-full bg-transparent focus:outline-none text-sm font-medium text-slate-800 placeholder-slate-400">
+                        </label>
 
-    <!-- Seletor de Área (Clicar) -->
-    <div class="relative sm:w-52 flex items-center bg-white border border-slate-300 hover:border-slate-400 focus-within:border-pojae-600 focus-within:ring-2 focus-within:ring-pojae-500/25 rounded-xl transition cursor-pointer group">
-        <i class="fas fa-layer-group text-pojae-600 ml-3.5 text-xs pointer-events-none shrink-0"></i>
-        <select id="search-category" aria-label="Selecionar área de atuação"
-            class="w-full appearance-none bg-transparent pl-2.5 pr-9 py-2.5 focus:outline-none text-sm font-medium text-slate-700 cursor-pointer">
-            <option value="">Todas as Áreas</option>
-            <option value="Tecnologia">Tecnologia (TI)</option>
-            <option value="Administração">Administração</option>
-            <option value="Direito">Direito</option>
-            <option value="Engenharia">Engenharia</option>
-        </select>
-        <span class="absolute right-2.5 w-6 h-6 rounded-lg bg-slate-100 group-hover:bg-slate-200/80 flex items-center justify-center pointer-events-none transition-colors">
-            <i class="fas fa-chevron-down text-slate-500 text-[10px]"></i>
-        </span>
-    </div>
+                        <!-- Seletor de Área (Clicar) -->
+                        <div class="relative sm:w-52 flex items-center bg-white border border-slate-300 hover:border-slate-400 focus-within:border-pojae-600 focus-within:ring-2 focus-within:ring-pojae-500/25 rounded-xl transition cursor-pointer group">
+                            <i class="fas fa-layer-group text-pojae-600 ml-3.5 text-xs pointer-events-none shrink-0"></i>
+                            <select id="search-category" aria-label="Selecionar área de atuação"
+                                class="w-full appearance-none bg-transparent pl-2.5 pr-9 py-2.5 focus:outline-none text-sm font-medium text-slate-700 cursor-pointer">
+                                <option value="">Todas as Áreas</option>
+                                <option value="Tecnologia">Tecnologia (TI)</option>
+                                <option value="Administração">Administração</option>
+                                <option value="Direito">Direito</option>
+                                <option value="Engenharia">Engenharia</option>
+                            </select>
+                            <span class="absolute right-2.5 w-6 h-6 rounded-lg bg-slate-100 group-hover:bg-slate-200/80 flex items-center justify-center pointer-events-none transition-colors">
+                                <i class="fas fa-chevron-down text-slate-500 text-[10px]"></i>
+                            </span>
+                        </div>
 
-    <!-- Botão Buscar -->
-    <button onclick="filterJobs()"
-        class="bg-pojae-600 hover:bg-pojae-700 active:scale-[0.99] text-white font-bold px-6 py-3 rounded-xl transition-all shadow-lg shadow-blue-600/30 flex items-center justify-center gap-2 text-sm cursor-pointer shrink-0">
-        <span>Buscar</span>
-        <i class="fas fa-arrow-right text-xs"></i>
-    </button>
-</div>
+                        <!-- Botão Buscar -->
+                        <button onclick="filterJobs()"
+                            class="bg-pojae-600 hover:bg-pojae-700 active:scale-[0.99] text-white font-bold px-6 py-3 rounded-xl transition-all shadow-lg shadow-blue-600/30 flex items-center justify-center gap-2 text-sm cursor-pointer shrink-0">
+                            <span>Buscar</span>
+                            <i class="fas fa-arrow-right text-xs"></i>
+                        </button>
+                    </div>
 
                     <!-- Destaques Informativos (Cards Sutis em Vidro) -->
                     <div class="mt-6 sm:mt-7 grid grid-cols-3 gap-2.5 sm:gap-4 max-w-xl mx-auto lg:mx-0">
@@ -456,31 +456,31 @@
                             Cadastre sua empresa gratuitamente e receba currículos com documentação acadêmica validada pelas instituições.
                         </p>
 
-                        <!-- Checklist Complementar -->
-                        <ul class="space-y-3.5 my-6 border-y border-slate-700/80 py-5 text-xs sm:text-sm text-slate-200">
-                            <li class="flex items-center justify-between gap-3">
-                                <span>Cadastro institucional 100% gratuito para empresas</span>
-                                <span class="w-5 h-5 rounded-md bg-emerald-500/15 text-emerald-400 flex items-center justify-center shrink-0">
+                        <!-- Checklist Complementar (Ícones à esquerda e alinhados ao texto) -->
+                        <ul class="space-y-3 my-6 border-y border-slate-700/80 py-5 text-xs sm:text-sm text-slate-200">
+                            <li class="flex items-start gap-3">
+                                <span class="w-5 h-5 rounded-md bg-emerald-500/15 text-emerald-400 flex items-center justify-center shrink-0 mt-0.5">
                                     <i class="fas fa-check text-[10px]"></i>
                                 </span>
+                                <span class="leading-relaxed">Cadastro institucional 100% gratuito para empresas</span>
                             </li>
-                            <li class="flex items-center justify-between gap-3">
-                                <span>Acesso direto ao histórico escolar atualizado do candidato</span>
-                                <span class="w-5 h-5 rounded-md bg-emerald-500/15 text-emerald-400 flex items-center justify-center shrink-0">
+                            <li class="flex items-start gap-3">
+                                <span class="w-5 h-5 rounded-md bg-emerald-500/15 text-emerald-400 flex items-center justify-center shrink-0 mt-0.5">
                                     <i class="fas fa-check text-[10px]"></i>
                                 </span>
+                                <span class="leading-relaxed">Acesso direto ao histórico escolar atualizado do candidato</span>
                             </li>
-                            <li class="flex items-center justify-between gap-3">
-                                <span>Triagem organizada por curso, período e bairro de Maceió</span>
-                                <span class="w-5 h-5 rounded-md bg-emerald-500/15 text-emerald-400 flex items-center justify-center shrink-0">
+                            <li class="flex items-start gap-3">
+                                <span class="w-5 h-5 rounded-md bg-emerald-500/15 text-emerald-400 flex items-center justify-center shrink-0 mt-0.5">
                                     <i class="fas fa-check text-[10px]"></i>
                                 </span>
+                                <span class="leading-relaxed">Triagem organizada por curso, período e bairro de Maceió</span>
                             </li>
-                            <li class="flex items-center justify-between gap-3">
-                                <span>Enquadramento nas Leis 11.788/08 (Estágio) e 10.097/00 (Aprendiz)</span>
-                                <span class="w-5 h-5 rounded-md bg-emerald-500/15 text-emerald-400 flex items-center justify-center shrink-0">
+                            <li class="flex items-start gap-3">
+                                <span class="w-5 h-5 rounded-md bg-emerald-500/15 text-emerald-400 flex items-center justify-center shrink-0 mt-0.5">
                                     <i class="fas fa-check text-[10px]"></i>
                                 </span>
+                                <span class="leading-relaxed">Enquadramento nas Leis 11.788/08 (Estágio) e 10.097/00 (Aprendiz)</span>
                             </li>
                         </ul>
 
