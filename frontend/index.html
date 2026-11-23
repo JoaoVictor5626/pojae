@@ -23,53 +23,47 @@
 
     <!-- MAIN NAVBAR -->
     <header class="bg-white/90 backdrop-blur-md border-b border-slate-200/80 sticky top-0 z-40 transition-all">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-0 flex justify-between items-center h-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 xl:px-0 flex justify-between items-center h-20">
 
             <!-- BRAND LOGO POJAE -->
-            <a href="index.html" class="flex items-center gap-3 group z-50"
-                aria-label="POJAE - Ir para a página inicial">
+            <a href="index.html" class="flex items-center gap-3 group z-50" aria-label="POJAE - Ir para a página inicial">
                 <div class="logo-navbar">
                     <img src="./assets/images/pojae-logo.png" alt="Logotipo POJAE">
                 </div>
             </a>
 
             <!-- NAVIGATION LINKS (DESKTOP) -->
-            <nav class="desktop-nav items-center space-x-2 lg:space-x-4 text-sm font-semibold text-slate-600">
-                <a href="#vagas" 
-                class="relative px-3 py-2 transition-colors duration-300 md:hover:text-pojae-600 after:content-[''] after:absolute after:bottom-0 after:left-3 after:right-3 after:h-[2px] after:bg-pojae-600 after:scale-x-0 after:origin-right after:transition-transform after:duration-300 md:hover:after:scale-x-100 md:hover:after:origin-left">
+            <nav class="desktop-nav items-center space-x-2 lg:space-x-4 text-sm font-semibold text-slate-600 whitespace-nowrap">
+                <a href="#vagas" class="relative px-3 py-2 transition-colors duration-300 md:hover:text-pojae-600 after:content-[''] after:absolute after:bottom-0 after:left-3 after:right-3 after:h-[2px] after:bg-pojae-600 after:scale-x-0 after:origin-right after:transition-transform after:duration-300 md:hover:after:scale-x-100 md:hover:after:origin-left">
                     Vagas em Maceió
                 </a>
-                <a href="#estudantes"
-                class="relative px-3 py-2 transition-colors duration-300 md:hover:text-pojae-600 after:content-[''] after:absolute after:bottom-0 after:left-3 after:right-3 after:h-[2px] after:bg-pojae-600 after:scale-x-0 after:origin-right after:transition-transform after:duration-300 md:hover:after:scale-x-100 md:hover:after:origin-left">
+                <a href="#estudantes" class="relative px-3 py-2 transition-colors duration-300 md:hover:text-pojae-600 after:content-[''] after:absolute after:bottom-0 after:left-3 after:right-3 after:h-[2px] after:bg-pojae-600 after:scale-x-0 after:origin-right after:transition-transform after:duration-300 md:hover:after:scale-x-100 md:hover:after:origin-left">
                     Para Estagiários
                 </a>
-                <a href="#empresas" 
-                class="relative px-3 py-2 transition-colors duration-300 md:hover:text-pojae-600 after:content-[''] after:absolute after:bottom-0 after:left-3 after:right-3 after:h-[2px] after:bg-pojae-600 after:scale-x-0 after:origin-right after:transition-transform after:duration-300 md:hover:after:scale-x-100 md:hover:after:origin-left">
+                <a href="#empresas" class="relative px-3 py-2 transition-colors duration-300 md:hover:text-pojae-600 after:content-[''] after:absolute after:bottom-0 after:left-3 after:right-3 after:h-[2px] after:bg-pojae-600 after:scale-x-0 after:origin-right after:transition-transform after:duration-300 md:hover:after:scale-x-100 md:hover:after:origin-left">
                     Para Empresas
                 </a>
-                <a href="#instituicoes"
-                class="relative px-3 py-2 transition-colors duration-300 md:hover:text-pojae-600 after:content-[''] after:absolute after:bottom-0 after:left-3 after:right-3 after:h-[2px] after:bg-pojae-600 after:scale-x-0 after:origin-right after:transition-transform after:duration-300 md:hover:after:scale-x-100 md:hover:after:origin-left">
+                <a href="#instituicoes" class="relative px-3 py-2 transition-colors duration-300 md:hover:text-pojae-600 after:content-[''] after:absolute after:bottom-0 after:left-3 after:right-3 after:h-[2px] after:bg-pojae-600 after:scale-x-0 after:origin-right after:transition-transform after:duration-300 md:hover:after:scale-x-100 md:hover:after:origin-left">
                     Instituições
                 </a>
             </nav>
 
             <!-- ACTION BUTTONS / BOTÃO CADASTRE-SE & HAMBÚRGUER -->
-            <div class="flex items-center gap-2">
-                <!-- Botão de Login (Visível apenas em Desktop) -->
-                <a id="desktop-login-link" href="login.html"
-                    class="text-xs sm:text-sm font-semibold text-slate-600 px-3 py-2 transition-colors duration-300 hidden md:inline-block md:hover:text-pojae-600">
-                    Já tem conta? Entrar
-                </a>
+            <div class="flex items-center gap-2 whitespace-nowrap">
+                <div class="desktop-actions">
+                    <a id="desktop-login-link" href="login.html"
+                        class="text-sm font-semibold text-slate-600 px-3 py-2 transition-colors duration-300 hover:text-pojae-600">
+                        Já tem conta? Entrar
+                    </a>
 
-                <!-- Botão Principal: Cadastre-se (Apenas Desktop) -->
-                <a href="pagina-intermediaria.html"
-                    class="hidden md:flex bg-pojae-600 hover:bg-pojae-700 text-white font-semibold text-xs sm:text-sm px-4 py-2.5 rounded-xl shadow-md shadow-blue-600/30 transition items-center gap-2">
-                    <i class="fas fa-user-plus"></i>
-                    <span>Cadastre-se</span>
-                </a>
+                    <a href="pagina-intermediaria.html"
+                        class="flex bg-pojae-600 hover:bg-pojae-700 text-white font-semibold text-sm px-4 py-2.5 rounded-xl shadow-md shadow-blue-600/30 transition items-center gap-2">
+                        <i class="fas fa-user-plus"></i>
+                        <span>Cadastre-se</span>
+                    </a>
+                </div>
 
-                <!-- BOTÃO HAMBÚRGUER MOBILE -->
-                <button id="hamburger-btn" class="hamburger-btn md:hidden" aria-label="Abrir Menu de Navegação">
+                <button id="hamburger-btn" class="hamburger-btn" aria-label="Abrir Menu de Navegação">
                     <span class="hamburger-line"></span>
                     <span class="hamburger-line"></span>
                     <span class="hamburger-line"></span>
