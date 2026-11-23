@@ -12,8 +12,16 @@ body:has(.mobile-menu-overlay.is-open) {
     overflow: hidden;
 }
 
+/* Ajuste da Logo: menor no mobile, 150px no desktop */
 .logo-navbar {
-    width: 150px;
+    width: 115px; /* Tamanho ajustado para mobile */
+    transition: width 0.2s ease;
+}
+
+@media (min-width: 768px) {
+    .logo-navbar {
+        width: 150px;
+    }
 }
 
 .logo-footer {
@@ -218,39 +226,40 @@ body:has(.mobile-menu-overlay.is-open) {
     }
 }
 
-/* --- CONTROLE DE EXIBIÇÃO NOS 900PX --- */
+/* --- CONTROLE DE EXIBIÇÃO UNIFICADO NOS 1023PX --- */
 
-/* Por padrão (telas maiores que 900px) */
+/* Por padrão (telas maiores ou iguais a 1024px) */
 .desktop-nav {
     display: flex;
-    /* Mostra os links do meio */
+}
+
+.desktop-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 .hamburger-btn {
     display: none;
-    /* Esconde o botão hambúrguer */
 }
 
 .btn-text-publish {
     display: inline;
-    /* Mostra o texto do botão publicar */
 }
 
-/* Quando a tela for menor ou igual a 900px */
-@media (max-width: 900px) {
-    .desktop-nav {
-        display: none !important;
-        /* Esconde completamente os nomes do meio */
+/* Quando a tela for menor ou igual a 1023px (antes do breakpoint 'lg' do Tailwind) */
+@media (max-width: 1056px) {
+    .desktop-nav,
+    .desktop-actions {
+        display: none !important; /* Esconde links do meio e botões de ação */
     }
 
     .hamburger-btn {
-        display: flex !important;
-        /* Faz o menu hambúrguer aparecer */
+        display: flex !important; /* Exibe o botão hambúrguer */
     }
 
     .btn-text-publish {
         display: none !important;
-        /* Esconde o texto do botão para não amassar o layout */
     }
 }
 
