@@ -32,16 +32,16 @@ const FALLBACK_DATA = {
         statusCandidatura: 2,
         candidatoId: 101,
         nomeCandidato: "João Victor Araújo Coêlho",
-        email: "joao.victor@cesmac.edu.br",
-        telefone: "(82) 99812-3456",
+        email: "joaovictoracoelho123@gmail.com",
+        telefone: "(82) 98759-3494",
         curriculoId: 501,
         historicoEscolarId: 801,
-        mensagemApresentacao: "Prezados, sou estudante do 5º período de Engenharia de Software no CESMAC e tenho grande interesse em aplicar meus conhecimentos em JavaScript, Tailwind CSS e Git nos projetos da Tecnologia Alagoana.",
+        mensagemApresentacao: "Prezados, sou estudante do 4º período de Engenharia de Software no CESMAC e tenho grande interesse em aplicar meus conhecimentos em JavaScript, Tailwind CSS e Git nos projetos da Tecnologia Alagoana.",
         instituicaoEnsino: 1,
-        nomeCurso: "Engenharia de Software",
-        seriePeriodo: "5º Período",
+        nomeCurso: "Sistemas de Informação",
+        seriePeriodo: "4º Período",
         turno: "Noturno",
-        conclusaoPrevista: "2027-12-15",
+        conclusaoPrevista: "2028-12-15",
         habilidades: [
             { tipoHabilidade: 1, habilidade: "JavaScript ES6+ & DOM", nivelProficiencia: 4, observacoes: "Desenvolvimento de aplicações web interativas e consumo de APIs REST." },
             { tipoHabilidade: 1, habilidade: "HTML5 & Tailwind CSS", nivelProficiencia: 5, observacoes: "Construção de interfaces responsivas e protótipos de alta fidelidade." },
@@ -154,11 +154,17 @@ function renderCandidateProfile() {
 
     container.innerHTML = `
         <!-- CABEÇALHO DO PERFIL E DADOS DA CANDIDATURA -->
-        <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-sm space-y-6">
+        <div cla<div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-sm space-y-6">
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-100">
                 <div class="flex items-center gap-4">
-                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-pojae-900 to-pojae-600 text-white font-extrabold text-xl flex items-center justify-center shadow-lg shadow-blue-600/20 shrink-0">
-                        ${c.nomeCandidato.substring(0, 2).toUpperCase()}
+                    <!-- Círculo com inicial do primeiro e do último nome -->
+                    <div class="w-16 h-16 rounded-full bg-gradient-to-tr from-pojae-900 to-pojae-600 text-white font-extrabold text-xl flex items-center justify-center shadow-lg shadow-blue-600/20 shrink-0">
+                        ${(() => {
+                            const partes = (c.nomeCandidato || '').trim().split(/\s+/);
+                            if (partes.length === 0 || !partes[0]) return '';
+                            if (partes.length === 1) return partes[0].substring(0, 2).toUpperCase();
+                            return (partes[0][0] + partes[partes.length - 1][0]).toUpperCase();
+                        })()}
                     </div>
                     <div>
                         <div class="flex flex-wrap items-center gap-2 mb-1">
@@ -179,7 +185,7 @@ function renderCandidateProfile() {
                 <!-- CONTROLE DE STATUS DA CANDIDATURA -->
                 <div class="bg-slate-50 p-3.5 rounded-2xl border border-slate-200/80 shrink-0">
                     <label for="profile-status-select" class="block text-[11px] font-bold text-slate-500 mb-1">
-                        Status da Candidatura (RF08):
+                        Status da Candidatura:
                     </label>
                     <select id="profile-status-select" onchange="updateCandidateApplicationStatus(this.value)" class="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2 text-xs font-bold text-pojae-800 focus:outline-none focus:border-pojae-600 cursor-pointer">
                         <option value="1" ${c.statusCandidatura === 1 ? 'selected' : ''}>1 - Enviada</option>
@@ -202,7 +208,7 @@ function renderCandidateProfile() {
             </div>
         </div>
 
-        <!-- BLOCO 1: DADOS DE CONTATO E DOCUMENTAÇÃO ACADÊMICA (RF01 & RF07) -->
+        <!-- BLOCO 1: DADOS DE CONTATO E DOCUMENTAÇÃO ACADÊMICA -->
         <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-sm space-y-6">
             <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
                 <div class="w-10 h-10 rounded-xl bg-blue-100 text-pojae-700 flex items-center justify-center font-bold text-lg">
@@ -210,7 +216,7 @@ function renderCandidateProfile() {
                 </div>
                 <div>
                     <h2 class="text-base font-bold text-slate-900">Dados de Contato & Documentação Anexada</h2>
-                    <p class="text-xs text-slate-500">Informações disponibilizadas no cadastro do estudante e anexos da candidatura (RF07).</p>
+                    <p class="text-xs text-slate-500">Informações disponibilizadas no cadastro do estudante e anexos da candidatura.</p>
                 </div>
             </div>
 
@@ -263,7 +269,7 @@ function renderCandidateProfile() {
             </div>
         </div>
 
-        <!-- BLOCO 2: VÍNCULO ACADÊMICO (RF01) -->
+        <!-- BLOCO 2: VÍNCULO ACADÊMICO -->
         <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-sm space-y-6">
             <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
                 <div class="w-10 h-10 rounded-xl bg-blue-100 text-pojae-700 flex items-center justify-center font-bold text-lg">
