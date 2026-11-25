@@ -36,11 +36,14 @@
                 <a href="#vagas" class="relative px-3 py-2 transition-colors duration-300 md:hover:text-pojae-600 after:content-[''] after:absolute after:bottom-0 after:left-3 after:right-3 after:h-[2px] after:bg-pojae-600 after:scale-x-0 after:origin-right after:transition-transform after:duration-300 md:hover:after:scale-x-100 md:hover:after:origin-left">
                     Vagas em Maceió
                 </a>
-                <a href="#estudantes" class="relative px-3 py-2 transition-colors duration-300 md:hover:text-pojae-600 after:content-[''] after:absolute after:bottom-0 after:left-3 after:right-3 after:h-[2px] after:bg-pojae-600 after:scale-x-0 after:origin-right after:transition-transform after:duration-300 md:hover:after:scale-x-100 md:hover:after:origin-left">
-                    Para Estagiários
+                <a href="#sobre" class="relative px-3 py-2 transition-colors duration-300 md:hover:text-pojae-600 after:content-[''] after:absolute after:bottom-0 after:left-3 after:right-3 after:h-[2px] after:bg-pojae-600 after:scale-x-0 after:origin-right after:transition-transform after:duration-300 md:hover:after:scale-x-100 md:hover:after:origin-left">
+                    Sobre
                 </a>
                 <a href="#empresas" class="relative px-3 py-2 transition-colors duration-300 md:hover:text-pojae-600 after:content-[''] after:absolute after:bottom-0 after:left-3 after:right-3 after:h-[2px] after:bg-pojae-600 after:scale-x-0 after:origin-right after:transition-transform after:duration-300 md:hover:after:scale-x-100 md:hover:after:origin-left">
                     Para Empresas
+                </a>
+                <a href="#estudantes" class="relative px-3 py-2 transition-colors duration-300 md:hover:text-pojae-600 after:content-[''] after:absolute after:bottom-0 after:left-3 after:right-3 after:h-[2px] after:bg-pojae-600 after:scale-x-0 after:origin-right after:transition-transform after:duration-300 md:hover:after:scale-x-100 md:hover:after:origin-left">
+                    Para Estagiários
                 </a>
                 <a href="#instituicoes" class="relative px-3 py-2 transition-colors duration-300 md:hover:text-pojae-600 after:content-[''] after:absolute after:bottom-0 after:left-3 after:right-3 after:h-[2px] after:bg-pojae-600 after:scale-x-0 after:origin-right after:transition-transform after:duration-300 md:hover:after:scale-x-100 md:hover:after:origin-left">
                     Instituições
@@ -83,10 +86,11 @@
 
         <div class="flex flex-col items-center text-center space-y-3 w-full max-w-xs px-4 pointer-events-auto">
             <!-- Links de Navegação -->
-            <a href="#vagas" class="mobile-nav-link w-full text-center">Vagas em Maceió</a>
-            <a href="#estudantes" class="mobile-nav-link w-full text-center">Para Estagiários</a>
-            <a href="#empresas" class="mobile-nav-link w-full text-center">Para Empresas</a>
-            <a href="#instituicoes" class="mobile-nav-link w-full text-center">Instituições de Ensino</a>
+            <a href="#vagas" onclick="closeMobileMenu()" class="mobile-nav-link w-full text-center">Vagas em Maceió</a>
+            <a href="#sobre" onclick="closeMobileMenu()" class="mobile-nav-link w-full text-center">Sobre</a>
+            <a href="#empresas" onclick="closeMobileMenu()" class="mobile-nav-link w-full text-center">Para Empresas</a>
+            <a href="#estudantes" onclick="closeMobileMenu()" class="mobile-nav-link w-full text-center">Para Estagiários</a>
+            <a href="#instituicoes" onclick="closeMobileMenu()" class="mobile-nav-link w-full text-center">Instituições de Ensino</a>
 
             <!-- Divisor sutil -->
             <div class="w-full border-t border-slate-700/60 my-2"></div>
@@ -389,6 +393,162 @@
             <nav id="pagination-container" aria-label="Paginação de vagas" class="mt-10 flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 hidden">
                 <!-- Preenchido via JavaScript -->
             </nav>
+        </section>
+
+        <!-- SEÇÃO SOBRE A PLATAFORMA -->
+        <section id="sobre" aria-labelledby="sobre-titulo" class="py-16 sm:py-24 bg-white border-t border-slate-200/80 relative overflow-hidden">
+            
+            <!-- Brilho Decorativo Sutil -->
+            <div class="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-pojae-500/5 blur-3xl pointer-events-none"></div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-12 items-center">
+                    
+                    <!-- Coluna da Esquerda: Retrato Retangular com Fundo Claro para PNG Transparente -->
+                    <div class="lg:col-span-5 flex justify-center reveal-on-scroll">
+                        <div class="relative w-full max-w-[340px] sm:max-w-[380px] group">
+                            
+                            <!-- Moldura Deslocada Sutil ao Fundo (Profundidade Visual) -->
+                            <div class="absolute -inset-3 rounded-[2rem] bg-gradient-to-tr from-pojae-600/15 via-sky-400/15 to-blue-200/30 -rotate-2 transition-transform duration-500 group-hover:rotate-0 pointer-events-none"></div>
+
+                            <!-- Coluna da Esquerda: Retrato Retangular Suave com Borda Delicada -->
+                    <div class="lg:col-span-5 flex justify-center reveal-on-scroll">
+                        <div class="relative w-full max-w-[340px] sm:max-w-[380px] group">
+                            
+                            <!-- Moldura Externa Clara e Sem Borda (Movimento lateral discreto no hover) -->
+                            <div class="absolute -inset-3 rounded-[2rem] bg-sky-100/75 -rotate-3 transition-all duration-500 ease-out group-hover:rotate-0 group-hover:translate-x-1.5 pointer-events-none"></div>
+
+                            <!-- Card Principal Retangular (Com borda suave e acabamento limpo) -->
+                            <div class="relative aspect-[4/5] w-full rounded-3xl overflow-hidden bg-gradient-to-br from-slate-300/75 via-sky-200/70 to-pojae-300/65 border border-white-300/75 shadow-[0_18px_40px_-15px_rgba(15,23,42,0.14)]">
+                                
+                                <!-- Plano Arquitetônico 1: Bloco Branco Translúcido (Superior Direito) -->
+                                <div class="absolute -top-12 -right-12 w-72 h-72 rounded-[2.5rem] rotate-12 bg-white/50 pointer-events-none"></div>
+
+                                <!-- Plano Arquitetônico 2: Bloco Azul Suave (Inferior Esquerdo) -->
+                                <div class="absolute -bottom-14 -left-10 w-80 h-60 rounded-[2.5rem] -rotate-12 bg-gradient-to-tr from-pojae-700/20 via-pojae-600/15 to-sky-500/10 pointer-events-none"></div>
+
+                                <!-- Halo de Luz Difuso atrás da Pessoa -->
+                                <div class="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/4 w-64 h-64 rounded-full bg-white/65 blur-2xl pointer-events-none"></div>
+
+                                <!-- Imagem PNG Transparente -->
+                                <img 
+                                    src="./assets/images/mulher-trabalhando-no-laptop-pojae.png" 
+                                    alt="Estudante utilizando notebook na plataforma POJAE em Maceió" 
+                                    class="relative z-10 w-full h-full object-cover object-[center_65%] drop-shadow-[0_12px_20px_rgba(15,23,42,0.15)] transition-transform duration-700 ease-out group-hover:scale-[1.03] select-none"
+                                >
+
+                                <!-- Vinheta Inferior Bem Sutil -->
+                                <div class="absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-slate-900/10 to-transparent z-20 pointer-events-none"></div>
+                            </div>
+
+                            <!-- Badge Flutuante Superior Esquerdo -->
+                            <div class="flex items-center gap-2.5 bg-pojae-600 text-white px-4 py-2.5 rounded-xl shadow-md shadow-blue-600/20 border border-blue-400/25 absolute left-4 sm:-left-5 top-5 sm:top-6 z-20 animate-float-up">
+                                <i class="fas fa-handshake text-sky-200 text-xs"></i>
+                                <span class="text-xs font-bold tracking-tight">Conexão Direta & Gratuita</span>
+                            </div>
+
+                            <!-- Badge Flutuante Inferior Direito -->
+                            <div class="flex items-center gap-2.5 bg-slate-900/90 backdrop-blur-md text-white px-4 py-2.5 rounded-xl shadow-[0_10px_24px_rgba(15,23,42,0.18)] border border-slate-700/70 absolute right-4 sm:-right-5 bottom-5 sm:bottom-6 z-20 animate-float-down">
+                                <span class="w-6 h-6 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
+                                    <i class="fas fa-shield-alt text-xs"></i>
+                                </span>
+                                <span class="text-xs font-extrabold tracking-tight text-white">Lei nº 11.788/08</span>
+                            </div>
+
+                        </div>
+                    </div>
+
+                            <!-- Badge Flutuante Superior Esquerdo -->
+                            <div class="flex items-center gap-2.5 bg-pojae-600 text-white px-4 py-2.5 rounded-xl shadow-lg shadow-blue-600/25 border border-blue-400/30 absolute left-4 sm:-left-5 top-5 sm:top-6 z-20 animate-float-up">
+                                <i class="fas fa-handshake text-sky-200 text-xs"></i>
+                                <span class="text-xs font-bold tracking-tight">Conexão Direta & Gratuita</span>
+                            </div>
+
+                            <!-- Badge Flutuante Inferior Direito -->
+                            <div class="flex items-center gap-2.5 bg-slate-900/95 backdrop-blur-md text-white px-4 py-2.5 rounded-xl shadow-[0_12px_28px_rgba(15,23,42,0.25)] border border-slate-700/80 absolute right-4 sm:-right-5 bottom-5 sm:bottom-6 z-20 animate-float-down">
+                                <span class="w-6 h-6 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
+                                    <i class="fas fa-shield-alt text-xs"></i>
+                                </span>
+                                <span class="text-xs font-extrabold tracking-tight text-white">Lei nº 11.788/08</span>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Coluna da Direita: Conteúdo Institucional + 3 Cards de Público -->
+                    <div class="lg:col-span-7 text-center lg:text-left reveal-on-scroll">
+                        
+                        <!-- Eyebrow Superior -->
+                        <span class="block text-xs font-bold uppercase tracking-wider text-pojae-600">
+                            <span>Sobre a Plataforma</span>
+                        </span>
+
+                        <!-- Título Principal -->
+                        <h2 id="sobre-titulo" class="mt-3 text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
+                            Talentos locais, oportunidades <span class="text-transparent bg-clip-text bg-gradient-to-r from-pojae-600 to-pojae-800">reais em Maceió.</span>
+                        </h2>
+
+                        <!-- Texto Descritivo Conciso -->
+                        <p class="mt-4 text-slate-600 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                            O <strong>POJAE</strong> centraliza e simplifica o acesso ao primeiro emprego e à prática profissional na capital alagoana. Conectamos estudantes, empresas concedentes e instituições de ensino em um ambiente 100% digital, transparente e alinhado à <strong>Lei do Estágio (Nº 11.788/08)</strong> e à Lei da Aprendizagem.
+                        </p>
+
+                        <!-- Grid de 3 Cards -->
+                        <div class="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4 text-left">
+                            
+                            <!-- Card 1: Estudantes -->
+                            <div class="bg-slate-50/80 hover:bg-white border border-slate-200/80 hover:border-pojae-300 rounded-2xl p-5 transition-all duration-300 hover:shadow-md group">
+                                <div class="w-10 h-10 rounded-xl bg-pojae-100 text-pojae-600 flex items-center justify-center mb-3.5 group-hover:bg-pojae-600 group-hover:text-white transition-colors">
+                                    <i class="fas fa-user-graduate text-base"></i>
+                                </div>
+                                <h3 class="text-sm font-bold text-slate-900 leading-snug">
+                                    Estudantes do ensino médio, técnico e superior
+                                </h3>
+                                <p class="text-xs text-slate-500 mt-1.5 leading-relaxed">
+                                    Candidatura gratuita com currículo e histórico escolar.
+                                </p>
+                            </div>
+
+                            <!-- Card 2: Instituições de Ensino -->
+                            <div class="bg-slate-50/80 hover:bg-white border border-slate-200/80 hover:border-indigo-300 rounded-2xl p-5 transition-all duration-300 hover:shadow-md group">
+                                <div class="w-10 h-10 rounded-xl bg-indigo-100 text-indigo-600 flex items-center justify-center mb-3.5 group-hover:bg-indigo-600 group-hover:text-white transition-colors">
+                                    <i class="fas fa-university text-base"></i>
+                                </div>
+                                <h3 class="text-sm font-bold text-slate-900 leading-snug">
+                                    Instituições de ensino e orientadores
+                                </h3>
+                                <p class="text-xs text-slate-500 mt-1.5 leading-relaxed">
+                                    Validação de vínculo e convênios acadêmicos em Maceió.
+                                </p>
+                            </div>
+
+                            <!-- Card 3: Empresas Concedentes -->
+                            <div class="bg-slate-50/80 hover:bg-white border border-slate-200/80 hover:border-sky-300 rounded-2xl p-5 transition-all duration-300 hover:shadow-md group">
+                                <div class="w-10 h-10 rounded-xl bg-sky-100 text-sky-700 flex items-center justify-center mb-3.5 group-hover:bg-sky-700 group-hover:text-white transition-colors">
+                                    <i class="fas fa-building text-base"></i>
+                                </div>
+                                <h3 class="text-sm font-bold text-slate-900 leading-snug">
+                                    Empresas e organizações concedentes
+                                </h3>
+                                <p class="text-xs text-slate-500 mt-1.5 leading-relaxed">
+                                    Publicação ágil de vagas com supervisão formativa.
+                                </p>
+                            </div>
+
+                        </div>
+
+                        <!-- CTA Discreto e Secundário -->
+                        <div class="mt-7 pt-5 border-t border-slate-100 flex flex-wrap items-center justify-center lg:justify-start gap-4">
+                            <a href="#estudantes" class="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-pojae-600 hover:text-pojae-800 transition group">
+                                <span>Veja como funciona o passo a passo</span>
+                                <i class="fas fa-arrow-down text-xs group-hover:translate-y-0.5 transition-transform"></i>
+                            </a>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
         </section>
 
         <!-- SEÇÃO RECRUTADOR & INSTITUIÇÃO -->
