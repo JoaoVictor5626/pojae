@@ -202,7 +202,7 @@
                                     <span class="text-lg sm:text-2xl font-extrabold text-emerald-300 tracking-tight leading-none">0%</span>
                                     <i class="fas fa-check-circle text-emerald-400 text-xs"></i>
                                 </div>
-                                <span class="block text-[11px] sm:text-xs font-medium text-slate-300 mt-1.5">Custo p/ Estudante</span>
+                                <span class="block text-[11px] sm:text-xs font-medium text-slate-300 mt-1.5">Custo para Estudante</span>
                             </div>
                         </div>
 
@@ -344,7 +344,7 @@
 
         
         <!-- SEÇÃO FEED DE VAGAS -->
-        <section id="vagas" class="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section id="vagas" class="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 reveal-on-scroll">
             <!-- Cabeçalho da Seção + Filtros -->
             <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12 reveal-on-scroll">
                 <div>
@@ -488,46 +488,64 @@
                             O <strong>POJAE</strong> centraliza e simplifica o acesso ao primeiro emprego e à prática profissional na capital alagoana. Conectamos estudantes, empresas concedentes e instituições de ensino em um ambiente 100% digital, transparente e alinhado à <strong>Lei do Estágio (Nº 11.788/08)</strong> e à Lei da Aprendizagem.
                         </p>
 
-                        <!-- Grid de 3 Cards -->
+                        <!-- Grid de 3 Cards Informativos (Ordem padronizada: Estudante, Empresa, Instituição) -->
                         <div class="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4 text-left">
                             
-                            <!-- Card 1: Estudantes -->
-                            <div class="bg-slate-50/80 hover:bg-white border border-slate-200/80 hover:border-pojae-300 rounded-2xl p-5 transition-all duration-300 hover:shadow-md group">
-                                <div class="w-10 h-10 rounded-xl bg-pojae-100 text-pojae-600 flex items-center justify-center mb-3.5 group-hover:bg-pojae-600 group-hover:text-white transition-colors">
-                                    <i class="fas fa-user-graduate text-base"></i>
+                            <!-- Card 1: Estudante -->
+                            <div class="bg-slate-50/70 border border-pojae-600/35 rounded-2xl p-5 pt-7 relative overflow-hidden flex flex-col justify-between reveal-on-scroll">
+                                <div class="absolute top-0 right-0 bg-pojae-600 text-white text-[10px] font-bold px-3 py-1 rounded-bl-xl uppercase tracking-wider">
+                                    Estudante
                                 </div>
-                                <h3 class="text-sm font-bold text-slate-900 leading-snug">
-                                    Estudantes do ensino médio, técnico e superior
-                                </h3>
-                                <p class="text-xs text-slate-500 mt-1.5 leading-relaxed">
-                                    Candidatura gratuita com currículo e histórico escolar.
-                                </p>
+
+                                <div>
+                                    <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-pojae-900 to-pojae-600 text-white flex items-center justify-center text-base mb-4">
+                                        <i class="fas fa-user-graduate"></i>
+                                    </div>
+                                    <h3 class="text-sm font-bold text-slate-900 leading-snug">
+                                        Estudantes do ensino médio, técnico e superior
+                                    </h3>
+                                    <p class="text-xs text-slate-500 mt-1.5 leading-relaxed">
+                                        Candidatura gratuita com currículo e histórico escolar.
+                                    </p>
+                                </div>
                             </div>
 
-                            <!-- Card 2: Instituições de Ensino -->
-                            <div class="bg-slate-50/80 hover:bg-white border border-slate-200/80 hover:border-indigo-300 rounded-2xl p-5 transition-all duration-300 hover:shadow-md group">
-                                <div class="w-10 h-10 rounded-xl bg-indigo-100 text-indigo-600 flex items-center justify-center mb-3.5 group-hover:bg-indigo-600 group-hover:text-white transition-colors">
-                                    <i class="fas fa-university text-base"></i>
+                            <!-- Card 2: Empresa -->
+                            <div class="bg-slate-50/70 border border-sky-600/35 rounded-2xl p-5 pt-7 relative overflow-hidden flex flex-col justify-between reveal-on-scroll">
+                                <div class="absolute top-0 right-0 bg-sky-600 text-white text-[10px] font-bold px-3 py-1 rounded-bl-xl uppercase tracking-wider">
+                                    Empresa
                                 </div>
-                                <h3 class="text-sm font-bold text-slate-900 leading-snug">
-                                    Instituições de ensino e orientadores
-                                </h3>
-                                <p class="text-xs text-slate-500 mt-1.5 leading-relaxed">
-                                    Validação de vínculo e convênios acadêmicos em Maceió.
-                                </p>
+
+                                <div>
+                                    <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-sky-900 to-sky-500 text-white flex items-center justify-center text-base mb-4">
+                                        <i class="fas fa-building"></i>
+                                    </div>
+                                    <h3 class="text-sm font-bold text-slate-900 leading-snug">
+                                        Empresas e organizações concedentes
+                                    </h3>
+                                    <p class="text-xs text-slate-500 mt-1.5 leading-relaxed">
+                                        Publicação ágil de vagas com supervisão formativa.
+                                    </p>
+                                </div>
                             </div>
 
-                            <!-- Card 3: Empresas Concedentes -->
-                            <div class="bg-slate-50/80 hover:bg-white border border-slate-200/80 hover:border-sky-300 rounded-2xl p-5 transition-all duration-300 hover:shadow-md group">
-                                <div class="w-10 h-10 rounded-xl bg-sky-100 text-sky-700 flex items-center justify-center mb-3.5 group-hover:bg-sky-700 group-hover:text-white transition-colors">
-                                    <i class="fas fa-building text-base"></i>
+                            <!-- Card 3: Instituição -->
+                            <div class="bg-slate-50/70 border border-indigo-600/35 rounded-2xl p-5 pt-7 relative overflow-hidden flex flex-col justify-between reveal-on-scroll">
+                                <div class="absolute top-0 right-0 bg-indigo-600 text-white text-[10px] font-bold px-3 py-1 rounded-bl-xl uppercase tracking-wider">
+                                    Instituição
                                 </div>
-                                <h3 class="text-sm font-bold text-slate-900 leading-snug">
-                                    Empresas e organizações concedentes
-                                </h3>
-                                <p class="text-xs text-slate-500 mt-1.5 leading-relaxed">
-                                    Publicação ágil de vagas com supervisão formativa.
-                                </p>
+
+                                <div>
+                                    <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-indigo-900 to-indigo-500 text-white flex items-center justify-center text-base mb-4">
+                                        <i class="fas fa-university"></i>
+                                    </div>
+                                    <h3 class="text-sm font-bold text-slate-900 leading-snug">
+                                        Instituições de ensino e orientadores
+                                    </h3>
+                                    <p class="text-xs text-slate-500 mt-1.5 leading-relaxed">
+                                        Validação de vínculo e convênios acadêmicos em Maceió.
+                                    </p>
+                                </div>
                             </div>
 
                         </div>
