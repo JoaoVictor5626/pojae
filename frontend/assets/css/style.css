@@ -248,7 +248,7 @@ body:has(.mobile-menu-overlay.is-open) {
 }
 
 /* Quando a tela for menor ou igual a 1023px (antes do breakpoint 'lg' do Tailwind) */
-@media (max-width: 1056px) {
+@media (max-width: 1136px) {
     .desktop-nav,
     .desktop-actions {
         display: none !important; /* Esconde links do meio e botões de ação */
