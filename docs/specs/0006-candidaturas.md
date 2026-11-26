@@ -37,18 +37,19 @@ O service não recebe objetos HTTP. Falta de sessão retorna 401; perfil incompa
 |---|---|---|---|
 | `/candidaturas` | POST multipart/form-data | Estagiário autenticado | Implementada; validar arquivos conforme RS04 |
 | `/candidaturas/perfil` | GET | Estagiário autenticado | Atualmente retorna dados para preencher o formulário, não o histórico |
-| `/candidaturas/minhas` | GET | Estagiário autenticado | A especificar/implementar para RF-08 |
+| `/candidaturas/minhas` | GET | Estagiário autenticado | Retorna candidaturas próprias, ordenadas da mais recente para a mais antiga |
 | `/candidaturas/{id}/cancelar` | PATCH | Dono da candidatura | A especificar/implementar para RF-16 |
 | `/candidaturas/{id}/status` | PATCH | Empresa dona da vaga | Implementada |
-| `/candidaturas/{id}/documentos/{tipo}` | GET | Empresa autorizada | Implementada; acesso precisa permanecer privado |
+| `/candidaturas/{id}/documentos/{tipo}` | GET | Dono da candidatura ou empresa responsável pela vaga | Entrega documento próprio inline ao estagiário e como anexo à empresa |
 
 ## Comportamento
 
 1. O frontend envia o UUID da vaga, currículo, histórico escolar e mensagem como `multipart/form-data` com cookie de sessão.
 2. O backend ignora qualquer identificador de candidato enviado pelo navegador e associa a candidatura à conta da sessão.
 3. A listagem de histórico filtra no service pelo candidato autenticado. Alterar o ID da candidatura não pode revelar candidaturas de terceiros.
-4. A empresa acessa documentos somente de candidaturas das próprias vagas. O conteúdo binário não aparece em DTOs de listagem.
-5. Cancelar altera a situação e acrescenta evento ao histórico; não apaga a candidatura nem os documentos.
+4. O dashboard do candidato mostra status, vaga, empresa, localidade, bolsa, modalidade, data, mensagem e nomes dos documentos recebidos do backend.
+5. Candidato e empresa acessam arquivos somente quando têm vínculo autorizado. O conteúdo binário não aparece em DTOs de listagem.
+6. Cancelar altera a situação e acrescenta evento ao histórico; não apaga a candidatura nem os documentos.
 
 ## Pendências de negócio
 
@@ -61,7 +62,8 @@ O service não recebe objetos HTTP. Falta de sessão retorna 401; perfil incompa
 - [ ] Estagiário autenticado cria candidatura válida e recebe metadados sem bytes dos documentos.
 - [ ] Visitante, empresa e instituição não consultam nem enviam candidaturas como estagiário.
 - [ ] Candidato lista e cancela somente as próprias candidaturas.
+- [ ] Dashboard apresenta lista real e estados persistidos, inclusive estado vazio e erro de sessão.
 - [ ] Empresa consulta e atualiza apenas candidaturas de suas vagas.
-- [ ] Download de documento exige autenticação e autorização.
+- [ ] Estagiário e empresa acessam arquivos somente quando têm vínculo autorizado.
 - [ ] Arquivo inválido ou acima do limite é rejeitado sem persistir candidatura.
 - [ ] Vaga inválida, candidatura duplicada conforme regra definida e transição de estado inválida são rejeitadas.

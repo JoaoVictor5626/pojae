@@ -2,6 +2,7 @@ package br.com.pojae.backend.service;
 
 import br.com.pojae.backend.dto.request.JobApplicationCommand;
 import br.com.pojae.backend.dto.response.CandidateApplicationProfileDto;
+import br.com.pojae.backend.dto.response.CandidateJobApplicationDto;
 import br.com.pojae.backend.dto.response.JobApplicationResponseDto;
 import br.com.pojae.backend.exception.InvalidJobApplicationException;
 import br.com.pojae.backend.exception.NotFoundException;
@@ -18,8 +19,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
-import br.com.pojae.backend.model.enums.JobApplicationStatus;
 
 @Service
 public class JobApplicationService {
@@ -52,6 +53,27 @@ public class JobApplicationService {
                 candidate.getName(),
                 candidate.getEmail(),
                 candidate.getEducationalInstitution().getName());
+    }
+
+    @Transactional(readOnly = true)
+    public List<CandidateJobApplicationDto> listByCandidate(UUID candidateId) {
+        return applicationRepository.findAllByCandidate_IdOrderBySubmittedAtDesc(candidateId).stream()
+                .map(application -> new CandidateJobApplicationDto(
+                        application.getId(),
+                        application.getJob().getId(),
+                        application.getJob().getTitle(),
+                        application.getJob().getCompany().getName(),
+                        application.getJob().getLocation(),
+                        application.getJob().getScholarshipAmount(),
+                        application.getJob().getType().name(),
+                        application.getJob().getWorkModality().name(),
+                        application.getStatus(),
+                        application.getSubmittedAt(),
+                        application.getUpdatedAt(),
+                        application.getResumeFileName(),
+                        application.getAcademicHistoryFileName(),
+                        application.getPresentationMessage()))
+                .toList();
     }
 
     @Transactional
@@ -107,6 +129,16 @@ public class JobApplicationService {
         JobApplication app = applicationRepository.findById(applicationId)
                 .orElseThrow(() -> new NotFoundException("Candidatura"));
         if (!companyId.equals(app.getJob().getCompany().getId())) throw new NotFoundException("Candidatura");
+        if ("curriculo".equals(type)) return new ApplicationDocument(app.getResumeContent(), app.getResumeFileName());
+        if ("historico".equals(type)) return new ApplicationDocument(app.getAcademicHistoryContent(), app.getAcademicHistoryFileName());
+        throw new InvalidJobApplicationException("Documento inválido.");
+    }
+
+    @Transactional(readOnly = true)
+    public ApplicationDocument getCandidateDocument(UUID candidateId, UUID applicationId, String type) {
+        JobApplication app = applicationRepository.findById(applicationId)
+                .orElseThrow(() -> new NotFoundException("Candidatura"));
+        if (!candidateId.equals(app.getCandidate().getId())) throw new NotFoundException("Candidatura");
         if ("curriculo".equals(type)) return new ApplicationDocument(app.getResumeContent(), app.getResumeFileName());
         if ("historico".equals(type)) return new ApplicationDocument(app.getAcademicHistoryContent(), app.getAcademicHistoryFileName());
         throw new InvalidJobApplicationException("Documento inválido.");
