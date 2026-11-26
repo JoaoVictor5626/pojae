@@ -1,6 +1,6 @@
 # Estado atual
 
-Atualizado em: 2026-11-04
+Atualizado em: 2026-11-26
 
 Este arquivo guarda apenas o que não está em outro lugar. Mantenha-o com cerca de 30 linhas e retire o que estiver resolvido. O status de cada documento fica no próprio documento, e o histórico fica no Git.
 
@@ -10,7 +10,7 @@ Nada.
 
 ## Próximos passos
 
-Nenhum definido.
+- Adicionar testes automatizados para a criação de candidaturas e validar o fluxo com PostgreSQL local.
 
 ## Pendências
 
@@ -20,4 +20,13 @@ Nenhum definido.
   - Registrar falhas de login e acessos negados, pois não há configuração de logging definida.
 - Melhoria menor de segurança: adicionar CSP.
 - As publicações iniciais usam "admin" como autor e têm todas a mesma data.
-- O painel, o login e o tema claro não foram conferidos no navegador depois da mudança de estilo.
+- O painel, o login, o perfil do estudante e o tema claro não foram conferidos no navegador depois das integrações/mudanças de estilo.
+- Contas antigas não têm hash de senha; definir um fluxo de primeiro acesso para quem já estava cadastrado.
+- A candidatura agora grava os dados e PDFs pelo backend; a spec 0006 segue proposta até os testes automatizados serem adicionados.
+- Login e candidatura usam o mesmo host local do frontend na URL da API para que o navegador envie o cookie de sessão.
+- A página inicial consulta `/session` e esconde os links de login no desktop e no menu mobile para sessões autenticadas.
+- O painel da empresa foi ligado às vagas e candidaturas persistidas, com operações limitadas pela empresa da sessão; a spec 0007 segue proposta até os testes automatizados.
+- O cadastro de vagas agora exige sessão de empresa e associa a vaga à empresa autenticada; o formulário mostra o nome dessa empresa.
+- Os requisitos funcionais do PRD foram reorganizados para a plataforma de estágio, e as referências de autenticação, candidaturas e painel da empresa foram atualizadas.
+- Os 14 requisitos não funcionais do PRD foram atualizados, mantendo localização, acessibilidade, segurança, desempenho, confiabilidade e prioridades.
+- O PRD agora registra 12 requisitos de segurança com perigos e soluções relacionados aos requisitos funcionais.
