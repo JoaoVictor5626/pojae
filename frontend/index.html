@@ -50,7 +50,7 @@
                 </a>
             </nav>
 
-            <!-- ACTION BUTTONS / BOTÃO CADASTRE-SE, PERFIL & HAMBÚRGUER -->
+            <!-- ACTION BUTTONS / BOTÃO CADASTRE-SE, PERFIS & HAMBÚRGUER -->
             <div class="flex items-center gap-2 whitespace-nowrap">
                 <div class="desktop-actions flex items-center gap-2">
                     <a id="desktop-login-link" href="login.html"
@@ -64,11 +64,22 @@
                         <span>Cadastre-se</span>
                     </a>
 
-                    <!-- BOTÃO DE PERFIL DESKTOP (Fundo glass branco-azulado sutil + seta animada) -->
-                    <a id="desktop-profile-link" href="perfil-estudante.html"
+                    <!-- BOTÃO DE PERFIL ESTUDANTE DESKTOP (Exibir apenas quando logado como estudante) -->
+                    <a id="desktop-student-profile-link" href="perfil-estudante.html"
                         class="hidden group bg-sky-50/70 hover:bg-blue-100/65 backdrop-blur-md text-pojae-900 hover:text-pojae-700 border border-blue-200/75 hover:border-pojae-400/70 font-bold text-sm pl-1.5 pr-4 py-1.5 rounded-full shadow-xs hover:shadow-sm transition-all duration-300 items-center gap-2.5">
                         <span class="relative w-8 h-8 rounded-full bg-gradient-to-tr from-pojae-900 via-pojae-700 to-pojae-500 text-white flex items-center justify-center text-xs shadow-xs">
                             <i class="fas fa-user-graduate"></i>
+                            <span class="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-500 ring-2 ring-sky-50"></span>
+                        </span>
+                        <span class="tracking-tight">Meu Perfil</span>
+                        <i class="fas fa-arrow-right text-xs text-pojae-600 group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+
+                    <!-- BOTÃO DE PERFIL EMPRESA DESKTOP (Exibir apenas quando logado como empresa) -->
+                    <a id="desktop-company-profile-link" href="perfil-empresa.html"
+                        class="hidden group bg-sky-50/70 hover:bg-blue-100/65 backdrop-blur-md text-pojae-900 hover:text-pojae-700 border border-blue-200/75 hover:border-pojae-400/70 font-bold text-sm pl-1.5 pr-4 py-1.5 rounded-full shadow-xs hover:shadow-sm transition-all duration-300 items-center gap-2.5">
+                        <span class="relative w-8 h-8 rounded-full bg-gradient-to-tr from-pojae-900 via-pojae-700 to-pojae-500 text-white flex items-center justify-center text-xs shadow-xs">
+                            <i class="fas fa-building"></i>
                             <span class="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-500 ring-2 ring-sky-50"></span>
                         </span>
                         <span class="tracking-tight">Meu Perfil</span>
@@ -119,11 +130,22 @@
                 <span>Já tenho uma conta</span>
             </a>
 
-            <!-- BOTÃO DE PERFIL NO MENU MOBILE (Fundo glass branco-azulado sutil + seta animada) -->
-            <a id="mobile-profile-link" href="perfil-estudante.html" onclick="closeMobileMenu();"
+            <!-- BOTÃO DE PERFIL ESTUDANTE NO MENU MOBILE (Exibir apenas quando logado como estudante) -->
+            <a id="mobile-student-profile-link" href="perfil-estudante.html" onclick="closeMobileMenu();"
                 class="hidden group mobile-nav-link w-full py-2 pl-2 pr-4 bg-sky-50/90 hover:bg-blue-100/95 backdrop-blur-md text-pojae-900 hover:text-pojae-700 font-bold text-sm rounded-full border border-blue-200/80 shadow-lg shadow-slate-950/25 items-center justify-between transition-all duration-300">
                 <span class="relative w-8 h-8 rounded-full bg-gradient-to-tr from-pojae-900 via-pojae-700 to-pojae-500 text-white flex items-center justify-center text-xs shadow-xs">
                     <i class="fas fa-user-graduate"></i>
+                    <span class="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-500 ring-2 ring-sky-50"></span>
+                </span>
+                <span class="tracking-tight">Meu Perfil</span>
+                <i class="fas fa-arrow-right text-xs text-pojae-600 group-hover:translate-x-1 transition-transform"></i>
+            </a>
+
+            <!-- BOTÃO DE PERFIL EMPRESA NO MENU MOBILE (Exibir apenas quando logado como empresa) -->
+            <a id="mobile-company-profile-link" href="perfil-empresa.html" onclick="closeMobileMenu();"
+                class="hidden group mobile-nav-link w-full py-2 pl-2 pr-4 bg-sky-50/90 hover:bg-blue-100/95 backdrop-blur-md text-pojae-900 hover:text-pojae-700 font-bold text-sm rounded-full border border-blue-200/80 shadow-lg shadow-slate-950/25 items-center justify-between transition-all duration-300">
+                <span class="relative w-8 h-8 rounded-full bg-gradient-to-tr from-pojae-900 via-pojae-700 to-pojae-500 text-white flex items-center justify-center text-xs shadow-xs">
+                    <i class="fas fa-building"></i>
                     <span class="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-500 ring-2 ring-sky-50"></span>
                 </span>
                 <span class="tracking-tight">Meu Perfil</span>
