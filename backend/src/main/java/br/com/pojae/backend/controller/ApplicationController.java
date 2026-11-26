@@ -2,6 +2,7 @@ package br.com.pojae.backend.controller;
 
 import br.com.pojae.backend.dto.request.LoginRequestDto;
 import br.com.pojae.backend.dto.response.LoginResponseDto;
+import br.com.pojae.backend.dto.response.SessionResponseDto;
 import br.com.pojae.backend.service.LoginService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -31,14 +32,18 @@ public class ApplicationController {
     private LoginService loginService;
 
     @GetMapping("/session")
-    public ResponseEntity<Void> session(HttpServletRequest request) {
+    public ResponseEntity<SessionResponseDto> session(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
         if (session == null
                 || session.getAttribute(SESSION_ACCOUNT_ID) == null
                 || session.getAttribute(SESSION_ACCOUNT_TYPE) == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
-        return ResponseEntity.ok().build();
+        Object accountType = session.getAttribute(SESSION_ACCOUNT_TYPE);
+        if (!(accountType instanceof String type)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+        return ResponseEntity.ok(new SessionResponseDto(type));
     }
 
     @PostMapping("/login")

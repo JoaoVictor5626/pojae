@@ -263,6 +263,8 @@ async function hideLoginLinksForAuthenticatedUser() {
         const response = await fetch(`${API_BASE_URL}/session`, { credentials: 'include' });
         if (!response.ok) return;
 
+        const session = await response.json();
+
         // Oculta os botões de Login e Cadastro (Desktop e Mobile)
         ['desktop-login-link', 'desktop-register-link', 'mobile-login-link', 'mobile-register-link'].forEach(id => {
             const element = document.getElementById(id);
@@ -271,13 +273,15 @@ async function hideLoginLinksForAuthenticatedUser() {
             }
         });
 
-        // Exibe os botões de Perfil (Desktop e Mobile)
-        ['desktop-profile-link', 'mobile-profile-link'].forEach(id => {
+        const profileLinksByType = {
+            CANDIDATE: ['desktop-student-profile-link', 'mobile-student-profile-link'],
+            COMPANY: ['desktop-company-profile-link', 'mobile-company-profile-link']
+        };
+        (profileLinksByType[session.accountType] || []).forEach(id => {
             const profileLink = document.getElementById(id);
-            if (profileLink) {
-                profileLink.classList.remove('hidden');
-                profileLink.classList.add('flex');
-            }
+            if (!profileLink) return;
+            profileLink.classList.remove('hidden');
+            profileLink.classList.add('flex');
         });
     } catch (error) {
         // Sem conexão com o backend, os links continuam visíveis para permitir o login.
