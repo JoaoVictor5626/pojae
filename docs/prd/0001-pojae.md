@@ -2,7 +2,8 @@
 
 - **Status:** Aceito
 - **Data:** 2026-11-04
-- **Especificações:** [fundação](../specs/0001-fundacao.md), [autenticação](../specs/0002-autenticacao.md), [oportunidades](../specs/0003-oportunidades.md), [comentários](../specs/0004-comentarios.md), [publicações iniciais](../specs/0005-publicacoes-iniciais.md), [candidaturas](../specs/0006-candidaturas.md), [painel da empresa](../specs/0007-painel-empresa.md)
+- **Especificações:** [fundação](../specs/0001-fundacao.md), [autenticação](../specs/0002-autenticacao.md), [candidaturas](../specs/0006-candidaturas.md), [vagas e painel da empresa](../specs/0007-painel-empresa.md), [cadastros e perfis](../specs/0008-cadastros-e-perfis.md), [vagas salvas e recomendações](../specs/0009-vagas-salvas-e-recomendacoes.md), [convênios e validação](../specs/0010-convenios-e-validacao-do-estagio.md), [notificações](../specs/0011-notificacoes.md), [entrevistas](../specs/0012-entrevistas.md), [avaliação do estágio](../specs/0013-avaliacao-do-estagio.md), [recuperação de acesso](../specs/0014-recuperacao-de-acesso.md), [auditoria e recuperação de dados](../specs/0015-auditoria-e-recuperacao.md)
+- **Decisões de arquitetura:** [MVC e services](../adr/0001-mvc-com-camada-de-service.md), [PostgreSQL](../adr/0004-postgresql-como-banco-de-dados.md), [sessões e autenticação](../adr/0005-autenticacao-por-sessao-http.md), [autorização](../adr/0006-autorizacao-por-perfil-e-vinculo.md), [auditoria](../adr/0007-trilha-de-auditoria-e-historico.md), [documentos privados](../adr/0008-documentos-privados-no-banco-de-dados.md), [notificações](../adr/0009-canal-de-notificacoes.md), [backup e recuperação](../adr/0010-backup-e-recuperacao-de-dados.md)
 
 ## Objetivo
 

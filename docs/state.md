@@ -11,15 +11,15 @@ Nada.
 ## Próximos passos
 
 - Adicionar testes automatizados para a criação de candidaturas e validar o fluxo com PostgreSQL local.
+- Definir critérios de compatibilidade, convênios, planos, entrevistas e avaliações antes de implementar as specs propostas.
 
 ## Pendências
 
 - Antes de um deploy real (revisão OWASP de 2026-11-04):
-  - Limitar tentativas de login e envios de comentário, que o PRD deixou fora do escopo.
+  - Limitar tentativas de login e redefinição de senha antes de produção, conforme RS09.
   - Revisar a configuração de produção do Spring Boot, incluindo segurança de cookies e hosts permitidos, e resolver os avisos da verificação de configuração segura.
   - Registrar falhas de login e acessos negados, pois não há configuração de logging definida.
 - Melhoria menor de segurança: adicionar CSP.
-- As publicações iniciais usam "admin" como autor e têm todas a mesma data.
 - O painel, o login, o perfil do estudante e o tema claro não foram conferidos no navegador depois das integrações/mudanças de estilo.
 - Contas antigas não têm hash de senha; definir um fluxo de primeiro acesso para quem já estava cadastrado.
 - A candidatura agora grava os dados e PDFs pelo backend; a spec 0006 segue proposta até os testes automatizados serem adicionados.
@@ -30,3 +30,6 @@ Nada.
 - Os requisitos funcionais do PRD foram reorganizados para a plataforma de estágio, e as referências de autenticação, candidaturas e painel da empresa foram atualizadas.
 - Os 14 requisitos não funcionais do PRD foram atualizados, mantendo localização, acessibilidade, segurança, desempenho, confiabilidade e prioridades.
 - O PRD agora registra 12 requisitos de segurança com perigos e soluções relacionados aos requisitos funcionais.
+- Os ADRs de autenticação e autorização foram realinhados ao PRD; propostas novas cobrem autorização, auditoria, documentos, notificações e recuperação de dados.
+- A sessão informa o perfil autenticado para exibir somente o link de perfil correspondente no navbar da página inicial.
+- As specs agora mapeiam os RFs/RSs do PRD; os fluxos ainda sem implementação foram separados em propostas e as specs editoriais antigas foram arquivadas.

@@ -13,7 +13,7 @@ Abstrações de controller podem reduzir código, mas esconder o fluxo em heran�
 
 O projeto segue MVC, com todas as regras de negócio em uma camada de service que não conhece HTTP. Os controllers chamam os services e não contêm regras de negócio nem acessam os repositories diretamente.
 
-As regras de cada camada estão em [`docs/arquitetura.md`](../arquitetura.md).
+As regras de cada camada estão em [`docs/architecture.md`](../architecture.md).
 
 ## Consequências
 
