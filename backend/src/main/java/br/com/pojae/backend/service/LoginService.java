@@ -25,6 +25,10 @@ public class LoginService {
     private PasswordEncoder encoder;
 
     public Optional<LoginResponseDto> authenticate(LoginRequestDto request) {
+        if (request == null || request.document() == null || request.password() == null) {
+            throw new InvalidCredentialsException();
+        }
+
         String field = request.document().replaceAll("\\D", "");
         if (field.length() == 11) {
             return authenticateCandidate(field, request.password());

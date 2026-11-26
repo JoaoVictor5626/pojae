@@ -69,12 +69,13 @@ async function handleLogin(e) {
     e.preventDefault();
     const form = e.currentTarget;
     const submitButton = form.querySelector('[type="submit"]');
-    const docRaw = document.getElementById('login-documento').value.replace(/\D/g, "");
+    const documentFormatted = document.getElementById('login-documento').value.trim();
+    const documentDigits = documentFormatted.replace(/\D/g, "");
     const password = document.getElementById('login-senha').value;
 
-    if (docRaw.length !== 11 && docRaw.length !== 14) {
+    if (documentDigits.length !== 11 && documentDigits.length !== 14) {
         showToast("Por favor, digite um CPF (11 dígitos) ou CNPJ (14 dígitos) válido.", "info");
-        return;2
+        return;
     }
 
     submitButton.disabled = true;
@@ -83,7 +84,7 @@ async function handleLogin(e) {
             method: 'POST',
             credentials: 'include',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ document: docRaw, password })
+            body: JSON.stringify({ document: documentFormatted, password })
         });
 
         if (response.status === 401) {
@@ -95,7 +96,7 @@ async function handleLogin(e) {
 
         const account = await response.json();
         showToast('Login realizado com sucesso! Redirecionando...', 'success');
-        if (docRaw.length === 11) {
+        if (documentDigits.length === 11) {
             setTimeout(() => { window.location.href = 'index.html'; }, 1000);
         } else {
             setTimeout(() => { window.location.href = 'dashboard-empresa.html'; }, 1000);
