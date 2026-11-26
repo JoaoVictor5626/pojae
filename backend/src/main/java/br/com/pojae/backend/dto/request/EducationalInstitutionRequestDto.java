@@ -8,6 +8,7 @@ public record EducationalInstitutionRequestDto(
 
         String name,
         String cnpj,
+        String password,
         String email,
         String phone,
         EducationalInstitutionType type,

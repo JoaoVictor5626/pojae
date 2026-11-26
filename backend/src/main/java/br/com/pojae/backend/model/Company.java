@@ -26,9 +26,6 @@ public class Company extends Account {
     @Column(length = 18, nullable = false)
     private String cnpj;
 
-    @Column(length = 100, nullable = false)
-    private String password;
-
     @Column(length = 50, nullable = false)
     private String internshipSupervisorName;
 

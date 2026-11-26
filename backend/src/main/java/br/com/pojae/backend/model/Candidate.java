@@ -34,9 +34,6 @@ public class Candidate extends Account {
     @Column(unique = true, length = 14, nullable = false)
     private String cpf;
 
-    @Column(length = 100, nullable = false)
-    private String password;
-
     @ManyToOne
     @JoinColumn(name = "educational_institution_id", nullable = false)
     private EducationalInstitution educationalInstitution;

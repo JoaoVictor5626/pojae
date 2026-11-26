@@ -38,10 +38,19 @@ async function handleInstitutionRegister(e) {
     e.preventDefault();
     const form = e.currentTarget;
     const submitButton = form.querySelector('[type="submit"]');
+    const password = document.getElementById('field-senha-inst').value;
+    const confirmation = document.getElementById('field-confirmar-senha-inst').value;
+
+    if (password !== confirmation) {
+        showToast('As senhas não coincidem.', 'info');
+        document.getElementById('field-confirmar-senha-inst').focus();
+        return;
+    }
 
     const institutionData = {
         name: document.getElementById('field-nome-inst').value.trim(),
         cnpj: document.getElementById('field-cnpj-inst').value.trim(),
+        password,
         email: document.getElementById('field-email-inst').value.trim(),
         phone: document.getElementById('field-telefone-inst').value.replace(/\D/g, ''),
         type: document.getElementById('field-tipo-inst').value,
@@ -71,7 +80,7 @@ async function handleInstitutionRegister(e) {
 
         if (!response.ok) throw new Error('Cadastro não concluído');
         showToast('Cadastro de instituição realizado com sucesso no POJAE!', 'success');
-        setTimeout(() => { window.location.href = 'index.html'; }, 2000);
+        setTimeout(() => { window.location.href = 'login.html'; }, 2000);
     } catch (error) {
         showToast('Não foi possível concluir o cadastro. Confira os dados e tente novamente.', 'info');
         submitButton.disabled = false;
