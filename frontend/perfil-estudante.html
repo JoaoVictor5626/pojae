@@ -58,7 +58,7 @@
             <div class="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-4">
                 <div id="profile-avatar"
                     class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-pojae-900 to-pojae-600 text-white font-extrabold text-xl flex items-center justify-center shadow-lg shadow-blue-600/20 shrink-0">
-                    JV
+                    --
                 </div>
                 <div class="space-y-1">
                     <div class="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-blue-50 border border-blue-100 text-pojae-700 text-[11px] font-bold">
@@ -68,7 +68,7 @@
                         Carregando perfil...
                     </h1>
                     <p id="profile-header-subtitle" class="text-xs sm:text-sm text-slate-500">
-                        Estagiário / Jovem Aprendiz • Maceió - AL
+                        Carregando dados do perfil...
                     </p>
                 </div>
             </div>
@@ -241,11 +241,7 @@
                         <label class="block text-xs font-bold text-slate-700 mb-1">Instituição de Ensino *</label>
                         <select id="field-instituicao" required disabled
                             class="editable-field w-full bg-slate-100 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm text-slate-700 focus:outline-none focus:border-pojae-600 disabled:cursor-not-allowed">
-                            <option value="1">Centro Universitário CESMAC</option>
-                            <option value="2">Universidade Federal de Alagoas (UFAL)</option>
-                            <option value="3">Instituto Federal de Alagoas (IFAL - Campus Maceió)</option>
-                            <option value="4">Centro Universitário Tiradentes (UNIT-AL)</option>
-                            <option value="5">SENAI / SESI Alagoas</option>
+                            <option value="">Carregando instituições...</option>
                         </select>
                     </div>
 
@@ -438,47 +434,8 @@
             TOOL: 'Ferramenta / Software'
         };
 
-        // Dados padrão de fallback caso não haja backend ativo no momento
-        const fallbackStudentData = {
-            id: 101,
-            nome: 'João Victor Araújo Coêlho',
-            cpf: '123.456.789-00',
-            email: 'joao.coelho@academico.cesmac.edu.br',
-            telefone: '(82) 99988-7766',
-            cep: '57051-000',
-            endereco: 'Rua Cônego Machado',
-            numero: '918',
-            bairro: 'Farol',
-            cidade: 'Maceió',
-            estado: 'AL',
-            instituicaoId: '1',
-            curso: 'Engenharia de Software',
-            periodo: '5º Período',
-            turno: 'EVENING',
-            conclusaoPrevista: '12/2027',
-            habilidades: [
-                {
-                    tipo: 'HARD_SKILL',
-                    nome: 'JavaScript & HTML/CSS',
-                    nivel: 4,
-                    observacoes: 'Desenvolvimento web em projetos acadêmicos no CESMAC'
-                },
-                {
-                    tipo: 'TOOL',
-                    nome: 'Git & GitHub',
-                    nivel: 4,
-                    observacoes: 'Controle de versão em equipe'
-                },
-                {
-                    tipo: 'SOFT_SKILL',
-                    nome: 'Comunicação e Trabalho em Equipe',
-                    nivel: 5,
-                    observacoes: 'Monitoria acadêmica e apresentação de seminários'
-                }
-            ]
-        };
-
         let studentProfile = null;
+        let institutions = [];
         let backupProfileSnapshot = null;
         let isEditing = false;
         let currentRating = 3;
@@ -489,55 +446,69 @@
 
         async function loadStudentProfile() {
             try {
-                const response = await fetch(`${API_BASE_URL}/estudantes/me`, { credentials: 'include' });
-                if (response.ok) {
-                    const data = await response.json();
-                    studentProfile = normalizeStudentData(data);
-                } else {
-                    studentProfile = structuredClone(fallbackStudentData);
-                }
+                await loadInstitutions();
+                const response = await fetch(`${API_BASE_URL}/candidatos/me`, { credentials: 'include' });
+                if (response.status === 401) throw new Error('Entre com uma conta de candidato para ver seu perfil.');
+                if (!response.ok) throw new Error('Não foi possível carregar seu perfil.');
+                studentProfile = normalizeStudentData(await response.json());
+                populateForm(studentProfile);
             } catch (error) {
-                studentProfile = structuredClone(fallbackStudentData);
+                document.getElementById('profile-header-name').textContent = 'Perfil indisponível';
+                document.getElementById('profile-header-subtitle').textContent = error.message;
+                document.getElementById('profile-header-actions').classList.add('hidden');
+                showToast(error.message, 'info');
             }
+        }
 
-            populateForm(studentProfile);
+        async function loadInstitutions() {
+            const response = await fetch(`${API_BASE_URL}/instituicoesDeEnsino`);
+            if (!response.ok) throw new Error('Não foi possível carregar as instituições de ensino.');
+            institutions = await response.json();
+            const select = document.getElementById('field-instituicao');
+            select.innerHTML = '<option value="">Selecione uma instituição...</option>';
+            institutions.forEach(institution => {
+                const option = document.createElement('option');
+                option.value = institution.id;
+                option.textContent = institution.name;
+                select.appendChild(option);
+            });
         }
 
         function normalizeStudentData(raw) {
             return {
-                id: raw.id ?? fallbackStudentData.id,
-                nome: raw.nome || raw.name || fallbackStudentData.nome,
-                cpf: raw.cpf || fallbackStudentData.cpf,
-                email: raw.email || fallbackStudentData.email,
-                telefone: raw.telefone || raw.phone || fallbackStudentData.telefone,
-                cep: raw.cep || raw.zipCode || fallbackStudentData.cep,
-                endereco: raw.endereco || raw.street || fallbackStudentData.endereco,
-                numero: raw.numero || raw.number || fallbackStudentData.numero,
-                bairro: raw.bairro || raw.neighborhood || fallbackStudentData.bairro,
-                cidade: 'Maceió',
-                estado: 'AL',
-                instituicaoId: String(raw.instituicaoId || raw.institutionId || '1'),
-                curso: raw.curso || raw.course || fallbackStudentData.curso,
-                periodo: raw.periodo || raw.period || fallbackStudentData.periodo,
-                turno: raw.turno || raw.shift || 'EVENING',
-                conclusaoPrevista: raw.conclusaoPrevista || raw.expectedGraduation || fallbackStudentData.conclusaoPrevista,
-                habilidades: Array.isArray(raw.habilidades || raw.skills)
-                    ? (raw.habilidades || raw.skills).map(h => ({
-                        tipo: h.tipo || h.type || 'HARD_SKILL',
-                        nome: h.nome || h.name || '',
-                        nivel: Number(h.nivel || h.proficiencyLevel || 3),
-                        observacoes: h.observacoes || h.notes || ''
-                    }))
-                    : structuredClone(fallbackStudentData.habilidades)
+                id: raw.id,
+                nome: raw.name,
+                cpf: raw.cpf,
+                email: raw.email,
+                telefone: raw.phone,
+                cep: raw.address.cep,
+                endereco: raw.address.street,
+                numero: String(raw.address.number),
+                bairro: raw.address.neighborhood,
+                cidade: raw.address.city,
+                estado: raw.address.state,
+                instituicaoId: String(raw.educationalInstitutionId),
+                instituicaoNome: raw.educationalInstitutionName,
+                curso: raw.courseName,
+                periodo: raw.gradeOrAcademicTerm,
+                turno: raw.studyShift,
+                conclusaoPrevista: raw.expectedGraduationDate,
+                habilidades: (raw.skills || []).map(skill => ({
+                    id: skill.id,
+                    tipo: skill.type,
+                    nome: skill.description,
+                    nivel: Number(skill.proficiencyLevel),
+                    observacoes: skill.notes || ''
+                }))
             };
         }
 
         function populateForm(data) {
             document.getElementById('field-nome').value = data.nome;
-            document.getElementById('field-cpf').value = data.cpf;
+            document.getElementById('field-cpf').value = formatCpf(data.cpf);
             document.getElementById('field-email').value = data.email;
-            document.getElementById('field-telefone').value = data.telefone;
-            document.getElementById('field-cep').value = data.cep;
+            document.getElementById('field-telefone').value = formatPhone(data.telefone);
+            document.getElementById('field-cep').value = formatCep(data.cep);
             document.getElementById('field-endereco').value = data.endereco;
             document.getElementById('field-numero').value = data.numero;
             document.getElementById('field-bairro').value = data.bairro;
@@ -623,7 +594,7 @@
                 ...studentProfile,
                 nome: document.getElementById('field-nome').value.trim(),
                 email: document.getElementById('field-email').value.trim(),
-                telefone: document.getElementById('field-telefone').value.trim(),
+                telefone: document.getElementById('field-telefone').value.replace(/\D/g, ''),
                 cep: document.getElementById('field-cep').value.trim(),
                 endereco: document.getElementById('field-endereco').value.trim(),
                 numero: document.getElementById('field-numero').value.trim(),
@@ -655,31 +626,55 @@
             }
 
             const updatedData = readFormToObject();
-            if (novaSenha) updatedData.senha = novaSenha;
+            const requestData = {
+                name: updatedData.nome,
+                email: updatedData.email,
+                phone: updatedData.telefone,
+                address: {
+                    cep: updatedData.cep,
+                    street: updatedData.endereco,
+                    number: Number(updatedData.numero),
+                    neighborhood: updatedData.bairro,
+                    city: updatedData.cidade,
+                    state: updatedData.estado
+                },
+                educationalInstitutionId: updatedData.instituicaoId,
+                courseName: updatedData.curso,
+                gradeOrAcademicTerm: updatedData.periodo,
+                studyShift: updatedData.turno,
+                expectedGraduationDate: updatedData.conclusaoPrevista,
+                password: novaSenha || null,
+                skills: updatedData.habilidades.map(skill => ({
+                    type: skill.tipo,
+                    description: skill.nome,
+                    proficiencyLevel: skill.nivel,
+                    notes: skill.observacoes || ''
+                }))
+            };
 
             const saveBtn = document.getElementById('btn-save-profile');
             saveBtn.disabled = true;
 
             try {
-                const response = await fetch(`${API_BASE_URL}/estudantes/me`, {
+                const response = await fetch(`${API_BASE_URL}/candidatos/me`, {
                     method: 'PUT',
                     headers: { 'Content-Type': 'application/json' },
                     credentials: 'include',
-                    body: JSON.stringify(updatedData)
+                    body: JSON.stringify(requestData)
                 });
 
-                if (!response.ok && response.status !== 404) {
+                if (!response.ok) {
                     const err = await response.json().catch(() => ({}));
                     throw new Error(err.message || 'Erro ao atualizar perfil.');
                 }
+                studentProfile = normalizeStudentData(await response.json());
             } catch (error) {
-                // Mantém atualização em memória no modo protótipo caso o backend não esteja conectado
+                showToast(error.message || 'Não foi possível salvar as alterações.', 'info');
+                return;
             } finally {
                 saveBtn.disabled = false;
             }
 
-            delete updatedData.senha;
-            studentProfile = updatedData;
             document.getElementById('field-nova-senha').value = '';
             document.getElementById('field-confirmar-nova-senha').value = '';
 
@@ -803,12 +798,15 @@
             btn.disabled = true;
 
             try {
-                await fetch(`${API_BASE_URL}/estudantes/me`, {
+                const response = await fetch(`${API_BASE_URL}/candidatos/me`, {
                     method: 'DELETE',
                     credentials: 'include'
                 });
+                if (!response.ok) throw new Error('Não foi possível excluir a conta.');
             } catch (error) {
-                // Prossegue com limpeza local e redirecionamento mesmo sem backend ativo
+                btn.disabled = false;
+                showToast(error.message, 'info');
+                return;
             }
 
             closeDeleteModal();
@@ -844,6 +842,23 @@
                 v = v.replace(/^(\d*)/, '($1');
             }
             input.value = v;
+        }
+
+        function formatPhone(value) {
+            const digits = String(value || '').replace(/\D/g, '').slice(0, 11);
+            if (digits.length === 11) return digits.replace(/^(\d{2})(\d{5})(\d{4})$/, '($1) $2-$3');
+            if (digits.length === 10) return digits.replace(/^(\d{2})(\d{4})(\d{4})$/, '($1) $2-$3');
+            return digits;
+        }
+
+        function formatCpf(value) {
+            const digits = String(value || '').replace(/\D/g, '');
+            return digits.length === 11 ? digits.replace(/^(\d{3})(\d{3})(\d{3})(\d{2})$/, '$1.$2.$3-$4') : value;
+        }
+
+        function formatCep(value) {
+            const digits = String(value || '').replace(/\D/g, '');
+            return digits.length === 8 ? digits.replace(/^(\d{5})(\d{3})$/, '$1-$2') : value;
         }
 
         function maskCEP(input) {

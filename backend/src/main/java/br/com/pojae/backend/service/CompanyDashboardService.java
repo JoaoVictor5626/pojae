@@ -28,7 +28,7 @@ public class CompanyDashboardService {
     public CompanyDashboardDto load(UUID companyId) {
         Company company = companies.findById(companyId).orElseThrow(() -> new NotFoundException("Empresa"));
         Map<UUID, List<CompanyDashboardDto.Application>> applicantsByJob = new HashMap<>();
-        applications.findAllByJob_Company_Id(companyId).forEach(app ->
+        applications.findAllByJobCompanyId(companyId).forEach(app ->
                 applicantsByJob.computeIfAbsent(app.getJob().getId(), ignored -> new ArrayList<>()).add(application(app)));
         List<CompanyDashboardDto.Vacancy> vacancies = jobs.findAllByCompany_Id(companyId).stream().map(job -> {
             List<CompanyDashboardDto.Application> applicants = applicantsByJob.getOrDefault(job.getId(), List.of());
