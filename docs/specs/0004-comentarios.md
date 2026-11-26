@@ -1,7 +1,6 @@
 # Spec 0004: Comentários
 
 - **Status:** Implementado
-- **Requisitos:** RF-12 a RF-14 do [PRD 0001](../prd/0001-pojae.md)
 - **Depende de:** [Spec 0003](0003-oportunidades.md)
 
 ## Entidade `Comentario`

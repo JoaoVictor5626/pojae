@@ -1,7 +1,6 @@
 # Spec 0001: Fundação do projeto
 
 - **Status:** Implementado
-- **Requisitos:** RNF-01, RNF-03 e RNF-04 do [PRD 0001](../prd/0001-pojae.md)
 - **Decisões:** [ADR 0001](../adr/0001-mvc-com-camada-de-service.md), [ADR 0002](../adr/0002-modelo-de-usuario-customizado.md)
 
 Esta especificação deve ser implementada primeiro, e a entidade de usuário precisa existir antes da primeira migração.
