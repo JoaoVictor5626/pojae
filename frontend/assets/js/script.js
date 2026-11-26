@@ -263,9 +263,21 @@ async function hideLoginLinksForAuthenticatedUser() {
         const response = await fetch(`${API_BASE_URL}/session`, { credentials: 'include' });
         if (!response.ok) return;
 
-        ['desktop-login-link', 'mobile-login-link'].forEach(id => {
-            const loginLink = document.getElementById(id);
-            if (loginLink) loginLink.style.display = 'none';
+        // Oculta os botões de Login e Cadastro (Desktop e Mobile)
+        ['desktop-login-link', 'desktop-register-link', 'mobile-login-link', 'mobile-register-link'].forEach(id => {
+            const element = document.getElementById(id);
+            if (element) {
+                element.style.display = 'none';
+            }
+        });
+
+        // Exibe os botões de Perfil (Desktop e Mobile)
+        ['desktop-profile-link', 'mobile-profile-link'].forEach(id => {
+            const profileLink = document.getElementById(id);
+            if (profileLink) {
+                profileLink.classList.remove('hidden');
+                profileLink.classList.add('flex');
+            }
         });
     } catch (error) {
         // Sem conexão com o backend, os links continuam visíveis para permitir o login.
