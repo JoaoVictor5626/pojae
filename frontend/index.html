@@ -50,18 +50,28 @@
                 </a>
             </nav>
 
-            <!-- ACTION BUTTONS / BOTÃO CADASTRE-SE & HAMBÚRGUER -->
+            <!-- ACTION BUTTONS / BOTÃO CADASTRE-SE, PERFIL & HAMBÚRGUER -->
             <div class="flex items-center gap-2 whitespace-nowrap">
-                <div class="desktop-actions">
+                <div class="desktop-actions flex items-center gap-2">
                     <a id="desktop-login-link" href="login.html"
                         class="text-sm font-semibold text-slate-600 px-3 py-2 transition-colors duration-300 hover:text-pojae-600">
                         Já tem conta? Entrar
                     </a>
 
-                    <a href="pagina-intermediaria.html"
+                    <a id="desktop-register-link" href="pagina-intermediaria.html"
                         class="flex bg-pojae-600 hover:bg-pojae-700 text-white font-semibold text-sm px-4 py-2.5 rounded-xl shadow-md shadow-blue-600/30 transition items-center gap-2">
                         <i class="fas fa-user-plus"></i>
                         <span>Cadastre-se</span>
+                    </a>
+
+                    <!-- BOTÃO DE PERFIL DESKTOP (Identidade visual POJAE com badge de ícone em gradiente) -->
+                    <a id="desktop-profile-link" href="perfil-estudante.html"
+                        class="hidden group bg-blue-50/80 hover:bg-pojae-600 text-pojae-800 hover:text-white border border-blue-200/90 hover:border-pojae-600 font-bold text-sm pl-2 pr-4 py-1.5 rounded-xl shadow-sm hover:shadow-md hover:shadow-blue-600/25 transition-all duration-300 items-center gap-2.5">
+                        <span class="w-7 h-7 rounded-lg bg-gradient-to-tr from-pojae-900 to-pojae-600 group-hover:from-white group-hover:to-blue-50 text-white group-hover:text-pojae-700 flex items-center justify-center text-xs shadow-sm transition-colors">
+                            <i class="fas fa-user-graduate"></i>
+                        </span>
+                        <span>Meu Perfil</span>
+                        <i class="fas fa-chevron-right text-[10px] text-pojae-500 group-hover:text-blue-200 group-hover:translate-x-0.5 transition-all"></i>
                     </a>
                 </div>
 
@@ -74,8 +84,7 @@
         </div>
     </header>
 
-
-    <!-- MENU OVERLAY MOBILE FULLSCREEN (COM BOTÃO CADASTRE-SE INTERNO) -->
+    <!-- MENU OVERLAY MOBILE FULLSCREEN -->
     <div id="mobile-menu" class="mobile-menu-overlay" onclick="closeMobileMenuOnBackdrop(event)">
         <!-- Botão X dedicado para fechar o menu -->
         <button onclick="closeMobileMenu()"
@@ -96,7 +105,7 @@
             <div class="w-full border-t border-slate-700/60 my-2"></div>
 
             <!-- BOTÃO CADASTRE-SE DENTRO DO MENU MOBILE -->
-            <a href="pagina-intermediaria.html" onclick="closeMobileMenu();"
+            <a id="mobile-register-link" href="pagina-intermediaria.html" onclick="closeMobileMenu();"
                 class="mobile-nav-link w-full py-3 bg-pojae-600 hover:bg-pojae-700 text-white font-bold text-sm rounded-xl shadow-lg shadow-blue-600/30 flex items-center justify-center gap-2 transition">
                 <i class="fas fa-user-plus"></i>
                 <span>Cadastre-se</span>
@@ -107,6 +116,15 @@
                 class="mobile-nav-link w-full py-2.5 bg-slate-800 text-slate-300 hover:text-white border border-slate-700 rounded-xl font-semibold text-xs flex items-center justify-center gap-2 transition">
                 <i class="fas fa-sign-in-alt"></i>
                 <span>Já tenho uma conta</span>
+            </a>
+
+            <!-- BOTÃO DE PERFIL NO MENU MOBILE -->
+            <a id="mobile-profile-link" href="perfil-estudante.html" onclick="closeMobileMenu();"
+                class="hidden mobile-nav-link w-full py-3 px-4 bg-gradient-to-r from-pojae-800 via-pojae-600 to-pojae-500 hover:from-pojae-700 hover:to-pojae-600 text-white font-bold text-sm rounded-xl border border-blue-400/30 shadow-lg shadow-blue-600/30 items-center justify-center gap-2.5 transition">
+                <span class="w-6 h-6 rounded-lg bg-white/15 flex items-center justify-center text-xs">
+                    <i class="fas fa-user-graduate"></i>
+                </span>
+                <span>Meu Perfil</span>
             </a>
         </div>
     </div>
