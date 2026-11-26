@@ -8,6 +8,7 @@ import br.com.pojae.backend.repository.EducationalInstitutionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -22,12 +23,16 @@ public class EducationalInstitutionService {
     @Autowired
     private AddressService addressService;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Transactional
     public EducationalInstitution create(EducationalInstitutionRequestDto educationalInstitutionRequestDto) {
         LocalDateTime now = LocalDateTime.now();
         EducationalInstitution educationalInstitution = EducationalInstitution.builder()
                 .name(educationalInstitutionRequestDto.name())
                 .cnpj(educationalInstitutionRequestDto.cnpj())
+                .password(passwordEncoder.encode(educationalInstitutionRequestDto.password()))
                 .phone(educationalInstitutionRequestDto.phone())
                 .email(educationalInstitutionRequestDto.email())
                 .type(educationalInstitutionRequestDto.type())

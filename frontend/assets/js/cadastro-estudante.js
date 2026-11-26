@@ -205,7 +205,7 @@ async function submitStudentRegistration(form) {
 
         if (!response.ok) throw new Error('Cadastro não concluído');
         showToast('Cadastro de estagiário realizado com sucesso no POJAE!', 'success');
-        setTimeout(() => { window.location.href = 'index.html'; }, 2000);
+        setTimeout(() => { window.location.href = 'login.html'; }, 2000);
     } catch (error) {
         showToast('Não foi possível concluir o cadastro. Confira os dados e tente novamente.', 'info');
         submitButton.disabled = false;
