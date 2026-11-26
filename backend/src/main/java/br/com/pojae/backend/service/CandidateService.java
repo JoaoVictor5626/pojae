@@ -2,12 +2,10 @@ package br.com.pojae.backend.service;
 
 import br.com.pojae.backend.exception.NotFoundException;
 import br.com.pojae.backend.model.Candidate;
-import br.com.pojae.backend.model.Company;
 import br.com.pojae.backend.model.Skill;
 import br.com.pojae.backend.repository.CandidateRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -46,7 +44,7 @@ public class CandidateService {
         List<Skill> savedSkills = new ArrayList<>();
         for (Skill skill : skills) {
             skill.setCandidates(savedCandidate);
-            skill.setUpdatedAt(LocalDateTime.now());
+            skill.setCreatedAt(LocalDateTime.now());
             savedSkills.add(skillService.create(skill));
         }
         savedCandidate.setSkills(savedSkills);
@@ -86,7 +84,8 @@ public class CandidateService {
     }
 
     public Optional<Candidate> findByCpf(String cpf) {
-        return repository.findByCpf(cpf);
+        String digits = onlyDigits(cpf);
+        return repository.findByCpf(digits).or(() -> repository.findByCpf(formatCpf(digits)));
     }
 
     private void existsById(UUID id) {
@@ -97,6 +96,16 @@ public class CandidateService {
 
     private String encrypt(String password) {
         return encoder.encode(password);
+    }
+
+    private String onlyDigits(String value) {
+        return value == null ? "" : value.replaceAll("\\D", "");
+    }
+
+    private String formatCpf(String digits) {
+        if (digits.length() != 11) return digits;
+        return digits.substring(0, 3) + "." + digits.substring(3, 6) + "."
+                + digits.substring(6, 9) + "-" + digits.substring(9);
     }
 
 }

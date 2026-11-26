@@ -69,7 +69,8 @@ public class CompanyService {
     }
 
     public Optional<Company> findByCnpj(String cnpj) {
-        return repository.findByCnpj(cnpj);
+        String digits = onlyDigits(cnpj);
+        return repository.findByCnpj(digits).or(() -> repository.findByCnpj(formatCnpj(digits)));
     }
 
     private void existsById(UUID id) {
@@ -80,6 +81,16 @@ public class CompanyService {
 
     private String encrypt(String password) {
         return encoder.encode(password);
+    }
+
+    private String onlyDigits(String value) {
+        return value == null ? "" : value.replaceAll("\\D", "");
+    }
+
+    private String formatCnpj(String digits) {
+        if (digits.length() != 14) return digits;
+        return digits.substring(0, 2) + "." + digits.substring(2, 5) + "."
+                + digits.substring(5, 8) + "/" + digits.substring(8, 12) + "-" + digits.substring(12);
     }
 
 }
