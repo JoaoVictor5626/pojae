@@ -10,7 +10,8 @@ import java.util.List;
 
 @Repository
 public interface JobApplicationRepository extends JpaRepository<JobApplication, UUID> {
-    List<JobApplication> findAllByJob_Company_Id(UUID companyId);
-    void deleteAllByJob_Id(UUID jobId);
+    List<JobApplication> findAllByJobCompanyId(UUID companyId);
+    void deleteAllByJobId(UUID jobId);
+    void deleteAllByCandidateId(UUID candidateId);
 
 }
