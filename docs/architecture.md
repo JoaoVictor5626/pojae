@@ -23,7 +23,7 @@ flowchart LR
 - Não misture regras de negócio nem acesse o Spring Data JPA diretamente.
 - O controller só recebe a requisição, chama o service e retorna a resposta (template ou redirect).
 - O controller não contém regra de negócio nem acessa o Spring Data JPA diretamente.
-<!-- - A autenticação e a sessão HTTP são gerenciadas pelo Spring Security ([ADR 0002](adr/0002-modelo-de-usuario-customizado.md)). -->
+- A sessão HTTP é lida pelo controller; os services recebem o identificador e o perfil autenticados e verificam no servidor o vínculo com o recurso, conforme as [ADRs 0005](adr/0005-autenticacao-por-sessao-http.md) e [0006](adr/0006-autorizacao-por-perfil-e-vinculo.md).
 
 ## Validações (`<app>/dto/`)
 

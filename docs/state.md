@@ -30,3 +30,5 @@ Nada.
 - Os requisitos funcionais do PRD foram reorganizados para a plataforma de estágio, e as referências de autenticação, candidaturas e painel da empresa foram atualizadas.
 - Os 14 requisitos não funcionais do PRD foram atualizados, mantendo localização, acessibilidade, segurança, desempenho, confiabilidade e prioridades.
 - O PRD agora registra 12 requisitos de segurança com perigos e soluções relacionados aos requisitos funcionais.
+- Os ADRs de autenticação e autorização foram realinhados ao PRD; propostas novas cobrem autorização, auditoria, documentos, notificações e recuperação de dados.
+- A sessão informa o perfil autenticado para exibir somente o link de perfil correspondente no navbar da página inicial.

@@ -1,6 +1,6 @@
 # ADR 0002: Modelo de usuário customizado e autenticação própria
 
-- **Status:** Aceito
+- **Status:** Substituído por [ADR 0005](0005-autenticacao-por-sessao-http.md)
 - **Data:** 2026-11-04
 
 ## Contexto

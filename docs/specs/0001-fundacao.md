@@ -1,7 +1,7 @@
 # Spec 0001: Fundação do projeto
 
 - **Status:** Implementado
-- **Decisões:** [ADR 0001](../adr/0001-mvc-com-camada-de-service.md), [ADR 0002](../adr/0002-modelo-de-usuario-customizado.md)
+- **Decisões:** [ADR 0001](../adr/0001-mvc-com-camada-de-service.md), [ADR 0005](../adr/0005-autenticacao-por-sessao-http.md)
 
 Esta especificação deve ser implementada primeiro, e a entidade de usuário precisa existir antes da primeira migração.
 
