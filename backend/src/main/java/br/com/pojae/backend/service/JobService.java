@@ -96,7 +96,7 @@ public class JobService {
     @Transactional
     public void deleteOwned(UUID companyId, UUID jobId) {
         Job job = findOwned(companyId, jobId);
-        applicationRepository.deleteAllByJob_Id(jobId);
+        applicationRepository.deleteAllByJobId(jobId);
         repository.delete(job);
     }
 
