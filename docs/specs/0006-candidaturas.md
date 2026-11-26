@@ -1,59 +1,67 @@
 # Spec 0006: Candidaturas
 
 - **Status:** Proposto
-- **Depende de:** [Spec 0001](0001-fundacao.md), [Spec 0002](0002-autenticacao.md)
-- **Requisitos:** RF-05 e RF-13 do [PRD 0001](../prd/0001-pojae.md)
+- **Requisitos:** RF-05, RF-08, RF-13 e RF-16 do [PRD 0001](../prd/0001-pojae.md)
+- **Decisões:** [ADR 0006](../adr/0006-autorizacao-por-perfil-e-vinculo.md), [ADR 0007](../adr/0007-trilha-de-auditoria-e-historico.md), [ADR 0008](../adr/0008-documentos-privados-no-banco-de-dados.md)
+- **Depende de:** [Spec 0002](0002-autenticacao.md)
 
 ## Entidade `JobApplication`
 
 | Campo | Tipo | Regras |
 |---|---|---|
-| `candidate` | `ManyToOne(Candidate)` | Obrigatório; candidato vem da sessão autenticada |
-| `job` | `ManyToOne(Job)` | Obrigatório; vaga precisa existir |
-| `submittedAt` | `Instant` | Preenchido pelo service ao criar |
-| `status` | `Integer` | `1` enviada, `2` em análise, `3` aprovada, `4` rejeitada, `5` cancelada; início em `1` |
-| `resumeContent` / `resumeFileName` | `byte[]` / `String` | PDF obrigatório, até 5 MiB |
-| `academicHistoryContent` / `academicHistoryFileName` | `byte[]` / `String` | PDF obrigatório, até 5 MiB |
-| `presentationMessage` | `String` | Obrigatória, até 2000 caracteres |
-| `updatedAt` | `Instant` | Inicializado junto com `submittedAt` |
-
-Os IDs de candidato e vaga são UUIDs, conforme as entidades já existentes, mesmo que os placeholders atuais do HTML sejam números. Os arquivos são persistidos em colunas `bytea` do PostgreSQL e não são incluídos em respostas JSON.
+| `id` | UUID | Gerado pelo sistema |
+| `candidate` | `ManyToOne(Candidate)` | Obrigatório; UUID obtido da sessão |
+| `job` | `ManyToOne(Job)` | Obrigatório; vaga existente e elegível para candidatura |
+| `submittedAt` | `LocalDateTime` | Preenchido no envio |
+| `status` | `JobApplicationStatus` | `ENVIADA`, `EM_ANALISE`, `APROVADA`, `REJEITADA` ou `CANCELADA`; inicia em `ENVIADA` |
+| `resumeContent` / `resumeFileName` | `byte[]` / `String` | Documento privado; formato e limite de tamanho devem ser validados |
+| `academicHistoryContent` / `academicHistoryFileName` | `byte[]` / `String` | Documento privado; formato e limite de tamanho devem ser validados |
+| `presentationMessage` | String | Obrigatória; até 2000 caracteres |
+| `updatedAt` | `LocalDateTime` | Preenchida na criação e atualizada em cada mudança de estado |
 
 ## `JobApplicationService`
 
-| Método | Regra |
+| Operação | Regra |
 |---|---|
-| `submit(candidateId, jobId, resume, academicHistory, message)` | Verifica candidato e vaga, valida os dois PDFs e a mensagem, cria candidatura com status `1` e timestamps atuais |
+| `submit(candidateId, jobId, documents, message)` | Obtém candidato da sessão, valida vaga e arquivos, cria candidatura e estado inicial |
+| `listByCandidate(candidateId)` | Retorna somente candidaturas do estagiário autenticado |
+| `cancel(candidateId, applicationId)` | Cancela somente candidatura própria quando permitido e preserva o histórico |
+| `updateStatus(companyId, applicationId, status)` | Empresa altera situação somente de candidatura associada a vaga própria |
+| `getDocument(companyId, applicationId, type)` | Entrega documento após validar vínculo da empresa com a vaga |
 
-O service não recebe objetos HTTP. Falhas de entrada e arquivos inválidos são convertidos em HTTP 400 pelo controller; falta de sessão de candidato retorna 401; vaga ou candidato inexistente retorna 404.
-
-## DTOs
-
-- `JobApplicationRequestDto`: `jobId`, `resume`, `academicHistory`, `presentationMessage`.
-- `JobApplicationResponseDto`: ID, status e timestamps; não contém os bytes dos arquivos.
-- `JobApplicationCommand`: dados simples e conteúdo dos arquivos passados do controller ao service.
-- `JobApplicationJobDto`: campos mínimos para as vagas disponíveis no formulário, inclusive ID UUID.
+O service não recebe objetos HTTP. Falta de sessão retorna 401; perfil incompatível retorna 403; recurso de outro usuário deve ser indistinguível de recurso inexistente, retornando 404. Dados inválidos retornam 400.
 
 ## Rotas
 
-| Rota | Controller | Método | Acesso |
+| Rota | Método | Acesso | Situação |
 |---|---|---|---|
-| `/vagas/opcoes-candidatura` | `JobController` | GET | Público |
-| `/candidaturas/perfil` | `JobApplicationController` | GET | Candidato autenticado |
-| `/candidaturas` | `JobApplicationController` | POST multipart/form-data | Candidato autenticado |
+| `/candidaturas` | POST multipart/form-data | Estagiário autenticado | Implementada; validar arquivos conforme RS04 |
+| `/candidaturas/perfil` | GET | Estagiário autenticado | Atualmente retorna dados para preencher o formulário, não o histórico |
+| `/candidaturas/minhas` | GET | Estagiário autenticado | A especificar/implementar para RF-08 |
+| `/candidaturas/{id}/cancelar` | PATCH | Dono da candidatura | A especificar/implementar para RF-16 |
+| `/candidaturas/{id}/status` | PATCH | Empresa dona da vaga | Implementada |
+| `/candidaturas/{id}/documentos/{tipo}` | GET | Empresa autorizada | Implementada; acesso precisa permanecer privado |
 
 ## Comportamento
 
-1. A página inicial carrega as vagas persistidas pela API e usa os IDs reais ao abrir o modal.
-2. O formulário envia os arquivos selecionados e a mensagem como `multipart/form-data`, com cookie de sessão.
-3. O controller obtém o candidato pela sessão, ignora qualquer ID de candidato vindo do navegador e delega a gravação ao service.
-4. O modal carrega nome, e-mail e instituição do candidato pela sessão, sem confiar nos valores demonstrativos do HTML.
-5. Em caso de sucesso, responde 201 com os metadados da candidatura. O frontend só exibe sucesso depois dessa resposta.
-6. Sem sessão de candidato, com vaga inexistente, dados inválidos ou upload não-PDF/acima do limite, a candidatura não é gravada.
+1. O frontend envia o UUID da vaga, currículo, histórico escolar e mensagem como `multipart/form-data` com cookie de sessão.
+2. O backend ignora qualquer identificador de candidato enviado pelo navegador e associa a candidatura à conta da sessão.
+3. A listagem de histórico filtra no service pelo candidato autenticado. Alterar o ID da candidatura não pode revelar candidaturas de terceiros.
+4. A empresa acessa documentos somente de candidaturas das próprias vagas. O conteúdo binário não aparece em DTOs de listagem.
+5. Cancelar altera a situação e acrescenta evento ao histórico; não apaga a candidatura nem os documentos.
 
-## Testes
+## Pendências de negócio
 
-- [ ] Candidato autenticado cria candidatura com arquivos PDF válidos.
-- [ ] Visitante ou sessão de empresa não consulta o perfil nem cria candidatura.
-- [ ] Vaga inexistente, arquivos inválidos e mensagem inválida são rejeitados.
-- [ ] Resposta não expõe conteúdo binário dos arquivos.
+- Definir se um candidato pode se candidatar novamente à mesma vaga depois de cancelar.
+- Definir quais situações permitem cancelamento e se a empresa recebe notificação.
+- Definir formato permitido, tamanho máximo e política de retenção dos arquivos.
+
+## Verificações
+
+- [ ] Estagiário autenticado cria candidatura válida e recebe metadados sem bytes dos documentos.
+- [ ] Visitante, empresa e instituição não consultam nem enviam candidaturas como estagiário.
+- [ ] Candidato lista e cancela somente as próprias candidaturas.
+- [ ] Empresa consulta e atualiza apenas candidaturas de suas vagas.
+- [ ] Download de documento exige autenticação e autorização.
+- [ ] Arquivo inválido ou acima do limite é rejeitado sem persistir candidatura.
+- [ ] Vaga inválida, candidatura duplicada conforme regra definida e transição de estado inválida são rejeitadas.
