@@ -4,6 +4,7 @@ import br.com.pojae.backend.dto.request.JobApplicationCommand;
 import br.com.pojae.backend.dto.request.JobApplicationRequestDto;
 import br.com.pojae.backend.dto.request.UpdateApplicationStatusDto;
 import br.com.pojae.backend.dto.response.CandidateApplicationProfileDto;
+import br.com.pojae.backend.dto.response.CandidateJobApplicationDto;
 import br.com.pojae.backend.dto.response.JobApplicationResponseDto;
 import br.com.pojae.backend.exception.InvalidJobApplicationException;
 import br.com.pojae.backend.service.JobApplicationService;
@@ -29,6 +30,7 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -54,6 +56,16 @@ public class JobApplicationController {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
         return ResponseEntity.ok(service.getCandidateProfile(candidateId));
+    }
+
+    @GetMapping("/minhas")
+    public ResponseEntity<List<CandidateJobApplicationDto>> listCandidateApplications(HttpServletRequest request) {
+        UUID candidateId = authenticatedCandidateId(request);
+        if (candidateId == null) {
+            HttpSession session = request.getSession(false);
+            return ResponseEntity.status(session == null ? HttpStatus.UNAUTHORIZED : HttpStatus.FORBIDDEN).build();
+        }
+        return ResponseEntity.ok(service.listByCandidate(candidateId));
     }
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
@@ -88,11 +100,23 @@ public class JobApplicationController {
     @GetMapping("/{id}/documentos/{tipo}")
     public ResponseEntity<byte[]> downloadDocument(@PathVariable UUID id, @PathVariable String tipo,
             HttpServletRequest request) {
-        UUID companyId = authenticatedCompanyId(request);
-        if (companyId == null) return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-        JobApplicationService.ApplicationDocument document = service.getDocument(companyId, id, tipo);
-        return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
-                ContentDisposition.attachment().filename(document.fileName()).build().toString())
+        HttpSession session = request.getSession(false);
+        if (session == null) return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+
+        Object accountId = session.getAttribute(SESSION_ACCOUNT_ID);
+        String accountType = (String) session.getAttribute(SESSION_ACCOUNT_TYPE);
+        JobApplicationService.ApplicationDocument document;
+        ContentDisposition disposition;
+        if ("COMPANY".equals(accountType) && accountId instanceof UUID companyId) {
+            document = service.getDocument(companyId, id, tipo);
+            disposition = ContentDisposition.attachment().filename(document.fileName()).build();
+        } else if ("CANDIDATE".equals(accountType) && accountId instanceof UUID candidateId) {
+            document = service.getCandidateDocument(candidateId, id, tipo);
+            disposition = ContentDisposition.inline().filename(document.fileName()).build();
+        } else {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
+        return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, disposition.toString())
                 .contentType(MediaType.APPLICATION_PDF).body(document.content());
     }
 
@@ -105,7 +129,7 @@ public class JobApplicationController {
 
     private UUID authenticatedCandidateId(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
-        if (session == null) {
+        if (session == null || !"CANDIDATE".equals(session.getAttribute(SESSION_ACCOUNT_TYPE))) {
             return null;
         }
         Object accountId = session.getAttribute(SESSION_ACCOUNT_ID);

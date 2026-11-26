@@ -33,3 +33,4 @@ Nada.
 - Os ADRs de autenticação e autorização foram realinhados ao PRD; propostas novas cobrem autorização, auditoria, documentos, notificações e recuperação de dados.
 - A sessão informa o perfil autenticado para exibir somente o link de perfil correspondente no navbar da página inicial.
 - As specs agora mapeiam os RFs/RSs do PRD; os fluxos ainda sem implementação foram separados em propostas e as specs editoriais antigas foram arquivadas.
+- O dashboard do estudante carrega candidaturas e documentos do candidato autenticado pela API.
