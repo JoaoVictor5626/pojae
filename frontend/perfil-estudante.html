@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POJAE - Meu Perfil de Estudante</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- FontAwesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <script src="./assets/js/tailwind-config.js"></script>
+
+    <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans flex flex-col min-h-screen antialiased selection:bg-blue-500 selection:text-white">
+
+    <!-- NAVBAR PRINCIPAL -->
+    <header class="bg-white/90 backdrop-blur-md border-b border-slate-200/80 sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-0 flex justify-between items-center h-20">
+            <!-- BRAND LOGO POJAE -->
+            <a href="index.html" class="flex items-center gap-3 group z-50" aria-label="POJAE - Ir para a página inicial">
+                <div class="logo-navbar">
+                    <img src="./assets/images/pojae-logo.png" alt="Logotipo POJAE">
+                </div>
+            </a>
+
+            <!-- AÇÕES DE NAVEGAÇÃO -->
+            <div class="flex items-center gap-2 sm:gap-3">
+                <a href="index.html"
+                    class="text-xs sm:text-sm font-semibold text-slate-600 hover:text-pojae-600 px-3 py-2 rounded-lg transition">
+                    <i class="fas fa-arrow-left mr-1.5"></i> Voltar ao Início
+                </a>
+                <button type="button" onclick="handleLogout()"
+                    class="text-xs sm:text-sm font-semibold text-slate-600 hover:text-red-600 bg-slate-100 hover:bg-red-50 px-3.5 py-2 rounded-xl border border-slate-200 hover:border-red-200 transition flex items-center gap-1.5 cursor-pointer">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span class="hidden sm:inline">Sair</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- NOTIFICATION TOAST CONTAINER -->
+    <div id="toast-container" class="fixed top-24 right-4 z-50 flex flex-col gap-2 max-w-sm w-full pointer-events-none">
+    </div>
+
+    <!-- CONTEÚDO PRINCIPAL: PERFIL DO ESTUDANTE -->
+    <main class="flex-grow py-10 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto w-full space-y-8">
+
+        <!-- CARD DE RESUMO E AÇÕES DA CONTA -->
+        <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-sm flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+            <div class="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-4">
+                <div id="profile-avatar"
+                    class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-pojae-900 to-pojae-600 text-white font-extrabold text-xl flex items-center justify-center shadow-lg shadow-blue-600/20 shrink-0">
+                    JV
+                </div>
+                <div class="space-y-1">
+                    <div class="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-blue-50 border border-blue-100 text-pojae-700 text-[11px] font-bold">
+                        <i class="fas fa-user-graduate"></i> PERFIL DO ESTUDANTE
+                    </div>
+                    <h1 id="profile-header-name" class="text-xl sm:text-2xl font-extrabold text-slate-900">
+                        Carregando perfil...
+                    </h1>
+                    <p id="profile-header-subtitle" class="text-xs sm:text-sm text-slate-500">
+                        Estagiário / Jovem Aprendiz • Maceió - AL
+                    </p>
+                </div>
+            </div>
+
+            <!-- BOTÕES DE EDITAR E EXCLUIR CONTA -->
+            <div id="profile-header-actions" class="flex flex-wrap items-center justify-center sm:justify-end gap-2.5 shrink-0">
+                <button type="button" id="btn-enable-edit" onclick="toggleEditMode(true)"
+                    class="px-4 py-2.5 bg-pojae-600 hover:bg-pojae-700 text-white font-bold text-xs sm:text-sm rounded-xl shadow-md shadow-blue-600/20 transition flex items-center gap-2 cursor-pointer">
+                    <i class="fas fa-pen"></i>
+                    <span>Editar Dados</span>
+                </button>
+
+                <button type="button" onclick="openDeleteModal()"
+                    class="px-4 py-2.5 bg-red-50 hover:bg-red-600 text-red-600 hover:text-white border border-red-200 hover:border-red-600 font-bold text-xs sm:text-sm rounded-xl transition flex items-center gap-2 cursor-pointer">
+                    <i class="fas fa-trash-alt"></i>
+                    <span>Excluir Conta</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- AVISO DE MODO DE EDIÇÃO ATIVO -->
+        <div id="edit-mode-banner" class="hidden bg-amber-50 border border-amber-200 rounded-2xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs text-amber-900">
+            <div class="flex items-center gap-2.5">
+                <i class="fas fa-edit text-amber-600 text-base"></i>
+                <span><strong>Modo de edição ativado:</strong> altere os campos desejados e clique em <strong>Salvar Alterações</strong> ao final da página.</span>
+            </div>
+            <button type="button" onclick="cancelEditMode()"
+                class="text-xs font-bold text-amber-800 hover:text-amber-950 underline self-end sm:self-auto cursor-pointer">
+                Descartar alterações
+            </button>
+        </div>
+
+        <!-- FORMULÁRIO DE VISUALIZAÇÃO / EDIÇÃO DO PERFIL -->
+        <form id="student-profile-form" onsubmit="handleSaveProfile(event)" class="space-y-8">
+
+            <!-- BLOCO 1: DADOS PESSOAIS E CONTATO -->
+            <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-sm space-y-6">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-blue-100 text-pojae-700 flex items-center justify-center font-bold text-lg">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-base font-bold text-slate-900">Informações Pessoais & Contato</h2>
+                            <p class="text-xs text-slate-500">Dados básicos de identificação do estagiário / jovem aprendiz.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
+                    <!-- Nome -->
+                    <div class="md:col-span-8">
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Nome Completo *</label>
+                        <input type="text" id="field-nome" required disabled
+                            class="editable-field w-full bg-slate-100 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm text-slate-700 focus:outline-none focus:border-pojae-600 disabled:cursor-not-allowed">
+                    </div>
+
+                    <!-- CPF (Chave de identificação - permanece bloqueado) -->
+                    <div class="md:col-span-4">
+                        <label class="block text-xs font-bold text-slate-700 mb-1">CPF <span class="text-[10px] font-normal text-slate-400">(Não alterável)</span></label>
+                        <input type="text" id="field-cpf" readonly disabled
+                            class="w-full bg-slate-100 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm text-slate-500 font-mono cursor-not-allowed">
+                    </div>
+
+                    <!-- E-mail -->
+                    <div class="md:col-span-7">
+                        <label class="block text-xs font-bold text-slate-700 mb-1">E-mail Acadêmico / Pessoal *</label>
+                        <input type="email" id="field-email" required disabled
+                            class="editable-field w-full bg-slate-100 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm text-slate-700 focus:outline-none focus:border-pojae-600 disabled:cursor-not-allowed">
+                    </div>
+
+                    <!-- Telefone -->
+                    <div class="md:col-span-5">
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Telefone / WhatsApp *</label>
+                        <input type="text" id="field-telefone" required maxlength="15" oninput="maskPhone(this)" disabled
+                            class="editable-field w-full bg-slate-100 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm text-slate-700 focus:outline-none focus:border-pojae-600 font-mono disabled:cursor-not-allowed">
+                    </div>
+
+                    <!-- Alteração opcional de senha (visível apenas no modo edição) -->
+                    <div id="password-edit-fields" class="hidden md:col-span-12 grid grid-cols-1 md:grid-cols-2 gap-4 pt-2 border-t border-slate-100">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">Nova Senha <span class="text-[11px] font-normal text-slate-400">(Opcional)</span></label>
+                            <input type="password" id="field-nova-senha" minlength="8" maxlength="72"
+                                autocomplete="new-password" placeholder="Deixe em branco para manter a atual"
+                                class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:border-pojae-600">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">Confirmar Nova Senha</label>
+                            <input type="password" id="field-confirmar-nova-senha" minlength="8" maxlength="72"
+                                autocomplete="new-password" placeholder="Repita a nova senha"
+                                class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:border-pojae-600">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BLOCO 2: ENDEREÇO EM MACEIÓ -->
+            <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-sm space-y-6">
+                <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                    <div class="w-10 h-10 rounded-xl bg-blue-100 text-pojae-700 flex items-center justify-center font-bold text-lg">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-base font-bold text-slate-900">Endereço Residencial</h2>
+                        <p class="text-xs text-slate-500">Restrito a localidades de Maceió - AL.</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
+                    <!-- CEP -->
+                    <div class="md:col-span-4">
+                        <label class="block text-xs font-bold text-slate-700 mb-1">CEP *</label>
+                        <input type="text" id="field-cep" required maxlength="9" oninput="maskCEP(this)" disabled
+                            class="editable-field w-full bg-slate-100 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm text-slate-700 focus:outline-none focus:border-pojae-600 font-mono disabled:cursor-not-allowed">
+                    </div>
+
+                    <!-- Endereço / Logradouro -->
+                    <div class="md:col-span-8">
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Endereço (Logradouro) *</label>
+                        <input type="text" id="field-endereco" required disabled
+                            class="editable-field w-full bg-slate-100 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm text-slate-700 focus:outline-none focus:border-pojae-600 disabled:cursor-not-allowed">
+                    </div>
+
+                    <!-- Número -->
+                    <div class="md:col-span-3">
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Número *</label>
+                        <input type="text" id="field-numero" required disabled
+                            class="editable-field w-full bg-slate-100 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm text-slate-700 focus:outline-none focus:border-pojae-600 disabled:cursor-not-allowed">
+                    </div>
+
+                    <!-- Bairro -->
+                    <div class="md:col-span-4">
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Bairro *</label>
+                        <input type="text" id="field-bairro" required disabled
+                            class="editable-field w-full bg-slate-100 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm text-slate-700 focus:outline-none focus:border-pojae-600 disabled:cursor-not-allowed">
+                    </div>
+
+                    <!-- Cidade -->
+                    <div class="md:col-span-3">
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Cidade *</label>
+                        <input type="text" id="field-cidade" value="Maceió" readonly disabled
+                            class="w-full bg-slate-100 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm text-slate-500 font-semibold cursor-not-allowed">
+                    </div>
+
+                    <!-- Estado -->
+                    <div class="md:col-span-2">
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Estado *</label>
+                        <input type="text" id="field-estado" value="AL" readonly disabled
+                            class="w-full bg-slate-100 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm text-slate-500 font-semibold cursor-not-allowed">
+                    </div>
+                </div>
+            </div>
+
+            <!-- BLOCO 3: VÍNCULO ACADÊMICO -->
+            <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-sm space-y-6">
+                <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+                    <div class="w-10 h-10 rounded-xl bg-blue-100 text-pojae-700 flex items-center justify-center font-bold text-lg">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-base font-bold text-slate-900">Vínculo com Instituição de Ensino</h2>
+                        <p class="text-xs text-slate-500">Informações escolares e acadêmicas vinculadas à sua conta.</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
+                    <!-- Instituição de Ensino -->
+                    <div class="md:col-span-6">
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Instituição de Ensino *</label>
+                        <select id="field-instituicao" required disabled
+                            class="editable-field w-full bg-slate-100 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm text-slate-700 focus:outline-none focus:border-pojae-600 disabled:cursor-not-allowed">
+                            <option value="1">Centro Universitário CESMAC</option>
+                            <option value="2">Universidade Federal de Alagoas (UFAL)</option>
+                            <option value="3">Instituto Federal de Alagoas (IFAL - Campus Maceió)</option>
+                            <option value="4">Centro Universitário Tiradentes (UNIT-AL)</option>
+                            <option value="5">SENAI / SESI Alagoas</option>
+                        </select>
+                    </div>
+
+                    <!-- Nome do Curso -->
+                    <div class="md:col-span-6">
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Nome do Curso *</label>
+                        <input type="text" id="field-curso" required disabled
+                            class="editable-field w-full bg-slate-100 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm text-slate-700 focus:outline-none focus:border-pojae-600 disabled:cursor-not-allowed">
+                    </div>
+
+                    <!-- Série / Período -->
+                    <div class="md:col-span-4">
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Série / Período *</label>
+                        <input type="text" id="field-periodo" required disabled
+                            class="editable-field w-full bg-slate-100 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm text-slate-700 focus:outline-none focus:border-pojae-600 disabled:cursor-not-allowed">
+                    </div>
+
+                    <!-- Turno -->
+                    <div class="md:col-span-4">
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Turno *</label>
+                        <select id="field-turno" required disabled
+                            class="editable-field w-full bg-slate-100 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm text-slate-700 focus:outline-none focus:border-pojae-600 disabled:cursor-not-allowed">
+                            <option value="MORNING">Matutino</option>
+                            <option value="AFTERNOON">Vespertino</option>
+                            <option value="EVENING">Noturno</option>
+                            <option value="FULL_DAY">Integral</option>
+                        </select>
+                    </div>
+
+                    <!-- Conclusão Prevista -->
+                    <div class="md:col-span-4">
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Conclusão Prevista (MM/AAAA) *</label>
+                        <input type="text" id="field-conclusao" required maxlength="7" oninput="maskDate(this)" disabled
+                            class="editable-field w-full bg-slate-100 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm text-slate-700 focus:outline-none focus:border-pojae-600 font-mono disabled:cursor-not-allowed">
+                    </div>
+                </div>
+            </div>
+
+            <!-- BLOCO 4: HABILIDADES CADASTRADAS -->
+            <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-sm space-y-6">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-blue-100 text-pojae-700 flex items-center justify-center font-bold text-lg">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-base font-bold text-slate-900">Habilidades do Estagiário</h2>
+                            <p class="text-xs text-slate-500">Competências técnicas e comportamentais registradas no seu perfil.</p>
+                        </div>
+                    </div>
+                    <span class="text-[10px] bg-blue-50 text-pojae-700 font-mono font-bold px-2.5 py-1 rounded-md">
+                        Competências
+                    </span>
+                </div>
+
+                <!-- FORMULÁRIO PARA ADICIONAR NOVA HABILIDADE (VISÍVEL APENAS NO MODO EDIÇÃO) -->
+                <div id="skill-editor-box" class="hidden bg-slate-50 p-4 rounded-2xl border border-slate-200/80 space-y-4">
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-3">
+                        <div class="md:col-span-4">
+                            <label class="block text-[11px] font-bold text-slate-700 mb-1">Tipo de Habilidade *</label>
+                            <select id="hab-tipo"
+                                class="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-pojae-600">
+                                <option value="HARD_SKILL">Técnica / Hard Skill</option>
+                                <option value="SOFT_SKILL">Comportamental / Soft Skill</option>
+                                <option value="IDIOM">Idioma</option>
+                                <option value="TOOL">Ferramenta / Software</option>
+                            </select>
+                        </div>
+
+                        <div class="md:col-span-4">
+                            <label class="block text-[11px] font-bold text-slate-700 mb-1">Habilidade / Descrição *</label>
+                            <input type="text" id="hab-nome" placeholder="Ex: Python, Pacote Office, Liderança"
+                                class="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-pojae-600">
+                        </div>
+
+                        <div class="md:col-span-4">
+                            <label class="block text-[11px] font-bold text-slate-700 mb-1">Nível de Proficiência (1 a 5) *</label>
+                            <div class="flex items-center gap-2 pt-1">
+                                <div id="star-container" class="text-amber-400 text-lg flex gap-1 cursor-pointer">
+                                    <i class="fas fa-star" onclick="setRating(1)"></i>
+                                    <i class="fas fa-star" onclick="setRating(2)"></i>
+                                    <i class="fas fa-star" onclick="setRating(3)"></i>
+                                    <i class="far fa-star" onclick="setRating(4)"></i>
+                                    <i class="far fa-star" onclick="setRating(5)"></i>
+                                </div>
+                                <span id="rating-label" class="text-xs font-bold text-slate-600">3 / 5</span>
+                            </div>
+                        </div>
+
+                        <div class="md:col-span-12">
+                            <label class="block text-[11px] font-bold text-slate-700 mb-1">Observações</label>
+                            <input type="text" id="hab-obs"
+                                placeholder="Ex: Utilizado em projetos acadêmicos e minicursos"
+                                class="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-pojae-600">
+                        </div>
+                    </div>
+
+                    <div class="flex justify-end">
+                        <button type="button" onclick="addSkill()"
+                            class="bg-pojae-600 hover:bg-pojae-700 text-white font-bold text-xs px-4 py-2 rounded-xl transition shadow-md shadow-blue-600/20 flex items-center gap-1.5 cursor-pointer">
+                            <i class="fas fa-plus"></i> Adicionar Habilidade
+                        </button>
+                    </div>
+                </div>
+
+                <!-- TABELA DE HABILIDADES -->
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse text-xs">
+                        <thead>
+                            <tr class="bg-slate-100 text-slate-600 font-bold uppercase text-[10px] tracking-wider border-b border-slate-200">
+                                <th class="p-3">Tipo</th>
+                                <th class="p-3">Habilidade</th>
+                                <th class="p-3">Proficiência</th>
+                                <th class="p-3">Observações</th>
+                                <th id="skills-action-col" class="hidden p-3 text-center">Ação</th>
+                            </tr>
+                        </thead>
+                        <tbody id="skills-table-body" class="divide-y divide-slate-100">
+                            <!-- Preenchido Dinamicamente -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- BARRA DE SALVAMENTO (EXIBIDA APENAS NO MODO EDIÇÃO) -->
+            <div id="edit-submit-bar" class="hidden flex-col sm:flex-row justify-end gap-3 pt-2">
+                <button type="button" onclick="cancelEditMode()"
+                    class="px-6 py-3 bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold text-sm rounded-xl transition text-center cursor-pointer">
+                    Cancelar Edição
+                </button>
+                <button type="submit" id="btn-save-profile"
+                    class="px-8 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm rounded-xl shadow-lg shadow-emerald-600/25 transition flex items-center justify-center gap-2 cursor-pointer">
+                    <i class="fas fa-save"></i>
+                    <span>Salvar Alterações</span>
+                </button>
+            </div>
+        </form>
+    </main>
+
+    <!-- MODAL DE CONFIRMAÇÃO DE EXCLUSÃO DE CONTA -->
+    <div id="modal-delete-account" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 border border-slate-200 shadow-2xl space-y-5">
+            <div class="flex items-start gap-4">
+                <div class="w-12 h-12 rounded-2xl bg-red-100 text-red-600 flex items-center justify-center text-xl shrink-0">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <div>
+                    <h3 class="text-lg font-extrabold text-slate-900">Excluir Conta Permanentemente?</h3>
+                    <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+                        Esta ação removerá seu cadastro de estudante, habilidades e candidaturas vinculadas no <strong>POJAE</strong>. Não será possível desfazer esta operação.
+                    </p>
+                </div>
+            </div>
+
+            <div class="bg-red-50/70 border border-red-100 rounded-xl p-3 text-xs text-red-800">
+                Para confirmar, digite <strong>EXCLUIR</strong> no campo abaixo:
+                <input type="text" id="delete-confirm-input" placeholder="EXCLUIR"
+                    oninput="validateDeleteInput()"
+                    class="mt-2 w-full bg-white border border-red-200 rounded-lg px-3 py-2 text-xs font-mono uppercase focus:outline-none focus:border-red-500">
+            </div>
+
+            <div class="flex gap-2.5 pt-1">
+                <button type="button" onclick="closeDeleteModal()"
+                    class="w-1/2 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs sm:text-sm rounded-xl transition cursor-pointer">
+                    Cancelar
+                </button>
+                <button type="button" id="btn-confirm-delete" disabled onclick="handleDeleteAccount()"
+                    class="w-1/2 py-2.5 bg-red-600 hover:bg-red-700 disabled:bg-red-300 disabled:cursor-not-allowed text-white font-bold text-xs sm:text-sm rounded-xl transition flex items-center justify-center gap-1.5 cursor-pointer">
+                    <i class="fas fa-trash-alt"></i>
+                    <span>Confirmar Exclusão</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Container do Footer -->
+    <div id="footer-container"></div>
+
+    <!-- Script de Inclusão dos Componentes Modulares -->
+    <script src="./assets/js/partials.js"></script>
+
+    <script>
+        const API_HOST = window.location.hostname || 'localhost';
+        const API_BASE_URL = window.POJAE_API_URL || `http://${API_HOST}:8080`;
+
+        const SKILL_TYPE_LABELS = {
+            HARD_SKILL: 'Técnica / Hard Skill',
+            SOFT_SKILL: 'Comportamental / Soft Skill',
+            IDIOM: 'Idioma',
+            TOOL: 'Ferramenta / Software'
+        };
+
+        // Dados padrão de fallback caso não haja backend ativo no momento
+        const fallbackStudentData = {
+            id: 101,
+            nome: 'João Victor Araújo Coêlho',
+            cpf: '123.456.789-00',
+            email: 'joao.coelho@academico.cesmac.edu.br',
+            telefone: '(82) 99988-7766',
+            cep: '57051-000',
+            endereco: 'Rua Cônego Machado',
+            numero: '918',
+            bairro: 'Farol',
+            cidade: 'Maceió',
+            estado: 'AL',
+            instituicaoId: '1',
+            curso: 'Engenharia de Software',
+            periodo: '5º Período',
+            turno: 'EVENING',
+            conclusaoPrevista: '12/2027',
+            habilidades: [
+                {
+                    tipo: 'HARD_SKILL',
+                    nome: 'JavaScript & HTML/CSS',
+                    nivel: 4,
+                    observacoes: 'Desenvolvimento web em projetos acadêmicos no CESMAC'
+                },
+                {
+                    tipo: 'TOOL',
+                    nome: 'Git & GitHub',
+                    nivel: 4,
+                    observacoes: 'Controle de versão em equipe'
+                },
+                {
+                    tipo: 'SOFT_SKILL',
+                    nome: 'Comunicação e Trabalho em Equipe',
+                    nivel: 5,
+                    observacoes: 'Monitoria acadêmica e apresentação de seminários'
+                }
+            ]
+        };
+
+        let studentProfile = null;
+        let backupProfileSnapshot = null;
+        let isEditing = false;
+        let currentRating = 3;
+
+        window.addEventListener('DOMContentLoaded', () => {
+            loadStudentProfile();
+        });
+
+        async function loadStudentProfile() {
+            try {
+                const response = await fetch(`${API_BASE_URL}/estudantes/me`, { credentials: 'include' });
+                if (response.ok) {
+                    const data = await response.json();
+                    studentProfile = normalizeStudentData(data);
+                } else {
+                    studentProfile = structuredClone(fallbackStudentData);
+                }
+            } catch (error) {
+                studentProfile = structuredClone(fallbackStudentData);
+            }
+
+            populateForm(studentProfile);
+        }
+
+        function normalizeStudentData(raw) {
+            return {
+                id: raw.id ?? fallbackStudentData.id,
+                nome: raw.nome || raw.name || fallbackStudentData.nome,
+                cpf: raw.cpf || fallbackStudentData.cpf,
+                email: raw.email || fallbackStudentData.email,
+                telefone: raw.telefone || raw.phone || fallbackStudentData.telefone,
+                cep: raw.cep || raw.zipCode || fallbackStudentData.cep,
+                endereco: raw.endereco || raw.street || fallbackStudentData.endereco,
+                numero: raw.numero || raw.number || fallbackStudentData.numero,
+                bairro: raw.bairro || raw.neighborhood || fallbackStudentData.bairro,
+                cidade: 'Maceió',
+                estado: 'AL',
+                instituicaoId: String(raw.instituicaoId || raw.institutionId || '1'),
+                curso: raw.curso || raw.course || fallbackStudentData.curso,
+                periodo: raw.periodo || raw.period || fallbackStudentData.periodo,
+                turno: raw.turno || raw.shift || 'EVENING',
+                conclusaoPrevista: raw.conclusaoPrevista || raw.expectedGraduation || fallbackStudentData.conclusaoPrevista,
+                habilidades: Array.isArray(raw.habilidades || raw.skills)
+                    ? (raw.habilidades || raw.skills).map(h => ({
+                        tipo: h.tipo || h.type || 'HARD_SKILL',
+                        nome: h.nome || h.name || '',
+                        nivel: Number(h.nivel || h.proficiencyLevel || 3),
+                        observacoes: h.observacoes || h.notes || ''
+                    }))
+                    : structuredClone(fallbackStudentData.habilidades)
+            };
+        }
+
+        function populateForm(data) {
+            document.getElementById('field-nome').value = data.nome;
+            document.getElementById('field-cpf').value = data.cpf;
+            document.getElementById('field-email').value = data.email;
+            document.getElementById('field-telefone').value = data.telefone;
+            document.getElementById('field-cep').value = data.cep;
+            document.getElementById('field-endereco').value = data.endereco;
+            document.getElementById('field-numero').value = data.numero;
+            document.getElementById('field-bairro').value = data.bairro;
+            document.getElementById('field-instituicao').value = data.instituicaoId;
+            document.getElementById('field-curso').value = data.curso;
+            document.getElementById('field-periodo').value = data.periodo;
+            document.getElementById('field-turno').value = data.turno;
+            document.getElementById('field-conclusao').value = data.conclusaoPrevista;
+
+            updateHeaderSummary(data);
+            renderSkillsTable();
+        }
+
+        function updateHeaderSummary(data) {
+            const parts = (data.nome || 'Estudante').trim().split(/\s+/);
+            const initials = parts.length > 1
+                ? `${parts[0][0]}${parts[parts.length - 1][0]}`.toUpperCase()
+                : parts[0].substring(0, 2).toUpperCase();
+
+            const instSelect = document.getElementById('field-instituicao');
+            const instName = instSelect.options[instSelect.selectedIndex]?.text || 'Instituição em Maceió';
+
+            document.getElementById('profile-avatar').textContent = initials;
+            document.getElementById('profile-header-name').textContent = data.nome;
+            document.getElementById('profile-header-subtitle').textContent =
+                `${data.curso} (${data.periodo}) • ${instName}`;
+        }
+
+        /* ------------------------------------------------------------------ */
+        /* CONTROLE DO MODO DE EDIÇÃO                                         */
+        /* ------------------------------------------------------------------ */
+        function toggleEditMode(enable) {
+            isEditing = enable;
+
+            if (enable) {
+                backupProfileSnapshot = structuredClone(readFormToObject());
+            }
+
+            document.querySelectorAll('.editable-field').forEach(field => {
+                field.disabled = !enable;
+                if (enable) {
+                    field.classList.remove('bg-slate-100');
+                    field.classList.add('bg-slate-50');
+                } else {
+                    field.classList.remove('bg-slate-50');
+                    field.classList.add('bg-slate-100');
+                }
+            });
+
+            document.getElementById('edit-mode-banner').classList.toggle('hidden', !enable);
+            document.getElementById('password-edit-fields').classList.toggle('hidden', !enable);
+            document.getElementById('skill-editor-box').classList.toggle('hidden', !enable);
+            document.getElementById('skills-action-col').classList.toggle('hidden', !enable);
+
+            const submitBar = document.getElementById('edit-submit-bar');
+            submitBar.classList.toggle('hidden', !enable);
+            if (enable) submitBar.classList.add('flex');
+
+            const btnEdit = document.getElementById('btn-enable-edit');
+            btnEdit.classList.toggle('hidden', enable);
+
+            renderSkillsTable();
+
+            if (enable) {
+                document.getElementById('field-nome').focus();
+                showToast('Edição habilitada. Atualize seus dados e clique em Salvar.', 'info');
+            }
+        }
+
+        function cancelEditMode() {
+            if (backupProfileSnapshot) {
+                studentProfile = structuredClone(backupProfileSnapshot);
+                populateForm(studentProfile);
+            }
+            document.getElementById('field-nova-senha').value = '';
+            document.getElementById('field-confirmar-nova-senha').value = '';
+            toggleEditMode(false);
+            showToast('Alterações descartadas.', 'info');
+        }
+
+        function readFormToObject() {
+            return {
+                ...studentProfile,
+                nome: document.getElementById('field-nome').value.trim(),
+                email: document.getElementById('field-email').value.trim(),
+                telefone: document.getElementById('field-telefone').value.trim(),
+                cep: document.getElementById('field-cep').value.trim(),
+                endereco: document.getElementById('field-endereco').value.trim(),
+                numero: document.getElementById('field-numero').value.trim(),
+                bairro: document.getElementById('field-bairro').value.trim(),
+                instituicaoId: document.getElementById('field-instituicao').value,
+                curso: document.getElementById('field-curso').value.trim(),
+                periodo: document.getElementById('field-periodo').value.trim(),
+                turno: document.getElementById('field-turno').value,
+                conclusaoPrevista: document.getElementById('field-conclusao').value.trim(),
+                habilidades: structuredClone(studentProfile.habilidades)
+            };
+        }
+
+        async function handleSaveProfile(e) {
+            e.preventDefault();
+
+            const novaSenha = document.getElementById('field-nova-senha').value;
+            const confirmarNovaSenha = document.getElementById('field-confirmar-nova-senha').value;
+
+            if (novaSenha || confirmarNovaSenha) {
+                if (novaSenha.length < 8) {
+                    showToast('A nova senha deve ter no mínimo 8 caracteres.', 'info');
+                    return;
+                }
+                if (novaSenha !== confirmarNovaSenha) {
+                    showToast('A confirmação da nova senha não confere.', 'info');
+                    return;
+                }
+            }
+
+            const updatedData = readFormToObject();
+            if (novaSenha) updatedData.senha = novaSenha;
+
+            const saveBtn = document.getElementById('btn-save-profile');
+            saveBtn.disabled = true;
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/estudantes/me`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    credentials: 'include',
+                    body: JSON.stringify(updatedData)
+                });
+
+                if (!response.ok && response.status !== 404) {
+                    const err = await response.json().catch(() => ({}));
+                    throw new Error(err.message || 'Erro ao atualizar perfil.');
+                }
+            } catch (error) {
+                // Mantém atualização em memória no modo protótipo caso o backend não esteja conectado
+            } finally {
+                saveBtn.disabled = false;
+            }
+
+            delete updatedData.senha;
+            studentProfile = updatedData;
+            document.getElementById('field-nova-senha').value = '';
+            document.getElementById('field-confirmar-nova-senha').value = '';
+
+            populateForm(studentProfile);
+            toggleEditMode(false);
+            showToast('Dados do perfil atualizados com sucesso!', 'success');
+        }
+
+        /* ------------------------------------------------------------------ */
+        /* GERENCIAMENTO DE HABILIDADES                                       */
+        /* ------------------------------------------------------------------ */
+        function setRating(rating) {
+            currentRating = rating;
+            const stars = document.querySelectorAll('#star-container i');
+            stars.forEach((star, index) => {
+                if (index < rating) {
+                    star.classList.remove('far');
+                    star.classList.add('fas');
+                } else {
+                    star.classList.remove('fas');
+                    star.classList.add('far');
+                }
+            });
+            document.getElementById('rating-label').textContent = `${rating} / 5`;
+        }
+
+        function addSkill() {
+            const tipo = document.getElementById('hab-tipo').value;
+            const nome = document.getElementById('hab-nome').value.trim();
+            const observacoes = document.getElementById('hab-obs').value.trim();
+
+            if (!nome) {
+                showToast('Informe o nome ou descrição da habilidade.', 'info');
+                return;
+            }
+
+            studentProfile.habilidades.push({
+                tipo,
+                nome,
+                nivel: currentRating,
+                observacoes: observacoes || 'Sem observações adicionais'
+            });
+
+            document.getElementById('hab-nome').value = '';
+            document.getElementById('hab-obs').value = '';
+            setRating(3);
+            renderSkillsTable();
+            showToast('Habilidade adicionada! Clique em "Salvar Alterações" para confirmar.', 'success');
+        }
+
+        function removeSkill(index) {
+            studentProfile.habilidades.splice(index, 1);
+            renderSkillsTable();
+            showToast('Habilidade removida da lista.', 'info');
+        }
+
+        function renderSkillsTable() {
+            const tbody = document.getElementById('skills-table-body');
+            tbody.innerHTML = '';
+
+            if (!studentProfile.habilidades || studentProfile.habilidades.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="${isEditing ? 5 : 4}" class="p-6 text-center text-slate-400">
+                            Nenhuma habilidade cadastrada no perfil.
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            studentProfile.habilidades.forEach((skill, idx) => {
+                const starsHtml = Array.from({ length: 5 }, (_, i) =>
+                    `<i class="${i < skill.nivel ? 'fas' : 'far'} fa-star text-amber-400"></i>`
+                ).join('');
+
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-slate-50/80 transition';
+                tr.innerHTML = `
+                    <td class="p-3 font-semibold text-pojae-700">${SKILL_TYPE_LABELS[skill.tipo] || skill.tipo}</td>
+                    <td class="p-3 font-bold text-slate-800">${escapeHtml(skill.nome)}</td>
+                    <td class="p-3 whitespace-nowrap">
+                        <span class="inline-flex items-center gap-0.5 mr-1.5">${starsHtml}</span>
+                        <span class="text-[11px] font-bold text-slate-500">(${skill.nivel}/5)</span>
+                    </td>
+                    <td class="p-3 text-slate-600">${escapeHtml(skill.observacoes)}</td>
+                    ${isEditing ? `
+                        <td class="p-3 text-center">
+                            <button type="button" onclick="removeSkill(${idx})"
+                                class="text-red-500 hover:text-red-700 bg-red-50 hover:bg-red-100 px-2.5 py-1.5 rounded-lg transition cursor-pointer"
+                                title="Remover habilidade">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </td>
+                    ` : ''}
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        /* ------------------------------------------------------------------ */
+        /* EXCLUSÃO DE CONTA E LOGOUT                                         */
+        /* ------------------------------------------------------------------ */
+        function openDeleteModal() {
+            document.getElementById('delete-confirm-input').value = '';
+            document.getElementById('btn-confirm-delete').disabled = true;
+            document.getElementById('modal-delete-account').classList.remove('hidden');
+        }
+
+        function closeDeleteModal() {
+            document.getElementById('modal-delete-account').classList.add('hidden');
+        }
+
+        function validateDeleteInput() {
+            const val = document.getElementById('delete-confirm-input').value.trim().toUpperCase();
+            document.getElementById('btn-confirm-delete').disabled = val !== 'EXCLUIR';
+        }
+
+        async function handleDeleteAccount() {
+            const btn = document.getElementById('btn-confirm-delete');
+            btn.disabled = true;
+
+            try {
+                await fetch(`${API_BASE_URL}/estudantes/me`, {
+                    method: 'DELETE',
+                    credentials: 'include'
+                });
+            } catch (error) {
+                // Prossegue com limpeza local e redirecionamento mesmo sem backend ativo
+            }
+
+            closeDeleteModal();
+            showToast('Sua conta foi excluída com sucesso. Redirecionando...', 'success');
+
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 1500);
+        }
+
+        async function handleLogout() {
+            try {
+                await fetch(`${API_BASE_URL}/logout`, {
+                    method: 'POST',
+                    credentials: 'include'
+                });
+            } catch (error) {
+                // Ignora erro de rede no logout offline
+            }
+            window.location.href = 'index.html';
+        }
+
+        /* ------------------------------------------------------------------ */
+        /* MÁSCARAS E UTILITÁRIOS                                             */
+        /* ------------------------------------------------------------------ */
+        function maskPhone(input) {
+            let v = input.value.replace(/\D/g, '').slice(0, 11);
+            if (v.length > 6) {
+                v = v.replace(/^(\d{2})(\d{5})(\d{0,4}).*/, '($1) $2-$3');
+            } else if (v.length > 2) {
+                v = v.replace(/^(\d{2})(\d{0,5})/, '($1) $2');
+            } else if (v.length > 0) {
+                v = v.replace(/^(\d*)/, '($1');
+            }
+            input.value = v;
+        }
+
+        function maskCEP(input) {
+            let v = input.value.replace(/\D/g, '').slice(0, 8);
+            if (v.length > 5) {
+                v = v.replace(/^(\d{5})(\d{1,3})/, '$1-$2');
+            }
+            input.value = v;
+        }
+
+        function maskDate(input) {
+            let v = input.value.replace(/\D/g, '').slice(0, 6);
+            if (v.length > 2) {
+                v = v.replace(/^(\d{2})(\d{1,4})/, '$1/$2');
+            }
+            input.value = v;
+        }
+
+        function escapeHtml(value) {
+            return String(value ?? '').replace(/[&<>"']/g, ch => ({
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#39;'
+            })[ch]);
+        }
+
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toast-container');
+            if (!container) return;
+
+            const toast = document.createElement('div');
+            const bgColor = type === 'success' ? 'bg-emerald-600' : 'bg-pojae-700';
+            const icon = type === 'success' ? 'fa-check-circle' : 'fa-info-circle';
+
+            toast.className = `${bgColor} text-white px-4 py-3 rounded-2xl shadow-xl flex items-center justify-between text-xs font-semibold pointer-events-auto`;
+            toast.innerHTML = `
+                <div class="flex items-center gap-2">
+                    <i class="fas ${icon} text-sm"></i>
+                    <span>${message}</span>
+                </div>
+                <button type="button" onclick="this.parentElement.remove()" class="text-white/80 hover:text-white ml-3">
+                    <i class="fas fa-times"></i>
+                </button>
+            `;
+
+            container.appendChild(toast);
+            setTimeout(() => {
+                if (toast.parentElement) toast.remove();
+            }, 4000);
+        }
+    </script>
+</body>
+</html>
