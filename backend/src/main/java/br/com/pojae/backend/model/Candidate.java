@@ -1,6 +1,5 @@
 package br.com.pojae.backend.model;
 
-import br.com.pojae.backend.model.enums.Status;
 import br.com.pojae.backend.model.enums.StudyShift;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -9,56 +8,34 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
-import java.time.LocalDateTime;
 import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @Entity
 @Table(name = "tb_candidates")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-public class Candidate {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
-
-    @Column(length = 50, nullable = false)
-    private String name;
+@SuperBuilder
+public class Candidate extends Account {
 
     @Column(unique = true, length = 14, nullable = false)
     private String cpf;
 
-    @Column(unique = true, length = 14, nullable = false)
-    private String phone;
-
-    @Column(unique = true, length = 50, nullable = false)
-    private String email;
-
     @Column(length = 100, nullable = false)
     private String password;
-
-    @ManyToOne
-    @JoinColumn(name = "address_cep", nullable = false)
-    private Address address;
 
     @ManyToOne
     @JoinColumn(name = "educational_institution_id", nullable = false)
@@ -78,11 +55,6 @@ public class Candidate {
     @JsonFormat(pattern = "MM/yyyy")
     private YearMonth expectedGraduationDate;
 
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private Status status;
-
-    @Column(nullable = false)
     @ManyToMany
     @JoinTable(
             name = "tb_candidate_skills",
@@ -90,19 +62,5 @@ public class Candidate {
             inverseJoinColumns = @JoinColumn(name = "skill_id", nullable = false)
     )
     private List<Skill> skills = new ArrayList<>();
-
-    @Column(nullable = false)
-    @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
-    private LocalDateTime createdAt = LocalDateTime.now();
-
-    @Column(nullable = false)
-    @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
-    private LocalDateTime updatedAt;
-
-//    @Column(nullable = false)
-//    private Boolean cv;
-//
-//    @Column(nullable = false)
-//    private Boolean historico;
 
 }
