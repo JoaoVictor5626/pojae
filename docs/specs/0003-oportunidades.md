@@ -1,7 +1,6 @@
 # Spec 0003: Oportunidades
 
 - **Status:** Implementado
-- **Requisitos:** RF-01 a RF-11 do [PRD 0001](../prd/0001-pojae.md)
 - **Decisões:** [ADR 0001](../adr/0001-mvc-com-camada-de-service.md), [ADR 0003](../adr/0003-conteudo-em-texto-puro.md)
 - **Depende de:** [Spec 0001](0001-fundacao.md), [Spec 0002](0002-autenticacao.md)
 

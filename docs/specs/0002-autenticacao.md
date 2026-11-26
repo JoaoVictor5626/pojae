@@ -1,7 +1,7 @@
 # Spec 0002: Autenticação
 
 - **Status:** Implementado
-- **Requisitos:** RF-05 e RF-15 do [PRD 0001](../prd/0001-pojae.md)
+- **Requisitos:** RF-22 e RF-24 do [PRD 0001](../prd/0001-pojae.md)
 - **Decisão:** [ADR 0002](../adr/0002-modelo-de-usuario-customizado.md)
 - **Depende de:** [Spec 0001](0001-fundacao.md)
 
