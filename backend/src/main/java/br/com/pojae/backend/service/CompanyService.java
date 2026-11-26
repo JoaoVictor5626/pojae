@@ -1,5 +1,6 @@
 package br.com.pojae.backend.service;
 
+import br.com.pojae.backend.dto.response.CompanySummaryDto;
 import br.com.pojae.backend.exception.NotFoundException;
 import br.com.pojae.backend.model.Company;
 import br.com.pojae.backend.repository.CompanyRepository;
@@ -37,6 +38,12 @@ public class CompanyService {
 
     public List<Company> read() {
         return repository.findAll();
+    }
+
+    @Transactional(readOnly = true)
+    public CompanySummaryDto getSummary(UUID id) {
+        Company company = findById(id);
+        return new CompanySummaryDto(company.getId(), company.getName());
     }
 
     public Company update(UUID id, Company companyUpdated) {

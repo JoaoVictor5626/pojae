@@ -28,7 +28,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/vagas")
-@CrossOrigin(origins = {"http://localhost:5500", "http://127.0.0.1:5500", "http://localhost:5501", "http://127.0.0.1:5501", "http://localhost:5502", "http://127.0.0.1:5502"})
+@CrossOrigin(origins = {"http://localhost:5500", "http://127.0.0.1:5500", "http://localhost:5501", "http://127.0.0.1:5501", "http://localhost:5502", "http://127.0.0.1:5502"}, allowCredentials = "true")
 public class JobController {
 
     @Autowired
@@ -75,8 +75,10 @@ public class JobController {
     }
 
     @PostMapping
-    public Job create(@RequestBody Job job) {
-        return service.create(job);
+    public ResponseEntity<Job> create(@RequestBody Job job, HttpServletRequest request) {
+        UUID companyId = companyId(request);
+        if (companyId == null) return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.create(companyId, job));
     }
 
     @GetMapping

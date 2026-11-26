@@ -30,8 +30,8 @@ public class JobService {
     private JobApplicationRepository applicationRepository;
 
     @Transactional
-    public Job create(Job job) {
-        Company company = companyRepository.findById(job.getCompany().getId())
+    public Job create(UUID companyId, Job job) {
+        Company company = companyRepository.findById(companyId)
                 .orElseThrow(() -> new NotFoundException("Empresa"));
         job.setCompany(company);
         if (job.getStatus() == null) job.setStatus(JobStatus.PUBLICADA);

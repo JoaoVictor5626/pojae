@@ -9,26 +9,24 @@ function maskCurrency(input) {
     input.value = value;
 }
 
-const API_BASE_URL = window.POJAE_API_URL || 'http://localhost:8080';
+const API_HOST = window.location.hostname || 'localhost';
+const API_BASE_URL = window.POJAE_API_URL || 'http://' + API_HOST + ':8080';
 
-window.addEventListener('DOMContentLoaded', loadCompanies);
+window.addEventListener('DOMContentLoaded', loadAuthenticatedCompany);
 
-async function loadCompanies() {
-    const select = document.getElementById('field-empresa-resp');
+async function loadAuthenticatedCompany() {
+    const companyField = document.getElementById('field-empresa-resp');
+    const submitButton = document.querySelector('#job-register-form [type="submit"]');
     try {
-        const response = await fetch(`${API_BASE_URL}/empresas`);
-        if (!response.ok) throw new Error('Falha ao carregar empresas');
-
-        const companies = await response.json();
-        select.replaceChildren(new Option('Selecione a empresa...', ''));
-        companies.forEach(company => select.add(new Option(company.name, company.id)));
-        if (companies.length === 0) {
-            select.disabled = true;
-            showToast('Cadastre uma empresa antes de publicar uma vaga.', 'info');
-        }
+        const response = await fetch(`${API_BASE_URL}/empresas/me`, { credentials: 'include' });
+        if (!response.ok) throw new Error('Sessão de empresa necessária');
+        const company = await response.json();
+        companyField.value = company.name;
     } catch (error) {
-        select.disabled = true;
-        showToast('Não foi possível carregar as empresas cadastradas.', 'info');
+        companyField.value = '';
+        companyField.placeholder = 'Entre com uma conta de empresa para cadastrar vagas';
+        submitButton.disabled = true;
+        showToast('Entre com uma conta de empresa para cadastrar uma vaga.', 'info');
     }
 }
 
@@ -87,7 +85,6 @@ async function handleJobRegister(e) {
         expectedStartDate: formatApiDate(document.getElementById('field-inicio').value),
         expectedEndDate: formatApiDate(document.getElementById('field-termino').value),
         benefitsOffered: document.getElementById('field-beneficios').value.trim(),
-        company: { id: document.getElementById('field-empresa-resp').value },
         location: document.getElementById('field-localidade').value.trim(),
         workModality: document.getElementById('field-modalidade').value,
         sector: document.getElementById('field-setor').value,
@@ -105,6 +102,7 @@ async function handleJobRegister(e) {
         const response = await fetch(`${API_BASE_URL}/vagas`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
             body: JSON.stringify(jobData)
         });
         if (!response.ok) throw new Error('Cadastro não concluído');
