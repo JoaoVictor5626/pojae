@@ -718,15 +718,19 @@
 
 
         <!-- SEÇÃO FLUXO / PASSO A PASSO -->
-        <section id="estudantes" class="py-16 sm:py-24 bg-gradient-to-b from-white via-slate-50/60 to-white relative overflow-hidden">
+        <section id="estudantes" class="pt-16 sm:pt-24 pb-32 sm:pb-40 bg-gradient-to-b from-white via-sky-50/40 to-white relative overflow-hidden">
+
             
             <!-- Padrão Geométrico Sutil de Fundo -->
-            <div class="absolute inset-0 opacity-[0.35] bg-[radial-gradient(#cbd5e1_1px,transparent_1px)] [background-size:24px_24px] [mask-image:radial-gradient(ellipse_70%_60%_at_50%_50%,#000_60%,transparent_100%)] pointer-events-none"></div>
+            <div class="absolute inset-0 opacity-[0.4] bg-[radial-gradient(#cbd5e1_1px,transparent_1px)] [background-size:24px_24px] [mask-image:radial-gradient(ellipse_75%_65%_at_50%_45%,#000_60%,transparent_100%)] pointer-events-none"></div>
+
+            <!-- Brilho Radial Central Sutil -->
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[680px] h-[320px] bg-pojae-500/[0.06] rounded-full blur-3xl pointer-events-none"></div>
 
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 
                 <!-- Cabeçalho da Seção -->
-                <div class="text-center max-w-2xl mx-auto mb-16 reveal-on-scroll">
+                <div class="text-center max-w-2xl mx-auto mb-16 sm:mb-20 reveal-on-scroll">
                     <span class="block text-xs font-bold uppercase tracking-wider text-pojae-600">
                         <span>Jornada Simplificada</span>
                     </span>
@@ -742,18 +746,19 @@
                 <div class="relative reveal-on-scroll">
                     
                     <!-- Linha Conectora Horizontal (Desktop) -->
-                    <div class="hidden md:block absolute top-7 left-[12.5%] right-[12.5%] h-[2px] bg-gradient-to-r from-pojae-500/35 via-sky-400/45 to-emerald-400/45 pointer-events-none"></div>
+                    <div class="hidden md:block absolute top-7 left-[12.5%] right-[12.5%] h-[3px] rounded-full bg-gradient-to-r from-pojae-500/35 via-sky-400/55 to-emerald-400/55 pointer-events-none"></div>
+                    <div class="hidden md:block absolute top-7 left-[12.5%] right-[12.5%] h-[6px] -translate-y-[1.5px] rounded-full bg-gradient-to-r from-pojae-500/15 via-sky-400/20 to-emerald-400/20 blur-xs pointer-events-none"></div>
 
                     <!-- Linha Conectora Vertical (Celular) -->
-                    <div class="md:hidden absolute top-7 bottom-14 left-7 w-[2px] bg-gradient-to-b from-pojae-500/35 via-sky-400/45 to-emerald-400/45 pointer-events-none"></div>
+                    <div class="md:hidden absolute top-7 bottom-14 left-7 w-[2px] bg-gradient-to-b from-pojae-500/40 via-sky-400/50 to-emerald-400/50 pointer-events-none"></div>
 
                     <div class="grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-6">
                         
                         <!-- Passo 1 -->
                         <div class="relative z-10 flex md:flex-col items-start md:items-center text-left md:text-center gap-4 md:gap-0 group">
-                            <div class="relative shrink-0 md:mb-5">
-                                <div class="absolute -inset-1.5 rounded-full bg-blue-500/15 blur-sm group-hover:bg-blue-500/25 transition-colors"></div>
-                                <div class="relative w-14 h-14 rounded-full bg-gradient-to-br from-pojae-600 to-blue-500 text-white font-extrabold text-lg flex items-center justify-center shadow-lg shadow-blue-500/25 ring-4 ring-white">
+                            <div class="relative shrink-0 md:mb-5 transition-transform duration-300 group-hover:-translate-y-1">
+                                <div class="absolute -inset-2 rounded-full bg-blue-500/15 blur-md group-hover:bg-blue-500/30 transition-colors"></div>
+                                <div class="relative w-14 h-14 rounded-full bg-gradient-to-br from-pojae-600 to-blue-500 text-white font-extrabold text-lg flex items-center justify-center shadow-lg shadow-blue-500/30 ring-4 ring-white">
                                     1
                                 </div>
                             </div>
@@ -773,9 +778,9 @@
 
                         <!-- Passo 2 -->
                         <div class="relative z-10 flex md:flex-col items-start md:items-center text-left md:text-center gap-4 md:gap-0 group">
-                            <div class="relative shrink-0 md:mb-5">
-                                <div class="absolute -inset-1.5 rounded-full bg-sky-500/15 blur-sm group-hover:bg-sky-500/25 transition-colors"></div>
-                                <div class="relative w-14 h-14 rounded-full bg-gradient-to-br from-pojae-600 to-sky-500 text-white font-extrabold text-lg flex items-center justify-center shadow-lg shadow-sky-500/25 ring-4 ring-white">
+                            <div class="relative shrink-0 md:mb-5 transition-transform duration-300 group-hover:-translate-y-1">
+                                <div class="absolute -inset-2 rounded-full bg-sky-500/15 blur-md group-hover:bg-sky-500/30 transition-colors"></div>
+                                <div class="relative w-14 h-14 rounded-full bg-gradient-to-br from-pojae-600 to-sky-500 text-white font-extrabold text-lg flex items-center justify-center shadow-lg shadow-sky-500/30 ring-4 ring-white">
                                     2
                                 </div>
                             </div>
@@ -795,9 +800,9 @@
 
                         <!-- Passo 3 -->
                         <div class="relative z-10 flex md:flex-col items-start md:items-center text-left md:text-center gap-4 md:gap-0 group">
-                            <div class="relative shrink-0 md:mb-5">
-                                <div class="absolute -inset-1.5 rounded-full bg-cyan-500/15 blur-sm group-hover:bg-cyan-500/25 transition-colors"></div>
-                                <div class="relative w-14 h-14 rounded-full bg-gradient-to-br from-sky-500 to-cyan-500 text-white font-extrabold text-lg flex items-center justify-center shadow-lg shadow-cyan-500/25 ring-4 ring-white">
+                            <div class="relative shrink-0 md:mb-5 transition-transform duration-300 group-hover:-translate-y-1">
+                                <div class="absolute -inset-2 rounded-full bg-cyan-500/15 blur-md group-hover:bg-cyan-500/30 transition-colors"></div>
+                                <div class="relative w-14 h-14 rounded-full bg-gradient-to-br from-sky-500 to-cyan-500 text-white font-extrabold text-lg flex items-center justify-center shadow-lg shadow-cyan-500/30 ring-4 ring-white">
                                     3
                                 </div>
                             </div>
@@ -817,9 +822,9 @@
 
                         <!-- Passo 4 -->
                         <div class="relative z-10 flex md:flex-col items-start md:items-center text-left md:text-center gap-4 md:gap-0 group">
-                            <div class="relative shrink-0 md:mb-5">
-                                <div class="absolute -inset-1.5 rounded-full bg-emerald-500/15 blur-sm group-hover:bg-emerald-500/25 transition-colors"></div>
-                                <div class="relative w-14 h-14 rounded-full bg-gradient-to-br from-emerald-500 to-teal-500 text-white font-extrabold text-lg flex items-center justify-center shadow-lg shadow-emerald-500/25 ring-4 ring-white">
+                            <div class="relative shrink-0 md:mb-5 transition-transform duration-300 group-hover:-translate-y-1">
+                                <div class="absolute -inset-2 rounded-full bg-emerald-500/15 blur-md group-hover:bg-emerald-500/30 transition-colors"></div>
+                                <div class="relative w-14 h-14 rounded-full bg-gradient-to-br from-emerald-500 to-teal-500 text-white font-extrabold text-lg flex items-center justify-center shadow-lg shadow-emerald-500/30 ring-4 ring-white">
                                     4
                                 </div>
                             </div>
@@ -839,22 +844,16 @@
 
                     </div>
                 </div>
-
-                <!-- Rodapé Discreto da Seção com Chamada para Ação -->
-                <div class="mt-14 pt-8 border-t border-slate-200/70 flex flex-col sm:flex-row items-center justify-center gap-4 text-center reveal-on-scroll">
-                    <p class="text-xs sm:text-sm text-slate-600 font-medium">
-                        Pronto para dar o primeiro passo na sua carreira profissional?
-                    </p>
-                    <a href="pagina-intermediaria.html" class="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-pojae-600 hover:text-pojae-800 transition group">
-                        <span>Criar meu cadastro gratuito</span>
-                        <i class="fas fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
-                    </a>
-                </div>
             </div>
+
+            <!-- 3 Ondas Suaves Centralizadas com #eff6ff (Ajustadas para Mobile) -->
+            <svg class="absolute bottom-0 left-0 w-full h-11 sm:h-20 md:h-28 pointer-events-none" viewBox="0 0 1440 160" fill="none" preserveAspectRatio="none">
+                <path d="M0 112 C 110 128, 150 64, 260 66 C 370 68, 410 124, 500 114 C 600 104, 630 58, 720 60 C 810 62, 840 118, 940 114 C 1040 110, 1080 64, 1180 66 C 1290 68, 1330 122, 1440 112 V 160 H 0 Z" fill="#eff6ff"/>
+            </svg>
         </section>
 
         <!-- SEÇÃO INSTITUIÇÕES DE ENSINO PARCEIRAS -->
-        <section id="instituicoes" class="py-16 sm:py-24 bg-slate-100/70 border-t border-slate-200 overflow-hidden">
+        <section id="instituicoes" class="pt-8 sm:pt-12 pb-20 sm:pb-24 bg-[#eff6ff] overflow-hidden">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center reveal-on-scroll">
                 <span class="block text-xs font-bold uppercase tracking-wider text-pojae-600">
                     Rede de Parcerias
