@@ -713,6 +713,37 @@ function filterJobs() {
 }
 
 /* -------------------------------------------------------------------------- */
+/* BOTÃO FLUTUANTE VOLTAR AO TOPO                                             */
+/* -------------------------------------------------------------------------- */
+window.scrollToTop = function () {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+};
+
+(function () {
+    const btnTop = document.getElementById('btn-back-to-top');
+    if (!btnTop) return;
+
+    function toggleBackToTop() {
+        const hero = document.querySelector('.gradient-hero') || document.querySelector('section');
+        const limit = (hero && hero.offsetHeight > 100) ? hero.offsetHeight * 0.8 : 480;
+
+        if (window.scrollY > limit) {
+            btnTop.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none');
+            btnTop.classList.add('opacity-100', 'translate-y-0');
+        } else {
+            btnTop.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none');
+            btnTop.classList.remove('opacity-100', 'translate-y-0');
+        }
+    }
+
+    window.addEventListener('scroll', toggleBackToTop, { passive: true });
+    toggleBackToTop();
+})();
+
+/* -------------------------------------------------------------------------- */
 /* CONTROLE DOS MODAIS                                                        */
 /* -------------------------------------------------------------------------- */
 function openModal(id) {
